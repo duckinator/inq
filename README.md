@@ -3,6 +3,8 @@
 You just started working on a project that hasn't been maintained too well.
 How bad off is it?
 
+Generates a summary of how well-maintained the project is and highlights problem areas of a codebase stored on GitHub, using issues and pull requests.
+
 ## Installation
 
     $ gem install how_bad
