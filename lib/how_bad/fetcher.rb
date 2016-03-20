@@ -1,7 +1,7 @@
 require "github_api"
 
 class HowBad::Fetcher
-  def call(repository:, **options)
+  def call(repository)
     user, repo = repository.split('/', 2)
     github  = Github.new(auto_pagination: true)
     issues  = github.issues.list user: user, repo: repo

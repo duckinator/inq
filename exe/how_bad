@@ -4,8 +4,8 @@ require "how_bad"
 require "optparse"
 
 options = {
-  report: "report.csv",
-  #cache:  "cache.json",
+  report_file:  "report.csv",
+  #cache_file:   "cache.json",
 }
 
 opts = OptionParser.new do |opts|
@@ -28,12 +28,12 @@ opts = OptionParser.new do |opts|
     exit 0
   end
 
-  opts.on("[--report REPORT_FILE]", "CSV file containing the report") do |file|
-    options[:report] = file
+  opts.on("[--report-file REPORT_FILE]", "CSV file containing the report") do |file|
+    options[:report_file] = file
   end
 
-  #opts.on("[--cache CACHE_FILE]", "JSON file used as a cache") do |file|
-  #  options[:cache] = file
+  #opts.on("[--cache-file CACHE_FILE]", "JSON file used as a cache") do |file|
+  #  options[:cache_file] = file
   #end
 end
 opts.parse!
