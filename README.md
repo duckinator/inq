@@ -9,11 +9,11 @@ How bad off is it?
 
 ## Usage
 
-    $ how_bad <orgname>/<reponame> [--csv=FILENAME]
+    $ how_bad <orgname>/<reponame> [--report-file FILENAME]
 
 E.g.,
 
-    $ how_bad rubygems/rubygems --csv=report.csv
+    $ how_bad rubygems/rubygems --report-file report.csv
 
 ## Development
 
