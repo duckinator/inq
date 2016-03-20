@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
 
 require "how_bad"
+require "optparse"
+
+options = {
+  report: "report.csv",
+  #cache:  "cache.json",
+}
+
+opts = OptionParser.new do |opts|
+  opts.banner =
+    <<-EOF.gsub(/ *\| ?/, '')
+      | Usage: how_bad REPOSITORY [--report REPORT_FILE] [--cache CACHE_FILE]
+      |
+      | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
+      |
+      | E.g., if you wanted to check https://github.com/duckinator/how_bad,
+      | you'd run `how_bad duckinator/how_bad`.
+      |
+    EOF
+
+  opts.separator ""
+  opts.separator "Options:"
+
+  opts.on("-h", "--help", "Print this help") do
+    puts opts
+    exit 0
+  end
+
+  opts.on("[--report REPORT_FILE]", "CSV file containing the report") do |file|
+    options[:report] = file
+  end
+
+  #opts.on("[--cache CACHE_FILE]", "JSON file used as a cache") do |file|
+  #  options[:cache] = file
+  #end
+end
+opts.parse!
+
+if ARGV.length == 1
+  options[:repository] = ARGV.delete_at(0)
+else
+  puts opts
+  exit 1
+end
+
+HowBad.generate_report(options)
