@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ellen Marie Dash"]
   spec.email         = ["me@duckie.co"]
 
-  spec.summary       = %q{Quantify how well-maintained your project is.}
-  spec.description   = %q{You just started working on a new project that hadn't been maintained well. How bad is it?}
+  spec.summary       = %q{Quantify how well-maintained your GitHub project is.}
+  spec.description   = %q{You just started working on a GitHub project that hadn't been maintained particularly well. How bad is it?}
   spec.homepage      = "https://github.com/duckinator/how_bad"
   spec.license       = "MIT"
 
