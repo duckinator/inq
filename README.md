@@ -17,6 +17,8 @@ E.g.,
 
     $ how_bad rubygems/rubygems --report-file report.csv
 
+When executing it, you will go through a series of prompts to categorize each issue and pull request in the issue tracker. A summary CSV will be generated, which can be used for further analysis.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec how_bad` to use the gem in this directory, ignoring other installed copies of this gem.
