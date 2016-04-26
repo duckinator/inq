@@ -5,9 +5,9 @@ class HowBad::Fetcher
   include Contracts::Core
 
   Contract String => {issues: C::Not[nil], pulls: C::Not[nil]}
-  def call(repository)
+  def call(repository,
+        github = Github.new(auto_pagination: true))
     user, repo = repository.split('/', 2)
-    github  = Github.new(auto_pagination: true)
     issues  = github.issues.list user: user, repo: repo
     pulls   = github.pulls.list  user: user, repo: repo
 

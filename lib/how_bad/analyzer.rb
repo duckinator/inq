@@ -9,8 +9,9 @@ module HowBad
     include Contracts::Core
 
     Contract C::KeywordArgs[issues: C::Not[nil], pulls: C::Not[nil]] => Analysis
-    def call(issues:, pulls:)
-       Analysis.new(
+    def call(issues:, pulls:,
+          analysis_class: Analysis)
+       analysis_class.new(
          total_issues:  issues.length,
          total_pulls:   pulls.length,
 

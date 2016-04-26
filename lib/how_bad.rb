@@ -11,10 +11,13 @@ module HowBad
   require "how_bad/reporter"
 
   Contract C::KeywordArgs[repository: String, report_file: String] => C::Any
-  def self.generate_report(repository:, report_file:)
-    raw_data = Fetcher.new.call(repository)
-    analysis = Analyzer.new.call(**raw_data)
+  def self.generate_report(repository:, report_file:,
+        fetcher:  Fetcher.new,
+        analyzer: Analyzer.new,
+        reporter: Reporter.new)
+    raw_data = fetcher.call(repository)
+    analysis = analyzer.call(**raw_data)
 
-    Reporter.new.call(analysis, report_file)
+    reporter.call(analysis, report_file)
   end
 end
