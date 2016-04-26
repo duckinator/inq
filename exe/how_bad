@@ -28,11 +28,11 @@ opts = OptionParser.new do |opts|
     exit 0
   end
 
-  opts.on("--report-file REPORT_FILE", "CSV file containing the report") do |file|
+  opts.on("--report REPORT_FILE", "CSV file containing the report") do |file|
     options[:report_file] = file
   end
 
-  #opts.on("--cache-file CACHE_FILE", "JSON file used as a cache") do |file|
+  #opts.on("--cache CACHE_FILE", "JSON file used as a cache") do |file|
   #  options[:cache_file] = file
   #end
 end
