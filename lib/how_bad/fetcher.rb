@@ -18,12 +18,8 @@ class HowBad::Fetcher
       super(issues, pulls)
     end
 
-    def to_hash
-      {
-        issues: issues,
-        pulls: pulls
-      }
-    end
+    # Struct defines #to_h, but not #to_hash. Alias them.
+    alias_method :to_hash, :to_h
   end
 
 
