@@ -1,5 +1,6 @@
 require 'contracts'
 require 'ostruct'
+require 'date'
 
 module HowBad
   ##
@@ -43,7 +44,7 @@ module HowBad
     end
 
     def oldest_date_for(issues_or_pulls)
-      0 # TODO: Implement.
+      issues_or_pulls.map {|x| DateTime.parse(x['created_at']) }.sort.first
     end
   end
 end
