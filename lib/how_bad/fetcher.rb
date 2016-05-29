@@ -1,5 +1,5 @@
-require "contracts"
-require "github_api"
+require 'contracts'
+require 'github_api'
 
 class HowBad::Fetcher
   include Contracts::Core

@@ -1,5 +1,5 @@
-require "contracts"
-require "csv"
+require 'contracts'
+require 'csv'
 
 module HowBad
   class Reporter

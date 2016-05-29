@@ -1,14 +1,14 @@
-require "how_bad/version"
-require "contracts"
+require 'how_bad/version'
+require 'contracts'
 
 C = Contracts
 
 module HowBad
   include Contracts::Core
 
-  require "how_bad/fetcher"
-  require "how_bad/analyzer"
-  require "how_bad/reporter"
+  require 'how_bad/fetcher'
+  require 'how_bad/analyzer'
+  require 'how_bad/reporter'
 
   Contract C::KeywordArgs[repository: String, report_file: String,
       fetcher: Class,
