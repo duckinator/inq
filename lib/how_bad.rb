@@ -14,7 +14,7 @@ module HowBad
       fetcher: Class,
       analyzer: Class,
       reporter: Class
-    ] => Reporter::Analysis
+    ] => Analysis
   def self.generate_report(repository:, report_file:,
         fetcher:  Fetcher.new,
         analyzer: Analyzer.new,
