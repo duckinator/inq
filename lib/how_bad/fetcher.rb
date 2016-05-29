@@ -8,7 +8,6 @@ class HowBad::Fetcher
 
   ##
   # Standardized representation for fetcher results.
-  # Can be converted to a Hash.
   #
   # Implemented as a class instead of passing around a Hash so that it can
   # be more easily referenced by Contracts.
@@ -20,7 +19,7 @@ class HowBad::Fetcher
       super(issues, pulls)
     end
 
-    # Struct defines #to_h, but not #to_hash. Alias them.
+    # Struct defines #to_h, but not #to_hash, so we alias them.
     alias_method :to_hash, :to_h
   end
 
