@@ -2,6 +2,8 @@ require 'contracts'
 require 'ostruct'
 
 module HowBad
+  ##
+  # Represents a completed analysis of the repository being analyzed.
   class Analysis < OpenStruct
   end
 

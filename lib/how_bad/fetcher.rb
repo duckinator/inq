@@ -1,6 +1,8 @@
 require 'contracts'
 require 'github_api'
 
+##
+# Fetches data from GitHub.
 class HowBad::Fetcher
   include Contracts::Core
 
