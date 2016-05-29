@@ -20,14 +20,12 @@ module HowBad
         pulls_with_label: num_with_label(pulls),
 
         average_issue_age: average_age_for(issues),
-        oldest_issue_date: oldest_date_for(issues),
+        oldest_issue_date: oldest_age_for(issues),
 
         average_pull_age:  average_age_for(pulls),
-        oldest_pull_date:  oldest_date_for(pulls),
+        oldest_pull_date:  oldest_age_for(pulls),
       )
     end
-
-  private
 
     def num_with_label(issues_or_pulls)
       {} # TODO: Implement.
@@ -44,7 +42,7 @@ module HowBad
       0 # TODO: Implement.
     end
 
-    def oldest_date_for(issues_or_pulls)
+    def oldest_age_for(issues_or_pulls)
       0 # TODO: Implement.
     end
   end
