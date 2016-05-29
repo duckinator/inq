@@ -28,6 +28,8 @@ module HowBad
       )
     end
 
+    # Given an Array of issues or pulls, return a Hash specifying how many
+    # issues or pulls use each label.
     def num_with_label(issues_or_pulls)
       {} # TODO: Implement.
       # Notes:
@@ -39,10 +41,12 @@ module HowBad
       # }
     end
 
+    # Given an Array of issues or pulls, return the average age of them.
     def average_age_for(issues_or_pulls)
       0 # TODO: Implement.
     end
 
+    # Given an Array of issues or pulls, return the creation date of the oldest.
     def oldest_date_for(issues_or_pulls)
       issues_or_pulls.map {|x| DateTime.parse(x['created_at']) }.sort.first
     end
