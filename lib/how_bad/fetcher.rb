@@ -4,7 +4,10 @@ require "github_api"
 class HowBad::Fetcher
   include Contracts::Core
 
-  Contract String, C::Any => {issues: C::Not[nil], pulls: C::Not[nil]}
+  Contract String, C::RespondTo[:issues, :pulls] => {
+    issues: C::ArrayOf[Hash],
+    pulls: C::ArrayOf[Hash]
+  }
   def call(repository,
         github = Github.new(auto_pagination: true))
     user, repo = repository.split('/', 2)
