@@ -19,6 +19,14 @@ describe HowBad::Analyzer do
     end
   end
 
+  context '#average_date_for' do
+   it 'returns the average date for the provided issues or pulls' do
+     result = subject.average_date_for(fake_issues)
+
+     expect(result).to eq(Date.parse('2005-12-31'))
+   end
+  end
+
   context '#average_age_for' do
    it 'returns the average age for the provided issues or pulls' do
      result = subject.average_age_for(fake_issues)

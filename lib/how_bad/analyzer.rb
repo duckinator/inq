@@ -47,9 +47,17 @@ module HowBad
       hash
     end
 
+    def average_date_for(issues_or_pulls)
+      timestamps = issues_or_pulls.map { |iop| Time.parse(iop['created_at']).to_i }
+      average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
+
+      average_time = Time.at(average_timestamp)
+      Date.parse(average_time.to_s)
+    end
+
     # Given an Array of issues or pulls, return the average age of them.
     def average_age_for(issues_or_pulls)
-      0 # TODO: Implement.
+      0 #average_date_for(issues_or_pulls)
     end
 
     # Given an Array of issues or pulls, return the creation date of the oldest.
