@@ -10,11 +10,7 @@ module HowBad
   require 'how_bad/analyzer'
   require 'how_bad/reporter'
 
-  Contract C::KeywordArgs[repository: String, report_file: String,
-      fetcher: Class,
-      analyzer: Class,
-      reporter: Class
-    ] => Analysis
+  Contract C::KeywordArgs[repository: String, report_file: String] => Analysis
   def self.generate_report(repository:, report_file:,
         fetcher:  Fetcher.new,
         analyzer: Analyzer.new,
