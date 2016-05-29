@@ -11,11 +11,14 @@ module HowBad
   class Analyzer
     include Contracts::Core
 
-    Contract Fetcher::Results, Class => Analysis
+    Contract Fetcher::Results, C::KeywordArgs[analysis_class: C::Optional[Class]] => Analysis
     def call(data, analysis_class: Analysis)
+      issues = data.issues
+      pulls = data.pulls
+
       analysis_class.new(
-        total_issues:  data.issues.length,
-        total_pulls:   data.pulls.length,
+        total_issues:  issues.length,
+        total_pulls:   pulls.length,
 
         issues_with_label: num_with_label(issues),
         pulls_with_label: num_with_label(pulls),

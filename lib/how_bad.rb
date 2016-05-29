@@ -16,7 +16,7 @@ module HowBad
         analyzer: Analyzer.new,
         reporter: Reporter.new)
     raw_data = fetcher.call(repository)
-    analysis = analyzer.call(**raw_data)
+    analysis = analyzer.call(raw_data)
 
     reporter.call(analysis, report_file)
   end

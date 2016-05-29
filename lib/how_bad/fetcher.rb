@@ -24,7 +24,7 @@ class HowBad::Fetcher
   end
 
 
-  Contract String, C::RespondTo[:issues, :pulls] => Results
+  Contract String, C::Optional[C::RespondTo[:issues, :pulls]] => Results
   def call(repository,
         github = Github.new(auto_pagination: true))
     user, repo = repository.split('/', 2)
