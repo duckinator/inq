@@ -26,7 +26,7 @@ describe HowBad::Analyzer do
 
   context '#oldest_age_for' do
     it 'returns the oldest age for the provided issues or pulls' do
-      result = subject.average_age_for(issues)
+      result = subject.oldest_age_for(issues)
 
       expect(result).to eq(TODO)
     end
