@@ -13,9 +13,9 @@ describe HowBad::Analyzer do
 
   context '#num_with_label' do
     it 'returns a Hash mapping labels to the number of issues or pulls with that label' do
-      result = subject.num_with_label(issues)
+      result = subject.num_with_label(fake_issues)
 
-      expect(result).to eq(TODO)
+      expect(result).to eq({"triage" => 3, "administrative" => 2})
     end
   end
 

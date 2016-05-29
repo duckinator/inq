@@ -31,14 +31,20 @@ module HowBad
     # Given an Array of issues or pulls, return a Hash specifying how many
     # issues or pulls use each label.
     def num_with_label(issues_or_pulls)
-      {} # TODO: Implement.
-      # Notes:
-      # Hash mapping labels to the number of issues with those labels.
-      # E.g., given 10 with label "label1" and 5 with label "label2",
+      # Returned hash maps labels to frequency.
+      # E.g., given 10 issues/pulls with label "label1" and 5 with label "label2",
       # {
       #   "label1" => 10,
       #   "label2" => 5
       # }
+
+      hash = Hash.new(0)
+      issues_or_pulls.each { |iop|
+        iop['labels'].each { |label|
+          hash[label['name']] += 1
+        }
+      }
+      hash
     end
 
     # Given an Array of issues or pulls, return the average age of them.
