@@ -39,11 +39,11 @@ module HowBad
       # }
 
       hash = Hash.new(0)
-      issues_or_pulls.each { |iop|
-        iop['labels'].each { |label|
+      issues_or_pulls.each do |iop|
+        iop['labels'].each do |label|
           hash[label['name']] += 1
-        }
-      }
+        end
+      end
       hash
     end
 
