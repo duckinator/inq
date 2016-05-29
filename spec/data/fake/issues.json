@@ -50,6 +50,11 @@
         "url": "https://api.github.com/repos/rubygems/rubygems/labels/administrative",
         "name": "administrative",
         "color": "C0C0C0"
+      },
+      {
+        "url": "https://api.github.com/repos/rubygems/rubygems/labels/triage",
+        "name": "triage",
+        "color": "ffffff"
       }
     ],
     "state": "open",
