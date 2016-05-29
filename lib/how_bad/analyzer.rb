@@ -8,12 +8,11 @@ module HowBad
   class Analyzer
     include Contracts::Core
 
-    Contract C::KeywordArgs[issues: C::Not[nil], pulls: C::Not[nil]] => Analysis
-    def call(issues:, pulls:,
-          analysis_class: Analysis)
+    Contract Fetcher::Results, Class => Analysis
+    def call(data, analysis_class: Analysis)
        analysis_class.new(
-         total_issues:  issues.length,
-         total_pulls:   pulls.length,
+         total_issues:  data.issues.length,
+         total_pulls:   data.pulls.length,
 
          average_issue_age: average_age_for(issues),
          oldest_issue_date: oldest_date_for(issues),
