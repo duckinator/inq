@@ -1,6 +1,7 @@
 require 'contracts'
 require 'csv'
 require 'prawn'
+require 'prawn/table'
 
 module HowBad
   class UnsupportedExportFormat < StandardError
@@ -35,26 +36,26 @@ module HowBad
       oldest_date_format = "%b %e, %Y"
 
       Prawn::Document.generate(filename) do
-        font("Courier")
+        font("Helvetica")
 
         span(450, position: :center) do
-          pad(10) { text "How is #{a.repository}?" }
-          pad(10) {
-            text "Open issues:        #{a.number_of_issues}"
-            text "Open pull requests: #{a.number_of_pulls}"
-          }
-          pad(10) {
-            text "TODO: Issues per label."
-            text "TODO: PRs per label."
-          }
-          pad(10) {
-            text "Average issue age: #{a.average_issue_age}"
-            text "Average PR age:    #{a.average_pull_age}"
-          }
-          pad(10) {
-            text "Oldest issue opened on: #{a.oldest_issue_date.strftime(oldest_date_format)}"
-            text "Oldest PR opened on:    #{a.oldest_pull_date.strftime(oldest_date_format)}"
-          }
+          pad(10) { text "How is #{a.repository}?", size: 25 }
+          table [
+            ["Open issues",        a.number_of_issues],
+            ["Open pull requests", a.number_of_pulls],
+          ],
+          [
+            ["Issues per label.", "TODO"],
+            ["PRs per label.", "TODO"],
+          ],
+          [
+            ["Average issue age", a.average_issue_age],
+            ["Average PR age",    a.average_pull_age],
+          ],
+          [
+            ["Oldest issue opened on", a.oldest_issue_date.strftime(oldest_date_format)],
+            ["Oldest PR opened on",    a.oldest_pull_date.strftime(oldest_date_format)],
+          ]
         end
       end
     end
