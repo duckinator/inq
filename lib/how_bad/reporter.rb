@@ -1,5 +1,6 @@
 require 'contracts'
 require 'csv'
+require 'prawn'
 
 module HowBad
   class UnsupportedExportFormat < StandardError
@@ -30,7 +31,31 @@ module HowBad
     end
 
     def export_pdf!(filename=file)
-      raise NotImplementedError
+      a = analysis
+
+      Prawn::Document.generate(filename) do
+        font("Courier")
+
+        span(450, position: :center) do
+          pad(10) { text "How is #{a.repository}?" }
+          pad(10) {
+            text "Open issues:        #{a.number_of_issues}"
+            text "Open pull requests: #{a.number_of_pulls}"
+          }
+          pad(10) {
+            text "TODO: Issues per label."
+            text "TODO: PRs per label."
+          }
+          pad(10) {
+            text "Average issue age: #{a.average_issue_age}"
+            text "Average PR age:    #{a.average_pull_age}"
+          }
+          pad(10) {
+            text "Oldest issue opened on: #{a.oldest_issue_date}"
+            text "Oldest PR opened on:    #{a.oldest_pull_date}"
+          }
+        end
+      end
     end
 
     def export!(filename=file)
