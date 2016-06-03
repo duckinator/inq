@@ -1,5 +1,5 @@
 require 'contracts'
-require 'csv'
+require 'simple_xslx'
 
 module HowBad
   ##
