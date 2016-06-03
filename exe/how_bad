@@ -5,13 +5,12 @@ require "optparse"
 
 options = {
   report_file:  "report.csv",
-  #cache_file:   "cache.json",
 }
 
 opts = OptionParser.new do |opts|
   opts.banner =
     <<-EOF.gsub(/ *\| ?/, '')
-      | Usage: how_bad REPOSITORY [--report REPORT_FILE] [--cache CACHE_FILE]
+      | Usage: how_bad REPOSITORY [--report REPORT_FILE]
       |
       | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
       |
@@ -31,10 +30,6 @@ opts = OptionParser.new do |opts|
   opts.on("--report REPORT_FILE", "CSV file containing the report") do |file|
     options[:report_file] = file
   end
-
-  #opts.on("--cache CACHE_FILE", "JSON file used as a cache") do |file|
-  #  options[:cache_file] = file
-  #end
 end
 opts.parse!
 
