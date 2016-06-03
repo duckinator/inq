@@ -45,6 +45,8 @@ module HowBad
 
       hash = Hash.new(0)
       issues_or_pulls.each do |iop|
+        next unless iop['labels']
+
         iop['labels'].each do |label|
           hash[label['name']] += 1
         end
