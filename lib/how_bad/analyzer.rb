@@ -19,16 +19,16 @@ module HowBad
       analysis_class.new(
         repository: data.repository,
 
-        total_issues:  issues.length,
-        total_pulls:   pulls.length,
+        number_of_issues:  issues.length,
+        number_of_pulls:   pulls.length,
 
         issues_with_label: num_with_label(issues),
         pulls_with_label: num_with_label(pulls),
 
         average_issue_age: average_age_for(issues),
-        oldest_issue_date: oldest_date_for(issues),
-
         average_pull_age:  average_age_for(pulls),
+
+        oldest_issue_date: oldest_date_for(issues),
         oldest_pull_date:  oldest_date_for(pulls),
       )
     end
