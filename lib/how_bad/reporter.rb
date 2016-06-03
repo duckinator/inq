@@ -8,6 +8,21 @@ module HowBad
     def initialize(analysis, file)
       super(analysis, file)
     end
+
+    def to_hash
+      analysis.to_hash
+    end
+
+    def export(filename=file)
+      serializer =
+        SimpleXslx::Serializer.new(filename) do |doc|
+          hash = to_hash
+
+          doc.add_sheet("Report")
+          sheet.add_row(hash.keys)
+          sheet.add_row(hash.values)
+        end
+    end
   end
 
   class Reporter
