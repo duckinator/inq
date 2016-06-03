@@ -1,7 +1,13 @@
 require 'contracts'
-require 'simple_xslx'
+require 'csv'
 
 module HowBad
+  class UnsupportedExportFormat < StandardError
+    def initialize(format)
+      super("Unsupported export format: #{format}")
+    end
+  end
+
   ##
   # Represents a completed report.
   class Report < Struct.new(:analysis, :file)
@@ -9,19 +15,34 @@ module HowBad
       super(analysis, file)
     end
 
-    def to_hash
-      analysis.to_hash
+    def to_h
+      analysis.to_h
+    end
+    alias :to_hash :to_h
+
+    def export_csv!(filename=file)
+      hash = to_h
+
+      CSV.open(filename, "wb") do |csv|
+        csv << hash.keys
+        csv << hash.values
+      end
+    end
+
+    def export_pdf!(filename=file)
+      raise NotImplementedError
     end
 
     def export!(filename=file)
-      serializer =
-        SimpleXslx::Serializer.new(filename) do |doc|
-          hash = to_hash
+      extension = filename.split('.').last
 
-          doc.add_sheet("Report")
-          sheet.add_row(hash.keys)
-          sheet.add_row(hash.values)
-        end
+      if extension == 'csv'
+        export_csv!(filename)
+      elsif extension == 'pdf'
+        export_pdf!(filename)
+      else
+        raise UnsupportedExportFormat, filename.split('.').last
+      end
     end
   end
 
