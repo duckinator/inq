@@ -36,7 +36,7 @@ opts.parse!
 if ARGV.length == 1
   options[:repository] = ARGV.delete_at(0)
 else
-  puts opts
+  puts "Error: No repository specified."
   exit 1
 end
 
