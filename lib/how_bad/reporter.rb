@@ -32,6 +32,7 @@ module HowBad
 
     def export_pdf!(filename=file)
       a = analysis
+      oldest_date_format = "%b %e, %Y"
 
       Prawn::Document.generate(filename) do
         font("Courier")
@@ -51,8 +52,8 @@ module HowBad
             text "Average PR age:    #{a.average_pull_age}"
           }
           pad(10) {
-            text "Oldest issue opened on: #{a.oldest_issue_date}"
-            text "Oldest PR opened on:    #{a.oldest_pull_date}"
+            text "Oldest issue opened on: #{a.oldest_issue_date.strftime(oldest_date_format)}"
+            text "Oldest PR opened on:    #{a.oldest_pull_date.strftime(oldest_date_format)}"
           }
         end
       end
