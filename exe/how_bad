@@ -40,4 +40,4 @@ else
   exit 1
 end
 
-HowBad.generate_report(options)
+HowBad.generate_report(options).export!
