@@ -13,7 +13,7 @@ module HowBad
       analysis.to_hash
     end
 
-    def export(filename=file)
+    def export!(filename=file)
       serializer =
         SimpleXslx::Serializer.new(filename) do |doc|
           hash = to_hash
