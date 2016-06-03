@@ -17,6 +17,8 @@ module HowBad
       pulls = data.pulls
 
       analysis_class.new(
+        repository: data.repository,
+
         total_issues:  issues.length,
         total_pulls:   pulls.length,
 
