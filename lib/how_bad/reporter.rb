@@ -40,22 +40,17 @@ module HowBad
 
         span(450, position: :center) do
           pad(10) { text "How is #{a.repository}?", size: 25 }
-          table [
-            ["Open issues",        a.number_of_issues],
-            ["Open pull requests", a.number_of_pulls],
+          table([
+            ["Open issues:",        a.number_of_issues],
+            ["Open pull requests:", a.number_of_pulls],
+            ["Issues per label:", "TODO"],
+            ["PRs per label:", "TODO"],
+            ["Average issue age:", a.average_issue_age],
+            ["Average PR age:",    a.average_pull_age],
+            ["Oldest issue opened on:", a.oldest_issue_date.strftime(oldest_date_format)],
+            ["Oldest PR opened on:",    a.oldest_pull_date.strftime(oldest_date_format)],
           ],
-          [
-            ["Issues per label.", "TODO"],
-            ["PRs per label.", "TODO"],
-          ],
-          [
-            ["Average issue age", a.average_issue_age],
-            ["Average PR age",    a.average_pull_age],
-          ],
-          [
-            ["Oldest issue opened on", a.oldest_issue_date.strftime(oldest_date_format)],
-            ["Oldest PR opened on",    a.oldest_pull_date.strftime(oldest_date_format)],
-          ]
+          cell_style: { border_width: 0 })
         end
       end
     end
