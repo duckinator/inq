@@ -4,7 +4,7 @@ require "how_is"
 require "optparse"
 
 options = {
-  report_file:  "report.csv",
+  report_file:  "report.pdf",
 }
 
 opts = OptionParser.new do |opts|
