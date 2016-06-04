@@ -32,25 +32,32 @@ module HowBad
     end
 
     def export_pdf!(filename=file)
-      a = analysis
       oldest_date_format = "%b %e, %Y"
+      a = analysis
+
+      issue_or_pr_summary = lambda do |analysis, type, type_label|
+        a = analysis
+
+        span  "#{a.repository} has #{a.send("number_of_#{type}")} #{type_label}s open. " +
+              "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
+              "oldest #{type_label} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
+      end
 
       Prawn::Document.generate(filename) do
         font("Helvetica")
 
         span(450, position: :center) do
           pad(10) { text "How is #{a.repository}?", size: 25 }
-          table([
-            ["Open issues:",        a.number_of_issues],
-            ["Open pull requests:", a.number_of_pulls],
-            ["Issues per label:", "TODO"],
-            ["PRs per label:", "TODO"],
-            ["Average issue age:", a.average_issue_age],
-            ["Average PR age:",    a.average_pull_age],
-            ["Oldest issue opened on:", a.oldest_issue_date.strftime(oldest_date_format)],
-            ["Oldest PR opened on:",    a.oldest_pull_date.strftime(oldest_date_format)],
-          ],
-          cell_style: { border_width: 0 })
+          pad(5)  { text "Issues" }
+          span issue_or_pr_summary.call(a, "issue", "issue")
+          pad(5)  { text "Pull Requests" }
+          span issue_or_pr_summary.call(a, "pulls", "pull request")
+
+          pad(10) { text "Issues per label" }
+          table a.issues_with_label.to_a
+
+          pad(10) { text "Pull Requests per label" }
+          table a.pulls_with_label.to_a
         end
       end
     end
