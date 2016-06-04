@@ -3,7 +3,7 @@ require 'github_api'
 
 ##
 # Fetches data from GitHub.
-class HowBad::Fetcher
+class HowIs::Fetcher
   include Contracts::Core
 
   ##

@@ -3,7 +3,7 @@ require 'csv'
 require 'prawn'
 require 'prawn/table'
 
-module HowBad
+module HowIs
   class UnsupportedExportFormat < StandardError
     def initialize(format)
       super("Unsupported export format: #{format}")

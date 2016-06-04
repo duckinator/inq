@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "how_bad"
+require "how_is"
 require "optparse"
 
 options = {
@@ -10,12 +10,12 @@ options = {
 opts = OptionParser.new do |opts|
   opts.banner =
     <<-EOF.gsub(/ *\| ?/, '')
-      | Usage: how_bad REPOSITORY [--report REPORT_FILE]
+      | Usage: how_is REPOSITORY [--report REPORT_FILE]
       |
       | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
       |
-      | E.g., if you wanted to check https://github.com/duckinator/how_bad,
-      | you'd run `how_bad duckinator/how_bad`.
+      | E.g., if you wanted to check https://github.com/duckinator/how_is,
+      | you'd run `how_is duckinator/how_is`.
       |
     EOF
 
@@ -40,4 +40,4 @@ else
   exit 1
 end
 
-HowBad.generate_report(options).export!
+HowIs.generate_report(options).export!

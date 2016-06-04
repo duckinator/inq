@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'json'
 
-describe HowBad::Fetcher do
+describe HowIs::Fetcher do
   let(:issues) { JSON.parse(open(File.expand_path('../data/issues.json', __dir__)).read) }
   let(:pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 

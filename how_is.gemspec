@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'how_bad/version'
+require 'how_is/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "how_bad"
-  spec.version       = HowBad::VERSION
+  spec.name          = "how_is"
+  spec.version       = HowIs::VERSION
   spec.authors       = ["Ellen Marie Dash"]
   spec.email         = ["me@duckie.co"]
 
   spec.summary       = %q{Quantify how well-maintained your GitHub project is.}
-  spec.homepage      = "https://github.com/duckinator/how_bad"
+  spec.homepage      = "https://github.com/duckinator/how_is"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

@@ -1,14 +1,14 @@
-require 'how_bad/version'
+require 'how_is/version'
 require 'contracts'
 
 C = Contracts
 
-module HowBad
+module HowIs
   include Contracts::Core
 
-  require 'how_bad/fetcher'
-  require 'how_bad/analyzer'
-  require 'how_bad/reporter'
+  require 'how_is/fetcher'
+  require 'how_is/analyzer'
+  require 'how_is/reporter'
 
   Contract C::KeywordArgs[repository: String, report_file: String] => Report
   def self.generate_report(repository:, report_file:,

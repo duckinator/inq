@@ -2,7 +2,7 @@ require 'contracts'
 require 'ostruct'
 require 'date'
 
-module HowBad
+module HowIs
   ##
   # Represents a completed analysis of the repository being analyzed.
   class Analysis < OpenStruct

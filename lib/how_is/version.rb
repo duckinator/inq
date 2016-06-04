@@ -1,3 +1,3 @@
-module HowBad
+module HowIs
   VERSION = "0.1.0"
 end

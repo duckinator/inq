@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe HowBad::Analyzer do
+describe HowIs::Analyzer do
   let(:issues) { JSON.parse(open(File.expand_path('../data/issues.json', __dir__)).read) }
   let(:pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
   let(:fake_issues) { JSON.parse(open(File.expand_path('../data/fake/issues.json', __dir__)).read) }
   #let(:fake_pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
-  let(:fetcher_results) { HowBad::Fetcher::Results.new(issues, pulls) }
+  let(:fetcher_results) { HowIs::Fetcher::Results.new(issues, pulls) }
 
-  subject { HowBad::Analyzer.new }
+  subject { HowIs::Analyzer.new }
 
   context '#num_with_label' do
     it 'returns a Hash mapping labels to the number of issues or pulls with that label' do
