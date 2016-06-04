@@ -38,9 +38,9 @@ module HowIs
       issue_or_pr_summary = lambda do |analysis, type, type_label|
         a = analysis
 
-        span  "#{a.repository} has #{a.send("number_of_#{type}")} #{type_label}s open. " +
-              "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-              "oldest #{type_label} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
+        "#{a.repository} has #{a.send("number_of_#{type}s")} #{type_label}s open. " +
+        "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
+        "oldest #{type_label} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
       end
 
       Prawn::Document.generate(filename) do
@@ -49,15 +49,17 @@ module HowIs
         span(450, position: :center) do
           pad(10) { text "How is #{a.repository}?", size: 25 }
           pad(5)  { text "Issues" }
-          span issue_or_pr_summary.call(a, "issue", "issue")
+          text issue_or_pr_summary.call(a, "issue", "issue")
           pad(5)  { text "Pull Requests" }
-          span issue_or_pr_summary.call(a, "pulls", "pull request")
+          text issue_or_pr_summary.call(a, "pull", "pull request")
 
           pad(10) { text "Issues per label" }
-          table a.issues_with_label.to_a
+          table a.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
 
+          # TODO: GitHub's API doesn't include labels for PRs but does for issues?!
           pad(10) { text "Pull Requests per label" }
-          table a.pulls_with_label.to_a
+          text "TODO."
+          #table a.pulls_with_label.to_a
         end
       end
     end
