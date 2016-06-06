@@ -60,11 +60,10 @@ module HowIs
 
     def export!(filename=file)
       extension = filename.split('.').last
+      method_name = "export_#{extension}!"
 
-      if extension == 'csv'
-        export_csv!(filename)
-      elsif extension == 'pdf'
-        export_pdf!(filename)
+      if respond_to?(method_name)
+        send(method_name, filename)
       else
         raise UnsupportedExportFormat, filename.split('.').last
       end
