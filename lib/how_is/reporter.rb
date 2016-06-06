@@ -28,7 +28,7 @@ module HowIs
     end
 
     def export_json!(filename=file)
-      File.open(filename, 'rw') do |f|
+      File.open(filename, 'w') do |f|
         f.write to_h.to_json
       end
     end
