@@ -17,9 +17,13 @@ module HowIs
     end
     alias :to_hash :to_h
 
+    def to_json
+      to_h.to_json
+    end
+
     def export_json!(filename=file)
       File.open(filename, 'w') do |f|
-        f.write to_h.to_json
+        f.write to_json
       end
     end
 
