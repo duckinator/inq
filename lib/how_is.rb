@@ -10,8 +10,13 @@ module HowIs
   require 'how_is/analyzer'
   require 'how_is/reporter'
 
-  Contract C::KeywordArgs[repository: String, report_file: String] => Report
-  def self.generate_report(repository:, report_file:, from_file: nil,
+  Contract C::KeywordArgs[repository: String, report_file: String,
+                          from_file: C::Optional[C::Or[String, nil]],
+                          fetcher: C::Optional[Class],
+                          analyzer: C::Optional[Class],
+                          reporter: C::Optional[Class]] => Report
+  def self.generate_report(repository:, report_file:,
+        from_file: nil,
         fetcher:  Fetcher.new,
         analyzer: Analyzer.new,
         reporter: Reporter.new)
