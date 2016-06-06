@@ -1,9 +1,17 @@
 # How is [your repo]?
 
-You just started working on a project that hasn't been maintained too well.
-How bad off is it?
+`how_is` is tool for generating summaries of the health of a codebase. It uses information available from issues and pull requests to provide an overview of a repository and highlight problem areas of the codebase.
 
-Generates a summary of how well-maintained the project is and highlights problem areas of a codebase stored on GitHub, using issues and pull requests.
+The summary includes:
+
+* repository name,
+* number of open issues,
+* number of open pull requests,
+* percentage + number of open issues associated with each label and with no label,
+* average issue age,
+* average pull request age,
+* date oldest issue was opened,
+* date oldest pull request was opened.
 
 ## Installation
 
@@ -16,6 +24,8 @@ Generates a summary of how well-maintained the project is and highlights problem
 E.g.,
 
     $ how_is rubygems/rubygems --report-file report.pdf
+
+The above command creates a PDF containing the summary at `./report.pdf`.
 
 ## Development
 
