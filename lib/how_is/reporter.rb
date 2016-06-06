@@ -27,6 +27,12 @@ module HowIs
       end
     end
 
+    def export_json!(filename=file)
+      File.open(filename, 'rw') do |f|
+        f.write to_h.to_json
+      end
+    end
+
     def export_pdf!(filename=file)
       oldest_date_format = "%b %e, %Y"
       a = analysis
