@@ -5,6 +5,7 @@ require "optparse"
 
 options = {
   report_file:  "report.pdf",
+  from_file: nil,
 }
 
 opts = OptionParser.new do |opts|
@@ -25,6 +26,10 @@ opts = OptionParser.new do |opts|
   opts.on("-h", "--help", "Print this help") do
     puts opts
     exit 0
+  end
+
+  opts.on("--from JSON_REPORT_FILE", "import JSON_REPORT_FILE instead of fetching the data again") do |file|
+    options[:from_file] = file
   end
 
   opts.on("--report REPORT_FILE", "CSV file containing the report") do |file|
