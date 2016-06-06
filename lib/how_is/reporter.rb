@@ -13,10 +13,6 @@ module HowIs
   ##
   # Represents a completed report.
   class Report < Struct.new(:analysis, :file)
-    def initialize(analysis, file)
-      super(analysis, file)
-    end
-
     def to_h
       analysis.to_h
     end
@@ -35,23 +31,15 @@ module HowIs
       oldest_date_format = "%b %e, %Y"
       a = analysis
 
-      issue_or_pr_summary = lambda do |analysis, type, type_label|
-        a = analysis
-
-        "#{a.repository} has #{a.send("number_of_#{type}s")} #{type_label}s open. " +
-        "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-        "oldest #{type_label} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
-      end
-
       Prawn::Document.generate(filename) do
         font("Helvetica")
 
         span(450, position: :center) do
           pad(10) { text "How is #{a.repository}?", size: 25 }
           pad(5)  { text "Issues" }
-          text issue_or_pr_summary.call(a, "issue", "issue")
+          text issue_or_pr_summary(a, "issue", "issue")
           pad(5)  { text "Pull Requests" }
-          text issue_or_pr_summary.call(a, "pull", "pull request")
+          text issue_or_pr_summary(a, "pull", "pull request")
 
           pad(10) { text "Issues per label" }
           table a.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
@@ -74,6 +62,15 @@ module HowIs
       else
         raise UnsupportedExportFormat, filename.split('.').last
       end
+    end
+
+  private
+    def issue_or_pr_summary(analysis, type, type_label)
+      a = analysis
+
+      "#{a.repository} has #{a.send("number_of_#{type}s")} #{type_label}s open. " +
+      "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
+      "oldest #{type_label} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
     end
   end
 
