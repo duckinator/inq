@@ -1,5 +1,4 @@
 require 'contracts'
-require 'csv'
 require 'prawn'
 require 'prawn/table'
 
@@ -17,15 +16,6 @@ module HowIs
       analysis.to_h
     end
     alias :to_hash :to_h
-
-    def export_csv!(filename=file)
-      hash = to_h
-
-      CSV.open(filename, "wb") do |csv|
-        csv << hash.keys
-        csv << hash.values
-      end
-    end
 
     def export_json!(filename=file)
       File.open(filename, 'w') do |f|
