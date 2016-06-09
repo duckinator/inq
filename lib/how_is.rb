@@ -20,10 +20,12 @@ module HowIs
         fetcher:  Fetcher.new,
         analyzer: Analyzer.new,
         reporter: Reporter.new)
-    raise NotImplementedError, "--from not implemented yet" if from_file
-
-    raw_data = fetcher.call(repository)
-    analysis = analyzer.call(raw_data)
+    if from_file
+      analysis = analyzer.from_file(from_file)
+    else
+      raw_data = fetcher.call(repository)
+      analysis = analyzer.call(raw_data)
+    end
 
     reporter.call(analysis, report_file)
   end

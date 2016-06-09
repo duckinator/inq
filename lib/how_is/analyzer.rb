@@ -1,6 +1,7 @@
 require 'contracts'
 require 'ostruct'
 require 'date'
+require 'json'
 
 module HowIs
   ##
@@ -10,6 +11,12 @@ module HowIs
 
   class Analyzer
     include Contracts::Core
+
+    class UnsupportedImportFormat < StandardError
+      def initialize(format)
+        super("Unsupported import format: #{format}")
+      end
+    end
 
     Contract Fetcher::Results, C::KeywordArgs[analysis_class: C::Optional[Class]] => Analysis
     def call(data, analysis_class: Analysis)
@@ -31,6 +38,15 @@ module HowIs
         oldest_issue_date: oldest_date_for(issues),
         oldest_pull_date:  oldest_date_for(pulls),
       )
+    end
+
+    def from_file(file)
+      extension = file.split('.').last
+      raise UnsupportedImportFormat, extension unless extension == 'json'
+
+      hash = JSON.parse(open(file).read)
+
+      Analysis.new(hash)
     end
 
     # Given an Array of issues or pulls, return a Hash specifying how many
