@@ -28,7 +28,7 @@ class HowIs::Chart
   end
 
   def self.rotate(offset, filename)
-    if on_windows?
+    if Gem.win_platform?
       rotate_with_dotnet(filename, offset)
     else
       rotate_with_minimagick(filename, offset)
@@ -65,9 +65,5 @@ class HowIs::Chart
     image = MiniMagick::Image.new(filename) { |b| b.rotate offset.to_s }
     image.format 'png'
     image.write filename
-  end
-
-  def self.on_windows?
-    %w(mswin32 mingw32).include? Gem::Platform.local.os
   end
 end
