@@ -7,5 +7,5 @@
 /pkg/
 /spec/reports/
 /tmp/
-*.csv
-*.pdf
+report.pdf
+report.json
