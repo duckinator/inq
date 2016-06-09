@@ -4,9 +4,17 @@ class HowIs::Chart
   end
 
   def self.rotate(offset, filename)
-    return unless on_windows?
+    if on_windows?
+      rotate_with_dotnet(filename, offset)
+    else
+      rotate_with_minimagick(filename, offset)
+    end
+    $stderr.puts "Rotated image #{offset} degrees."
+  end
+
+  def self.rotate_with_dotnet(filename, offset)
     ps_rotate_flip = {
-      90  => 'Rotate90FlipNone',
+      90 => 'Rotate90FlipNone',
       180 => 'Rotate180FlipNone',
       270 => 'Rotate270FlipNone',
       -90 => 'Rotate270FlipNone'
@@ -25,9 +33,14 @@ class HowIs::Chart
       exit
     }
 
-    IO.popen(["powershell", "-Command", command], 'w') { |io|
-    }
-    $stderr.puts "Rotated image #{offset} degrees."
+    IO.popen(["powershell", "-Command", command], 'w') { |io| }
+  end
+
+  def self.rotate_with_minimagick(filename, offset)
+    require 'mini_magick'
+    image = MiniMagick::Image.new(filename) { |b| b.rotate offset.to_s }
+    image.format 'png'
+    image.write filename
   end
 
   def self.on_windows?
