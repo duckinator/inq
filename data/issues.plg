@@ -9,6 +9,7 @@ set tmargin at screen 0.85
 
 unset key
 unset border
+set tics nomirror
 unset xtics
 
 plot 'issues-per-label.dat' using 1:(-1):3 with labels left rotate by 90 font labelfont offset 0,1.5, \
