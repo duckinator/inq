@@ -45,6 +45,11 @@ module HowIs
       raise UnsupportedImportFormat, extension unless extension == 'json'
 
       hash = JSON.parse(open(file).read)
+      hash = hash.map do |k, v|
+        v = DateTime.parse(v) if k.end_with?('_date')
+
+        [k, v]
+      end.to_h
 
       Analysis.new(hash)
     end
