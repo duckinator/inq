@@ -1,6 +1,7 @@
 require 'contracts'
 require 'prawn'
 require 'prawn/table'
+require 'how_is/chart'
 
 module HowIs
   class UnsupportedExportFormat < StandardError
@@ -34,14 +35,44 @@ module HowIs
         font("Helvetica")
 
         span(450, position: :center) do
-          pad(10) { text "How is #{a.repository}?", size: 25 }
-          pad(5)  { text "Issues" }
-          text Report.issue_or_pr_summary(a, "issue", "issue")
-          pad(5)  { text "Pull Requests" }
+          header = ->(msg) {
+            pad_top(15) {
+              pad_bottom(3) {
+                text msg, size: 20
+              }
+            }
+          }
+          pad_bottom(10) { text "How is #{a.repository}?", size: 25 }
+
+          #pad(5)  { text "Pull Requests", size: 20 }
+          header.("Pull Requests")
           text Report.issue_or_pr_summary(a, "pull", "pull request")
 
-          pad(10) { text "Issues per label" }
-          table a.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
+          header.("Issues")
+          text Report.issue_or_pr_summary(a, "issue", "issue")
+
+          header.("Issues Per Label")
+          issues_per_label = a.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
+
+          File.open('issues-per-label.dat', 'w') do |f|
+            issues_per_label.each_with_index do |(label, n), i|
+              f.puts "#{i}\t#{n}\t#{label}"
+            end
+          end
+
+          Chart.gnuplot(%Q{
+            set terminal png size 500x500
+            set output 'issues-per-label.png'
+            set nokey
+            unset border
+            unset xtics
+
+            plot 'issues-per-label.dat' using 1:(-1):3 with labels rotate right, \
+                 'issues-per-label.dat' using 1:2 with boxes
+            })
+          Chart.rotate(90, 'issues-per-label.png')
+
+          image "./issues-per-label.png"
         end
       end
     end
