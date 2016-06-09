@@ -28,7 +28,6 @@ module HowIs
     end
 
     def export_pdf!(filename=file)
-      oldest_date_format = "%b %e, %Y"
       a = analysis
 
       Prawn::Document.generate(filename) do
@@ -37,17 +36,12 @@ module HowIs
         span(450, position: :center) do
           pad(10) { text "How is #{a.repository}?", size: 25 }
           pad(5)  { text "Issues" }
-          text issue_or_pr_summary(a, "issue", "issue")
+          text Report.issue_or_pr_summary(a, "issue", "issue")
           pad(5)  { text "Pull Requests" }
-          text issue_or_pr_summary(a, "pull", "pull request")
+          text Report.issue_summary(a, "pull", "pull request")
 
           pad(10) { text "Issues per label" }
           table a.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
-
-          # TODO: GitHub's API doesn't include labels for PRs but does for issues?!
-          pad(10) { text "Pull Requests per label" }
-          text "TODO."
-          #table a.pulls_with_label.to_a
         end
       end
     end
@@ -64,7 +58,8 @@ module HowIs
     end
 
   private
-    def issue_or_pr_summary(analysis, type, type_label)
+    def self.issue_or_pr_summary(analysis, type, type_label)
+      oldest_date_format = "%b %e, %Y"
       a = analysis
 
       "#{a.repository} has #{a.send("number_of_#{type}s")} #{type_label}s open. " +
