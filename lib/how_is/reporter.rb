@@ -92,9 +92,9 @@ module HowIs
       oldest_date_format = "%b %e, %Y"
       a = analysis
 
-      "#{a.repository} has #{a.send("number_of_#{type}s")} #{type_label}s open. " +
+      "There are #{a.send("number_of_#{type}s")} #{type_label}s open. " +
       "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-      "oldest #{type_label} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
+      "oldest was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
     end
   end
 
