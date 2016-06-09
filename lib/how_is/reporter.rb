@@ -55,7 +55,7 @@ module HowIs
 
           File.open('issues-per-label.dat', 'w') do |f|
             issues_per_label.each_with_index do |(label, n), i|
-              f.puts "#{i}\t#{n}\t#{label}"
+              f.puts "#{i}\t#{n}\t\"#{label}\""
             end
           end
 

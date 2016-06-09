@@ -1,17 +1,22 @@
+if (!exists("chartsize")) chartsize = '500,500'
+if (!exists("labelfont")) labelfont = 'Helvetica,12'
+if (!exists("chartfont")) chartfont = 'Helvetica,12'
+if (!exists("data")) data = 'issues-per-label.dat'
+
 set terminal png size chartsize font chartfont
 
 set output 'issues-per-label.png'
-
-set lmargin at screen 0.15
-set bmargin at screen 0.15
-set rmargin at screen 0.85
-set tmargin at screen 0.85
 
 unset key
 unset border
 set tics nomirror
 unset xtics
 
-plot 'issues-per-label.dat' using 1:(-1):3 with labels left rotate by 90 font labelfont offset 0,1.5, \
-     'issues-per-label.dat' using 1:2 with boxes
+plot data using 1:(-1):3 with \
+      labels left \
+      rotate by 90 \
+      font labelfont \
+      offset 0.30,2.10, \
+     data using 1:2 with boxes
+
 

@@ -33,7 +33,6 @@ class HowIs::Chart
     else
       rotate_with_minimagick(filename, offset)
     end
-    $stderr.puts "Rotated image #{offset} degrees."
   end
 
   def self.rotate_with_dotnet(filename, offset)
