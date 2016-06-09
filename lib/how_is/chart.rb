@@ -14,7 +14,7 @@ class HowIs::Chart
 
   def self.rotate_with_dotnet(filename, offset)
     ps_rotate_flip = {
-      90 => 'Rotate90FlipNone',
+      90  => 'Rotate90FlipNone',
       180 => 'Rotate180FlipNone',
       270 => 'Rotate270FlipNone',
       -90 => 'Rotate270FlipNone'
