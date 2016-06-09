@@ -4,6 +4,7 @@ class HowIs::Chart
   end
 
   def self.rotate(offset, filename)
+    return unless on_windows?
     ps_rotate_flip = {
       90  => 'Rotate90FlipNone',
       180 => 'Rotate180FlipNone',
@@ -27,5 +28,9 @@ class HowIs::Chart
     IO.popen(["powershell", "-Command", command], 'w') { |io|
     }
     $stderr.puts "Rotated image #{offset} degrees."
+  end
+
+  def self.on_windows?
+    %w(mswin32 mingw32).include? Gem::Platform.local.os
   end
 end
