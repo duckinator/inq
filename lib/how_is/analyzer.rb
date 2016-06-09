@@ -85,12 +85,54 @@ module HowIs
 
     # Given an Array of issues or pulls, return the average age of them.
     def average_age_for(issues_or_pulls)
-      0 #average_date_for(issues_or_pulls)
+      ages = issues_or_pulls.map {|iop| time_ago_in_seconds(iop['created_at'])}
+      raw_average = ages.reduce(:+) / ages.length
+
+      seconds_in_a_year = 31_556_926
+      seconds_in_a_month = 2_629_743
+      seconds_in_a_week = 604_800
+      seconds_in_a_day = 86_400
+
+      years = raw_average / seconds_in_a_year
+      years_remainder = raw_average % seconds_in_a_year
+
+      months = years_remainder / seconds_in_a_month
+      months_remainder = years_remainder % seconds_in_a_month
+
+      weeks = months_remainder / seconds_in_a_week
+      weeks_remainder = months_remainder % seconds_in_a_week
+
+      days = weeks_remainder / seconds_in_a_day
+
+      values = [
+        [years, "year"],
+        [months, "month"],
+        [weeks, "week"],
+        [days, "day"],
+      ].reject {|(v, k)| v == 0}.map{ |(v,k)|
+        k = k + 's' if v != 1
+        [v, k]
+      }
+
+      most_significant = values[0, 2].map {|x| x.join(" ")}
+
+      if most_significant.length < 2
+        value = most_significant.first
+      else
+        value = most_significant.join(" and ")
+      end
+
+      "approximately #{value}"
     end
 
     # Given an Array of issues or pulls, return the creation date of the oldest.
     def oldest_date_for(issues_or_pulls)
       issues_or_pulls.map {|x| DateTime.parse(x['created_at']) }.sort.first
+    end
+
+  private
+    def time_ago_in_seconds(x)
+      DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
     end
   end
 end
