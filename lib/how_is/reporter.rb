@@ -38,7 +38,7 @@ module HowIs
           pad(5)  { text "Issues" }
           text Report.issue_or_pr_summary(a, "issue", "issue")
           pad(5)  { text "Pull Requests" }
-          text Report.issue_summary(a, "pull", "pull request")
+          text Report.issue_or_pr_summary(a, "pull", "pull request")
 
           pad(10) { text "Issues per label" }
           table a.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
