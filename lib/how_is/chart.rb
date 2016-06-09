@@ -1,6 +1,30 @@
 class HowIs::Chart
-  def self.gnuplot(commands)
-    IO.popen("gnuplot", "w") {|io| io.puts commands}
+  # Generates the gnuplot script in data/issues.plg.
+  #
+  # Some configuration is available. Font locations are path to a TTF or other
+  # Gnuplot-readable font name.
+  #
+  # For example that could be '/Users/anne/Library/Fonts/InputMono-Medium.ttf'
+  # or just 'Helvetica'.
+  #
+  # @param font_location [String] Font for the chart
+  # @param font_size [Integer] Size of the chart text
+  # @param label_font_location [String] Font for labels
+  # @param label_font_size [Integer] Size of the label text
+  #
+  # @return void
+  def self.gnuplot(font_location: 'Helvetica',
+                   font_size: 16,
+                   label_font_location: 'Helvetica',
+                   label_font_size: 10,
+                   chartsize: '500,500')
+    cmd = %Q{
+      gnuplot -e "labelfont='#{label_font_location},#{label_font_size}'" \
+              -e "chartfont='#{font_location},#{font_size}'" \
+              -e "chartsize='#{chartsize}'" \
+              -c data/issues.plg
+    }
+    IO.popen(cmd, 'w')
   end
 
   def self.rotate(offset, filename)

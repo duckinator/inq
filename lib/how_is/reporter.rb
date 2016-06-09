@@ -59,16 +59,10 @@ module HowIs
             end
           end
 
-          Chart.gnuplot(%Q{
-            set terminal png size 500,500
-            set output 'issues-per-label.png'
-            set nokey
-            unset border
-            unset xtics
-
-            plot 'issues-per-label.dat' using 1:(-1):3 with labels rotate right, \
-                 'issues-per-label.dat' using 1:2 with boxes
-            })
+          Chart.gnuplot(label_font_location: 'Helvetica',
+                        label_font_size: 10,
+                        font_location: 'Helvetica',
+                        font_size: 16)
           Chart.rotate(90, 'issues-per-label.png')
 
           image "./issues-per-label.png"
