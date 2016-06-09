@@ -60,7 +60,7 @@ module HowIs
           end
 
           Chart.gnuplot(%Q{
-            set terminal png size 500x500
+            set terminal png size 500,500
             set output 'issues-per-label.png'
             set nokey
             unset border
