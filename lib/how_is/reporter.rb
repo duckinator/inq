@@ -44,7 +44,6 @@ module HowIs
           }
           pad_bottom(10) { text "How is #{a.repository}?", size: 25 }
 
-          #pad(5)  { text "Pull Requests", size: 20 }
           header.("Pull Requests")
           text Report.issue_or_pr_summary(a, "pull", "pull request")
 
