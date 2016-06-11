@@ -45,4 +45,4 @@ else
   exit 1
 end
 
-HowIs.generate_report(options).export!
+HowIs.generate_report(options)
