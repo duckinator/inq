@@ -29,7 +29,7 @@ module HowIs
 
       Chart.gnuplot(%Q{
         set terminal png size 500x500
-        set output 'issues-per-label.png'
+        set output '#{png_file}'
         set nokey
         unset border
         unset xtics
