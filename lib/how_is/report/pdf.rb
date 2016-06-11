@@ -17,7 +17,7 @@ module HowIs
     end
 
     def horizontal_bar_graph(data)
-      filename_base = "horizontal-bar-graph-#{Time.now.to_i}"
+      filename_base = "./horizontal-bar-graph-#{Time.now.to_i}"
       dat_file = filename_base + '.dat'
       png_file = filename_base + '.png'
 
@@ -39,7 +39,7 @@ module HowIs
         })
       Chart.rotate(90, png_file)
 
-      image png_file
+      pdf.image png_file
     end
 
     def text(_text)
