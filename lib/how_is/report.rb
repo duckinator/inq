@@ -26,7 +26,7 @@ module HowIs
 
         "There are #{number_of_type} #{type_label}s open. " +
         "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-        "oldest was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}"
+        "oldest was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}."
       end
   end
 
