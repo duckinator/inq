@@ -14,7 +14,7 @@ module HowIs
                           from_file: C::Optional[C::Or[String, nil]],
                           fetcher: C::Optional[Class],
                           analyzer: C::Optional[Class],
-                          reporter: C::Optional[Class]] => Report
+                          reporter: C::Optional[Class]] => C::Any
   def self.generate_report(repository:, report_file:,
         from_file: nil,
         fetcher:  Fetcher.new,
