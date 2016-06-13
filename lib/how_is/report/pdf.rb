@@ -17,27 +17,21 @@ module HowIs
     end
 
     def horizontal_bar_graph(data)
-      filename_base = "./horizontal-bar-graph-#{Time.now.to_i}"
+      filename_base = "./issues-per-label"
       dat_file = filename_base + '.dat'
       png_file = filename_base + '.png'
 
       File.open(dat_file, 'w') do |f|
         data.each_with_index do |(label, n), i|
-          f.puts "#{i}\t#{n}\t#{label}"
+          f.puts "#{i}\t#{n}\t\"#{label}\""
         end
       end
 
-      Chart.gnuplot(%Q{
-        set terminal png size 500x500
-        set output '#{png_file}'
-        set nokey
-        unset border
-        unset xtics
-
-        plot '#{dat_file}' using 1:(-1):3 with labels rotate right, \
-             '#{dat_file}' using 1:2 with boxes
-        })
-      Chart.rotate(90, png_file)
+      Chart.gnuplot(label_font_size: 10,
+                    font_size: 16,
+                    data_file: dat_file,
+                    png_file: png_file)
+     Chart.rotate(90, png_file)
 
       pdf.image png_file
     end
