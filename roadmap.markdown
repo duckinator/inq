@@ -4,7 +4,7 @@ A brief overview of where how_is stands and the plans for it.
 
 ## Goals
 
-How_is is intended to be usable both as a standalone program and a library, with reports generated as either files or Ruby `String`s. Initial export formats supported will be JSON, PDF, and HTML. When exporting a report, you can use the data from a previous JSON export to avoid making network requests.
+How_is is intended to be usable both as a standalone program and a library, with reports generated as either files or Ruby Strings. Initial export formats supported will be JSON, PDF, and HTML. When exporting a report, you can use the data from a previous JSON export to avoid making network requests.
 
 Metrics will be divided into two categories during implementation: Simple and Complex. Simple ones will be doable using only the information gathered from one API call to the issue tracker. Complex metrics require things like cloning the repository or making multiple API requests.
 
@@ -32,7 +32,7 @@ Once HTML export is implemented, it is planned to create a web service which tra
 
 As of June 15th 2016, how_is supports exports to JSON or PDF, but not HTML. For JSON and PDF, all Simple metrics have been implemented in some form, although they made need some polish ([#8](https://github.com/duckinator/how_is/issues/8)). HTML export is not implemented, and no Complex metrics are implemented. Tracking the number of issues without labels has also not been implemented ([#1](https://github.com/duckinator/how_is/issues/1)).
 
-Exporting to Ruby `String`s that contain valid JSON, PDF, or HTML documents has also not been implemented ([#7](https://github.com/duckinator/how_is/issues/7)).
+Exporting to Ruby Strings that contain valid JSON, PDF, or HTML documents has also not been implemented ([#7](https://github.com/duckinator/how_is/issues/7)).
 
 Authentication is not being used, but will likely be necessary, as it would raise the API rate limits ([#6](https://github.com/duckinator/how_is/issues/6)).
 
@@ -42,7 +42,7 @@ Once JSON and PDF exports are fully implemented ([#1](https://github.com/duckina
 
 ### Requirements for 2.0
 
-Once everything required for v1.0 as well as exporting to `String`s ([#7](https://github.com/duckinator/how_is/issues/7)) has been implemented, v2.0 will be released.
+Once everything required for v1.0 as well as exporting to Strings ([#7](https://github.com/duckinator/how_is/issues/7)) has been implemented, v2.0 will be released.
 
 ### Other changes
 
