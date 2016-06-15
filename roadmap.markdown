@@ -1,6 +1,6 @@
 # How_is Roadmap
 
-A brief overview of where how_is stands and the plans for it.
+A brief overview of how_is' goals and current status.
 
 ## Goals
 
