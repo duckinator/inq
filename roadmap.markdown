@@ -4,7 +4,7 @@ A brief overview of where how_is stands and the plans for it.
 
 ## Goals
 
-How_is is intended to be usable both as a standalone program and a library, with reports generated as either files or Ruby Strings. Initial export formats supported will be JSON, PDF, and HTML. When exporting a report, you can use the data from a previous JSON export to avoid making network requests.
+How_is is intended to be usable both as a standalone program and a as library, with reports generated as either files or Ruby Strings. Initial export formats supported will be JSON, PDF, and HTML. When exporting a report, you can use the data from a previous JSON export to avoid making network requests.
 
 Metrics will be divided into two categories during implementation: Simple and Complex. Simple ones will be doable using only the information gathered from one API call to the issue tracker. Complex metrics require things like cloning the repository or making multiple API requests.
 
