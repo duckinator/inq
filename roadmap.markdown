@@ -35,3 +35,15 @@ As of June 15th 2016, how_is supports exports to JSON or PDF, but not HTML. For 
 Exporting to Ruby `String`s that contain valid JSON, PDF, or HTML documents has also not been implemented ([#7](https://github.com/duckinator/how_is/issues/7)).
 
 Authentication is not being used, but will likely be necessary, as it would raise the API rate limits ([#6](https://github.com/duckinator/how_is/issues/6)).
+
+### Requirements for 1.0
+
+Once JSON and PDF exports are fully implemented ([#1](https://github.com/duckinator/how_is/issues/1)) and the README has a proper list of the metrics covered, v1.0 will be released.
+
+### Requirements for 2.0
+
+Once everything required for v1.0 as well as exporting to `String`s ([#7](https://github.com/duckinator/how_is/issues/7)) has been implemented, v2.0 will be released.
+
+### Other changes
+
+All other changes ([#8](https://github.com/duckinator/how_is/issues/8), [#6](https://github.com/duckinator/how_is/issues/6), any changes without an accompanying issue) will be grouped together in either the next major release, or a separate minor release.
