@@ -24,7 +24,7 @@ Complex metrics will include:
 * average response time by a team member in the past week,
 * graph of average response time by a team member per week.
 
-These metrics serve to either quantify how well the repository is being managed, quantify the state of the codebase itself, or both. By quantifying the state of the issue tracker and codebase, it will hopefully be easier to decide what needs to be done.
+These metrics serve to either quantify the state of the repository, quantify the state of the codebase itself, or both. By quantifying the state of the issue tracker and codebase, it will hopefully be easier to decide what needs to be done.
 
 Once HTML export is implemented, it is planned to create a web service which tracks these metrics over time for the RubyGems repository. The details of this have not been fully fleshed out, but I am attempting to design the library in such a way to allow the flexibility required to do this.
 
