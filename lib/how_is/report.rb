@@ -53,6 +53,7 @@ module HowIs
 
         header "Issues Per Label"
         issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
+        issues_per_label << ["(No label)", analysis.issues_with_no_label]
         horizontal_bar_graph issues_per_label
       }
 
