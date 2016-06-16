@@ -76,7 +76,7 @@ module HowIs
     end
 
     def num_with_no_label(issues)
-      issues.map{|x| x['labels'].empty?}.length
+      issues.select { |x| x['labels'].empty? }.length
     end
 
     def average_date_for(issues_or_pulls)
