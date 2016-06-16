@@ -30,6 +30,7 @@ module HowIs
         number_of_pulls:   pulls.length,
 
         issues_with_label: num_with_label(issues),
+        issues_with_no_label: num_with_no_label(issues),
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
@@ -72,6 +73,10 @@ module HowIs
         end
       end
       hash
+    end
+
+    def num_with_no_label(issues)
+      issues.map{|x| x['labels'].empty?}.length
     end
 
     def average_date_for(issues_or_pulls)
