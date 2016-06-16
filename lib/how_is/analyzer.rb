@@ -30,7 +30,6 @@ module HowIs
         number_of_pulls:   pulls.length,
 
         issues_with_label: num_with_label(issues),
-        pulls_with_label: num_with_label(pulls),
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
