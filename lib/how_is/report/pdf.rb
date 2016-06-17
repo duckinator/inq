@@ -40,7 +40,16 @@ module HowIs
       pdf.text _text
     end
 
-    def export!(&block)
+    # Prawn (afaict) doesn't let you export to a binary blob.
+    # So export to a file, then read the file.
+    def export(&block)
+      # TODO: Use actual temporary file.
+      export!('temp.pdf', &block)
+
+      open('temp.pdf').read
+    end
+
+    def export!(file, &block)
       _self = self
 
       Prawn::Document.generate(file) do |pdf|

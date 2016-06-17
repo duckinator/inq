@@ -7,7 +7,7 @@ module HowIs
 
   ##
   # Represents a completed report.
-  class BaseReport < Struct.new(:analysis, :file)
+  class BaseReport < Struct.new(:analysis)
     def to_h
       analysis.to_h
     end
@@ -34,30 +34,47 @@ module HowIs
     require 'how_is/report/pdf'
     require 'how_is/report/json'
 
+    REPORT_BLOCK = proc do
+      title "How is #{analysis.repository}?"
+
+      header "Pull Requests"
+      text issue_or_pr_summary "pull", "pull request"
+
+      header "Issues"
+      text issue_or_pr_summary "issue", "issue"
+
+      header "Issues Per Label"
+      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
+      issues_per_label << ["(No label)", analysis.issues_with_no_label]
+      horizontal_bar_graph issues_per_label
+    end
+
+    def self.export(analysis, format = :pdf)
+
+    end
+
     def self.export!(analysis, file)
-      extension = file.split('.').last
-      class_name = "#{extension.capitalize}Report"
+      format = file.split('.').last
+      report = get_report_class(format).new(analysis)
 
-      raise UnsupportedExportFormat, extension unless HowIs.const_defined?(class_name)
+      report.export!(file, &REPORT_BLOCK)
+    end
 
-      report = HowIs.const_get(class_name).new(analysis, file)
+    def self.export(analysis, format = :pdf)
+      report = get_report_class(format).new(analysis)
 
-      report.export! {
-        title "How is #{analysis.repository}?"
-
-        header "Pull Requests"
-        text issue_or_pr_summary "pull", "pull request"
-
-        header "Issues"
-        text issue_or_pr_summary "issue", "issue"
-
-        header "Issues Per Label"
-        issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
-        issues_per_label << ["(No label)", analysis.issues_with_no_label]
-        horizontal_bar_graph issues_per_label
-      }
+      report.export(&REPORT_BLOCK)
 
       report
+    end
+
+  private
+    def self.get_report_class(format)
+      class_name = "#{format.capitalize}Report"
+
+      raise UnsupportedExportFormat, format unless HowIs.const_defined?(class_name)
+
+      HowIs.const_get(class_name)
     end
   end
 end
