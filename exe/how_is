@@ -3,7 +3,10 @@
 require "how_is"
 require "optparse"
 
+abort "Error: No repository specified." unless ARGV.size == 1
+
 options = {
+  repository: ARGV.delete_at(0),
   report_file:  "report.pdf",
   from_file: nil,
 }
@@ -37,12 +40,5 @@ opts = OptionParser.new do |opts|
   end
 end
 opts.parse!
-
-if ARGV.length == 1
-  options[:repository] = ARGV.delete_at(0)
-else
-  puts "Error: No repository specified."
-  exit 1
-end
 
 HowIs.generate_report(options)
