@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/duckinator/how_is.png?label=ready&title=Ready)](https://waffle.io/duckinator/how_is)
 # How is [your repo]?
 
 `how_is` is tool for generating summaries of the health of a codebase. It uses information available from issues and pull requests to provide an overview of a repository and highlight problem areas of the codebase.
