@@ -8,7 +8,7 @@ The summary includes:
 * repository name,
 * number of open issues,
 * number of open pull requests,
-* percentage + number of open issues associated with each label and with no label,
+* number of open issues associated with each label and with no label,
 * average issue age,
 * average pull request age,
 * date oldest issue was opened,
