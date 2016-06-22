@@ -1,8 +1,10 @@
 module HowIs
   class JsonReport < BaseReport
-    alias_method :export, :to_json
+    def export(&block)
+      to_json
+    end
 
-    def export!(&block)
+    def export!(file, &block)
       File.open(file, 'w') do |f|
         f.write export
       end
