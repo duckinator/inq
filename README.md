@@ -16,6 +16,8 @@ The summary includes:
 
 ## Installation
 
+Make sure you have [gnuplot](http://gnuplot.info/) installed, then:
+
     $ gem install how_is
 
 ## Usage
