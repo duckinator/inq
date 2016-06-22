@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "configru", "~> 3.6.0"
   spec.add_runtime_dependency "contracts"
   spec.add_runtime_dependency "prawn"
-  spec.add_runtime_dependency "prawn-table"
 
   spec.add_runtime_dependency "mini_magick"
 

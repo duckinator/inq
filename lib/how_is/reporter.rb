@@ -1,6 +1,5 @@
 require 'contracts'
 require 'prawn'
-require 'prawn/table'
 require 'how_is/chart'
 
 module HowIs
