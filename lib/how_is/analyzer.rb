@@ -80,11 +80,10 @@ module HowIs
     end
 
     def average_date_for(issues_or_pulls)
-      timestamps = issues_or_pulls.map { |iop| Time.parse(iop['created_at']).to_i }
+      timestamps = issues_or_pulls.map { |iop| Date.parse(iop['created_at']).strftime('%s').to_i }
       average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
 
-      average_time = Time.at(average_timestamp)
-      Date.parse(average_time.to_s)
+      Date.strptime(average_timestamp.to_s, '%s')
     end
 
     # Given an Array of issues or pulls, return the average age of them.
