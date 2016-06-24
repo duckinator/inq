@@ -1,3 +1,6 @@
+require 'prawn'
+require 'how_is/chart'
+
 module HowIs
   class PdfReport < BaseReport
     attr_accessor :pdf

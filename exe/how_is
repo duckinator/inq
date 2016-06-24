@@ -49,4 +49,4 @@ else
   abort "Error: No repository specified."
 end
 
-HowIs.generate_report(options)
+HowIs.generate_report_file(options)

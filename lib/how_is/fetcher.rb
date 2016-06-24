@@ -24,7 +24,7 @@ class HowIs::Fetcher
   end
 
 
-  Contract String, C::RespondTo[:issues, :pulls] => Results
+  Contract String, C::Or[C::RespondTo[:issues, :pulls], nil] => Results
   def call(repository,
         github = nil)
     github ||= Github.new(auto_pagination: true)
