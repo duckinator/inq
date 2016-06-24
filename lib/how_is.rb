@@ -8,18 +8,30 @@ module HowIs
 
   require 'how_is/fetcher'
   require 'how_is/analyzer'
-  require 'how_is/reporter'
+  require 'how_is/report'
 
-  Contract C::KeywordArgs[repository: String, report_file: String,
-                          from_file: C::Optional[C::Or[String, nil]],
-                          fetcher: C::Optional[Class],
-                          analyzer: C::Optional[Class],
-                          reporter: C::Optional[Class]] => C::Any
-  def self.generate_report(repository:, report_file:,
+  def self.generate_report_file(report_file:, **kw_args)
+    analysis = self.generate_analysis(**kw_args)
+
+    Report.export!(analysis, report_file)
+  end
+
+  def self.generate_report(**kw_args)
+    analysis = self.generate_analysis(**kw_args)
+
+    Report.export(analysis)
+  end
+private
+
+
+Contract C::KeywordArgs[repository: String,
+                        from_file: C::Optional[C::Or[String, nil]],
+                        fetcher: C::Optional[Class],
+                        analyzer: C::Optional[Class]] => C::Any
+  def self.generate_analysis(repository:,
         from_file: nil,
-        fetcher:  Fetcher.new,
-        analyzer: Analyzer.new,
-        reporter: Reporter.new)
+        fetcher: Fetcher.new,
+        analysis: Analyzer.new)
     if from_file
       analysis = analyzer.from_file(from_file)
     else
@@ -27,6 +39,6 @@ module HowIs
       analysis = analyzer.call(raw_data)
     end
 
-    reporter.call(analysis, report_file)
+    analysis
   end
 end

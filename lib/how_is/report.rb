@@ -50,7 +50,7 @@ module HowIs
     end
 
     def self.export(analysis, format = :pdf)
-
+      report.export(&REPORT_BLOCK)
     end
 
     def self.export!(analysis, file)
