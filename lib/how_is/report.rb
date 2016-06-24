@@ -60,8 +60,6 @@ module HowIs
       report = get_report_class(format).new(analysis)
 
       report.export(&REPORT_BLOCK)
-
-      report
     end
 
   private

@@ -26,7 +26,8 @@ class HowIs::Fetcher
 
   Contract String, C::RespondTo[:issues, :pulls] => Results
   def call(repository,
-        github = Github.new(auto_pagination: true))
+        github = nil)
+    github ||= Github.new(auto_pagination: true)
     user, repo = repository.split('/', 2)
     issues  = github.issues.list user: user, repo: repo
     pulls   = github.pulls.list  user: user, repo: repo
