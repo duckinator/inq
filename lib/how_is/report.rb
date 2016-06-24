@@ -49,10 +49,6 @@ module HowIs
       horizontal_bar_graph issues_per_label
     end
 
-    def self.export(analysis, format = :pdf)
-      report.export(&REPORT_BLOCK)
-    end
-
     def self.export!(analysis, file)
       format = file.split('.').last
       report = get_report_class(format).new(analysis)
