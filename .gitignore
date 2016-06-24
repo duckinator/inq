@@ -9,5 +9,6 @@
 /tmp/
 report.pdf
 report.json
+report.html
 *.dat
 *.png

@@ -33,6 +33,7 @@ module HowIs
   class Report
     require 'how_is/report/pdf'
     require 'how_is/report/json'
+    require 'how_is/report/html'
 
     REPORT_BLOCK = proc do
       title "How is #{analysis.repository}?"
