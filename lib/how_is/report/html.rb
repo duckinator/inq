@@ -10,7 +10,22 @@ module HowIs
     end
 
     def horizontal_bar_graph(data)
-      @r += "<p>horizontal_bar_graph not implemented.</p>"
+      @bar_graphs ||= 0
+      @bar_graphs += 1
+
+      @r += <<-EOF
+<div id="bar-graph-#{@bar_graphs}"></div>
+<script>
+var data = [{
+  type: 'bar',
+  x: #{data.map(&:last).to_json},
+  y: #{data.map(&:first).to_json},
+  orientation: 'h'
+}];
+
+Plotly.newPlot("bar-graph-#{@bar_graphs}", data);
+</script>
+      EOF
     end
 
     def text(_text)
@@ -26,19 +41,21 @@ module HowIs
       report = export(&block)
 
       File.open(file, 'w') do |f|
-        f.puts "\
+        f.puts <<-EOF
 <!DOCTYPE html>
 <html>
 <head>
   <title>#{@title}</title>
   <style>
-  body { font: sans-serif;}
+  body { font: sans-serif; }
   main {
     max-width: 600px;
     max-width: 72ch;
     margin: auto;
   }
   </style>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
   <main>
@@ -46,7 +63,7 @@ module HowIs
   </main>
 </body>
 </html>
-"
+        EOF
       end
     end
   end
