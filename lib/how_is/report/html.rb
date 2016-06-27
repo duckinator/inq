@@ -11,7 +11,7 @@ module HowIs
       @r += "<h2>#{_text}</h2>"
     end
 
-    def link(url, _text)
+    def link(_text, url)
       %Q[<a href="#{url}">#{_text}</a>]
     end
 
@@ -27,7 +27,7 @@ module HowIs
         percentage = get_percentage.(row[1])
 
         if row[2]
-          label_text = link(row[2], row[0])
+          label_text = link(row[0], row[2])
         else
           label_text = row[1]
         end

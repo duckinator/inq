@@ -24,7 +24,9 @@ module HowIs
 
         number_of_type = a.send("number_of_#{type}s")
 
-        "There are #{number_of_type} #{type_label}s open. " +
+        type_link = "https://github.com/#{analysis.repository}/#{type}s"
+
+        "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
         "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
         "oldest was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}."
       end

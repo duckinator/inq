@@ -19,6 +19,11 @@ module HowIs
       }
     end
 
+    def link(_text, url)
+      # TODO: Actually have links.
+      _text
+    end
+
     def horizontal_bar_graph(data)
       filename_base = "./issues-per-label"
       dat_file = filename_base + '.dat'
