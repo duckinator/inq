@@ -10,22 +10,23 @@ module HowIs
     end
 
     def horizontal_bar_graph(data)
-      @bar_graphs ||= 0
-      @bar_graphs += 1
+      biggest = data.map(&:last).max
+      get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
-      @r += <<-EOF
-<div id="bar-graph-#{@bar_graphs}"></div>
-<script>
-var data = [{
-  type: 'bar',
-  x: #{data.map(&:last).to_json},
-  y: #{data.map(&:first).to_json},
-  orientation: 'h'
-}];
+      longest_label_length = data.map(&:first).map(&:length).max
+      label_width = "#{longest_label_length}ch"
 
-Plotly.newPlot("bar-graph-#{@bar_graphs}", data);
-</script>
-      EOF
+      @r += '<table class="horizontal-bar-graph">'
+      data.each do |row|
+        percentage = get_percentage.(row[1])
+        @r += <<-EOF
+  <tr>
+    <td style="width: #{label_width}">#{row[0]}</td>
+    <td><span class="fill" style="width: #{percentage}%">#{row[1]}</span></td>
+  </tr>
+        EOF
+      end
+      @r += "</table>"
     end
 
     def text(_text)
@@ -52,6 +53,15 @@ Plotly.newPlot("bar-graph-#{@bar_graphs}", data);
     max-width: 600px;
     max-width: 72ch;
     margin: auto;
+  }
+
+  .horizontal-bar-graph {
+    position: relative;
+    width: 100%;
+  }
+  .horizontal-bar-graph .fill {
+    display: inline-block;
+    background: #CCC;
   }
   </style>
 
