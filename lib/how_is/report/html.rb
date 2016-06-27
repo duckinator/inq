@@ -64,8 +64,6 @@ module HowIs
     background: #CCC;
   }
   </style>
-
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
   <main>
