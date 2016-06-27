@@ -10,7 +10,23 @@ module HowIs
     end
 
     def horizontal_bar_graph(data)
-      @r += "<p>horizontal_bar_graph not implemented.</p>"
+      biggest = data.map(&:last).max
+      get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
+
+      longest_label_length = data.map(&:first).map(&:length).max
+      label_width = "#{longest_label_length}ch"
+
+      @r += '<table class="horizontal-bar-graph">'
+      data.each do |row|
+        percentage = get_percentage.(row[1])
+        @r += <<-EOF
+  <tr>
+    <td style="width: #{label_width}">#{row[0]}</td>
+    <td><span class="fill" style="width: #{percentage}%">#{row[1]}</span></td>
+  </tr>
+        EOF
+      end
+      @r += "</table>"
     end
 
     def text(_text)
@@ -26,19 +42,30 @@ module HowIs
       report = export(&block)
 
       File.open(file, 'w') do |f|
-        f.puts "\
+        f.puts <<-EOF
 <!DOCTYPE html>
 <html>
 <head>
   <title>#{@title}</title>
   <style>
-  body { font: sans-serif;}
+  body { font: sans-serif; }
   main {
     max-width: 600px;
     max-width: 72ch;
     margin: auto;
   }
+
+  .horizontal-bar-graph {
+    position: relative;
+    width: 100%;
+  }
+  .horizontal-bar-graph .fill {
+    display: inline-block;
+    background: #CCC;
+  }
   </style>
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
   <main>
@@ -46,7 +73,7 @@ module HowIs
   </main>
 </body>
 </html>
-"
+        EOF
       end
     end
   end
