@@ -46,7 +46,12 @@ module HowIs
 
       header "Issues Per Label"
       issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
-      issues_per_label << ["(No label)", analysis.issues_with_no_label]
+      issues_per_label.map! do |label, num_issues|
+        label_link = "https://github.com/#{analysis.repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
+
+        [label, num_issues, label_link]
+      end
+      issues_per_label << ["(No label)", analysis.issues_with_no_label, nil]
       horizontal_bar_graph issues_per_label
     end
 

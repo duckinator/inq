@@ -1,3 +1,5 @@
+require 'cgi'
+
 module HowIs
   class HtmlReport < BaseReport
     def title(_text)
@@ -9,8 +11,12 @@ module HowIs
       @r += "<h2>#{_text}</h2>"
     end
 
+    def link(url, _text)
+      %Q[<a href="#{url}">#{_text}</a>]
+    end
+
     def horizontal_bar_graph(data)
-      biggest = data.map(&:last).max
+      biggest = data.map { |x| x[1] }.max
       get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
       longest_label_length = data.map(&:first).map(&:length).max
@@ -19,9 +25,16 @@ module HowIs
       @r += '<table class="horizontal-bar-graph">'
       data.each do |row|
         percentage = get_percentage.(row[1])
+
+        if row[2]
+          label_text = link(row[2], row[0])
+        else
+          label_text = row[1]
+        end
+
         @r += <<-EOF
   <tr>
-    <td style="width: #{label_width}">#{row[0]}</td>
+    <td style="width: #{label_width}">#{label_text}</td>
     <td><span class="fill" style="width: #{percentage}%">#{row[1]}</span></td>
   </tr>
         EOF
