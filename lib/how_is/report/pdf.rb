@@ -25,7 +25,7 @@ module HowIs
       png_file = filename_base + '.png'
 
       File.open(dat_file, 'w') do |f|
-        data.each_with_index do |(label, n), i|
+        data.each_with_index do |(label, n, link), i|
           f.puts "#{i}\t#{n}\t\"#{label}\""
         end
       end
