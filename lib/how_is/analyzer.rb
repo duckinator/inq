@@ -23,6 +23,16 @@ module HowIs
       issues = data.issues
       pulls = data.pulls
 
+      oldest_issue = {}
+      _oldest_issue = oldest_for(issues)
+      oldest_issue[:number] = _oldest_issue['number']
+      oldest_issue[:date] = date_for(_oldest_issue)
+
+      oldest_pull = {}
+      _oldest_pull = oldest_for(pulls)
+      oldest_pull[:number] = _oldest_pull['number']
+      oldest_pull[:date] = date_for(_oldest_pull)
+
       analysis_class.new(
         repository: data.repository,
 
@@ -35,8 +45,10 @@ module HowIs
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
 
-        oldest_issue_date: oldest_date_for(issues),
-        oldest_pull_date:  oldest_date_for(pulls),
+        oldest_issue: oldest_issue,
+        oldest_pull: {
+          date: oldest_date_for(pulls),
+        }
       )
     end
 
@@ -129,8 +141,12 @@ module HowIs
     end
 
     # Given an Array of issues or pulls, return the creation date of the oldest.
-    def oldest_date_for(issues_or_pulls)
-      issues_or_pulls.map {|x| DateTime.parse(x['created_at']) }.sort.first
+    def oldest_for(issues_or_pulls)
+      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
+    end
+
+    def date_for(issue_or_pull)
+      DateTime.parse(issue_or_pull)
     end
 
   private
