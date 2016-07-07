@@ -31,7 +31,7 @@ describe HowIs::Analyzer do
    it 'returns the average age for the provided issues or pulls' do
      result = subject.average_age_for(fake_issues)
 
-     expect(result).to eq("approximately 10 years and 5 months")
+     expect(result).to eq("approximately 10 years and 6 months")
    end
   end
 
