@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "github_api", "~> 0.13.1"
-  spec.add_runtime_dependency "configru", "~> 3.6.0"
   spec.add_runtime_dependency "contracts"
   spec.add_runtime_dependency "prawn"
 
