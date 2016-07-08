@@ -25,11 +25,11 @@ module HowIs
       number_of_type = a.send("number_of_#{type}s")
 
       type_link = "https://github.com/#{analysis.repository}/#{type}s"
-      oldest_issue_link = #...
+      oldest = a.send("oldest_#{type}")
 
       "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
       "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-      "#{link("oldest", oldest_issue_link)} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}."
+      "#{link("oldest", oldest[:html_link])} was opened on #{oldest[:date].strftime(oldest_date_format)}."
     end
   end
 
