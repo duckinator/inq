@@ -23,16 +23,6 @@ module HowIs
       issues = data.issues
       pulls = data.pulls
 
-      oldest_issue = {}
-      _oldest_issue = oldest_for(issues)
-      oldest_issue[:number] = _oldest_issue['number']
-      oldest_issue[:date] = date_for(_oldest_issue)
-
-      oldest_pull = {}
-      _oldest_pull = oldest_for(pulls)
-      oldest_pull[:number] = _oldest_pull['number']
-      oldest_pull[:date] = date_for(_oldest_pull)
-
       analysis_class.new(
         repository: data.repository,
 
@@ -45,10 +35,8 @@ module HowIs
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
 
-        oldest_issue: oldest_issue,
-        oldest_pull: {
-          date: oldest_date_for(pulls),
-        }
+        oldest_issue: issue_or_pull_to_hash(oldest_for(issues)),
+        oldest_pull: issue_or_pull_to_hash(oldest_for(pulls)),
       )
     end
 
@@ -62,6 +50,8 @@ module HowIs
 
         [k, v]
       end.to_h
+
+      # TODO: Handle oldest_issue/oldest_pull.
 
       Analysis.new(hash)
     end
@@ -152,6 +142,16 @@ module HowIs
   private
     def time_ago_in_seconds(x)
       DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
+    end
+
+    def issue_or_pull_to_hash(iop)
+      ret = {}
+
+      ret[:html_url] = iop['html_url']
+      ret[:number] = iop['number']
+      ret[:date] = date_for(iop)
+
+      ret
     end
   end
 end
