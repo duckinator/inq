@@ -136,7 +136,7 @@ module HowIs
     end
 
     def date_for(issue_or_pull)
-      DateTime.parse(issue_or_pull)
+      DateTime.parse(issue_or_pull['created_at'])
     end
 
   private
