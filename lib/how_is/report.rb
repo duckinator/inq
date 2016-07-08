@@ -18,19 +18,19 @@ module HowIs
     end
 
     private
-      def issue_or_pr_summary(type, type_label)
-        oldest_date_format = "%b %e, %Y"
-        a = analysis
+    def issue_or_pr_summary(type, type_label)
+      oldest_date_format = "%b %e, %Y"
+      a = analysis
 
-        number_of_type = a.send("number_of_#{type}s")
+      number_of_type = a.send("number_of_#{type}s")
 
-        type_link = "https://github.com/#{analysis.repository}/#{type}s"
-        oldest_issue_link = #...
+      type_link = "https://github.com/#{analysis.repository}/#{type}s"
+      oldest_issue_link = #...
 
-        "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
-        "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-        "#{link("oldest", oldest_issue_link)} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}."
-      end
+      "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
+      "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
+      "#{link("oldest", oldest_issue_link)} was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}."
+    end
   end
 
   class Report
