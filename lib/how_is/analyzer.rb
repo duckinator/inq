@@ -24,6 +24,9 @@ module HowIs
       pulls = data.pulls
 
       analysis_class.new(
+        issues_url: "https://github.com/#{data.repository}/issues",
+        pulls_url: "https://github.com/#{data.repository}/pulls",
+
         repository: data.repository,
 
         number_of_issues:  issues.length,
