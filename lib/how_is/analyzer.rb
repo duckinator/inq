@@ -51,7 +51,9 @@ module HowIs
         [k, v]
       end.to_h
 
-      # TODO: Handle oldest_issue/oldest_pull.
+      %w[oldest_issue oldest_pull].each do |key|
+        hash[key]['date'] = DateTime.parse(hash[key]['date'])
+      end
 
       Analysis.new(hash)
     end
