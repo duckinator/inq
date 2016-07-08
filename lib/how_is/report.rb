@@ -24,7 +24,7 @@ module HowIs
 
       number_of_type = a.send("number_of_#{type}s")
 
-      type_link = "https://github.com/#{analysis.repository}/#{type}s"
+      type_link = a.send("#{type}s_url")
       oldest = a.send("oldest_#{type}")
 
       "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
