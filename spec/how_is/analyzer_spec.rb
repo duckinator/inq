@@ -35,12 +35,12 @@ describe HowIs::Analyzer do
    end
   end
 
-  context '#oldest_date_for' do
-    it 'returns the oldest date for the provided issues or pulls' do
-      result = subject.oldest_date_for(fake_issues)
-      actual_oldest_date = DateTime.parse(fake_issues[0]['created_at'])
+  context '#oldest_for' do
+    it 'returns the oldest item for the provided issues or pulls' do
+      actual = subject.oldest_for(fake_issues)
+      expected = JSON.parse(open(File.expand_path('../data/how_is/analyzer_spec/oldest_for.json', __dir__)).read)
 
-      expect(result).to eq(actual_oldest_date)
+      expect(actual).to eq(expected)
     end
   end
 end

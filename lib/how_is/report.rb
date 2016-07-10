@@ -18,18 +18,19 @@ module HowIs
     end
 
     private
-      def issue_or_pr_summary(type, type_label)
-        oldest_date_format = "%b %e, %Y"
-        a = analysis
+    def issue_or_pr_summary(type, type_label)
+      oldest_date_format = "%b %e, %Y"
+      a = analysis
 
-        number_of_type = a.send("number_of_#{type}s")
+      number_of_type = a.send("number_of_#{type}s")
 
-        type_link = "https://github.com/#{analysis.repository}/#{type}s"
+      type_link = a.send("#{type}s_url")
+      oldest = a.send("oldest_#{type}")
 
-        "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
-        "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-        "oldest was opened on #{a.send("oldest_#{type}_date").strftime(oldest_date_format)}."
-      end
+      "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
+      "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
+      "#{link("oldest", oldest['html_url'])} was opened on #{oldest['date'].strftime(oldest_date_format)}."
+    end
   end
 
   class Report
@@ -47,13 +48,11 @@ module HowIs
       text issue_or_pr_summary "issue", "issue"
 
       header "Issues Per Label"
-      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v.to_i }.reverse
-      issues_per_label.map! do |label, num_issues|
-        label_link = "https://github.com/#{analysis.repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
-
-        [label, num_issues, label_link]
+      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v['total'].to_i }.reverse
+      issues_per_label.map! do |label, hash|
+        [label, hash['total'], hash['link']]
       end
-      issues_per_label << ["(No label)", analysis.issues_with_no_label, nil]
+      issues_per_label << ["(No label)", analysis.issues_with_no_label['total'], nil]
       horizontal_bar_graph issues_per_label
     end
 

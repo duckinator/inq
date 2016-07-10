@@ -24,19 +24,22 @@ module HowIs
       pulls = data.pulls
 
       analysis_class.new(
+        issues_url: "https://github.com/#{data.repository}/issues",
+        pulls_url: "https://github.com/#{data.repository}/pulls",
+
         repository: data.repository,
 
         number_of_issues:  issues.length,
         number_of_pulls:   pulls.length,
 
-        issues_with_label: num_with_label(issues),
-        issues_with_no_label: num_with_no_label(issues),
+        issues_with_label: with_label_links(num_with_label(issues), data.repository),
+        issues_with_no_label: {link: nil, total: num_with_no_label(issues)},
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
 
-        oldest_issue_date: oldest_date_for(issues),
-        oldest_pull_date:  oldest_date_for(pulls),
+        oldest_issue: issue_or_pull_to_hash(oldest_for(issues)),
+        oldest_pull: issue_or_pull_to_hash(oldest_for(pulls)),
       )
     end
 
@@ -50,6 +53,10 @@ module HowIs
 
         [k, v]
       end.to_h
+
+      %w[oldest_issue oldest_pull].each do |key|
+        hash[key]['date'] = DateTime.parse(hash[key]['date'])
+      end
 
       Analysis.new(hash)
     end
@@ -129,13 +136,35 @@ module HowIs
     end
 
     # Given an Array of issues or pulls, return the creation date of the oldest.
-    def oldest_date_for(issues_or_pulls)
-      issues_or_pulls.map {|x| DateTime.parse(x['created_at']) }.sort.first
+    def oldest_for(issues_or_pulls)
+      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
+    end
+
+    def date_for(issue_or_pull)
+      DateTime.parse(issue_or_pull['created_at'])
     end
 
   private
+    def with_label_links(labels, repository)
+      labels.map do |label, num_issues|
+        label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
+
+        [label, {link: label_link, total: num_issues}]
+      end.to_h
+    end
+
     def time_ago_in_seconds(x)
       DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
+    end
+
+    def issue_or_pull_to_hash(iop)
+      ret = {}
+
+      ret[:html_url] = iop['html_url']
+      ret[:number] = iop['number']
+      ret[:date] = date_for(iop)
+
+      ret
     end
   end
 end
