@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "mini_magick"
 
-  # Travis CI only supports up to Ruby 2.2.0, but Rack 2.0+ requires Rubuy 2.2.2+,
+  # Travis CI only supports up to Ruby 2.2.0, but Rack 2.0+ requires Ruby 2.2.2+,
   # so this pegs Rack to the latest version that works with Ruby 2.2.0.
   spec.add_runtime_dependency "rack", "< 2.0"
 
