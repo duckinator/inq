@@ -32,8 +32,8 @@ module HowIs
         number_of_issues:  issues.length,
         number_of_pulls:   pulls.length,
 
-        issues_with_label: num_with_label(issues),
-        issues_with_no_label: num_with_no_label(issues),
+        issues_with_label: with_label_links(num_with_label(issues), data.repository),
+        issues_with_no_label: {link: nil, total: num_with_no_label(issues)},
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
@@ -145,6 +145,14 @@ module HowIs
     end
 
   private
+    def with_label_links(labels, repository)
+      labels.map do |label, num_issues|
+        label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
+
+        [label, {link: label_link, total: num_issues}]
+      end.to_h
+    end
+
     def time_ago_in_seconds(x)
       DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
     end
