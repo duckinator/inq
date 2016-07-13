@@ -21,6 +21,15 @@ module HowIs
 
     Report.export(analysis, format)
   end
+
+  def self.supported_formats
+    report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
+    report_constants.map {|x| x.to_s.split('Report').first.downcase }
+  end
+
+  def self.can_export_to?(file)
+    supported_formats.include?(file.split('.').last)
+  end
 private
 
 
