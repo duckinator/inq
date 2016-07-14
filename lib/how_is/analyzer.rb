@@ -90,7 +90,7 @@ module HowIs
       timestamps = issues_or_pulls.map { |iop| Date.parse(iop['created_at']).strftime('%s').to_i }
       average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
 
-      Date.strptime(average_timestamp.to_s, '%s')
+      DateTime.strptime(average_timestamp.to_s, '%s')
     end
 
     # Given an Array of issues or pulls, return the average age of them.

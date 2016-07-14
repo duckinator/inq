@@ -23,7 +23,7 @@ describe HowIs::Analyzer do
   context '#average_date_for' do
    it 'returns the average date for the provided issues or pulls' do
      actual   = subject.average_date_for(fake_issues)
-     expected = Date.parse('2006-01-01')
+     expected = DateTime.parse('2006-01-01')
 
      expect(actual).to eq(expected)
    end
