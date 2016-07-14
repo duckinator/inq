@@ -14,13 +14,23 @@ describe HowIs do
 
   context '.generate_report' do
     it 'generates a correct JSON report' do
-      actual = HowIs.generate_report(
-        repository: 'rubygems/rubygems',
-        github: github,
-        format: :json,
-      )
+      actual = nil
+
+      date = DateTime.parse('2016-07-07')
+      Timecop.freeze(date) do
+        actual = HowIs.generate_report(
+          repository: 'rubygems/rubygems',
+          github: github,
+          format: :json,
+        )
+      end
 
       expected = open(File.expand_path('./data/how_is_spec/generate_report--generates-a-correct-JSON-report.json', __dir__)).read.strip
+
+      File.open('x','w'){|f|
+        f.puts expected
+        f.puts actual
+      }
 
       expect(actual).to eq(expected)
     end
