@@ -33,11 +33,15 @@ opts = OptionParser.new do |opts|
     options[:from_file] = file
   end
 
-  opts.on("--report REPORT_FILE", "CSV file containing the report") do |file|
+  opts.on("--report REPORT_FILE", "file containing the report") do |file|
     options[:report_file] = file
   end
 end
 opts.parse!
+
+unless HowIs.can_export_to?(options[:report_file])
+   abort "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
+end
 
 if options[:from_file]
   # Opening this file here seems a bit messy, but it works.

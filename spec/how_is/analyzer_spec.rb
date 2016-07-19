@@ -13,25 +13,28 @@ describe HowIs::Analyzer do
 
   context '#num_with_label' do
     it 'returns a Hash mapping labels to the number of issues or pulls with that label' do
-      result = subject.num_with_label(fake_issues)
+      actual   = subject.num_with_label(fake_issues)
+      expected = {"triage" => 3, "administrative" => 2}
 
-      expect(result).to eq({"triage" => 3, "administrative" => 2})
+      expect(actual).to eq(expected)
     end
   end
 
   context '#average_date_for' do
    it 'returns the average date for the provided issues or pulls' do
-     result = subject.average_date_for(fake_issues)
+     actual   = subject.average_date_for(fake_issues)
+     expected = DateTime.parse('2006-01-01')
 
-     expect(result).to eq(Date.parse('2006-01-01'))
+     expect(actual).to eq(expected)
    end
   end
 
   context '#average_age_for' do
    it 'returns the average age for the provided issues or pulls' do
-     result = subject.average_age_for(fake_issues)
+     actual   = subject.average_age_for(fake_issues)
+     expected = "approximately 10 years and 6 months"
 
-     expect(result).to eq("approximately 10 years and 6 months")
+     expect(actual).to eq(expected)
    end
   end
 

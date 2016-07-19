@@ -14,9 +14,10 @@ describe HowIs::Fetcher do
 
   context '#call' do
     it 'returns a hash containing issues and pull requests' do
-      results = subject.call('user/repo', github)
-      expect(results[:issues]).to eq(issues)
-      expect(results[:pulls]).to eq(pulls)
+      actual = subject.call('user/repo', github)
+
+      expect(actual[:issues]).to eq(issues)
+      expect(actual[:pulls]).to eq(pulls)
     end
   end
 end
