@@ -23,7 +23,7 @@ module HowIs
 
   private
     def fetch_pulse!(repository, period='monthly')
-      Tessellator::Fetcher.new.fetch('get', "https://github.com/#{repository}/pulse/#{period}")
+      Tessellator::Fetcher.new.call('get', "https://github.com/#{repository}/pulse/#{period}")
     end
   end
 end
