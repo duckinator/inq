@@ -1,5 +1,8 @@
 require 'how_is/version'
 require 'contracts'
+require 'cacert'
+
+Cacert.set_in_env
 
 C = Contracts
 
