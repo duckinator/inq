@@ -6,7 +6,7 @@ module HowIs
   class Pulse
     def initialize(repository)
       @repository = repository
-      @pulse_page_source = fetch_pulse!(repository)
+      @pulse_page_response = fetch_pulse!(repository)
     end
 
     def text_summary
@@ -14,9 +14,9 @@ module HowIs
     end
 
     def html_summary
-      @pulse_page_source
+      @pulse_page_response.body
         .split('<div class="section diffstat-summary">').last
-        .split('').first
+        .split('</div>').first
         .gsub('<a href="/', '<a href="https://github.com/')
         .strip
     end
