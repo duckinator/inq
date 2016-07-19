@@ -1,5 +1,9 @@
 module HowIs
   class JsonReport < BaseReport
+    def format
+      :json
+    end
+
     def export(&block)
       to_json
     end

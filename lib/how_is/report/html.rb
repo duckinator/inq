@@ -3,6 +3,10 @@ require 'how_is/pulse'
 
 module HowIs
   class HtmlReport < BaseReport
+    def format
+      :html
+    end
+
     def title(_text)
       @title = _text
       @r += "<h1>#{_text}</h1>"

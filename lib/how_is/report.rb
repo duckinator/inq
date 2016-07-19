@@ -8,6 +8,15 @@ module HowIs
   ##
   # Represents a completed report.
   class BaseReport < Struct.new(:analysis)
+    def format
+      raise NotImplementedError
+    end
+
+    def github_pulse_summary
+      @pulse ||= HowIs::Pulse.new(analysis.repository)
+      @pulse.send("#{format}_summary")
+    end
+
     def to_h
       analysis.to_h
     end
@@ -40,6 +49,8 @@ module HowIs
 
     REPORT_BLOCK = proc do
       title "How is #{analysis.repository}?"
+
+      text github_pulse_summary
 
       header "Pull Requests"
       text issue_or_pr_summary "pull", "pull request"
