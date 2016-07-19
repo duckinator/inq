@@ -1,7 +1,12 @@
 require 'cgi'
+require 'how_is/pulse'
 
 module HowIs
   class HtmlReport < BaseReport
+    def format
+      :html
+    end
+
     def title(_text)
       @title = _text
       @r += "<h1>#{_text}</h1>"
@@ -13,6 +18,10 @@ module HowIs
 
     def link(_text, url)
       %Q[<a href="#{url}">#{_text}</a>]
+    end
+
+    def monthly_summary
+      pulse.html_summary
     end
 
     def horizontal_bar_graph(data)

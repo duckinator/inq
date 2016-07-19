@@ -3,6 +3,10 @@ require 'how_is/chart'
 
 module HowIs
   class PdfReport < BaseReport
+    def format
+      :pdf
+    end
+
     attr_accessor :pdf
 
     def title(_text)
