@@ -34,11 +34,11 @@ module HowIs
     supported_formats.include?(file.split('.').last)
   end
 
-Contract C::KeywordArgs[repository: String,
-                        from_file: C::Optional[C::Or[String, nil]],
-                        fetcher: C::Optional[Class],
-                        analyzer: C::Optional[Class],
-                        github: C::Optional[C::Any]] => C::Any
+  Contract C::KeywordArgs[repository: String,
+                          from_file: C::Optional[C::Or[String, nil]],
+                          fetcher: C::Optional[Class],
+                          analyzer: C::Optional[Class],
+                          github: C::Optional[C::Any]] => C::Any
   def self.generate_analysis(repository:,
         from_file: nil,
         fetcher: Fetcher.new,
