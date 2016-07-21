@@ -33,8 +33,6 @@ module HowIs
   def self.can_export_to?(file)
     supported_formats.include?(file.split('.').last)
   end
-private
-
 
 Contract C::KeywordArgs[repository: String,
                         from_file: C::Optional[C::Or[String, nil]],
