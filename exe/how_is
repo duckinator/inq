@@ -7,6 +7,8 @@ options = {
   repository: nil,
   report_file:  "report.pdf",
   from_file: nil,
+  use_config_file: false,
+  config_file: nil,
 }
 
 opts = OptionParser.new do |opts|
@@ -29,6 +31,11 @@ opts = OptionParser.new do |opts|
     exit 0
   end
 
+  opts.on("--config [YAML_CONFIG_FILE]", "generate reports as specified in YAML_CONFIG_FILED") do |file|
+    options[:use_config_file] = true
+    options[:config_file] = file
+  end
+
   opts.on("--from JSON_REPORT_FILE", "import JSON_REPORT_FILE instead of fetching the data again") do |file|
     options[:from_file] = file
   end
@@ -38,6 +45,12 @@ opts = OptionParser.new do |opts|
   end
 end
 opts.parse!
+
+if options[:use_config_file]
+  HowIs::CLI.new.from_config_file(options[:config_file])
+  exit
+end
+
 
 unless HowIs.can_export_to?(options[:report_file])
    abort "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
