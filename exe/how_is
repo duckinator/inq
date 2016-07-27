@@ -31,7 +31,7 @@ opts = OptionParser.new do |opts|
     exit 0
   end
 
-  opts.on("--config [YAML_CONFIG_FILE]", "generate reports as specified in YAML_CONFIG_FILED") do |file|
+  opts.on("--config [YAML_CONFIG_FILE]", "generate reports as specified in YAML_CONFIG_FILE") do |file|
     options[:use_config_file] = true
     options[:config_file] = file
   end
