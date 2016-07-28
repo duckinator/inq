@@ -32,6 +32,34 @@ E.g.,
 
 The above command creates a PDF containing the summary at `./report.pdf`.
 
+### Generating reports from a config file
+
+Beyond the above, you can also create a config file &mdash; typically called
+how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`. If your config
+file is called how_is.yml, you can just run `how_is --config`.
+
+You can see [the how_is.yml in the how-is-rubygems repository](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml)
+for an example.
+
+The config file is a YAML file. The two root keys are `repository` (the
+repository name, of format USER_OR_ORG/REPOSITORY &mdash; e.g. how-is/how_is)
+and `reports`.
+
+`reports` is a hash of key/value pairs, with the keys being the type of report
+("html", "pdf", or "json") and the values being another hash.
+
+That hash can have the following keys: `directory` (the directory to place the
+report in), `filename` (the format string for filenames), and (optionally)
+`frontmatter`.
+
+`frontmatter` is a set of key/value pairs specifying frontmatter as used by
+various blog engines (e.g. Jekyll), so you can set title, layout, etc.
+
+Every value under `reports` is a format string, so you can do e.g.
+`filename: "%{date}-report.html"` or (under `frontmatter`)
+`title: "%{date} Report"`.
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec how_is` to use the gem in this directory, ignoring other installed copies of this gem.
