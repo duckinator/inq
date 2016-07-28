@@ -48,14 +48,19 @@ describe HowIs::CLI do
     it 'generates a report, with correct frontmatter' do
       actual = subject.from_config_file(config_file, github: github, report_class: report_class)
 
-      expected = <<-EOF
+      expected_html = <<-EOF
 ---
-title: "rubygems/rubygems report"
+title: rubygems/rubygems report
 layout: default
 ---
 
 [report]
       EOF
+      # Not valid JSON, because report_class.export() is the same static string
+      # regardless of format.
+      expected_json = "[report]\n"
+
+      expected = [expected_html, expected_json]
 
       expect(actual).to eq(expected)
     end

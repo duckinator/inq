@@ -53,7 +53,7 @@ class HowIs::CLI
       friendly_date: friendly_date,
     }
 
-    config['reports'].each do |format, report_config|
+    config['reports'].map do |format, report_config|
       filename = report_config['filename'] % report_data
       file = File.join(report_config['directory'], filename)
 
