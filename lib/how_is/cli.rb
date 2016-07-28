@@ -29,18 +29,22 @@ class HowIs::CLI
     YAML.dump(frontmatter)
   end
 
-  def from_config_file(config_file = nil)
+  def from_config_file(config_file = nil, **kwargs)
     config_file ||= DEFAULT_CONFIG_FILE
 
-    from_config(YAML.load_file(config_file))
+    from_config(YAML.load_file(config_file), **kwargs)
   end
 
-  def from_config(config)
+  def from_config(config,
+        github: nil,
+        report_class: nil)
+    report_class ||= HowIs::Report
+
     date = Date.strptime(Time.now.to_i.to_s, '%s')
     date_string = date.strftime('%Y-%m-%d')
     friendly_date = date.strftime('%B %d, %y')
 
-    analysis = HowIs.generate_analysis(repository: config['repository'])
+    analysis = HowIs.generate_analysis(repository: config['repository'], github: github)
 
     report_data = {
       repository: config['repository'],
@@ -52,7 +56,7 @@ class HowIs::CLI
       filename = report_config['filename'] % report_data
       file = File.join(report_config['directory'], filename)
 
-      report = HowIs::Report.export(analysis, format)
+      report = report_class.export(analysis, format)
 
       File.open(file, 'w') do |f|
         if report_config['frontmatter']
