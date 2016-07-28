@@ -46,8 +46,7 @@ describe HowIs::CLI do
     }
 
     it 'generates a report, with correct frontmatter' do
-      request = subject.from_config_file(config_file, github: github, report_class: report_class)
-      actual = open('../data/how_is/cli_spec/output/report.html').read
+      actual = subject.from_config_file(config_file, github: github, report_class: report_class)
 
       expected = <<-EOF
 ---

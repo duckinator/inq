@@ -1,6 +1,7 @@
 require 'how_is'
 require 'yaml'
 require 'contracts'
+require 'stringio'
 
 C = Contracts
 
@@ -15,7 +16,7 @@ class HowIs::CLI
   #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
   # =>  "---\nfoo: bar asdf\n"
   Contract C::HashOf[C::Or[String, Symbol] => String],
-           C::HashOf[C::Or[String, Symbol] => String] => String
+           C::HashOf[C::Or[String, Symbol] => C::Any] => String
   def generate_frontmatter(frontmatter, report_data)
     frontmatter = convert_keys(frontmatter, :to_s)
     report_data = convert_keys(report_data, :to_sym)
@@ -58,16 +59,28 @@ class HowIs::CLI
 
       report = report_class.export(analysis, format)
 
-      File.open(file, 'w') do |f|
-        if report_config['frontmatter']
-          f.puts generate_frontmatter(report_config['frontmatter'], report_data)
-          f.puts "---"
-          f.puts
-        end
+      result = build_report(report_config['frontmatter'], report_data, report)
 
-        f.puts report
+      File.open(file, 'w') do |f|
+        f.puts result
       end
+
+      result
     end
+  end
+
+  def build_report(frontmatter, report_data, report)
+    str = StringIO.new
+
+    if frontmatter
+      str.puts generate_frontmatter(frontmatter, report_data)
+      str.puts "---"
+      str.puts
+    end
+
+    str.puts report
+
+    str.string
   end
 
 private
