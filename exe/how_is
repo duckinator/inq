@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "how_is"
+require "how_is/cli"
 require "optparse"
 
 options = {
