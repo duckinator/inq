@@ -14,7 +14,7 @@ class HowIs::CLI
   # E.g.,
   #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
   # =>  "---\nfoo: bar asdf\n"
-  Contract C::HashOf[Or[String, Symbol] => String] => C::HashOf[Or[String, Symbol] => String]
+  Contract C::HashOf[C::Or[String, Symbol] => String] => C::HashOf[C::Or[String, Symbol] => String]
   def generate_frontmatter(frontmatter, report_data)
     frontmatter = convert_keys(frontmatter, :to_s)
     report_data = convert_keys(report_data, :to_sym)
