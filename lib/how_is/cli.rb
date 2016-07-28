@@ -1,10 +1,24 @@
 require 'how_is'
 require 'yaml'
+require 'contracts'
+
+C = Contracts
 
 class HowIs::CLI
+  include Contracts::Core
+
   DEFAULT_CONFIG_FILE = 'how_is.yml'
 
+  # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
+  #
+  # E.g.,
+  #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
+  # =>  "---\nfoo: bar asdf\n"
+  Contract C::HashOf[Or[String, Symbol] => String] => C::HashOf[Or[String, Symbol] => String]
   def generate_frontmatter(frontmatter, report_data)
+    frontmatter = convert_keys(frontmatter, :to_s)
+    report_data = convert_keys(report_data, :to_sym)
+
     frontmatter = frontmatter.map { |k, v|
       v = v % report_data
 
@@ -49,5 +63,12 @@ class HowIs::CLI
         f.puts report
       end
     end
+  end
+
+private
+  # convert_keys({'foo' => 'bar'}, :to_sym)
+  # => {:foo => 'bar'}
+  def convert_keys(data, method_name)
+    data.map {|k, v| [k.send(method_name), v]}.to_h
   end
 end
