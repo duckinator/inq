@@ -43,6 +43,11 @@ opts = OptionParser.new do |opts|
   opts.on("--report REPORT_FILE", "file containing the report") do |file|
     options[:report_file] = file
   end
+
+  opts.on("-v", "--version", "prints the version") do
+    puts HowIs::VERSION
+    exit
+  end
 end
 opts.parse!
 
