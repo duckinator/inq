@@ -27,11 +27,6 @@ describe HowIs do
 
       expected = open(File.expand_path('./data/how_is_spec/generate_report--generates-a-correct-JSON-report.json', __dir__)).read.strip
 
-      File.open('x','w'){|f|
-        f.puts expected
-        f.puts actual
-      }
-
       expect(actual).to eq(expected)
     end
   end

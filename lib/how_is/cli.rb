@@ -1,6 +1,7 @@
 require 'how_is'
 require 'yaml'
 require 'contracts'
+require 'stringio'
 
 C = Contracts
 
@@ -15,7 +16,7 @@ class HowIs::CLI
   #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
   # =>  "---\nfoo: bar asdf\n"
   Contract C::HashOf[C::Or[String, Symbol] => String],
-           C::HashOf[C::Or[String, Symbol] => String] => String
+           C::HashOf[C::Or[String, Symbol] => C::Any] => String
   def generate_frontmatter(frontmatter, report_data)
     frontmatter = convert_keys(frontmatter, :to_s)
     report_data = convert_keys(report_data, :to_sym)
@@ -29,18 +30,22 @@ class HowIs::CLI
     YAML.dump(frontmatter)
   end
 
-  def from_config_file(config_file = nil)
+  def from_config_file(config_file = nil, **kwargs)
     config_file ||= DEFAULT_CONFIG_FILE
 
-    from_config(YAML.load_file(config_file))
+    from_config(YAML.load_file(config_file), **kwargs)
   end
 
-  def from_config(config)
+  def from_config(config,
+        github: nil,
+        report_class: nil)
+    report_class ||= HowIs::Report
+
     date = Date.strptime(Time.now.to_i.to_s, '%s')
     date_string = date.strftime('%Y-%m-%d')
     friendly_date = date.strftime('%B %d, %y')
 
-    analysis = HowIs.generate_analysis(repository: config['repository'])
+    analysis = HowIs.generate_analysis(repository: config['repository'], github: github)
 
     report_data = {
       repository: config['repository'],
@@ -48,22 +53,34 @@ class HowIs::CLI
       friendly_date: friendly_date,
     }
 
-    config['reports'].each do |format, report_config|
+    config['reports'].map do |format, report_config|
       filename = report_config['filename'] % report_data
       file = File.join(report_config['directory'], filename)
 
-      report = HowIs::Report.export(analysis, format)
+      report = report_class.export(analysis, format)
+
+      result = build_report(report_config['frontmatter'], report_data, report)
 
       File.open(file, 'w') do |f|
-        if report_config['frontmatter']
-          f.puts generate_frontmatter(report_config['frontmatter'], report_data)
-          f.puts "---"
-          f.puts
-        end
-
-        f.puts report
+        f.puts result
       end
+
+      result
     end
+  end
+
+  def build_report(frontmatter, report_data, report)
+    str = StringIO.new
+
+    if frontmatter
+      str.puts generate_frontmatter(frontmatter, report_data)
+      str.puts "---"
+      str.puts
+    end
+
+    str.puts report
+
+    str.string
   end
 
 private
