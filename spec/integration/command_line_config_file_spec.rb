@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'spec_helper'
 require 'open3'
 
 HOW_IS_CONFIG_FILE_CONTENTS = <<-EOF
@@ -22,7 +22,7 @@ layout: default
 ---
 EOF
 
-describe 'Command line' do
+describe 'Command line', :integration do
   context 'running how_is with a config file' do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|

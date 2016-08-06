@@ -1,2 +1,6 @@
 --format documentation
 --color
+
+# Skip all tests tagged with "integration" or "slow"
+--tag ~integration
+--tag ~slow
