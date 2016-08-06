@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   # so this pegs Rack to the latest version that works with Ruby 2.2.0.
   spec.add_runtime_dependency "rack", "< 2.0"
 
-  spec.add_runtime_dependency "tessellator-fetcher", "~> 4.0.1"
+  spec.add_runtime_dependency "tessellator-fetcher", "~> 5.0.0"
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
