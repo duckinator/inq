@@ -55,6 +55,11 @@ opts.parse!
 if options[:use_config_file]
   HowIs::CLI.new.from_config_file(options[:config_file])
   exit
+else
+  # These are only never used elsewhere; removing them simplifies the
+  # contracts and keyword args for other APIs.
+  options.delete(:use_config_file)
+  options.delete(:config_file)
 end
 
 
