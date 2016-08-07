@@ -1,20 +1,6 @@
 require 'spec_helper'
 require 'open3'
 
-HOW_IS_CONFIG_FILE_CONTENTS = <<-EOF
-repository: rubygems/rubygems
-reports:
-  html:
-    directory: .
-    frontmatter:
-      title: "%{repository} report"
-      layout: default
-    filename: "report.html"
-  json:
-    directory: json
-    filename: "report.json"
-EOF
-
 JEKYLL_HEADER = <<-EOF
 ---
 title: rubygems/rubygems report
@@ -27,11 +13,9 @@ describe 'Command line', :integration do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
         Dir.chdir(dir) {
-          File.open('how_is.yml', 'w') {|f| f.puts HOW_IS_CONFIG_FILE_CONTENTS }
-
           data = {}
 
-          Open3.popen3('bundle exec how_is --config') do |stdin, stdout, stderr, wait_thr|
+          Open3.popen3('bundle exec how_is --config ../data/integration/how_is.yml') do |stdin, stdout, stderr, wait_thr|
             wait_thr.join # Wait for command to finish executing.
 
             data[:stdout] = stdout.read
