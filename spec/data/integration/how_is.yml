@@ -1,0 +1,11 @@
+repository: rubygems/rubygems
+reports:
+  html:
+    directory: .
+    frontmatter:
+      title: "%{repository} report"
+      layout: default
+    filename: "report.html"
+  json:
+    directory: json
+    filename: "report.json"
