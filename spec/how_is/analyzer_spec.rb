@@ -31,7 +31,13 @@ describe HowIs::Analyzer do
 
   context '#average_age_for' do
    it 'returns the average age for the provided issues or pulls' do
-     actual   = subject.average_age_for(fake_issues)
+     actual = nil
+
+     date = DateTime.parse('2016-07-07')
+     Timecop.freeze(date) do
+       actual   = subject.average_age_for(fake_issues)
+     end
+
      expected = "approximately 10 years and 6 months"
 
      expect(actual).to eq(expected)
