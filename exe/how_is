@@ -16,11 +16,13 @@ opts = OptionParser.new do |opts|
   opts.banner =
     <<-EOF.gsub(/ *\| ?/, '')
       | Usage: how_is REPOSITORY [--report REPORT_FILE]
+      |        how_is --config [CONFIG_FILE]
       |
       | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
+      | CONFIG_FILE defaults to how_is.yml.
       |
-      | E.g., if you wanted to check https://github.com/duckinator/how_is,
-      | you'd run `how_is duckinator/how_is`.
+      | E.g., if you wanted to check https://github.com/how-is/how_is,
+      | you'd run `how_is how-is/how_is`.
       |
     EOF
 
