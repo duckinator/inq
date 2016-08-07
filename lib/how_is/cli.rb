@@ -3,8 +3,6 @@ require 'yaml'
 require 'contracts'
 require 'stringio'
 
-C = Contracts
-
 class HowIs::CLI
   include Contracts::Core
 
