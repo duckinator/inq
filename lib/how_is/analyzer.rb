@@ -33,7 +33,7 @@ module HowIs
         number_of_pulls:   pulls.length,
 
         issues_with_label: with_label_links(num_with_label(issues), data.repository),
-        issues_with_no_label: {link: nil, total: num_with_no_label(issues)},
+        issues_with_no_label: {'link' => nil, 'total' => num_with_no_label(issues)},
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
