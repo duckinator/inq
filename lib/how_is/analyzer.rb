@@ -149,7 +149,7 @@ module HowIs
       labels.map do |label, num_issues|
         label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
 
-        [label, {link: label_link, total: num_issues}]
+        [label, {'link' => label_link, 'total' => num_issues}]
       end.to_h
     end
 
