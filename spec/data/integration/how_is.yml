@@ -7,5 +7,5 @@ reports:
       layout: default
     filename: "report.html"
   json:
-    directory: json
+    directory: .
     filename: "report.json"
