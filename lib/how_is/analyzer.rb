@@ -160,9 +160,9 @@ module HowIs
     def issue_or_pull_to_hash(iop)
       ret = {}
 
-      ret[:html_url] = iop['html_url']
-      ret[:number] = iop['number']
-      ret[:date] = date_for(iop)
+      ret['html_url'] = iop['html_url']
+      ret['number'] = iop['number']
+      ret['date'] = date_for(iop)
 
       ret
     end
