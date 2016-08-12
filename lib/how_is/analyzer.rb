@@ -33,7 +33,7 @@ module HowIs
         number_of_pulls:   pulls.length,
 
         issues_with_label: with_label_links(num_with_label(issues), data.repository),
-        issues_with_no_label: {link: nil, total: num_with_no_label(issues)},
+        issues_with_no_label: {'link' => nil, 'total' => num_with_no_label(issues)},
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
@@ -149,7 +149,7 @@ module HowIs
       labels.map do |label, num_issues|
         label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
 
-        [label, {link: label_link, total: num_issues}]
+        [label, {'link' => label_link, 'total' => num_issues}]
       end.to_h
     end
 
@@ -160,9 +160,9 @@ module HowIs
     def issue_or_pull_to_hash(iop)
       ret = {}
 
-      ret[:html_url] = iop['html_url']
-      ret[:number] = iop['number']
-      ret[:date] = date_for(iop)
+      ret['html_url'] = iop['html_url']
+      ret['number'] = iop['number']
+      ret['date'] = date_for(iop)
 
       ret
     end
