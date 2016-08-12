@@ -2,7 +2,9 @@
 
 require "how_is"
 require "how_is/cli"
-require "how_is/cli/options"
+require "how_is/cli/parser"
+
+options = HowIs::CLI::Parser.new.parse(ARGV)
 
 if options[:use_config_file]
   HowIs::CLI.new.from_config_file(options[:config_file])

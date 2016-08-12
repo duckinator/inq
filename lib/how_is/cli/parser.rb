@@ -5,7 +5,7 @@ require "how_is/cli"
 require "optparse"
 
 class HowIs::CLI
-  class Options
+  class Parser
     def parse(_argv)
       options = {
         repository: nil,
