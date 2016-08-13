@@ -2,88 +2,75 @@
 
 require "how_is"
 require "how_is/cli"
-require "optparse"
+require "slop"
 
 class HowIs::CLI
+  DEFAULT_REPORT_FILE = "report.html"
+
+  class OptionsError < StandardError
+  end
+
   class Parser
-    def parse(_argv)
-      options = {
-        repository: nil,
-        report_file:  "report.pdf",
-        from_file: nil,
-        use_config_file: false,
-        config_file: nil,
-      }
+    attr_reader :opts
 
-      opts = OptionParser.new do |opts|
-        opts.banner =
-          <<-EOF.gsub(/ *\| ?/, '')
-          | Usage: how_is REPOSITORY [--report REPORT_FILE]
-          |        how_is --config [CONFIG_FILE]
-          |
-          | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
-          | CONFIG_FILE defaults to how_is.yml.
-          |
-          | E.g., if you wanted to check https://github.com/how-is/how_is,
-          | you'd run `how_is how-is/how_is`.
-          |
-          EOF
+    def call(argv)
+      opts = Slop::Options.new
+      opts.banner =
+        <<-EOF.gsub(/ *\| ?/, '')
+        | Usage: how_is REPOSITORY [--report REPORT_FILE]
+        |        how_is --config [CONFIG_FILE]
+        |
+        | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
+        | CONFIG_FILE defaults to how_is.yml.
+        |
+        | E.g., if you wanted to check https://github.com/how-is/how_is,
+        | you'd run `how_is how-is/how_is`.
+        |
+        EOF
 
-        opts.separator ""
-        opts.separator "Options:"
+      opts.separator ""
+      opts.separator "Options:"
 
-        opts.on("-h", "--help", "Print this help") do
-          puts opts
-          exit 0
-        end
+      opts.bool   "-h", "--help",    "Print help text"
+      opts.string       "--config",  "YAML config file, used to generate a group of reports"
+      opts.string       "--from",    "JSON report file, used instead of fetching the data again"
+      opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')})"
+      opts.string "-v", "--version", "prints the version"
 
-        opts.on("--config [YAML_CONFIG_FILE]", "generate reports as specified in YAML_CONFIG_FILE") do |file|
-          options[:use_config_file] = true
-          options[:config_file] = file
-        end
+      parser    = Slop::Parser.new(opts)
+      result    = parser.parse(argv)
+      options   = result.to_hash
+      arguments = result.arguments
 
-        opts.on("--from JSON_REPORT_FILE", "import JSON_REPORT_FILE instead of fetching the data again") do |file|
-          options[:from_file] = file
-        end
+      options[:report] ||= DEFAULT_REPORT_FILE
 
-        opts.on("--report REPORT_FILE", "file containing the report") do |file|
-          options[:report_file] = file
-        end
+      # The following are only useful if true.
+      # Removing them here simplifies contracts and keyword args for other APIs.
+      options.delete(:config)   unless options[:config]
+      options.delete(:help)     unless options[:help]
+      options.delete(:version)  unless options[:version]
 
-        opts.on("-v", "--version", "prints the version") do
-          puts HowIs::VERSION
-          exit
-        end
+      unless HowIs.can_export_to?(options[:report])
+        raise OptionsError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
-      argv = _argv.clone
-      opts.parse!(argv)
-
-      unless options[:use_config_file]
-        # These are only never used elsewhere; removing them simplifies the
-        # contracts and keyword args for other APIs.
-        options.delete(:use_config_file)
-        options.delete(:config_file)
-      end
-
-
-      unless HowIs.can_export_to?(options[:report_file])
-        abort "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
-      end
-
-      if options[:use_config_file]
-        # pass
-      elsif options[:from_file]
+      if options[:config]
+        # Nothing to do.
+      elsif options[:from]
         # Opening this file here seems a bit messy, but it works.
         options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
-        abort "Error: Invalid JSON report file." unless options[:repository]
+        raise OptionsError, "Invalid JSON report file." unless options[:repository]
       elsif argv.length >= 1
         options[:repository] = argv.delete_at(0)
       else
-        abort "Error: No repository specified."
+        raise OptionsError, "No repository specified."
       end
 
-      options
+      {
+        opts: opts,
+        options: options,
+        arguments: arguments,
+      }
     end
   end
 end
