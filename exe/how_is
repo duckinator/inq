@@ -4,10 +4,19 @@ require "how_is"
 require "how_is/cli"
 require "how_is/cli/parser"
 
-options = HowIs::CLI::Parser.new.parse(ARGV)
+parser  = HowIs::CLI::Parser.new(ARGV)
+result  = parser.call
 
-if options[:use_config_file]
-  HowIs::CLI.new.from_config_file(options[:config_file])
+opts      = result[:opts]
+options   = result[:options]
+arguments = result[:arguments]
+
+if options[:show_help]
+  puts result[:opts]
+elsif options[:version]
+  puts HowIs::VERSION
+elsif options[:config]
+  HowIs::CLI.new.from_config_file(options[:config])
 else
   HowIs.generate_report_file(options)
 end

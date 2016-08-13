@@ -13,7 +13,7 @@ module HowIs
   require 'how_is/analyzer'
   require 'how_is/report'
 
-  def self.generate_report_file(report_file:, **kw_args)
+  def self.generate_report_file(report:, **kw_args)
     analysis = self.generate_analysis(**kw_args)
 
     Report.export!(analysis, report_file)
@@ -35,17 +35,17 @@ module HowIs
   end
 
   Contract C::KeywordArgs[repository: String,
-                          from_file: C::Optional[C::Or[String, nil]],
+                          from: C::Optional[C::Or[String, nil]],
                           fetcher: C::Optional[Class],
                           analyzer: C::Optional[Class],
                           github: C::Optional[C::Any]] => C::Any
   def self.generate_analysis(repository:,
-        from_file: nil,
+        from: nil,
         fetcher: Fetcher.new,
         analyzer: Analyzer.new,
         github: nil)
-    if from_file
-      analysis = analyzer.from_file(from_file)
+    if from
+      analysis = analyzer.from_file(from)
     else
       raw_data = fetcher.call(repository, github)
       analysis = analyzer.call(raw_data)
