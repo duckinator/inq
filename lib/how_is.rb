@@ -16,7 +16,7 @@ module HowIs
   def self.generate_report_file(report:, **kw_args)
     analysis = self.generate_analysis(**kw_args)
 
-    Report.export!(analysis, report_file)
+    Report.export!(analysis, report)
   end
 
   def self.generate_report(format:, **kw_args)

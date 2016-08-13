@@ -2,15 +2,10 @@
 
 require "how_is"
 require "how_is/cli"
-require "optparse"
+require "slop"
 
 class HowIs::CLI
-  DEFAULT_OPTIONS = {
-    repository: nil,
-    report: "report.pdf",
-    from: nil,
-    config: nil,
-  }
+  DEFAULT_REPORT_FILE = "report.html"
 
   class OptionsError < StandardError
   end
@@ -18,7 +13,7 @@ class HowIs::CLI
   class Parser
     attr_reader :opts
 
-    def parse!(_argv)
+    def call(argv)
       opts = Slop::Options.new
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
@@ -44,17 +39,18 @@ class HowIs::CLI
 
       parser    = Slop::Parser.new(opts)
       result    = parser.parse(argv)
-      options   = DEFAULT_OPTIONS.merge(results.to_hash)
+      options   = result.to_hash
       arguments = result.arguments
 
-      unless options[:config]
-        # These are only never used elsewhere; removing them simplifies the
-        # contracts and keyword args for other APIs.
-        options.delete(:config)
-      end
+      options[:report] ||= DEFAULT_REPORT_FILE
 
+      # The following are only useful if true.
+      # Removing them here simplifies contracts and keyword args for other APIs.
+      options.delete(:config)   unless options[:config]
+      options.delete(:help)     unless options[:help]
+      options.delete(:version)  unless options[:version]
 
-      unless HowIs.can_export_to?(options[:report_file])
+      unless HowIs.can_export_to?(options[:report])
         raise OptionsError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 

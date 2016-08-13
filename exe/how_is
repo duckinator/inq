@@ -4,14 +4,22 @@ require "how_is"
 require "how_is/cli"
 require "how_is/cli/parser"
 
-parser  = HowIs::CLI::Parser.new(ARGV)
-result  = parser.call
+begin
+  parser  = HowIs::CLI::Parser.new
+  result  = parser.call(ARGV)
+rescue HowIs::CLI::OptionsError => e
+  if ENV['SHOW_TRACE']
+    raise
+  else
+    abort "Error: #{e.message}"
+  end
+end
 
 opts      = result[:opts]
 options   = result[:options]
 arguments = result[:arguments]
 
-if options[:show_help]
+if options[:help]
   puts result[:opts]
 elsif options[:version]
   puts HowIs::VERSION

@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "github_api", "~> 0.13.1"
   spec.add_runtime_dependency "contracts"
+  spec.add_runtime_dependency "slop"
   spec.add_runtime_dependency "prawn"
 
   spec.add_runtime_dependency "mini_magick"
