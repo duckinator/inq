@@ -13,6 +13,8 @@ module HowIs
   require 'how_is/analyzer'
   require 'how_is/report'
 
+  DEFAULT_FORMAT = :html
+
   def self.generate_report_file(report:, **kw_args)
     analysis = self.generate_analysis(**kw_args)
 

@@ -74,7 +74,7 @@ module HowIs
       report.export!(file, &REPORT_BLOCK)
     end
 
-    def self.export(analysis, format = :pdf)
+    def self.export(analysis, format = HowIs::DEFAULT_FORMAT)
       report = get_report_class(format).new(analysis)
 
       report.export(&REPORT_BLOCK)

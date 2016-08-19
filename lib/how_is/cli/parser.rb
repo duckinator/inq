@@ -5,7 +5,7 @@ require "how_is/cli"
 require "slop"
 
 class HowIs::CLI
-  DEFAULT_REPORT_FILE = "report.html"
+  DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}"
 
   class OptionsError < StandardError
   end
@@ -34,7 +34,7 @@ class HowIs::CLI
       opts.bool   "-h", "--help",    "Print help text"
       opts.string       "--config",  "YAML config file, used to generate a group of reports"
       opts.string       "--from",    "JSON report file, used instead of fetching the data again"
-      opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')})"
+      opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})"
       opts.string "-v", "--version", "prints the version"
 
       parser    = Slop::Parser.new(opts)
