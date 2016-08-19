@@ -18,7 +18,7 @@ class HowIs::CLI
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
         | Usage: how_is REPOSITORY [--report REPORT_FILE]
-        |        how_is --config [CONFIG_FILE]
+        |        how_is --config CONFIG_FILE
         |
         | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
         | CONFIG_FILE defaults to how_is.yml.
