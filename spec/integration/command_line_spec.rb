@@ -36,6 +36,30 @@ describe 'Command line', :integration do
     end
   end
 
+  context 'running `how_is how-is/example-repository`' do
+    it 'generates a valid report file' do
+      Dir.mktmpdir {|dir|
+        Dir.chdir(dir) {
+          data = {}
+
+          Open3.popen3("bundle exec how_is how-is/example-repository") do |stdin, stdout, stderr, wait_thr|
+            wait_thr.join # Wait for command to finish executing.
+
+            data[:stdout] = stdout.read
+            data[:stderr] = stderr.read
+          end
+
+          expect(data[:stderr]).to be_empty
+
+          #expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_PDF_REPORT).read.chomp
+          #actual   = File.open('report.pdf').read.chomp
+          #
+          #expect(expected).to eq(actual)
+        }
+      }
+    end
+  end
+
   context 'running `how_is how-is/example-repository --report report.json`' do
     it 'generates a valid report file' do
       Dir.mktmpdir {|dir|
