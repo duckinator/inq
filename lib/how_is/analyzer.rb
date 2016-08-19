@@ -96,7 +96,6 @@ module HowIs
     # Given an Array of issues or pulls, return the average age of them.
     def average_age_for(issues_or_pulls)
       ages = issues_or_pulls.map {|iop| time_ago_in_seconds(iop['created_at'])}
-      p ages
       raw_average = ages.reduce(:+) / ages.length
 
       seconds_in_a_year = 31_556_926
