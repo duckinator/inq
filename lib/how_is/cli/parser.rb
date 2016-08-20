@@ -44,7 +44,7 @@ class HowIs::CLI
       opts.string       "--config",  "YAML config file, used to generate a group of reports"
       opts.string       "--from",    "JSON report file, used instead of fetching the data again"
       opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})"
-      opts.string "-v", "--version", "prints the version"
+      opts.bool   "-v", "--version", "prints the version"
 
       parser    = Slop::Parser.new(opts)
       result    = parser.parse(argv)
