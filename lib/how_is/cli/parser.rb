@@ -10,6 +10,15 @@ class HowIs::CLI
   class OptionsError < StandardError
   end
 
+  class InvalidOutputFileError < OptionsError
+  end
+
+  class InvalidInputFileError < OptionsError
+  end
+
+  class NoRepositoryError < OptionsError
+  end
+
   class Parser
     attr_reader :opts
 
@@ -51,7 +60,7 @@ class HowIs::CLI
       options.delete(:version)  unless options[:version]
 
       unless HowIs.can_export_to?(options[:report])
-        raise OptionsError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
+        raise InvalidOutputFileError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
       if options[:config]
@@ -59,11 +68,11 @@ class HowIs::CLI
       elsif options[:from]
         # Opening this file here seems a bit messy, but it works.
         options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
-        raise OptionsError, "Invalid JSON report file." unless options[:repository]
+        raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
       elsif argv.length >= 1
         options[:repository] = argv.delete_at(0)
       else
-        raise OptionsError, "No repository specified."
+        raise NoRepositoryError, "No repository specified."
       end
 
       {
