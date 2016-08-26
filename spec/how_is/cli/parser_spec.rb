@@ -8,7 +8,7 @@ describe HowIs::CLI::Parser do
     it 'converts flags to a Hash' do
       actual = subject.call(%w[--version])
 
-      expect(actual).to eq({version: true})
+      expect(actual[:options][:version]).to eq(true)
     end
 
     it 'raises NoRepositoryError if a repository is required but not specified' do
