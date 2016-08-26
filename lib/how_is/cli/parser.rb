@@ -67,6 +67,8 @@ class HowIs::CLI
         # Nothing to do.
       elsif options[:from]
         # Opening this file here seems a bit messy, but it works.
+        raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+
         options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
         raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
       elsif argv.length >= 1
