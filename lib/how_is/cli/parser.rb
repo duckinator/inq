@@ -10,6 +10,15 @@ class HowIs::CLI
   class OptionsError < StandardError
   end
 
+  class InvalidOutputFileError < OptionsError
+  end
+
+  class InvalidInputFileError < OptionsError
+  end
+
+  class NoRepositoryError < OptionsError
+  end
+
   class Parser
     attr_reader :opts
 
@@ -35,7 +44,7 @@ class HowIs::CLI
       opts.string       "--config",  "YAML config file, used to generate a group of reports"
       opts.string       "--from",    "JSON report file, used instead of fetching the data again"
       opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})"
-      opts.string "-v", "--version", "prints the version"
+      opts.bool   "-v", "--version", "prints the version"
 
       parser    = Slop::Parser.new(opts)
       result    = parser.parse(argv)
@@ -51,19 +60,21 @@ class HowIs::CLI
       options.delete(:version)  unless options[:version]
 
       unless HowIs.can_export_to?(options[:report])
-        raise OptionsError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
+        raise InvalidOutputFileError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
       if options[:config]
         # Nothing to do.
       elsif options[:from]
         # Opening this file here seems a bit messy, but it works.
+        raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+
         options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
-        raise OptionsError, "Invalid JSON report file." unless options[:repository]
+        raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
       elsif argv.length >= 1
         options[:repository] = argv.delete_at(0)
       else
-        raise OptionsError, "No repository specified."
+        raise NoRepositoryError, "No repository specified."
       end
 
       {
