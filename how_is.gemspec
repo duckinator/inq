@@ -18,12 +18,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "github_api", "~> 0.13.1"
-  spec.add_runtime_dependency "contracts"
-  spec.add_runtime_dependency "slop"
-  spec.add_runtime_dependency "prawn"
+  spec.add_runtime_dependency "github_api", "~> 0.14.5"
+  spec.add_runtime_dependency "contracts", "~> 0.14.0"
+  spec.add_runtime_dependency "slop", "~> 4.4.1"
+  spec.add_runtime_dependency "prawn", "~> 2.1.0"
 
-  spec.add_runtime_dependency "mini_magick"
+  spec.add_runtime_dependency "mini_magick", "~> 4.5.1"
 
   # Travis CI only supports up to Ruby 2.2.0, but Rack 2.0+ requires Ruby 2.2.2+,
   # so this pegs Rack to the latest version that works with Ruby 2.2.0.
@@ -31,8 +31,8 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "tessellator-fetcher", "~> 5.0.0"
 
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "bundler", "~> 1.12"
+  spec.add_development_dependency "rake", "~> 11.2"
+  spec.add_development_dependency "rspec", "~> 3.5"
   spec.add_development_dependency "timecop", "~> 0.8.1"
 end
