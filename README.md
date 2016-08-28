@@ -20,7 +20,8 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
 ## Installation
 
-Make sure you have [gnuplot](http://gnuplot.info/) installed, then:
+If you want to generate PDF reports, make sure you have
+[gnuplot](http://gnuplot.info/) installed.
 
     $ gem install how_is
 
@@ -30,9 +31,9 @@ Make sure you have [gnuplot](http://gnuplot.info/) installed, then:
 
 E.g.,
 
-    $ how_is rubygems/rubygems --report-file report.pdf
+    $ how_is rubygems/rubygems --report-file report.html
 
-The above command creates a PDF containing the summary at `./report.pdf`.
+The above command creates a HTML file containing the summary at `./report.html`.
 
 ### Generating reports from a config file
 
