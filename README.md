@@ -16,6 +16,8 @@ The summary includes:
 * date oldest issue was opened,
 * date oldest pull request was opened.
 
+If you want to contribute or discuss how_is, you can [join Bundler's slack](http://slack.bundler.io/) and join the #how_is channel.
+
 ## Installation
 
 Make sure you have [gnuplot](http://gnuplot.info/) installed, then:
