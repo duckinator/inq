@@ -13,7 +13,7 @@ There is an integration test that fails for an unknown reason.
 Reports can be generated using a config file, typically named
 how_is.yml. This has been successfully used for
 [how-is.github.io/how-is-rubygems](https://how-is.github.io/how-is-rubygems/)
-([how_is.yml source](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml).
+([how_is.yml source](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml)).
 
 how_is can be used as either an executable or a library, however
 [library usage is currently undocumented](https://github.com/how-is/how_is/issues/45).
