@@ -8,7 +8,7 @@ A brief overview of how_is' goals and current status.
 
 So far, HTML and JSON reports work extremely well. PDF support has lagged
 due to difficulties finding a library that can do everything needed.
-There is an integration test that fails for an unknown reason.
+There is [an integration test that fails for an unknown reason](https://github.com/how-is/how_is/issues/36).
 
 Reports can be generated using a config file, typically named
 how_is.yml. This has been successfully used for
