@@ -27,11 +27,11 @@ If you want to generate PDF reports, make sure you have
 
 ## Usage
 
-    $ how_is <orgname>/<reponame> [--report-file FILENAME]
+    $ how_is <orgname>/<reponame> [--report FILENAME]
 
 E.g.,
 
-    $ how_is rubygems/rubygems --report-file report.html
+    $ how_is rubygems/rubygems --report report.html
 
 The above command creates a HTML file containing the summary at `./report.html`.
 
