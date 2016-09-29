@@ -27,6 +27,8 @@ If you want to generate PDF reports, make sure you have
 
 ## Usage
 
+### Command Line
+
     $ how_is <orgname>/<reponame> [--report FILENAME]
 
 E.g.,
@@ -35,7 +37,7 @@ E.g.,
 
 The above command creates a HTML file containing the summary at `./report.html`.
 
-### Generating reports from a config file
+#### Generating reports from a config file
 
 Beyond the above, you can also create a config file &mdash; typically called
 how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`. If your config
@@ -62,6 +64,43 @@ Every value under `reports` is a format string, so you can do e.g.
 `filename: "%{date}-report.html"` or (under `frontmatter`)
 `title: "%{date} Report"`.
 
+### Ruby API
+
+```ruby
+# Generate a report for <orgname>/<reponame>, defaulting to
+# the report file being report.html.
+HowIs.generate_report(repository: '<orgname>/<reponame>')
+
+# Generate a report for <orgname>/<reponame>, specifying
+# a report file of blah-report.html.
+HowIs.generate_report(repository: '<orgname>/<reponame>', report:
+'blah-report.html')
+
+# Generate a report from a config file located at ./how_is.yml.
+# Example config file: https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml
+# NOTE: This is going to be moved outside of HowIs::CLI at some point.
+HowIs::CLI.new.from_config_file('how_is.yml')
+
+# Generate a report from a config Hash.
+# NOTE: This is going to be moved outside of HowIs::CLI at some point.
+HowIs::CLI.new.from_config({
+  repository: '<orgname>/<reponame>',
+  reports: {
+    html: {
+      directory: '_posts',
+      frontmatter: {
+        title: '%{date} Report',
+        layout: 'default'
+      },
+      filename: "%{date}-report.html"
+    },
+    json: {
+      directory: 'json',
+      filename: '%{date}.json'
+    }
+  }
+})
+```
 
 ## Development
 
