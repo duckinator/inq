@@ -43,7 +43,6 @@ module HowIs
   end
 
   class Report
-    require 'how_is/report/pdf'
     require 'how_is/report/json'
     require 'how_is/report/html'
 
