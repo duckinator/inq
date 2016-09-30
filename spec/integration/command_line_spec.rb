@@ -3,6 +3,7 @@ require 'open3'
 
 HOW_IS_CONFIG_FILE = File.expand_path('../data/integration/how_is.yml', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('../data/example-repository-report.json', __dir__)
+HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('../data/example-repository-report.html', __dir__)
 
 JEKYLL_HEADER = <<-EOF
 ---
@@ -51,8 +52,8 @@ describe 'Command line', :integration do
 
           expect(data[:stderr]).to be_empty
 
-          #expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_PDF_REPORT).read.chomp
-          #actual   = File.open('report.pdf').read.chomp
+          #expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
+          #actual   = File.open('report.html').read.chomp
           #
           #expect(expected).to eq(actual)
         }

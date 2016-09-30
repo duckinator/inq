@@ -20,9 +20,6 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
 ## Installation
 
-If you want to generate PDF reports, make sure you have
-[gnuplot](http://gnuplot.info/) installed.
-
     $ gem install how_is
 
 ## Usage
@@ -51,7 +48,7 @@ repository name, of format USER_OR_ORG/REPOSITORY &mdash; e.g. how-is/how_is)
 and `reports`.
 
 `reports` is a hash of key/value pairs, with the keys being the type of report
-("html", "pdf", or "json") and the values being another hash.
+("html", or "json") and the values being another hash.
 
 That hash can have the following keys: `directory` (the directory to place the
 report in), `filename` (the format string for filenames), and (optionally)
