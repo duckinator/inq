@@ -63,18 +63,22 @@ class HowIs::CLI
         raise InvalidOutputFileError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
-      if options[:config]
-        # Nothing to do.
-      elsif options[:from]
-        # Opening this file here seems a bit messy, but it works.
-        raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+      unless options[:config]
+        # If we pass --config, other options (excluding --help and --version)
+        # are ignored. As such, everything in this `unless` block is irrelevant.
 
-        options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
-        raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
-      elsif argv.length >= 1
-        options[:repository] = argv.delete_at(0)
-      else
-        raise NoRepositoryError, "No repository specified."
+        if options[:from]
+          raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+
+          # Opening the file here is a bit gross, but I couldn't find a better
+          # way to do it. -@duckinator
+          options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
+          raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
+        elsif argv.length >= 1
+          options[:repository] = argv.delete_at(0)
+        else
+          raise NoRepositoryError, "No repository specified."
+        end
       end
 
       {
