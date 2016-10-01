@@ -24,6 +24,8 @@ class HowIs::Fetcher
   end
 
 
+  ##
+  # Fetches repository information from GitHub and returns a Results object.
   Contract String, C::Or[C::RespondTo[:issues, :pulls], nil] => Results
   def call(repository,
         github = nil)
@@ -39,7 +41,8 @@ class HowIs::Fetcher
     )
   end
 
-  private def obj_to_array_of_hashes(object)
+private
+  def obj_to_array_of_hashes(object)
     object.to_a.map(&:to_h)
   end
 end
