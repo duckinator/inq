@@ -22,14 +22,16 @@ class HowIs::CLI
   class Parser
     attr_reader :opts
 
+    # Parses +argv+ to generate an options Hash to control the behavior of
+    # the library.
     def call(argv)
       opts = Slop::Options.new
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
-        | Usage: how_is REPOSITORY [--report REPORT_FILE]
+        | Usage: how_is REPOSITORY [--report REPORT_FILE] [--from JSON_FILE]
         |        how_is --config CONFIG_FILE
         |
-        | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
+        | Where REPOSITORY is <GitHub username or org>/<repository name>.
         | CONFIG_FILE defaults to how_is.yml.
         |
         | E.g., if you wanted to check https://github.com/how-is/how_is,
@@ -53,28 +55,33 @@ class HowIs::CLI
 
       options[:report] ||= DEFAULT_REPORT_FILE
 
-      # The following are only useful if true.
+      # The following are only useful if they're not nil or false.
       # Removing them here simplifies contracts and keyword args for other APIs.
       options.delete(:config)   unless options[:config]
       options.delete(:help)     unless options[:help]
       options.delete(:version)  unless options[:version]
 
+      # Raise an exception if the file can't be exported.
       unless HowIs.can_export_to?(options[:report])
         raise InvalidOutputFileError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
-      if options[:config]
-        # Nothing to do.
-      elsif options[:from]
-        # Opening this file here seems a bit messy, but it works.
-        raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+      unless options[:config]
+        # If we pass --config, other options (excluding --help and --version)
+        # are ignored. As such, everything in this `unless` block is irrelevant.
 
-        options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
-        raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
-      elsif argv.length >= 1
-        options[:repository] = argv.delete_at(0)
-      else
-        raise NoRepositoryError, "No repository specified."
+        if options[:from]
+          raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+
+          # Opening the file here is a bit gross, but I couldn't find a better
+          # way to do it. -@duckinator
+          options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
+          raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
+        elsif argv.length >= 1
+          options[:repository] = argv.delete_at(0)
+        else
+          raise NoRepositoryError, "No repository specified."
+        end
       end
 
       {

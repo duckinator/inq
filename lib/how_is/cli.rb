@@ -28,12 +28,16 @@ class HowIs::CLI
     YAML.dump(frontmatter)
   end
 
+  ##
+  # Generates a series of report files based on a YAML config file.
   def from_config_file(config_file = nil, **kwargs)
     config_file ||= DEFAULT_CONFIG_FILE
 
     from_config(YAML.load_file(config_file), **kwargs)
   end
 
+  ##
+  # Generates a series of report files based on a config Hash.
   def from_config(config,
         github: nil,
         report_class: nil)
@@ -67,6 +71,8 @@ class HowIs::CLI
     end
   end
 
+  # Combine the frontmatter, report data, and raw report into a report with
+  # frontmatter.
   def build_report(frontmatter, report_data, report)
     str = StringIO.new
 
