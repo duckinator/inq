@@ -12,12 +12,16 @@ module HowIs
   class Analyzer
     include Contracts::Core
 
+    ##
+    # Raised when attempting to export to an unsupported format.
     class UnsupportedImportFormat < StandardError
       def initialize(format)
         super("Unsupported import format: #{format}")
       end
     end
 
+    ##
+    # Generates and returns an analysis.
     Contract Fetcher::Results, C::KeywordArgs[analysis_class: C::Optional[Class]] => Analysis
     def call(data, analysis_class: Analysis)
       issues = data.issues
@@ -43,6 +47,8 @@ module HowIs
       )
     end
 
+    ##
+    # Generates an analysis from a JSON report.
     def from_file(file)
       extension = file.split('.').last
       raise UnsupportedImportFormat, extension unless extension == 'json'
@@ -82,10 +88,13 @@ module HowIs
       hash
     end
 
+    # Returns the number of issues with no label.
     def num_with_no_label(issues)
       issues.select { |x| x['labels'].empty? }.length
     end
 
+    # Given an Array of dates, average the timestamps and return the date that
+    # represents.
     def average_date_for(issues_or_pulls)
       timestamps = issues_or_pulls.map { |iop| Date.parse(iop['created_at']).strftime('%s').to_i }
       average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
@@ -140,11 +149,14 @@ module HowIs
       issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
     end
 
+    # Given an issue or PR, returns the date it was created.
     def date_for(issue_or_pull)
       DateTime.parse(issue_or_pull['created_at'])
     end
 
   private
+    # Takes an Array of labels, and returns amodified list that includes links
+    # to each label.
     def with_label_links(labels, repository)
       labels.map do |label, num_issues|
         label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
@@ -153,6 +165,7 @@ module HowIs
       end.to_h
     end
 
+    # Returns how many seconds ago a date (as a String) was.
     def time_ago_in_seconds(x)
       DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
     end
