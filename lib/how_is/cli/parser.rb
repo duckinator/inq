@@ -53,7 +53,7 @@ class HowIs::CLI
 
       options[:report] ||= DEFAULT_REPORT_FILE
 
-      # The following are only useful if true.
+      # The following are only useful if they're not nil or false.
       # Removing them here simplifies contracts and keyword args for other APIs.
       options.delete(:config)   unless options[:config]
       options.delete(:help)     unless options[:help]
