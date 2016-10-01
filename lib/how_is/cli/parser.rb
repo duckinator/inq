@@ -26,10 +26,10 @@ class HowIs::CLI
       opts = Slop::Options.new
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
-        | Usage: how_is REPOSITORY [--report REPORT_FILE]
+        | Usage: how_is REPOSITORY [--report REPORT_FILE] [--from JSON_FILE]
         |        how_is --config CONFIG_FILE
         |
-        | Where REPOSITORY is of the format <GitHub username or org>/<repository name>.
+        | Where REPOSITORY is <GitHub username or org>/<repository name>.
         | CONFIG_FILE defaults to how_is.yml.
         |
         | E.g., if you wanted to check https://github.com/how-is/how_is,
