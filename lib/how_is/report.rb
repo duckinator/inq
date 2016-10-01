@@ -49,6 +49,14 @@ module HowIs
     require 'how_is/report/json'
     require 'how_is/report/html'
 
+    # The way this entire class works is there is a REPORT_BLOCK proc which
+    # calls various methods to create the report, and REPORT_BLOCK is eventually
+    # instance_exec'd by the various *Report (HtmlReport, previously PdfReport)
+    # classes, which define the methods required.
+    #
+    # The *Report class inherit from BaseReport, which implements the common
+    # methods for them.
+
     REPORT_BLOCK = proc do
       title "How is #{analysis.repository}?"
 
@@ -71,6 +79,9 @@ module HowIs
       horizontal_bar_graph issues_per_label
     end
 
+    ##
+    # Export a report to a file.
+    # (TODO: Maybe rename this to export_file?)
     def self.export!(analysis, file)
       format = file.split('.').last
       report = get_report_class(format).new(analysis)
@@ -78,6 +89,8 @@ module HowIs
       report.export!(file, &REPORT_BLOCK)
     end
 
+    ##
+    # Export a report to a String.
     def self.export(analysis, format = HowIs::DEFAULT_FORMAT)
       report = get_report_class(format).new(analysis)
 
@@ -85,6 +98,8 @@ module HowIs
     end
 
   private
+    # Given a format name (+format+), returns the corresponding <blah>Report
+    # class.
     def self.get_report_class(format)
       class_name = "#{format.capitalize}Report"
 

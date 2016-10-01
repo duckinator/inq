@@ -22,6 +22,8 @@ class HowIs::CLI
   class Parser
     attr_reader :opts
 
+    # Parses +argv+ to generate an options Hash to control the behavior of
+    # the library.
     def call(argv)
       opts = Slop::Options.new
       opts.banner =
@@ -59,6 +61,7 @@ class HowIs::CLI
       options.delete(:help)     unless options[:help]
       options.delete(:version)  unless options[:version]
 
+      # Raise an exception if the file can't be exported.
       unless HowIs.can_export_to?(options[:report])
         raise InvalidOutputFileError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
