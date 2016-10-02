@@ -60,7 +60,7 @@ module HowIs
       instance_exec(&block)
     end
 
-    def export!(file, &block)
+    def export_file(file, &block)
       report = export(&block)
 
       File.open(file, 'w') do |f|

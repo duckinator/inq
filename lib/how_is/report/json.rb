@@ -8,7 +8,7 @@ module HowIs
       to_json
     end
 
-    def export!(file, &block)
+    def export_file(file, &block)
       File.open(file, 'w') do |f|
         f.write export
       end

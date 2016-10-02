@@ -81,12 +81,11 @@ module HowIs
 
     ##
     # Export a report to a file.
-    # (TODO: Maybe rename this to export_file?)
-    def self.export!(analysis, file)
+    def self.export_file(analysis, file)
       format = file.split('.').last
       report = get_report_class(format).new(analysis)
 
-      report.export!(file, &REPORT_BLOCK)
+      report.export_file(file, &REPORT_BLOCK)
     end
 
     ##
