@@ -38,7 +38,7 @@ module HowIs
         if row[2]
           label_text = link(row[0], row[2])
         else
-          label_text = row[1]
+          label_text = row[0]
         end
 
         @r += <<-EOF
