@@ -34,6 +34,10 @@ module HowIs
       number == 1 ? text : "#{text}s"
     end
 
+    def are_is(number)
+      number == 1 ? "is" : "are"
+    end
+
     def issue_or_pr_summary(type, type_label)
       oldest_date_format = "%b %e, %Y"
       a = analysis
@@ -46,7 +50,7 @@ module HowIs
       if number_of_type == 0
         "There are #{link("no #{type_label}s open", type_link)}."
       else
-        "There are #{link("#{number_of_type} #{pluralize(type_label, number_of_type)} open", type_link)}. " +
+        "There #{are_is(number_of_type)} #{link("#{number_of_type} #{pluralize(type_label, number_of_type)} open", type_link)}. " +
         "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
         "#{link("oldest", oldest['html_url'])} was opened on #{oldest['date'].strftime(oldest_date_format)}."
       end
