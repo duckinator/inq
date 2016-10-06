@@ -40,7 +40,7 @@ module HowIs
       oldest = a.send("oldest_#{type}")
 
       if number_of_type == 0
-        "There are #{link("no #{type_label}s open.", type_link)}."
+        "There are #{link("no #{type_label}s open", type_link)}."
       else
         "There are #{link("#{number_of_type} #{type_label}s open", type_link)}. " +
         "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
