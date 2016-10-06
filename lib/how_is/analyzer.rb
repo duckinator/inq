@@ -103,7 +103,10 @@ module HowIs
     end
 
     # Given an Array of issues or pulls, return the average age of them.
+    # Returns nil if no issues or pulls are provided.
     def average_age_for(issues_or_pulls)
+      return nil if issues_or_pulls.empty?
+
       ages = issues_or_pulls.map {|iop| time_ago_in_seconds(iop['created_at'])}
       raw_average = ages.reduce(:+) / ages.length
 
@@ -145,7 +148,10 @@ module HowIs
     end
 
     # Given an Array of issues or pulls, return the creation date of the oldest.
+    # Returns nil if no issues or pulls are provided.
     def oldest_for(issues_or_pulls)
+      return nil if issues_or_pulls.empty?
+
       issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
     end
 
@@ -171,6 +177,8 @@ module HowIs
     end
 
     def issue_or_pull_to_hash(iop)
+      return nil if iop.nil?
+
       ret = {}
 
       ret['html_url'] = iop['html_url']
