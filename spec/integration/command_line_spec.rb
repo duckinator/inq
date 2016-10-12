@@ -17,16 +17,11 @@ describe 'Command line', :integration do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
         Dir.chdir(dir) {
-          data = {}
-
-          Open3.popen3("bundle exec how_is --config #{HOW_IS_CONFIG_FILE}") do |stdin, stdout, stderr, wait_thr|
-            wait_thr.join # Wait for command to finish executing.
-
-            data[:stdout] = stdout.read
-            data[:stderr] = stderr.read
+         VCR.use_cassette("how_is-with-config-file") do
+            expect {
+              HowIs::CLI.new.from_config_file(HOW_IS_CONFIG_FILE)
+            }.to_not output.to_stderr
           end
-
-          expect(data[:stderr]).to be_empty
 
           html_report = File.open('report.html').read
           json_report = File.open('report.json').read
@@ -39,49 +34,40 @@ describe 'Command line', :integration do
 
   context 'running `how_is how-is/example-repository`' do
     it 'generates a valid report file' do
-      Dir.mktmpdir {|dir|
-        Dir.chdir(dir) {
-          data = {}
+      expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
+      actual = nil
 
-          Open3.popen3("bundle exec how_is how-is/example-repository") do |stdin, stdout, stderr, wait_thr|
-            wait_thr.join # Wait for command to finish executing.
-
-            data[:stdout] = stdout.read
-            data[:stderr] = stderr.read
-          end
-
-          expect(data[:stderr]).to be_empty
-
-          #expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
-          #actual   = File.open('report.html').read.chomp
-          #
-          #expect(expected).to eq(actual)
-        }
+      options = {
+        repository: 'how-is/example-repository',
+        format: 'html'
       }
+
+      VCR.use_cassette("how_is-example-repository") do
+        expect {
+          actual = HowIs.generate_report(**options)
+        }.to_not output.to_stderr
+      end
+
+      expect(expected).to eq(actual)
     end
   end
 
   context 'running `how_is how-is/example-repository --report report.json`' do
     it 'generates a valid report file' do
-      Dir.mktmpdir {|dir|
-        Dir.chdir(dir) {
-          data = {}
+      expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
+      actual = nil
 
-          Open3.popen3("bundle exec how_is how-is/example-repository --report report.json") do |stdin, stdout, stderr, wait_thr|
-            wait_thr.join # Wait for command to finish executing.
-
-            data[:stdout] = stdout.read
-            data[:stderr] = stderr.read
-          end
-
-          expect(data[:stderr]).to be_empty
-
-          expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
-          actual   = File.open('report.json').read.chomp
-
-          expect(expected).to eq(actual)
-        }
+      options = {
+        repository: 'how-is/example-repository',
+        format: 'json',
       }
+      VCR.use_cassette("how_is-example-repository") do
+        expect {
+          actual = HowIs.generate_report(**options)
+        }.to_not output.to_stderr
+      end
+
+      expect(expected).to eq(actual)
     end
   end
 end
