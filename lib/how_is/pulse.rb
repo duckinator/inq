@@ -14,8 +14,16 @@ module HowIs
     end
 
     def html_summary
-      @pulse_page_response.body
-        .split('<div class="section diffstat-summary">').last
+      parts = 
+        @pulse_page_response.body
+          .split('<div class="section diffstat-summary">')
+
+      if parts.length == 1
+        return "There hasn't been any activity on #{@repository} in the last month."
+      end
+
+      parts
+        .last
         .split('</div>').first
         .gsub('<a href="/', '<a href="https://github.com/')
         .strip
