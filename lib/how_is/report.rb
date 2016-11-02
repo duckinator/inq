@@ -72,7 +72,8 @@ module HowIs
     REPORT_BLOCK = proc do
       title "How is #{analysis.repository}?"
 
-      text "Monthly report, ending on #{DateTime.now.strftime('%B %e, %Y')}."
+      # new_offset(0) sets the time to UTC.
+      text "Monthly report, ending on #{DateTime.now.new_offset(0).strftime('%B %e, %Y')}."
 
       text github_pulse_summary
 

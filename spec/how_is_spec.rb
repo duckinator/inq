@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'open3'
+require 'timecop'
 
 HOW_IS_CONFIG_FILE = File.expand_path('./data/how_is.yml', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('./data/example-repository-report.json', __dir__)
@@ -13,6 +14,16 @@ layout: default
 EOF
 
 describe HowIs do
+  before do
+    # 2016-11-01 00:00:00 UTC.
+    date = DateTime.parse('2016-11-01').new_offset(0)
+    Timecop.freeze(date)
+  end
+
+  after do
+    Timecop.return
+  end
+
   context 'with a config file' do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
