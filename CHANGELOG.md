@@ -28,6 +28,3 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 This changelog was started while working on v11.0.0.
 Prior to that, I have no idea what was added or when.
-
-It may be possible to retroactively create a changelog, but I'm not sure
-it's worth the effort.
