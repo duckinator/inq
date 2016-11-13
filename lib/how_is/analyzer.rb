@@ -165,6 +165,8 @@ module HowIs
     # Given an Array of issues or pulls, return the newest.
     # Returns nil if no issues or pulls are provided.
     def newest_for(issues_or_pulls)
+      return nil if issues_or_pulls.empty?
+
       sort_iops_by_created_at(issues_or_pulls).last
     end
 
