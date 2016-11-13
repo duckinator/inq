@@ -7,13 +7,17 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [Unreleased]
 
+(Nothing so far.)
+
+## [11.0.0]
+
 ### Added
 
 - Document Ruby API
 
 ### Changed
 
-- Fixed command-line help text (it was incorrect in v10.0.0 and earlier)
+- Fixed command-line help text (it was incorrect in v10.0.0 and some earlier versions)
 - Handles generating reports for repositories with no issues and/or no PRs
 - Handles generating reports for repositories with no activity in the
   past month
