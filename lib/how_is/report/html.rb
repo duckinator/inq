@@ -55,6 +55,15 @@ module HowIs
       @r += "<p>#{_text}</p>"
     end
 
+    def list(items)
+      @r += '<ul>'
+      items.each do |item|
+        # TODO: HTML escaping? (e.g. &lt; and &gt;)
+        @r += "<li>#{item}</li>"
+      end
+      @r += '</ul>'
+    end
+
     def export(&block)
       @r = ''
       instance_exec(&block)

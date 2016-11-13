@@ -46,6 +46,7 @@ module HowIs
 
       type_link = a.send("#{type}s_url")
       oldest = a.send("oldest_#{type}")
+      newest = a.send("newest_#{type}")
 
       if number_of_type == 0
         text "There are #{link("no #{type_label}s open", type_link)}."
@@ -54,8 +55,8 @@ module HowIs
 
         list [
           "Average age: #{a.send("average_#{type}_age")}.",
-          "The #{link("oldest " + type, oldest['html_url'])} was opened on #{oldest['date'].strftime(date_format)}.",
-          "The #{link("newest " + type, newest['html_url'])} was opened on #{newest['date'].strftime(date_format)}"
+          "The #{link("oldest " + type_label, oldest['html_url'])} was opened on #{oldest['date'].strftime(date_format)}.",
+          "The #{link("newest " + type_label, newest['html_url'])} was opened on #{newest['date'].strftime(date_format)}"
         ]
       end
     end
