@@ -1,5 +1,5 @@
 require 'cgi'
-require 'how_is/pulse'
+require 'how_is/report/base_report'
 
 module HowIs
   class HtmlReport < BaseReport
