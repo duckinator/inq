@@ -39,7 +39,7 @@ module HowIs
     end
 
     def issue_or_pr_summary(type, type_label)
-      oldest_date_format = "%b %e, %Y"
+      date_format = "%b %e, %Y"
       a = analysis
 
       number_of_type = a.send("number_of_#{type}s")
@@ -48,11 +48,15 @@ module HowIs
       oldest = a.send("oldest_#{type}")
 
       if number_of_type == 0
-        "There are #{link("no #{type_label}s open", type_link)}."
+        text "There are #{link("no #{type_label}s open", type_link)}."
       else
-        "There #{are_is(number_of_type)} #{link("#{number_of_type} #{pluralize(type_label, number_of_type)} open", type_link)}. " +
-        "The average #{type_label} age is #{a.send("average_#{type}_age")}, and the " +
-        "#{link("oldest", oldest['html_url'])} was opened on #{oldest['date'].strftime(oldest_date_format)}."
+        text "There #{are_is(number_of_type)} #{link("#{number_of_type} #{pluralize(type_label, number_of_type)} open", type_link)}."
+
+        list [
+          "Average age: #{a.send("average_#{type}_age")}.",
+          "The #{link("oldest " + type, oldest['html_url'])} was opened on #{oldest['date'].strftime(date_format)}.",
+          "The #{link("newest " + type, newest['html_url'])} was opened on #{newest['date'].strftime(date_format)}"
+        ]
       end
     end
   end
@@ -83,10 +87,10 @@ module HowIs
       text github_pulse_summary
 
       header "Pull Requests"
-      text issue_or_pr_summary "pull", "pull request"
+      text issue_or_pr_summary("pull", "pull request")
 
       header "Issues"
-      text issue_or_pr_summary "issue", "issue"
+      text issue_or_pr_summary("issue", "issue")
 
       header "Issues Per Label"
       issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v['total'].to_i }.reverse
