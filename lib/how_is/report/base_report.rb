@@ -6,9 +6,36 @@ module HowIs
       raise NotImplementedError
     end
 
-    def github_pulse_summary
-      @pulse ||= HowIs::Pulse.new(analysis.repository)
-      @pulse.send("#{format}_summary")
+    def title(_text)
+      raise NotImplementedError
+    end
+
+    def header(_text)
+      raise NotImplementedError
+    end
+
+    def text(_text)
+      raise NotImplementedError
+    end
+
+    def link(_text, url)
+      raise NotImplementedError
+    end
+
+    def monthly_summary
+      raise NotImplemented Error
+    end
+
+    def horizontal_bar_graph(data)
+      raise NotImplementedError
+    end
+
+    def export(&block)
+      raise NotImplementedError
+    end
+
+    def export_file(file, &block)
+      raise NotImplementedError
     end
 
     def to_h
@@ -21,6 +48,11 @@ module HowIs
     end
 
     private
+    def github_pulse_summary
+      @pulse ||= HowIs::Pulse.new(analysis.repository)
+      @pulse.send("#{format}_summary")
+    end
+
     def pluralize(text, number)
       number == 1 ? text : "#{text}s"
     end
