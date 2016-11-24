@@ -3,7 +3,7 @@
 
 # How is [your repo]?
 
-`how_is` is tool for generating summaries of the health of a codebase. It uses information available from issues and pull requests to provide an overview of a repository and highlight problem areas of the codebase.
+`how_is` is tool for generating summaries of the health of a codebase hosted on GitHub. It uses information available from issues and pull requests to provide an overview of a repository and highlight problem areas of the codebase.
 
 The summary includes:
 
@@ -40,8 +40,21 @@ Beyond the above, you can also create a config file &mdash; typically called
 how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`. (E.g., if
 the config file is how_is.yml, you would run `how_is --config how_is.yml`.)
 
-You can see [the how_is.yml in the how-is-rubygems repository](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml)
-for an example.
+Below is an example config file, [from the how-is-rubygems repository](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml).
+
+```yaml
+repository: rubygems/rubygems
+reports:
+  html:
+    directory: _posts
+    frontmatter:
+      title: "%{date} Report"
+      layout: default
+    filename: "%{date}-report.html"
+  json:
+    directory: json
+    filename: "%{date}.json"
+```
 
 The config file is a YAML file. The two root keys are `repository` (the
 repository name, of format USER_OR_ORG/REPOSITORY &mdash; e.g. how-is/how_is)
@@ -55,7 +68,8 @@ report in), `filename` (the format string for filenames), and (optionally)
 `frontmatter`.
 
 `frontmatter` is a set of key/value pairs specifying frontmatter as used by
-various blog engines (e.g. Jekyll), so you can set title, layout, etc.
+various blog engines (e.g. Jekyll), so you can set the title, layout, etc of
+the page.
 
 Every value under `reports` is a format string, so you can do e.g.
 `filename: "%{date}-report.html"` or (under `frontmatter`)
