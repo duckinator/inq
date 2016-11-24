@@ -37,8 +37,7 @@ The above command creates a HTML file containing the summary at `./report.html`.
 #### Generating reports from a config file
 
 Beyond the above, you can also create a config file &mdash; typically called
-how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`. If your config
-file is called how_is.yml, you can just run `how_is --config`.
+how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`.
 
 You can see [the how_is.yml in the how-is-rubygems repository](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml)
 for an example.
