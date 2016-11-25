@@ -44,6 +44,9 @@ module HowIs
 
         oldest_issue: issue_or_pull_to_hash(oldest_for(issues)),
         oldest_pull: issue_or_pull_to_hash(oldest_for(pulls)),
+
+        newest_issue: issue_or_pull_to_hash(newest_for(issues)),
+        newest_pull: issue_or_pull_to_hash(newest_for(pulls)),
       )
     end
 
@@ -147,12 +150,24 @@ module HowIs
       "approximately #{value}"
     end
 
-    # Given an Array of issues or pulls, return the creation date of the oldest.
+    def sort_iops_by_created_at(issues_or_pulls)
+      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
+    end
+
+    # Given an Array of issues or pulls, return the oldest.
     # Returns nil if no issues or pulls are provided.
     def oldest_for(issues_or_pulls)
       return nil if issues_or_pulls.empty?
 
-      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
+      sort_iops_by_created_at(issues_or_pulls).first
+    end
+
+    # Given an Array of issues or pulls, return the newest.
+    # Returns nil if no issues or pulls are provided.
+    def newest_for(issues_or_pulls)
+      return nil if issues_or_pulls.empty?
+
+      sort_iops_by_created_at(issues_or_pulls).last
     end
 
     # Given an issue or PR, returns the date it was created.
