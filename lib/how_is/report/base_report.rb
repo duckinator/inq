@@ -85,7 +85,7 @@ module HowIs
         unordered_list [
           "Average age: #{a.send("average_#{type}_age")}.",
           "#{link('Oldest ' + type_label, oldest['html_url'])} was opened on #{oldest['date'].strftime(date_format)}.",
-          "#{link('Newest ' + type_label, newest['html_url'])} was opened on #{newest['date'].strftime(date_format)}"
+          "#{link('Newest ' + type_label, newest['html_url'])} was opened on #{newest['date'].strftime(date_format)}.",
         ]
       end
     end
