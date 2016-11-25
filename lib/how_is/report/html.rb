@@ -9,11 +9,11 @@ module HowIs
 
     def title(_text)
       @title = _text
-      @r += "<h1>#{_text}</h1>"
+      @r += "\n<h1>#{_text}</h1>\n"
     end
 
     def header(_text)
-      @r += "<h2>#{_text}</h2>"
+      @r += "\n<h2>#{_text}</h2>\n"
     end
 
     def link(_text, url)
@@ -31,7 +31,7 @@ module HowIs
       longest_label_length = data.map(&:first).map(&:length).max
       label_width = "#{longest_label_length}ch"
 
-      @r += '<table class="horizontal-bar-graph">'
+      @r += "<table class=\"horizontal-bar-graph\">\n"
       data.each do |row|
         percentage = get_percentage.(row[1])
 
@@ -46,13 +46,14 @@ module HowIs
     <td style="width: #{label_width}">#{label_text}</td>
     <td><span class="fill" style="width: #{percentage}%">#{row[1]}</span></td>
   </tr>
+
         EOF
       end
-      @r += "</table>"
+      @r += "</table>\n"
     end
 
     def text(_text)
-      @r += "<p>#{_text}</p>"
+      @r += "<p>#{_text}</p>\n"
     end
 
     def export(&block)
