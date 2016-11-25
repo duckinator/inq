@@ -34,10 +34,10 @@ module HowIs
       text github_pulse_summary
 
       header "Pull Requests"
-      text issue_or_pr_summary "pull", "pull request"
+      issue_or_pr_summary "pull", "pull request"
 
       header "Issues"
-      text issue_or_pr_summary "issue", "issue"
+      issue_or_pr_summary "issue", "issue"
 
       header "Issues Per Label"
       issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v['total'].to_i }.reverse

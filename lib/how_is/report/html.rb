@@ -20,8 +20,16 @@ module HowIs
       %Q[<a href="#{url}">#{_text}</a>]
     end
 
-    def monthly_summary
-      pulse.html_summary
+    def text(_text)
+      @r += "<p>#{_text}</p>\n"
+    end
+
+    def unordered_list(arr)
+      @r += "\n<ul>\n"
+      arr.each do |item|
+        @r += "  <li>#{item}</li>\n"
+      end
+      @r += "</ul>\n\n"
     end
 
     def horizontal_bar_graph(data)
@@ -52,8 +60,8 @@ module HowIs
       @r += "</table>\n"
     end
 
-    def text(_text)
-      @r += "<p>#{_text}</p>\n"
+    def monthly_summary
+      pulse.html_summary
     end
 
     def export(&block)
