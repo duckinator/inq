@@ -1,3 +1,5 @@
+require 'json'
+
 module HowIs
   ##
   # Subclasses of BaseReport represent complete reports.
@@ -48,7 +50,7 @@ module HowIs
     alias :to_hash :to_h
 
     def to_json
-      to_h.to_json
+      JSON.pretty_generate(to_h)
     end
 
     private
