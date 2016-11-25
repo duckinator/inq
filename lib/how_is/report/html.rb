@@ -24,6 +24,14 @@ module HowIs
       @r += "<p>#{_text}</p>\n"
     end
 
+    def unordered_list(arr)
+      @r += "\n<ul>\n"
+      arr.each do |item|
+        @r += "  <li>#{item}</li>\n"
+      end
+      @r += "</ul>\n\n"
+    end
+
     def horizontal_bar_graph(data)
       biggest = data.map { |x| x[1] }.max
       get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
