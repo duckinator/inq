@@ -7,7 +7,21 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [Unreleased]
 
-(Nothing so far.)
+The majority of changes in this release were refactoring and
+improvements to documentation.
+
+Pull Requests for this release can be [viewed on
+GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-11-11..2016-11-25%20).
+
+### Added
+
+- Include newest PR/issue in reports.
+
+### Changed
+
+- JSON and HTML reports have nicer source.
+  ([#82](https://github.com/how-is/how_is/pulls/82),
+  [#84](https://github.com/how-is/how_is/pulls/84)).
 
 ## [11.0.0]
 
