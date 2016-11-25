@@ -151,7 +151,7 @@ module HowIs
     end
 
     def sort_iops_by_created_at(issues_or_pulls)
-      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }.first
+      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }
     end
 
     # Given an Array of issues or pulls, return the oldest.
