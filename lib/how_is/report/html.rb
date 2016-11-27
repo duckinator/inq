@@ -64,13 +64,13 @@ module HowIs
       pulse.html_summary
     end
 
-    def export(&block)
+    def export
       @r = ''
-      instance_exec(&block)
+      generate_report_text!
     end
 
-    def export_file(file, &block)
-      report = export(&block)
+    def export_file(file)
+      report = export
 
       File.open(file, 'w') do |f|
         f.puts <<-EOF
