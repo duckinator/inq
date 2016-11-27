@@ -85,7 +85,7 @@ module HowIs
 
     private
     def categorize_labels(labels)
-      categorized = {}
+      categories = {}
       labels.each do |label, hash|
         parts = label.split(':', 2)
         if parts.length == 1
@@ -94,11 +94,19 @@ module HowIs
           category = parts.first
         end
 
-        categorized[category] ||= {}
-        categorized[category][label] = hash
+        categories[category] ||= {}
+        categories[category][label] = hash
       end
 
-      categorized
+      categories
+    end
+
+    def sort_labels_in_category(category)
+      #...
+    end
+
+    def sort_categories(categories)
+      #...
     end
 
     def github_pulse_summary
