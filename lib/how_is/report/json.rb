@@ -6,11 +6,11 @@ module HowIs
       :json
     end
 
-    def export(&block)
+    def export
       to_json
     end
 
-    def export_file(file, &block)
+    def export_file(file)
       File.open(file, 'w') do |f|
         f.write export
       end
