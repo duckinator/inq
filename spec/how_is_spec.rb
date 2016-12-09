@@ -3,8 +3,12 @@ require 'open3'
 require 'timecop'
 
 HOW_IS_CONFIG_FILE = File.expand_path('./data/how_is.yml', __dir__)
+
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('./data/example-repository-report.json', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('./data/example-repository-report.html', __dir__)
+
+
+HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT = File.expand_path('./data/example-empty-repository-report.html', __dir__)
 
 JEKYLL_HEADER = <<-EOF
 ---
@@ -75,6 +79,25 @@ describe HowIs do
         format: 'json',
       }
       VCR.use_cassette("how_is-example-repository") do
+        expect {
+          actual = HowIs.generate_report(**options)
+        }.to_not output.to_stderr
+      end
+
+      expect(expected).to eq(actual)
+    end
+  end
+
+  context 'HTML report for repository with no PRs or issues' do
+    it 'generates a valid report file' do
+      expected = File.open(HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT).read.chomp
+      actual = nil
+
+      options = {
+        repository: 'how-is/example-empty-repository',
+        format: 'html',
+      }
+      VCR.use_cassette("how_is-example-empty-repository") do
         expect {
           actual = HowIs.generate_report(**options)
         }.to_not output.to_stderr
