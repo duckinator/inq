@@ -5,6 +5,9 @@ module HowIs
   # Subclasses of BaseReport represent complete reports.
   class BaseReport < Struct.new(:analysis)
     def generate_report_text!
+      # title, text, header, horizontal_bar_graph, etc,
+      # append to @r, which is returned at the end of the function.
+
       title "How is #{analysis.repository}?"
 
       # DateTime#new_offset(0) sets the timezone to UTC. I think it does this
@@ -30,6 +33,9 @@ module HowIs
       end
       issues_per_label << ["(No label)", analysis.issues_with_no_label['total'], nil]
       horizontal_bar_graph issues_per_label
+
+      # See comment at beginning of function.
+      @r
     end
 
 
