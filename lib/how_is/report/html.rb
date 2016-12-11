@@ -34,7 +34,7 @@ module HowIs
 
     def horizontal_bar_graph(data)
       if data.length == 1 && data[0][0] == "(No label)"
-        @r += "<p>There are no open issues to graph.</p>\n"
+        text "There are no open issues to graph."
         return
       end
 
