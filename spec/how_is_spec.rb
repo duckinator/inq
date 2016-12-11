@@ -4,11 +4,11 @@ require 'timecop'
 
 HOW_IS_CONFIG_FILE = File.expand_path('./data/how_is.yml', __dir__)
 
-HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('./data/example-repository-report.json', __dir__)
-HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('./data/example-repository-report.html', __dir__)
+HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('./data/how-is-example-repository-report.json', __dir__)
+HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-repository-report.html', __dir__)
 
 
-HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT = File.expand_path('./data/example-empty-repository-report.html', __dir__)
+HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-empty-repository-report.html', __dir__)
 
 JEKYLL_HEADER = <<-EOF
 ---
@@ -34,7 +34,7 @@ describe HowIs do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
         Dir.chdir(dir) {
-         VCR.use_cassette("how_is-with-config-file") do
+         VCR.use_cassette("how-is-with-config-file") do
             expect {
               HowIs::CLI.new.from_config_file(HOW_IS_CONFIG_FILE)
             }.to_not output.to_stderr
@@ -59,7 +59,7 @@ describe HowIs do
         format: 'html'
       }
 
-      VCR.use_cassette("how_is-example-repository") do
+      VCR.use_cassette("how-is-example-repository") do
         expect {
           actual = HowIs.generate_report(**options)
         }.to_not output.to_stderr
@@ -78,7 +78,7 @@ describe HowIs do
         repository: 'how-is/example-repository',
         format: 'json',
       }
-      VCR.use_cassette("how_is-example-repository") do
+      VCR.use_cassette("how-is-example-repository") do
         expect {
           actual = HowIs.generate_report(**options)
         }.to_not output.to_stderr
@@ -97,7 +97,7 @@ describe HowIs do
         repository: 'how-is/example-empty-repository',
         format: 'html',
       }
-      VCR.use_cassette("how_is-example-empty-repository") do
+      VCR.use_cassette("how-is-example-empty-repository") do
         expect {
           actual = HowIs.generate_report(**options)
         }.to_not output.to_stderr
