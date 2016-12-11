@@ -7,12 +7,16 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [Unreleased]
 
+This release largely focused on refactoring and developer experience
+improvements (e.g. adding Rake tasks and improving the generated JSON and HTML).
+
 Pull Requests for this release can be [viewed on
 GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-11-11..2016-12-10).
 
 ### Added
 
 - Include newest PR/issue in reports.
+  ([#85](https://github.com/how-is/how_is/pull/85)).
 
 ### Changed
 
