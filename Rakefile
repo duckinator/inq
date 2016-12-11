@@ -1,7 +1,8 @@
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'timecop'
-require 'vcr'
+#require 'vcr'
+require './spec/vcr_helper.rb'
 require 'how_is'
 
 RSpec::Core::RakeTask.new(:spec)
@@ -16,23 +17,25 @@ class HelperFunctions
     end
   end
 
-  def self.generate_report(format)
+  def self.generate_report(repository, format)
     freeze_time do
       report = nil
 
       options = {
-        repository: 'how-is/example-repository',
+        repository: repository,
         format: format,
       }
 
-      VCR.use_cassette("how_is-example-repository") do
+      cassette = repository.gsub('/', '-')
+      VCR.use_cassette(cassette) do
         report = HowIs.generate_report(**options)
       end
 
-      filename = File.expand_path("spec/data/example-repository-report.#{format}", __dir__)
-      File.open(filename, 'w') do |f|
+      filename = "#{cassette}-report.#{format}"
+      path = File.expand_path("spec/data/#{filename}", __dir__)
+      File.open(path, 'w') do |f|
         f.puts report
-        # Hack: Trailing newline is missing, otherwise.
+        # HACK: Trailing newline is missing, otherwise.
         f.puts if format == 'html'
       end
     end
@@ -40,13 +43,19 @@ class HelperFunctions
 end
 
 namespace :generate do
-  desc 'Generate example HTML report.'
+  desc 'Generate example HTML reports.'
   task :html do
-    HelperFunctions.generate_report('html')
+    %w[
+      how-is/example-repository
+      how-is/example-empty-repository
+    ].each do |repo|
+      HelperFunctions.generate_report(repo, 'html')
+    end
   end
 
+  desc 'Generate example JSON reports.'
   task :json do
-    HelperFunctions.generate_report('json')
+    HelperFunctions.generate_report('how-is/example-repository', 'json')
   end
 
   task :all => [:html, :json]
