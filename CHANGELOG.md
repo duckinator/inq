@@ -7,6 +7,10 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [Unreleased]
 
+(Nothing so far.)
+
+## [v12.0.0]
+
 This release largely focused on refactoring and developer experience
 improvements (e.g. adding Rake tasks and improving the generated JSON and HTML).
 
