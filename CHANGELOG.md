@@ -9,6 +9,30 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v12.0.0]
+
+This release largely focused on refactoring and developer experience
+improvements (e.g. adding Rake tasks and improving the generated JSON and HTML).
+
+Pull Requests for this release can be [viewed on
+GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-11-11..2016-12-11).
+
+### Added
+
+- Include newest PR/issue in reports.
+  ([#85](https://github.com/how-is/how_is/pull/85))
+
+### Changed
+
+- Refactoring. ([#79](https://github.com/how-is/how_is/pull/79), [#80](https://github.com/how-is/how_is/pull/80), [#82](https://github.com/how-is/how_is/pull/82), [#88](https://github.com/how-is/how_is/pull/88))
+- JSON and HTML reports have nicer source.
+  ([#82](https://github.com/how-is/how_is/pulls/82),
+  [#84](https://github.com/how-is/how_is/pulls/84))
+- Handle generating a report on a repository with no open issues.
+  ([#92](https://github.com/how-is/how_is/pull/92))
+- Add Rake tasks to make development easier. ([#86](https://github.com/how-is/how_is/pull/86), [#94](https://github.com/how-is/how_is/pull/94), [#96](https://github.com/how-is/how_is/pull/96))
+- PR/issue info is now displayed as lists instead of paragraphs. ([#83](https://github.com/how-is/how_is/pull/83))
+
 ## [11.0.0]
 
 ### Added
