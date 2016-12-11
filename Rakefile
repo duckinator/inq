@@ -42,7 +42,7 @@ class HelperFunctions
   end
 end
 
-namespace :generate do
+namespace :generate_reports do
   desc 'Generate example HTML reports.'
   task :html do
     %w[
