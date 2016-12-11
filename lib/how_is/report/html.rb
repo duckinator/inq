@@ -33,6 +33,11 @@ module HowIs
     end
 
     def horizontal_bar_graph(data)
+      if data.length == 1 && data[0][0] == "(No label)"
+        text "There are no open issues to graph."
+        return
+      end
+
       biggest = data.map { |x| x[1] }.max
       get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
