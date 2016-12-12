@@ -31,6 +31,9 @@ class HowIs::Fetcher
         github = nil)
     github ||= Github.new(auto_pagination: true)
     user, repo = repository.split('/', 2)
+    raise HowIs::CLI::OptionsError, 'To generate a report from GitHub, ' \
+                                    'provide the repository username/project. ' \
+                                    'Quitting!' unless user && repo
     issues  = github.issues.list user: user, repo: repo
     pulls   = github.pulls.list  user: user, repo: repo
 
