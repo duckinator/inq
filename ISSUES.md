@@ -16,7 +16,7 @@ first colon in an issue name.
 
 Issue groups:
 
-* (ungrouped)
+* [(ungrouped)](#ungrouped)
 * [category](#categories)
 * [closed](#closed)
 * [size](#size)
