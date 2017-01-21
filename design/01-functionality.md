@@ -91,6 +91,12 @@ Items with two asterisks (\*\*) have been partially implemented.
 
 ## UI Specification
 
+## Infmation about how_is
+
+`how_is --help` prints help text and exits.
+
+`how_is --version` prints the version and exits.
+
 ### Generating a report
 
 How\_is can generate HTML reports for https://github.com/rubygems/rubygems.
