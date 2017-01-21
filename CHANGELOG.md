@@ -11,8 +11,9 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [v12.0.0]
 
-This release largely focused on refactoring and developer experience
-improvements (e.g. adding Rake tasks and improving the generated JSON and HTML).
+This release ([snapshot](https://github.com/how-is/how_is/tree/v12.0.0))
+largely focused on refactoring and developer experience improvements
+(e.g. adding Rake tasks and improving the generated JSON and HTML).
 
 Pull Requests for this release can be [viewed on
 GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-11-11..2016-12-11).
@@ -34,6 +35,9 @@ GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-
 - PR/issue info is now displayed as lists instead of paragraphs. ([#83](https://github.com/how-is/how_is/pull/83))
 
 ## [11.0.0]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v11.0.0))
+removed PDF reports, handles more edge cases, and improves tests.
 
 ### Added
 
