@@ -142,5 +142,8 @@ tl;dr: you're using the JSON file as a cache.
 
 ### Generating a report using a config file
 
-TODO.
+See [the README](https://github.com/how-is/how_is/blob/master/README.md#generating-reports-from-a-config-file).
 
+### Ruby API
+
+See [the README](https://github.com/how-is/how_is/blob/master/README.md#ruby-api).
