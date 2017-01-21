@@ -93,8 +93,9 @@ Items with two asterisks (\*\*) have been partially implemented.
 
 ### Generating a report
 
-Generates an HTML report for https://github.com/rubygems/rubygems at
-`./report.html`. Open in a web browser to view it.
+How\_is can generate HTML reports for https://github.com/rubygems/rubygems.
+By default, it generates reports at `./report.html`.
+To view an HTML report, open it in aweb browser.
 
 There is no output when it succeeds.
 
@@ -105,13 +106,10 @@ $
 
 ### Generate a report, specifying the filename
 
-Generates a JSON report for https://github.com/rubygems/rubygems at
-`./report.json`. Open in a web browser to view it.
-
 You can generate reports with other filenames, as well as different
 report formats, using the `--report FILENAME` parameter.
 
-The report `FILENAME` can be any filename that ends with a lowercase
+The FILENAME can be any filename that ends with a lowercase
 extension specifying a supported format (currently `.html` and `.json`).
 
 If the filename ends with `.html` it'll generate an HTML report,
