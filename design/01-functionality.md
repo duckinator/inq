@@ -88,3 +88,8 @@ Reports will contain the following:
 
 Items with an asterisk (\*) have yet to be implemented.
 Items with two asterisks (\*\*) have been partially implemented.
+
+## UI Specification
+
+TODO: Specify how the UI works.
+
