@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
 
   # Travis CI only supports up to Ruby 2.2.0, but Rack 2.0+ requires Ruby 2.2.2+,
   # so this pegs Rack to the latest version that works with Ruby 2.2.0.
-  spec.add_runtime_dependency "rack", "< 2.0"
+  spec.add_runtime_dependency "rack", "~> 2.0"
 
   spec.add_runtime_dependency "tessellator-fetcher", "~> 5.0.0"
 
