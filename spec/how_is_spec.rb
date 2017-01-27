@@ -36,7 +36,7 @@ describe HowIs do
         Dir.chdir(dir) {
          VCR.use_cassette("how-is-with-config-file") do
             expect {
-              HowIs::CLI.new.from_config_file(HOW_IS_CONFIG_FILE)
+              HowIs.from_config_file(YAML.load_file(HOW_IS_CONFIG_FILE))
             }.to_not output.to_stderr
           end
 
@@ -54,14 +54,9 @@ describe HowIs do
       expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
       actual = nil
 
-      options = {
-        repository: 'how-is/example-repository',
-        format: 'html'
-      }
-
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual = HowIs.generate_report(**options)
+          actual = HowIs.new('how-is/example-repository').to_html
         }.to_not output.to_stderr
       end
 
@@ -74,13 +69,9 @@ describe HowIs do
       expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
       actual = nil
 
-      options = {
-        repository: 'how-is/example-repository',
-        format: 'json',
-      }
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual = HowIs.generate_report(**options)
+          actual = HowIs.new('how-is/example-repository').to_json
         }.to_not output.to_stderr
       end
 
@@ -93,13 +84,9 @@ describe HowIs do
       expected = File.open(HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT).read.chomp
       actual = nil
 
-      options = {
-        repository: 'how-is/example-empty-repository',
-        format: 'html',
-      }
       VCR.use_cassette("how-is-example-empty-repository") do
         expect {
-          actual = HowIs.generate_report(**options)
+          actual = HowIs.new('how-is/example-empty-repository').to_html
         }.to_not output.to_stderr
       end
 
