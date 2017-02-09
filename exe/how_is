@@ -25,7 +25,7 @@ begin
   elsif options[:version]
     puts HowIs::VERSION
   elsif options[:config]
-    HowIs::CLI.new.from_config_file(options[:config])
+    HowIs.from_config_file(YAML.load_file(options[:config]))
   else
     HowIs.generate_report_file(options)
   end
