@@ -25,8 +25,9 @@ class HowIs
 
   ##
   # Generates and returns a report as a String.
-  def initialize(repository, **kw_args)
-    @analysis = HowIs.generate_analysis(repository: repository, **kw_args)
+  def initialize(repository, analysis = nil, **kw_args)
+    analysis ||= HowIs.generate_analysis(repository: repository, **kw_args)
+    @analysis = analysis
   end
 
   def to_html
@@ -35,6 +36,13 @@ class HowIs
 
   def to_json
     Report.export(@analysis, :json)
+  end
+
+  def self.from_json(json)
+    data = JSON.parse(json)
+    analysis = HowIs::Analysis.new(data)
+
+    self.new(data['repository'], analysis)
   end
 
   ##

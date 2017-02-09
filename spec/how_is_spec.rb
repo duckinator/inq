@@ -31,6 +31,13 @@ describe HowIs do
     Timecop.return
   end
 
+  it 'from_json(json) works' do
+    expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read
+    actual = HowIs.from_json(expected).to_json
+
+    expect(expected.strip).to eq(actual.strip)
+  end
+
   context 'with a config' do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
