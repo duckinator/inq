@@ -9,6 +9,18 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v14.0.0]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v14.0.0))
+made JSON reports include Pulse data, thus making `HowIs.from_json()`
+not make any network requests at all.
+
+### Changes
+
+* Remove dead code. ([#123](https://github.com/how-is/how_is/pull/123))
+* Include Pulse data in JSON reports.
+  ([#125](https://github.com/how-is/how_is/pull/125))
+
 ## [v13.0.0]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v13.0.0))
