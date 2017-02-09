@@ -90,6 +90,31 @@ class HowIs
     end
 
     private
+    def categorize_labels(labels)
+      categories = {}
+      labels.each do |label, hash|
+        parts = label.split(':', 2)
+        if parts.length == 1
+          category = :none
+        else
+          category = parts.first
+        end
+
+        categories[category] ||= {}
+        categories[category][label] = hash
+      end
+
+      categories
+    end
+
+    def sort_labels_in_category(category)
+      #...
+    end
+
+    def sort_categories(categories)
+      #...
+    end
+
     def github_pulse_summary
       @pulse ||= HowIs::Pulse.new(analysis.repository)
       @pulse.send("#{format}_summary")
