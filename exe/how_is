@@ -2,7 +2,6 @@
 
 require "how_is"
 require "how_is/cli"
-require "how_is/cli/parser"
 
 begin
   parser  = HowIs::CLI::Parser.new
