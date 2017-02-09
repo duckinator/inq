@@ -31,18 +31,20 @@ describe HowIs do
     Timecop.return
   end
 
-  context 'with a config file' do
+  context 'with a config' do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
         Dir.chdir(dir) {
-         VCR.use_cassette("how-is-with-config-file") do
+          reports = nil
+
+          VCR.use_cassette("how-is-with-config-file") do
             expect {
-              HowIs.from_config_file(YAML.load_file(HOW_IS_CONFIG_FILE))
+              reports = HowIs.from_config(YAML.load_file(HOW_IS_CONFIG_FILE))
             }.to_not output.to_stderr
           end
 
-          html_report = File.open('report.html').read
-          json_report = File.open('report.json').read
+          html_report = reports['./report.html']
+          json_report = reports['./report.json']
 
           expect(html_report).to include(JEKYLL_HEADER)
         }
@@ -121,8 +123,6 @@ describe HowIs do
     end
   end
 
-  # NOTE: Only testing #from_config_file, not #from_config, because if
-  #       #from_config_file works, that implies #from_config works.
   context '#from_config' do
     let(:config) {
       file = File.expand_path('./data/how_is/cli_spec/how_is.yml', __dir__)
@@ -153,6 +153,7 @@ describe HowIs do
       VCR.use_cassette("how-is-from-config-frontmatter") do
         reports = HowIs.from_config(config, github: github, report_class: report_class)
       end
+
       actual_html = reports['output/report.html']
       actual_json = reports['output/report.json']
 

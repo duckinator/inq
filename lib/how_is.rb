@@ -93,12 +93,6 @@ class HowIs
   end
 
   ##
-  # Generates a series of report files based on a YAML config file.
-  def self.from_config_file(config_file, **kwargs)
-    from_config(YAML.load_file(config_file), **kwargs)
-  end
-
-  ##
   # Generates a series of report files based on a config Hash.
   def self.from_config(config,
         github: nil,
