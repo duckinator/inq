@@ -63,7 +63,7 @@ class HowIs
       end.to_h
 
       hash.keys.each do |key|
-        next unless hash[key]['date']
+        next unless hash[key].is_a?(Hash) && hash[key]['date']
 
         hash[key]['date'] = DateTime.parse(hash[key]['date'])
       end
