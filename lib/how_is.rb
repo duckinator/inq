@@ -125,6 +125,8 @@ class HowIs
 
       result
     end
+
+    generated_reports
   end
 
   # Combine the frontmatter, report data, and raw report into a report with
