@@ -1,11 +1,11 @@
 repository: rubygems/rubygems
 reports:
   html:
-    directory: spec/data/how_is/cli_spec/output
+    directory: output
     frontmatter:
       title: "%{repository} report"
       layout: default
     filename: "report.html"
   json:
-    directory: spec/data/how_is/cli_spec/output
+    directory: output
     filename: "report.json"

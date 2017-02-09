@@ -1,3 +1,3 @@
-module HowIs
-  VERSION = "12.0.0"
+class HowIs
+  VERSION = "13.0.0"
 end

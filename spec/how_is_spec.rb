@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'open3'
 require 'timecop'
+require 'yaml'
 
 HOW_IS_CONFIG_FILE = File.expand_path('./data/how_is.yml', __dir__)
 
@@ -30,18 +31,20 @@ describe HowIs do
     Timecop.return
   end
 
-  context 'with a config file' do
+  context 'with a config' do
     it 'generates valid report files' do
       Dir.mktmpdir {|dir|
         Dir.chdir(dir) {
-         VCR.use_cassette("how-is-with-config-file") do
+          reports = nil
+
+          VCR.use_cassette("how-is-with-config-file") do
             expect {
-              HowIs::CLI.new.from_config_file(HOW_IS_CONFIG_FILE)
+              reports = HowIs.from_config(YAML.load_file(HOW_IS_CONFIG_FILE))
             }.to_not output.to_stderr
           end
 
-          html_report = File.open('report.html').read
-          json_report = File.open('report.json').read
+          html_report = reports['./report.html']
+          json_report = reports['./report.json']
 
           expect(html_report).to include(JEKYLL_HEADER)
         }
@@ -54,14 +57,9 @@ describe HowIs do
       expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
       actual = nil
 
-      options = {
-        repository: 'how-is/example-repository',
-        format: 'html'
-      }
-
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual = HowIs.generate_report(**options)
+          actual = HowIs.new('how-is/example-repository').to_html
         }.to_not output.to_stderr
       end
 
@@ -74,13 +72,9 @@ describe HowIs do
       expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
       actual = nil
 
-      options = {
-        repository: 'how-is/example-repository',
-        format: 'json',
-      }
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual = HowIs.generate_report(**options)
+          actual = HowIs.new('how-is/example-repository').to_json
         }.to_not output.to_stderr
       end
 
@@ -93,17 +87,91 @@ describe HowIs do
       expected = File.open(HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT).read.chomp
       actual = nil
 
-      options = {
-        repository: 'how-is/example-empty-repository',
-        format: 'html',
-      }
       VCR.use_cassette("how-is-example-empty-repository") do
         expect {
-          actual = HowIs.generate_report(**options)
+          actual = HowIs.new('how-is/example-empty-repository').to_html
         }.to_not output.to_stderr
       end
 
       expect(expected).to eq(actual)
     end
   end
+
+  context '#generate_frontmatter' do
+    it 'works with frontmatter parameter using String keys, report_data using String keys' do
+      actual = nil
+      expected = nil
+
+      VCR.use_cassette("how-is-example-repository") do
+        actual = HowIs.generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
+        expected = "---\nfoo: bar asdf\n"
+      end
+
+      expect(actual).to eq(expected)
+    end
+
+    it 'works with frontmatter parameter using Symbol keys, report_data using Symbol keys' do
+      actual = nil
+      expected = nil
+
+      VCR.use_cassette("how-is-example-repository") do
+        actual = HowIs.generate_frontmatter({:foo => "bar %{baz}"}, {:baz => "asdf"})      
+        expected = "---\nfoo: bar asdf\n"
+      end
+
+      expect(actual).to eq(expected)
+    end
+  end
+
+  context '#from_config' do
+    let(:config) {
+      file = File.expand_path('./data/how_is/cli_spec/how_is.yml', __dir__)
+      YAML.load_file(file)
+    }
+
+    let(:issues) { JSON.parse(open(File.expand_path('./data/issues.json', __dir__)).read) }
+    let(:pulls) { JSON.parse(open(File.expand_path('./data/pulls.json', __dir__)).read) }
+
+    let(:github) {
+      instance_double('GitHub',
+        issues: instance_double('GitHub::Issues', list: issues),
+        pulls: instance_double('GitHub::Pulls', list: pulls)
+      )
+    }
+
+    let(:report_class) {
+      Class.new {
+        def self.export(analysis, format)
+          "[report]"
+        end
+      }
+    }
+
+    it 'generates a report, with correct frontmatter' do
+      reports = nil
+
+      VCR.use_cassette("how-is-from-config-frontmatter") do
+        reports = HowIs.from_config(config, github: github, report_class: report_class)
+      end
+
+      actual_html = reports['output/report.html']
+      actual_json = reports['output/report.json']
+
+      expected_html = <<-EOF
+---
+title: rubygems/rubygems report
+layout: default
+---
+
+[report]
+      EOF
+      # Not valid JSON, because report_class.export() is the same static string
+      # regardless of format.
+      expected_json = "[report]\n"
+
+      expect(actual_html).to eq(expected_html)
+      expect(actual_json).to eq(expected_json)
+    end
+  end
+
 end
