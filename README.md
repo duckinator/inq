@@ -78,23 +78,18 @@ Every value under `reports` is a format string, so you can do e.g.
 ### Ruby API
 
 ```ruby
-# Generate a report for <orgname>/<reponame>, defaulting to
-# the report file being report.html.
-HowIs.generate_report(repository: '<orgname>/<reponame>')
-
-# Generate a report for <orgname>/<reponame>, specifying
-# a report file of blah-report.html.
-HowIs.generate_report(repository: '<orgname>/<reponame>', report:
-'blah-report.html')
+# Generate an HTML report for <orgname>/<reponame>, and save it to
+# report.html
+report = HowIs.new('<orgname>/<reponame>').to_html
+File.open('report.html', 'w') { |f| f.puts report }
 
 # Generate a report from a config file located at ./how_is.yml.
 # Example config file: https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml
-# NOTE: This is going to be moved outside of HowIs::CLI at some point.
-HowIs::CLI.new.from_config_file('how_is.yml')
+require 'yaml'
+HowIs.from_config_file(YAML.load_file('how_is.yml'))
 
 # Generate a report from a config Hash.
-# NOTE: This is going to be moved outside of HowIs::CLI at some point.
-HowIs::CLI.new.from_config({
+HowIs.from_config({
   repository: '<orgname>/<reponame>',
   reports: {
     html: {
