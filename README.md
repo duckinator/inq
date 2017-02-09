@@ -1,5 +1,5 @@
-[![Stories in Ready](https://badge.waffle.io/duckinator/how_is.png?label=ready&title=Ready)](https://waffle.io/duckinator/how_is)
-[![Build Status](https://travis-ci.org/duckinator/how_is.svg?branch=master)](https://travis-ci.org/duckinator/how_is)
+[![Stories in Ready](https://badge.waffle.io/how-is/how_is.png?label=ready&title=Ready)](https://waffle.io/how-is/how_is)
+[![Build Status](https://travis-ci.org/how-is/how_is.svg?branch=master)](https://travis-ci.org/how-is/how_is)
 
 # How is [your repo]?
 
@@ -121,7 +121,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/duckinator/how_is. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/how-is/how_is. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
