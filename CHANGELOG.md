@@ -9,6 +9,16 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v15.0.0]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v15.0.0))
+implements `HowIs.from_json`.
+
+### Changes
+
+* Implemented `How_is.from_json`.
+  ([#126](https://github.com/how-is/how_is/pull/126))
+
 ## [v14.0.0]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v14.0.0))
