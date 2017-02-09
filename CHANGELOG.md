@@ -9,6 +9,21 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v13.0.0]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v13.0.0))
+largely focused on an API redesign.
+
+Pull requests for this release can be [viewe on
+GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-12-12..2017-02-09).
+
+### Changed
+
+* API overhaul. ([#115](https://github.com/how-is/how_is/issues/115), [#117](https://github.com/how-is/how_is/pull/117))
+* Raise an exception/show a CLI warning if the provided repository name
+  isn't in the "user/repo" format.
+  ([#98](https://github.com/how-is/how_is/pull/98))
+
 ## [v12.0.0]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v12.0.0))
