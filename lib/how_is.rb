@@ -39,10 +39,9 @@ class HowIs
   end
 
   def self.from_json(json)
-    data = JSON.parse(json)
-    analysis = HowIs::Analysis.new(data)
+    analysis = HowIs::Analyzer.from_json(json)
 
-    self.new(data['repository'], analysis)
+    self.new(analysis.repository, analysis)
   end
 
   ##

@@ -54,11 +54,8 @@ class HowIs
 
     ##
     # Generates an analysis from a JSON report.
-    def from_file(file)
-      extension = file.split('.').last
-      raise UnsupportedImportFormat, extension unless extension == 'json'
-
-      hash = JSON.parse(open(file).read)
+    def self.from_json(json)
+      hash = JSON.parse(json)
       hash = hash.map do |k, v|
         v = DateTime.parse(v) if k.end_with?('_date')
 

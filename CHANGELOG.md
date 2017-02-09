@@ -9,6 +9,16 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v16.0.0]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v16.0.0))
+makes `HowIs.from_json` actually parse dates.
+
+### Changes
+
+* Make `HowIs.from_json` parse dates.
+  ([#127](https://github.com/how-is/how_is/pull/127))
+
 ## [v15.0.0]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v15.0.0))
