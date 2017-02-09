@@ -62,7 +62,9 @@ class HowIs
         [k, v]
       end.to_h
 
-      %w[oldest_issue oldest_pull].each do |key|
+      hash.keys.each do |key|
+        next unless hash[key].is_a?(Hash) && hash[key]['date']
+
         hash[key]['date'] = DateTime.parse(hash[key]['date'])
       end
 
