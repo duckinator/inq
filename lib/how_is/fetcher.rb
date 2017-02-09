@@ -42,13 +42,13 @@ class HowIs::Fetcher
     issues  = github.issues.list user: user, repo: repo
     pulls   = github.pulls.list  user: user, repo: repo
 
-    pulse = pulse.html_summary
+    summary = pulse.html_summary
 
     Results.new(
       repository,
       obj_to_array_of_hashes(issues),
       obj_to_array_of_hashes(pulls),
-      pulse,
+      summary,
     )
   end
 
