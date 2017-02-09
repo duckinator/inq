@@ -1,6 +1,6 @@
 require 'tessellator/fetcher'
 
-module HowIs
+class HowIs
   # This entire class is a monstrous hack, because GitHub doesn't provide a good
   # API for Pulse.
   class Pulse

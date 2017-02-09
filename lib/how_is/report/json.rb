@@ -1,6 +1,6 @@
 require 'how_is/report/base_report'
 
-module HowIs
+class HowIs
   class JsonReport < BaseReport
     def format
       :json

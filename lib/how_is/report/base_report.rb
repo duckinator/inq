@@ -1,6 +1,6 @@
 require 'json'
 
-module HowIs
+class HowIs
   ##
   # Subclasses of BaseReport represent complete reports.
   class BaseReport < Struct.new(:analysis)

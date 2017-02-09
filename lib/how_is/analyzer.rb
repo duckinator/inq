@@ -3,7 +3,7 @@ require 'ostruct'
 require 'date'
 require 'json'
 
-module HowIs
+class HowIs
   ##
   # Represents a completed analysis of the repository being analyzed.
   class Analysis < OpenStruct

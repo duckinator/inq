@@ -1,7 +1,7 @@
 require 'cgi'
 require 'how_is/report/base_report'
 
-module HowIs
+class HowIs
   class HtmlReport < BaseReport
     def format
       :html

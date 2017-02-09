@@ -97,15 +97,25 @@ describe HowIs do
 
   context '#generate_frontmatter' do
     it 'works with frontmatter parameter using String keys, report_data using String keys' do
-      actual = HowIs.generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
-      expected = "---\nfoo: bar asdf\n"
+      actual = nil
+      expected = nil
+
+      VCR.use_cassette("how-is-example-repository") do
+        actual = HowIs.new('how-is/example-repository').generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
+        expected = "---\nfoo: bar asdf\n"
+      end
 
       expect(actual).to eq(expected)
     end
 
     it 'works with frontmatter parameter using Symbol keys, report_data using Symbol keys' do
-      actual = HowIs.generate_frontmatter({:foo => "bar %{baz}"}, {:baz => "asdf"})
-      expected = "---\nfoo: bar asdf\n"
+      actual = nil
+      expected = nil
+
+      VCR.use_cassette("how-is-example-repository") do
+        actual = HowIs.generate_frontmatter({:foo => "bar %{baz}"}, {:baz => "asdf"})      
+        expected = "---\nfoo: bar asdf\n"
+      end
 
       expect(actual).to eq(expected)
     end
@@ -115,12 +125,12 @@ describe HowIs do
   #       #from_config_file works, that implies #from_config works.
   context '#from_config' do
     let(:config) {
-      file = File.expand_path('../data/how_is/cli_spec/how_is.yml', __dir__)
+      file = File.expand_path('./data/how_is/cli_spec/how_is.yml', __dir__)
       YAML.load_file(file)
     }
 
-    let(:issues) { JSON.parse(open(File.expand_path('../data/issues.json', __dir__)).read) }
-    let(:pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
+    let(:issues) { JSON.parse(open(File.expand_path('./data/issues.json', __dir__)).read) }
+    let(:pulls) { JSON.parse(open(File.expand_path('./data/pulls.json', __dir__)).read) }
 
     let(:github) {
       instance_double('GitHub',
@@ -138,7 +148,11 @@ describe HowIs do
     }
 
     it 'generates a report, with correct frontmatter' do
-      reports = HowIs.from_config(config, github: github, report_class: report_class)
+      reports = nil
+
+      VCR.use_cassette("how-is-from-config-frontmatter") do
+        reports = HowIs.from_config(config, github: github, report_class: report_class)
+      end
       actual_html = reports['output/report.html']
       actual_json = reports['output/report.json']
 

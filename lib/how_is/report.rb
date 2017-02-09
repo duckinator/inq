@@ -1,7 +1,7 @@
 require 'date'
 require 'how_is/pulse'
 
-module HowIs
+class HowIs
   class UnsupportedExportFormat < StandardError
     def initialize(format)
       super("Unsupported export format: #{format}")
