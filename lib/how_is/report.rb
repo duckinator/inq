@@ -1,5 +1,4 @@
 require 'date'
-require 'how_is/pulse'
 
 class HowIs
   class UnsupportedExportFormat < StandardError

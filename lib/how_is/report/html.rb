@@ -65,10 +65,6 @@ class HowIs
       @r += "</table>\n"
     end
 
-    def monthly_summary
-      pulse.html_summary
-    end
-
     def export
       @r = ''
       generate_report_text!

@@ -12,12 +12,21 @@ describe HowIs::Fetcher do
     )
   }
 
+  let(:pulse) {
+    Class.new {
+      def html_summary
+        'html_summary'
+      end
+    }.new
+  }
+
   context '#call' do
     it 'returns a hash containing issues and pull requests' do
-      actual = subject.call('user/repo', github)
+      actual = subject.call('user/repo', github, pulse)
 
       expect(actual[:issues]).to eq(issues)
       expect(actual[:pulls]).to eq(pulls)
+      expect(actual[:pulse]).to eq('html_summary')
     end
   end
 end

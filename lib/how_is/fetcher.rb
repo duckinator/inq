@@ -1,5 +1,6 @@
 require 'contracts'
 require 'github_api'
+require 'how_is/pulse'
 
 ##
 # Fetches data from GitHub.
@@ -11,12 +12,12 @@ class HowIs::Fetcher
   #
   # Implemented as a class instead of passing around a Hash so that it can
   # be more easily referenced by Contracts.
-  class Results < Struct.new(:repository, :issues, :pulls)
+  class Results < Struct.new(:repository, :issues, :pulls, :pulse)
     include Contracts::Core
 
-    Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash] => nil
-    def initialize(repository, issues, pulls)
-      super(repository, issues, pulls)
+    Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String => nil
+    def initialize(repository, issues, pulls, pulse)
+      super(repository, issues, pulls, pulse)
     end
 
     # Struct defines #to_h, but not #to_hash, so we alias them.
@@ -26,10 +27,14 @@ class HowIs::Fetcher
 
   ##
   # Fetches repository information from GitHub and returns a Results object.
-  Contract String, C::Or[C::RespondTo[:issues, :pulls], nil] => Results
+  Contract String,
+    C::Or[C::RespondTo[:issues, :pulls], nil],
+    C::Or[C::RespondTo[:html_summary], nil] => Results
   def call(repository,
-        github = nil)
+        github = nil,
+        pulse = nil)
     github ||= Github.new(auto_pagination: true)
+    pulse ||= HowIs::Pulse.new(repository)
     user, repo = repository.split('/', 2)
     raise HowIs::CLI::OptionsError, 'To generate a report from GitHub, ' \
                                     'provide the repository username/project. ' \
@@ -37,10 +42,13 @@ class HowIs::Fetcher
     issues  = github.issues.list user: user, repo: repo
     pulls   = github.pulls.list  user: user, repo: repo
 
+    pulse = pulse.html_summary
+
     Results.new(
       repository,
       obj_to_array_of_hashes(issues),
-      obj_to_array_of_hashes(pulls)
+      obj_to_array_of_hashes(pulls),
+      pulse,
     )
   end
 

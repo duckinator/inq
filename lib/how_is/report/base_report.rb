@@ -18,7 +18,7 @@ class HowIs
       # TODO: Stop pretending everyone who runs how_is is in UTC.
       text "Monthly report, ending on #{DateTime.now.new_offset(0).strftime('%B %e, %Y')}."
 
-      text github_pulse_summary
+      text analysis.pulse
 
       header "Pull Requests"
       issue_or_pr_summary "pull", "pull request"
@@ -68,10 +68,6 @@ class HowIs
       raise NotImplementedError
     end
 
-    def monthly_summary
-      raise NotImplementedError
-    end
-
     def export
       raise NotImplementedError
     end
@@ -90,11 +86,6 @@ class HowIs
     end
 
     private
-    def github_pulse_summary
-      @pulse ||= HowIs::Pulse.new(analysis.repository)
-      @pulse.send("#{format}_summary")
-    end
-
     def pluralize(text, number)
       number == 1 ? text : "#{text}s"
     end
