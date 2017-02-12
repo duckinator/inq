@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["me@duckie.co"]
 
   spec.summary       = %q{Quantify the health of a GitHub repository.}
-  spec.homepage      = "https://github.com/duckinator/how_is"
+  spec.homepage      = "https://github.com/how-is/how_is"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
