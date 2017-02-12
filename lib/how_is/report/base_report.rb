@@ -38,40 +38,62 @@ class HowIs
       @r
     end
 
+    # === Methods implemented by subclasses of BaseReport ===
 
-    
+    ##
+    # Returns the format of report this class generates.
+    #
+    # @returns [Symbol] A lowercase symbol denoting the report format.
     def format
       raise NotImplementedError
     end
 
+    ##
+    # Appends a title to the report.
     def title(_text)
       raise NotImplementedError
     end
 
+    ##
+    # Appends a header to the report.
     def header(_text)
       raise NotImplementedError
     end
 
+    ##
+    # Appends a line of text to the report.
     def text(_text)
       raise NotImplementedError
     end
 
+    ##
+    # Appends a link to the report.
     def link(_text, url)
       raise NotImplementedError
     end
 
+    ##
+    # Appends an unordered list to the report.
     def unordered_list(arr)
       raise NotImplementedError
     end
 
+    ##
+    # Appends a horizontal bar graph to the report.
     def horizontal_bar_graph(data)
       raise NotImplementedError
     end
 
+    ##
+    # Exports the report as a String.
     def export
       raise NotImplementedError
     end
 
+    ##
+    # Exports a report to a file.
+    #
+    # NOTE: May be removed in the future.
     def export_file(file)
       raise NotImplementedError
     end

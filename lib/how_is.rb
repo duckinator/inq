@@ -17,6 +17,10 @@ class HowIs
 
   ##
   # Generate a report file.
+  #
+  # TODO: Remnant of old API. Remove or rename.
+  # If this is removed, remove various .export_file
+  # methods throughout Report/*Report.
   def self.generate_report_file(report:, **kw_args)
     analysis = self.generate_analysis(**kw_args)
 
@@ -24,20 +28,43 @@ class HowIs
   end
 
   ##
-  # Generates and returns a report as a String.
+  # Generate a HowIs instance, so you can generate reports.
+  #
+  # @param repository [String] The name of a GitHub repository (of the
+  #   format <user or organization>/<repository>).
+  # @param analysis [HowIs::Analysis] Optional; if passed, this Analysis
+  #   object is used instead of generating one.
   def initialize(repository, analysis = nil, **kw_args)
+    # If no Analysis is passed, generate one.
     analysis ||= HowIs.generate_analysis(repository: repository, **kw_args)
+
+    # Used by to_html, to_json, etc.
     @analysis = analysis
   end
 
+  ##
+  # Generate an HTML report.
+  #
+  # @returns [String] An HTML report.
   def to_html
     Report.export(@analysis, :html)
   end
 
+  ##
+  # Generate a JSON report.
+  #
+  # @returns [String] A JSON report.
   def to_json
     Report.export(@analysis, :json)
   end
 
+  ##
+  # Given a JSON report, create a new HowIs object (for generating other
+  # reports).
+  #
+  # @param json [String] A JSON report object.
+  # @returns [HowIs] A HowIs object that can be used for generating other
+  #   reports, treating the JSON report as a cache.
   def self.from_json(json)
     analysis = HowIs::Analyzer.from_json(json)
 
@@ -46,6 +73,9 @@ class HowIs
 
   ##
   # Returns a list of possible export formats.
+  #
+  # @returns [Array<String>] An array of the types of reports you can
+  #   generate.
   def self.supported_formats
     report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
     report_constants.map {|x| x.to_s.split('Report').first.downcase }
@@ -53,6 +83,10 @@ class HowIs
 
   ##
   # Returns whether or not the specified +file+ can be exported to.
+  #
+  # @param file [String] A filename.
+  # @returns [Boolean] +true+ if HowIs can export to the file, +false+
+  #   if it can't.
   def self.can_export_to?(file)
     # TODO: Check if the file is writable?
     supported_formats.include?(file.split('.').last)
@@ -101,6 +135,13 @@ class HowIs
 
   ##
   # Generates a series of report files based on a config Hash.
+  #
+  # @param config [Hash] A Hash specifying the formats, locations, etc
+  #   of the reports to generate.
+  # @param github (You don't need this.) An object to replace the GitHub
+  #   class when fetching data.
+  # @param report_class (You don't need this.) An object to replace the
+  #   HowIs::Report class when generating reports.
   def self.from_config(config,
         github: nil,
         report_class: nil)
