@@ -21,7 +21,11 @@ class HowIs
     end
 
     ##
-    # Generates and returns an analysis.
+    # Generates and returns an analysis.i
+    #
+    # @param data [Fetcher::Results] The results gathered by Fetcher.
+    # @param analysis_class (You don't need this.) A class to use instead of
+    #   HowIs::Analysis.
     Contract Fetcher::Results, C::KeywordArgs[analysis_class: C::Optional[Class]] => Analysis
     def call(data, analysis_class: Analysis)
       issues = data.issues
@@ -54,6 +58,8 @@ class HowIs
 
     ##
     # Generates an analysis from a JSON report.
+    #
+    # @param json [String] The JSON string to generate an Analysis from.
     def self.from_json(json)
       hash = JSON.parse(json)
       hash = hash.map do |k, v|
