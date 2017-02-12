@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ellen Marie Dash"]
   spec.email         = ["me@duckie.co"]
 
-  spec.summary       = %q{Quantify the health of a GitHub repository is.}
+  spec.summary       = %q{Quantify the health of a GitHub repository.}
   spec.homepage      = "https://github.com/duckinator/how_is"
   spec.license       = "MIT"
 
