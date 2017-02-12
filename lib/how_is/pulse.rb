@@ -1,18 +1,23 @@
 require 'tessellator/fetcher'
 
 class HowIs
-  # This entire class is a monstrous hack, because GitHub doesn't provide a good
-  # API for Pulse.
+  # This entire class is a monstrous hack, because GitHub doesn't provide
+  # a good API for Pulse.
+  #
+  # TODO: Use GitHub's Statistics API to replace this garbage.
+  #   See https://github.com/how-is/how_is/issues/122
   class Pulse
     def initialize(repository)
       @repository = repository
       @pulse_page_response = fetch_pulse!(repository)
     end
 
+    # This is probably dead code.
     def text_summary
       raise NotImplementedError
     end
 
+    # Gets the HTML Pulse summary.
     def html_summary
       parts = 
         @pulse_page_response.body
@@ -30,6 +35,7 @@ class HowIs
     end
 
   private
+    # Fetch Pulse page from GitHub for scraping.
     def fetch_pulse!(repository, period='monthly')
       Tessellator::Fetcher.new.call('get', "https://github.com/#{repository}/pulse/#{period}")
     end
