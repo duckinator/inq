@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require "how_is"
 require "slop"
 
