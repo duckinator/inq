@@ -1,0 +1,120 @@
+{
+  "issues_url": "https://github.com/rubygems/rubygems/issues",
+  "pulls_url": "https://github.com/rubygems/rubygems/pulls",
+  "repository": "rubygems/rubygems",
+  "number_of_issues": 140,
+  "number_of_pulls": 33,
+  "issues_with_label": {
+    "status: triage": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22status%3A+triage%22",
+      "total": 35
+    },
+    "type: feature request": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22type%3A+feature+request%22",
+      "total": 36
+    },
+    "contribution: unclaimed": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22contribution%3A+unclaimed%22",
+      "total": 3
+    },
+    "status: ready": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22status%3A+ready%22",
+      "total": 30
+    },
+    "platform: windows": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22platform%3A+windows%22",
+      "total": 10
+    },
+    "type: bug report": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22type%3A+bug+report%22",
+      "total": 25
+    },
+    "contribution: small": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22contribution%3A+small%22",
+      "total": 1
+    },
+    "type: cleanup": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22type%3A+cleanup%22",
+      "total": 1
+    },
+    "status: user feedback required": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22status%3A+user+feedback+required%22",
+      "total": 1
+    },
+    "type: major bump": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22type%3A+major+bump%22",
+      "total": 7
+    },
+    "category: install": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22category%3A+install%22",
+      "total": 22
+    },
+    "category: command": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22category%3A+command%22",
+      "total": 3
+    },
+    "platform: java": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22platform%3A+java%22",
+      "total": 1
+    },
+    "category: #gem or #require": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22category%3A+%23gem+or+%23require%22",
+      "total": 3
+    },
+    "platform: osx": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22platform%3A+osx%22",
+      "total": 1
+    },
+    "type: documentation": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22type%3A+documentation%22",
+      "total": 2
+    },
+    "category: gem spec": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22category%3A+gem+spec%22",
+      "total": 7
+    },
+    "category: other": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22category%3A+other%22",
+      "total": 9
+    },
+    "performance": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22performance%22",
+      "total": 4
+    },
+    "category: API": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22category%3A+API%22",
+      "total": 2
+    },
+    "platform: linux": {
+      "link": "https://github.com/rubygems/rubygems/issues?q=is%3Aopen+is%3Aissue+label%3A%22platform%3A+linux%22",
+      "total": 1
+    }
+  },
+  "issues_with_no_label": {
+    "link": null,
+    "total": 16
+  },
+  "average_issue_age": "approximately 1 year and 6 months",
+  "average_pull_age": "approximately 1 year and 3 months",
+  "oldest_issue": {
+    "html_url": "https://github.com/rubygems/rubygems/issues/108",
+    "number": 108,
+    "date": "2011-06-14T23:08:09+00:00"
+  },
+  "oldest_pull": {
+    "html_url": "https://github.com/rubygems/rubygems/pull/649",
+    "number": 649,
+    "date": "2013-09-16T15:04:07+00:00"
+  },
+  "newest_issue": {
+    "html_url": "https://github.com/rubygems/rubygems/issues/1838",
+    "number": 1838,
+    "date": "2017-02-10T13:19:49+00:00"
+  },
+  "newest_pull": {
+    "html_url": "https://github.com/rubygems/rubygems/pull/1834",
+    "number": 1834,
+    "date": "2017-02-05T08:38:44+00:00"
+  },
+  "pulse": "Excluding merges, <strong>6 authors</strong>\n      have pushed\n      <strong><span class=\"text-emphasized\">39</span> commits</strong> to master and\n      <strong><span class=\"text-emphasized\">42</span> commits</strong>\n      to all branches.\n      On master, <strong>36 files</strong>\n      have changed and there have been\n      <a href=\"https://github.com/rubygems/rubygems/compare/master@%7B1484432282%7D...master\" class=\"lines-changed\">\n        <strong class=\"insertions\">486</strong> <strong>additions</strong> and\n        <strong class=\"deletions\">117</strong> <strong>deletions</strong></a>."
+}
