@@ -92,23 +92,18 @@ class HowIs
     supported_formats.include?(file.split('.').last)
   end
 
-  # Generate an analysis. Used internally for generate_report{,_file}.
+  # Generate an analysis. Used internally for #generate_report_file
+  # and .new().
   Contract C::KeywordArgs[repository: String,
-                          from: C::Optional[C::Or[String, nil]],
                           fetcher: C::Optional[Class],
                           analyzer: C::Optional[Class],
                           github: C::Optional[C::Any]] => C::Any
   def self.generate_analysis(repository:,
-        from: nil,
         fetcher: Fetcher.new,
         analyzer: Analyzer.new,
         github: nil)
-    if from
-      analysis = analyzer.from_file(from)
-    else
-      raw_data = fetcher.call(repository, github)
-      analysis = analyzer.call(raw_data)
-    end
+    raw_data = fetcher.call(repository, github)
+    analysis = analyzer.call(raw_data)
 
     analysis
   end

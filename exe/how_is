@@ -18,16 +18,41 @@ opts      = result[:opts]
 options   = result[:options]
 arguments = result[:arguments]
 
-begin
-  if options[:help]
-    puts result[:opts]
-  elsif options[:version]
-    puts HowIs::VERSION
-  elsif options[:config]
-    HowIs.from_config_file(YAML.load_file(options[:config]))
-  else
-    HowIs.generate_report_file(options)
+if options[:help]
+  puts result[:opts]
+  exit
+elsif options[:version]
+  puts HowIs::VERSION
+  exit
+end
+
+def save_files(reports)
+  reports.each do |file, report|
+    format = file.split('.').last
+
+    File.open(file, 'w') do |f|
+      f.write report.send("to_#{format}")
+    end
   end
+end
+
+begin
+  if options[:config]
+    reports = HowIs.from_config_file(YAML.load_file(options[:config]))
+
+    save_files(reports)
+  else
+    report =
+      if options[:from]
+        json_report = File.open(options[:from]).read
+        HowIs.from_json(json_report)
+      else
+        HowIs.new(options[:repository])
+      end
+
+    save_files({ options[:report] => report })
+  end
+
 rescue => e
   if ENV['SHOW_TRACE']
     raise
