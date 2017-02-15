@@ -91,65 +91,7 @@ Items with two asterisks (\*\*) have been partially implemented.
 
 ## UI Specification
 
-## Infmation about how_is
-
-`how_is --help` prints help text and exits.
-
-`how_is --version` prints the version and exits.
-
-### Generating a report
-
-How\_is can generate HTML reports for https://github.com/rubygems/rubygems.
-By default, it generates reports at `./report.html`.
-To view an HTML report, open it in aweb browser.
-
-There is no output when it succeeds.
-
-```
-$ how_is rubygems/rubygems
-$
-```
-
-### Generate a report, specifying the filename
-
-You can generate reports with other filenames, as well as different
-report formats, using the `--report FILENAME` parameter.
-
-The FILENAME can be any filename that ends with a lowercase
-extension specifying a supported format (currently `.html` and `.json`).
-
-If the filename ends with `.html` it'll generate an HTML report,
-if it ends with `.json` it'll generate a JSON report.
-
-There is no output when it succeeds.
-
-```
-$ how_is --report report.json rubygems/rubygems
-$
-```
-
-### Generate a report, using data from a JSON report
-
-If you have a JSON report (see above), you can use that to generate
-another report (probably HTML) using that data.
-
-E.g.,
-
-```
-$ how_is --from report.json --report report.html
-$
-```
-
-This generates an HTML report just like `how_is --report report.html
-REPOSITORY`, except it uses the data from `report.json` instead of
-fetching it again.
-
-tl;dr: you're using the JSON file as a cache.
-
-### Generating a report using a config file
-
-See [the README](https://github.com/how-is/how_is/blob/master/README.md#generating-reports-from-a-config-file).
-
-### Ruby API
-
-See [the README](https://github.com/how-is/how_is/blob/master/README.md#ruby-api).
+how_is follows [Readme Driven
+Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html) and, as such,
+[README.md](https://github.com/how-is/how_is/blob/master/README.md) is
+both the documentation and the specification.

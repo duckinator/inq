@@ -34,9 +34,28 @@ E.g.,
 
 The above command creates a HTML file containing the summary at `./report.html`.
 
+If you don't pass the `--report` flag, it defaults to
+`./report.html`.
+
+#### Generating reports, using a JSON report as a cache
+
+You can use a JSON report as a cache when generating another rpeort.
+
+E.g.,
+
+    $ how_is rubygems/rubygems --report report.json
+    $ how_is --from report.json --report report.html
+
+The first command generates a JSON report at `./report.json`. The second
+command generates an HTML report at `./report.html`, using information
+from `./report.json`.
+
+When using `--from`, no network requests are made, because all of the
+required information is in the JSON report.
+
 #### Generating reports from a config file
 
-Beyond the above, you can also create a config file &mdash; typically called
+You can also create a config file &mdash; typically called
 how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`. (E.g., if
 the config file is how_is.yml, you would run `how_is --config how_is.yml`.)
 
