@@ -87,7 +87,7 @@ class HowIs::CLI
 
           # Opening the file here is a bit gross, but I couldn't find a
           # better way to do it. -@duckinator
-          options[:repository] = JSON.parse(open(options[:from_file]).read)['repository']
+          options[:repository] = JSON.parse(open(options[:from]).read)['repository']
 
           raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
 
