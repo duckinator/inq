@@ -16,18 +16,6 @@ class HowIs
   DEFAULT_FORMAT = :html
 
   ##
-  # Generate a report file.
-  #
-  # TODO: Remnant of old API. Remove or rename.
-  # If this is removed, remove various .export_file
-  # methods throughout Report/*Report.
-  def self.generate_report_file(report:, **kw_args)
-    analysis = self.generate_analysis(**kw_args)
-
-    Report.export_file(analysis, report)
-  end
-
-  ##
   # Generate a HowIs instance, so you can generate reports.
   #
   # @param repository [String] The name of a GitHub repository (of the
@@ -92,8 +80,8 @@ class HowIs
     supported_formats.include?(file.split('.').last)
   end
 
-  # Generate an analysis. Used internally for #generate_report_file
-  # and .new().
+  # Generate an analysis.
+  # TODO: This may make more sense as Analysis.new().
   Contract C::KeywordArgs[repository: String,
                           fetcher: C::Optional[Class],
                           analyzer: C::Optional[Class],
