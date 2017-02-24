@@ -57,12 +57,11 @@ class HowIs
     end
 
     ##
-    # Generates an analysis from a JSON report.
+    # Generates an analysis from a hash of report data.
     #
-    # @param json [String] The JSON string to generate an Analysis from.
-    def self.from_json(json)
-      hash = JSON.parse(json)
-      hash = hash.map do |k, v|
+    # @param data [Hash] The hash to generate an Analysis from.
+    def self.from_hash(data)
+      hash = data.map do |k, v|
         v = DateTime.parse(v) if k.end_with?('_date')
 
         [k, v]
