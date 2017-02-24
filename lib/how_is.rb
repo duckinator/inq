@@ -54,7 +54,18 @@ class HowIs
   # @returns [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the JSON report as a cache.
   def self.from_json(json)
-    analysis = HowIs::Analyzer.from_json(json)
+    self.from_hash(JSON.parse(json))
+  end
+
+  ##
+  # Given report data as a hash, create a new HowIs object (for generating
+  # other reports).
+  #
+  # @param data [Hash] A hash containing report data.
+  # @returns [HowIs] A HowIs object that can be used for generating other
+  #   reports, treating the provided report data as a cache.
+  def self.from_hash(data)
+    analysis = HowIs::Analyzer.from_hash(data)
 
     self.new(analysis.repository, analysis)
   end
