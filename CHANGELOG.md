@@ -9,6 +9,38 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v18.0.0]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.0))
+vastly improves documentation, fixes the `--from` flag, and adds the
+`HowIs.from_hash` method (used by the
+[dashboard](https://github.com/how-is/dashboard)).
+
+### Additions
+
+* Add/improve inline code documentation.
+  ([#132](https://github.com/how-is/how_is/pull/132))
+* Move documentation from design/ to README.
+  ([#143](https://github.com/how-is/how_is/pull/143))
+* Add `HowIs.from_hash` method.
+  ([#144](https://github.com/how-is/how_is/pull/144))
+
+### Changes
+
+* Unpin Rack version. ([#139](https://github.com/how-is/how_is/pull/139))
+* Fix --from. ([#141](https://github.com/how-is/how_is/pull/141))
+
+### Miscellaneous
+
+Things that don't affect users of how\_is.
+
+* Fix grammar in gemspec.
+  ([#129](https://github.com/how-is/how_is/pull/129))
+* Fix URL in gemspec. ([#130](https://github.com/how-is/how_is/pull/130))
+* Remove shebang line from lib/ file.
+  ([#131](https://github.com/how-is/how_is/pull/131))
+
+
 ## [v17.0.0]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v17.0.0))
