@@ -16,6 +16,9 @@ vastly improves documentation, fixes the `--from` flag, and adds the
 `HowIs.from_hash` method (used by the
 [dashboard](https://github.com/how-is/dashboard)).
 
+Pull Requests for this release can be [viewed on
+GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2017-02-10..2017-03-03).
+
 ### Additions
 
 * Add/improve inline code documentation.
