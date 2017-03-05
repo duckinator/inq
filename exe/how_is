@@ -38,7 +38,7 @@ end
 
 begin
   if options[:config]
-    reports = HowIs.from_config_file(YAML.load_file(options[:config]))
+    reports = HowIs.from_config(YAML.load_file(options[:config]))
 
     save_files(reports)
   else

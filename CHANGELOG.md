@@ -9,6 +9,16 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v18.0.1]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.1))
+fixes the `--config` flag, which was previously using the wrong method.
+
+### Changes
+
+* v18.0.1 - fix `--config` flag.
+  ([#147](https://github.com/how-is/how_is/pull/147))
+
 ## [v18.0.0]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.0))
