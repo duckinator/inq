@@ -31,7 +31,7 @@ def save_files(reports)
     format = file.split('.').last
 
     File.open(file, 'w') do |f|
-      f.write report.send("to_#{format}")
+      f.write report
     end
   end
 end
