@@ -9,6 +9,17 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v18.0.2]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.2))
+_actually_ fixes the `--config` flag, which made an unecessary method
+call.
+
+### Changes
+
+* v18.0.2 - Remove unnecessary `.send()` call in exe/how_is.
+  ([#148](https://github.com/how-is/how_is/pull/148))
+
 ## [v18.0.1]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.1))
