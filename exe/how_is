@@ -2,6 +2,7 @@
 
 require "how_is"
 require "how_is/cli"
+require "pathname"
 
 begin
   parser  = HowIs::CLI::Parser.new
@@ -28,10 +29,9 @@ end
 
 def save_files(reports)
   reports.each do |file, report|
-    format = file.split('.').last
-
+    report_format = Pathname(file).extname.delete('.')
     File.open(file, 'w') do |f|
-      f.write report
+      f.write report.public_send("to_#{report_format}")
     end
   end
 end
