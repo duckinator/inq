@@ -2,7 +2,6 @@
 
 require "how_is"
 require "how_is/cli"
-require "pathname"
 
 begin
   parser  = HowIs::CLI::Parser.new
@@ -15,9 +14,7 @@ rescue HowIs::CLI::OptionsError => e
   end
 end
 
-opts      = result[:opts]
-options   = result[:options]
-arguments = result[:arguments]
+options = result[:options]
 
 if options[:help]
   puts result[:opts]
@@ -27,20 +24,11 @@ elsif options[:version]
   exit
 end
 
-def save_files(reports)
-  reports.each do |file, report|
-    report_format = Pathname(file).extname.delete('.')
-    File.open(file, 'w') do |f|
-      f.write report.public_send("to_#{report_format}")
-    end
-  end
-end
-
 begin
   if options[:config]
     reports = HowIs.from_config(YAML.load_file(options[:config]))
 
-    save_files(reports)
+    reports.each { |file, report| HowIs::Report.save_report(file, report) }
   else
     report =
       if options[:from]
@@ -50,7 +38,10 @@ begin
         HowIs.new(options[:repository])
       end
 
-    save_files({ options[:report] => report })
+    HowIs::Report.save_report(
+      options[:report],
+      HowIs::Report.to_format_based_on(options[:report], report)
+    )
   end
 
 rescue => e

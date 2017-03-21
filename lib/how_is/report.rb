@@ -1,4 +1,5 @@
 require 'date'
+require "pathname"
 
 class HowIs
   class UnsupportedExportFormat < StandardError
@@ -26,6 +27,40 @@ class HowIs
       report = get_report_class(format).new(analysis)
 
       report.export
+    end
+
+    ##
+    # Saves given Report in given file.
+    #
+    # @param file [String,Pathname] Name of file to write to
+    # @param report [Report] Report to store
+    def self.save_report(file, report)
+      File.open(file, 'w') do |f|
+        f.write report
+      end
+    end
+
+    ##
+    # Returns the report format for given filename.
+    #
+    # @param file [String] Filename of a report
+    #
+    # @return [String] Report format inferred from file name
+    def self.infer_format(file)
+      Pathname(file).extname.delete('.')
+    end
+
+    ##
+    # Exports given +report+ to the format suitable for given +file+.
+    #
+    # @param file [String,Pathname]
+    # @param report [Report]
+    #
+    # @return [String] The rendered report
+    def self.to_format_based_on(file, report)
+      report_format = infer_format(file)
+
+      report.public_send("to_#{report_format}")
     end
 
   private

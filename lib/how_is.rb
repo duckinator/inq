@@ -33,7 +33,7 @@ class HowIs
   ##
   # Generate an HTML report.
   #
-  # @returns [String] An HTML report.
+  # @return [String] An HTML report.
   def to_html
     Report.export(@analysis, :html)
   end
@@ -41,7 +41,7 @@ class HowIs
   ##
   # Generate a JSON report.
   #
-  # @returns [String] A JSON report.
+  # @return [String] A JSON report.
   def to_json
     Report.export(@analysis, :json)
   end
@@ -51,7 +51,7 @@ class HowIs
   # reports).
   #
   # @param json [String] A JSON report object.
-  # @returns [HowIs] A HowIs object that can be used for generating other
+  # @return [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the JSON report as a cache.
   def self.from_json(json)
     self.from_hash(JSON.parse(json))
@@ -62,7 +62,7 @@ class HowIs
   # other reports).
   #
   # @param data [Hash] A hash containing report data.
-  # @returns [HowIs] A HowIs object that can be used for generating other
+  # @return [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the provided report data as a cache.
   def self.from_hash(data)
     analysis = HowIs::Analyzer.from_hash(data)
@@ -73,7 +73,7 @@ class HowIs
   ##
   # Returns a list of possible export formats.
   #
-  # @returns [Array<String>] An array of the types of reports you can
+  # @return [Array<String>] An array of the types of reports you can
   #   generate.
   def self.supported_formats
     report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
@@ -84,7 +84,7 @@ class HowIs
   # Returns whether or not the specified +file+ can be exported to.
   #
   # @param file [String] A filename.
-  # @returns [Boolean] +true+ if HowIs can export to the file, +false+
+  # @return [Boolean] +true+ if HowIs can export to the file, +false+
   #   if it can't.
   def self.can_export_to?(file)
     # TODO: Check if the file is writable?
