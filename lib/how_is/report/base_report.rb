@@ -43,7 +43,7 @@ class HowIs
     ##
     # Returns the format of report this class generates.
     #
-    # @returns [Symbol] A lowercase symbol denoting the report format.
+    # @return [Symbol] A lowercase symbol denoting the report format.
     def format
       raise NotImplementedError
     end
