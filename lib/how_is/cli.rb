@@ -75,7 +75,7 @@ class HowIs::CLI
 
       # If we can't export to the specified file, raise an exception.
       unless HowIs.can_export_to?(options[:report])
-        raise InvalidOutputFileError, "Invalid file: #{options[:report_file]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
+        raise InvalidOutputFileError, "Invalid file: #{options[:report]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
       # If we pass --config, other options (excluding --help and
