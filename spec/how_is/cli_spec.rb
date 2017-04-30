@@ -38,7 +38,7 @@ describe HowIs::CLI::Parser do
     it 'raises InvalidOutputFileError if you specify an invalid format' do
       expect {
         subject.call(%w[--report has_an.invalidformat how-is/example-repository])
-      }.to raise_error(HowIs::CLI::InvalidOutputFileError)
+      }.to raise_error(HowIs::CLI::InvalidOutputFileError, /has_an.invalidformat/)
     end
   end
 
