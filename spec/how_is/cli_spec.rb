@@ -3,25 +3,25 @@ require 'how_is/cli'
 
 CLI_EXAMPLE_REPORT_FILE = File.expand_path('../data/how_is/cli_spec/example_report.json', __dir__)
 
-describe HowIs::CLI::Parser do
-  subject { HowIs::CLI::Parser.new }
+describe HowIs::CLI do
+  subject { HowIs::CLI }
 
   context '#parse' do
     it 'converts flags to a Hash' do
-      actual = subject.call(%w[--version])
+      actual = subject.parse(%w[--version])
 
       expect(actual[:options][:version]).to eq(true)
     end
 
     it 'raises NoRepositoryError if a repository is required but not specified' do
       expect {
-        subject.call(%w[])
+        subject.parse(%w[])
       }.to raise_error(HowIs::CLI::NoRepositoryError)
     end
 
     it 'raises InvalidInputFileError if a specified JSON file doesn\'t exist' do
       expect {
-        subject.call(%w[--from nonexistent.json])
+        subject.parse(%w[--from nonexistent.json])
       }.to raise_error(HowIs::CLI::InvalidInputFileError)
     end
 
@@ -29,7 +29,7 @@ describe HowIs::CLI::Parser do
       actual = nil
 
       expect {
-        actual = subject.call(%W[--from #{CLI_EXAMPLE_REPORT_FILE}])
+        actual = subject.parse(%W[--from #{CLI_EXAMPLE_REPORT_FILE}])
       }.to_not raise_error
 
       expect(actual[:options][:from]).to eq(CLI_EXAMPLE_REPORT_FILE)
@@ -37,7 +37,7 @@ describe HowIs::CLI::Parser do
 
     it 'raises InvalidOutputFileError if you specify an invalid format' do
       expect {
-        subject.call(%w[--report has_an.invalidformat how-is/example-repository])
+        subject.parse(%w[--report has_an.invalidformat how-is/example-repository])
       }.to raise_error(HowIs::CLI::InvalidOutputFileError, /has_an.invalidformat/)
     end
   end
