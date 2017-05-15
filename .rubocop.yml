@@ -1,0 +1,61 @@
+# Still try for 80, but we'll allow 110 because there's a not-insignificant
+# number of cases where we have long lines.
+#
+# It may be worth revisiting this in the future and refactoring those lines.
+Metrics/LineLength:
+  Max: 120
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength: 
+  Max: 20
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 1500
+
+# Use double quotes everywhere by default.
+# TODO: Enable Style/StringLiterals cop.
+Style/StringLiterals:
+  Enabled: false
+  #EnforcedStyle: double_quotes
+
+# Most readable form.
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+# Mixing hash styles just looks silly.
+# http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/HashSyntax
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys
+
+# I deplore assignments in conditions and never want them in any codebase
+# I have direct control over.
+Style/ParenthesesAroundCondition:
+  AllowSafeAssignment: false
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+
+# Indenting the chained dots beneath each other is not supported by this cop,
+# see https://github.com/bbatsov/rubocop/issues/1633
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+# { ... } for multi-line blocks is okay, follow Weirichs rule instead:
+# https://web.archive.org/web/20140221124509/http://onestepback.org/index.cgi/Tech/Ruby/BraceVsDoEnd.rdoc
+Style/BlockDelimiters:
+  Enabled: false
+
+# do / end blocks should be used for side effects,
+# methods that run a block for side effects and have
+# a useful return value are rare, assign the return
+# value to a local variable for those cases.
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+# Require a comma after the last item in an array or hash if each item is on
+# its own line.
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+
