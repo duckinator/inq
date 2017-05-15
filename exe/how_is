@@ -4,8 +4,7 @@ require "how_is"
 require "how_is/cli"
 
 begin
-  parser  = HowIs::CLI::Parser.new
-  result  = parser.call(ARGV)
+  result  = HowIs::CLI.parse(ARGV)
 rescue HowIs::CLI::OptionsError => e
   if ENV['SHOW_TRACE']
     raise
