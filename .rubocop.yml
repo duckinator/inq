@@ -1,0 +1,126 @@
+# Exceptions should inherit from StandardError.
+# (RuboCop default is to inherit from RuntimeError.)
+Lint/InheritException:
+  EnforcedStyle: standard_error
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+#Metrics/ClassLength:
+#  Max: 1500
+
+# Still try for 80, but we'll allow 110 because there's a not-insignificant
+# number of cases where we have long lines.
+#
+# It may be worth revisiting this in the future and refactoring those lines.
+Metrics/LineLength:
+  Max: 120
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength:
+  Max: 20
+
+# Most readable form.
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+# This codebase may be English, but some English words contain diacritics.
+Style/AsciiComments:
+  Enabled: false
+
+# Despite the fact that some English words contain diacritics, we want all
+# method names to be writable by people who don't have an easy way to type
+# words with diacritics.
+Style/AsciiIdentifiers:
+  Enabled: true
+
+# { ... } for multi-line blocks is okay, follow Weirichs rule instead:
+# https://web.archive.org/web/20140221124509/http://onestepback.org/index.cgi/Tech/Ruby/BraceVsDoEnd.rdoc
+Style/BlockDelimiters:
+  Enabled: false
+
+# Unicode is good, mkay?
+Style/Encoding:
+  Enabled: true
+
+# Force Unix line endings.
+Style/EndOfLine:
+  Enabled: true
+  EnforcedStyle: lf
+
+# A lot of the approaches I use for making things readable makes this angry.
+# E.g., formatting multiple consecutive assignments so that the equal signs
+# and values line up.
+#
+# foobar = 'blah'
+# baz    = 'asdf'
+# beep   = 'boop'
+Style/ExtraSpacing:
+  Enabled: false
+
+# Freeze string literals to future-proof the code.
+# TODO: Enable this always. (Disabled due to not knowing what will happen.)
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  #EnforcedStyle: always
+
+# Mixing hash styles just looks silly.
+# http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/HashSyntax
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys
+
+# I deplore assignments in conditions and never want them in any codebase
+# I have direct control over.
+Style/ParenthesesAroundCondition:
+  AllowSafeAssignment: false
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+
+# Use [] for `%`-literal delimiters (e.g. for %q[]) that RuboCop doesn't define
+# anything for. (E.g., %q[].)
+#
+# The reason I prefer [] instead of () is that most of the time I use
+# `%`-literals is inside of function calls, and using () makes it blend in too
+# much.
+Style/PercentLiteralDelimiters:
+  Enabled: true
+  PreferredDelimiters:
+    default: "[]"
+
+# `has_key?` and `has_value?` are clearer than `key?` and `value?`.
+Style/PreferredHashMethods:
+  Enabled: true
+  EnforcedStyle: verbose
+
+# do / end blocks should be used for side effects,
+# methods that run a block for side effects and have
+# a useful return value are rare, assign the return
+# value to a local variable for those cases.
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+# Indenting the chained dots beneath each other is not supported by this cop,
+# see https://github.com/bbatsov/rubocop/issues/1633
+Style/MultilineOperationIndentation:
+  Enabled: false
+
+# {'foo' => 'bar'} not { 'foo' => 'bar' }
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: no_space
+
+# Use double quotes everywhere by default.
+# TODO: Enable Style/StringLiterals cop. Disabled due to number of violations.
+Style/StringLiterals:
+  Enabled: false
+  #EnforcedStyle: double_quotes
+
+# Require parentheses around complex ternary conditions.
+Style/TernaryParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses_when_complex
+
+# Require a comma after the last item in an array or hash if each item is on
+# its own line.
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
