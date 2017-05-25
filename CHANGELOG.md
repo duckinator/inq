@@ -9,6 +9,25 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 (Nothing so far.)
 
+## [v18.0.3]
+
+This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.3))
+fixes the things the last few releases broke. I think. Hopefully.
+
+It also includes some refactoring work, and the addition of a RuboCop
+configuration.
+
+@duckinator enabled [Hound CI](https://houndci.com) for the repository, which
+should find any RuboCop violations that are added in PRs. The preexisting
+RuboCop violations (of which there are many) need to be addressed separately,
+and there will likely be an entire release dedicated to that.
+
+### Changes
+
+* Add RuboCop config ([#158](https://github.com/how-is/how_is/pull/158))
+* CLI parser refactor ([#157](https://github.com/how-is/how_is/pull/157))
+* exe/how_is: Reinstate to_json, to_html ([#150](https://github.com/how-is/how_is/pull/150), by @olleolleolle)
+
 ## [v18.0.2]
 
 This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.2))
