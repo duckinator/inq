@@ -54,7 +54,7 @@ class HowIs
         newest_issue: issue_or_pull_to_hash(newest_for(issues)),
         newest_pull: issue_or_pull_to_hash(newest_for(pulls)),
 
-        pulse: data.pulse,
+        pulse: data.pulse
       )
     end
 
