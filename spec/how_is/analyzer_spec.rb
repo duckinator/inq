@@ -7,7 +7,7 @@ describe HowIs::Analyzer do
   let(:pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
   let(:fake_issues) { JSON.parse(open(File.expand_path('../data/fake/issues.json', __dir__)).read) }
-  #let(:fake_pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
+  # let(:fake_pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
   let(:fetcher_results) { HowIs::Fetcher::Results.new(issues, pulls) }
 
