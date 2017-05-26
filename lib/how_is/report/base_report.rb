@@ -111,11 +111,11 @@ class HowIs
 
     private
     def pluralize(text, number)
-      number == 1 ? text : "#{text}s"
+      (number == 1) ? text : "#{text}s"
     end
 
     def are_is(number)
-      number == 1 ? "is" : "are"
+      (number == 1) ? "is" : "are"
     end
 
     def issue_or_pr_summary(type, type_label)
