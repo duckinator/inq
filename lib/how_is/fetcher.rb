@@ -50,7 +50,7 @@ class HowIs::Fetcher
       repository,
       obj_to_array_of_hashes(issues),
       obj_to_array_of_hashes(pulls),
-      summary,
+      summary
     )
   end
 
