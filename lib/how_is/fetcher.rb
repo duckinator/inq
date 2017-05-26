@@ -27,7 +27,6 @@ class HowIs
       alias_method :to_hash, :to_h
     end
 
-
     ##
     # Fetches repository information from GitHub and returns a Results object.
     Contract String,
