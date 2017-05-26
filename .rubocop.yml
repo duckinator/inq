@@ -27,6 +27,18 @@ Metrics/MethodLength:
 Style/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
+  # Disable because it wound up conflicting with a lot of things like:
+  # foo('bar',
+  #   baz: 'asdf',
+  #   beep: 'boop')
+  #
+  # I suspect these'll disappear when overarching architectural issues are
+  # addressed.
+  Enabled: false
+
+Style/AlignParameters:
+  # See Style/AlignedHash.
+  Enabled: false
 
 # This codebase may be English, but some English words contain diacritics.
 Style/AsciiComments:
