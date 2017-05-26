@@ -53,7 +53,8 @@ describe HowIs do
           end
 
           html_report = reports['./report.html']
-          json_report = reports['./report.json']
+          # TODO: Verify that JSON report is correct.
+          # json_report = reports['./report.json']
 
           expect(html_report).to include(JEKYLL_HEADER)
         }
