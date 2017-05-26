@@ -29,7 +29,7 @@ class HowIs
       issue_or_pr_summary "issue", "issue"
 
       header "Issues Per Label"
-      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v['total'].to_i }.reverse
+      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(_, v)| v['total'].to_i }.reverse
       issues_per_label.map! do |label, hash|
         [label, hash['total'], hash['link']]
       end
