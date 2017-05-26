@@ -110,6 +110,7 @@ class HowIs
     end
 
     private
+
     def pluralize(text, number)
       (number == 1) ? text : "#{text}s"
     end
