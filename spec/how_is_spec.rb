@@ -105,6 +105,8 @@ describe HowIs do
     end
   end
 
+  # Disable 'cop' that is violated by every .generate_frontmatter() calls.
+  # rubocop:disable Style/BracesAroundHashParameters
   context '#generate_frontmatter' do
     it 'works with frontmatter parameter using String keys, report_data using String keys' do
       actual = nil
@@ -130,6 +132,8 @@ describe HowIs do
       expect(actual).to eq(expected)
     end
   end
+  # Re-enable.
+  # rubocop:enable Style/BracesAroundHashParameters
 
   context '#from_config' do
     let(:config) {
