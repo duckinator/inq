@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cgi'
 require 'how_is/report/base_report'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'contracts'
 require 'github_api'
 require 'how_is/pulse'
