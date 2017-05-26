@@ -44,7 +44,6 @@ begin
       HowIs::Report.to_format_based_on(options[:report], report)
     )
   end
-
 rescue => e
   if ENV['SHOW_TRACE']
     raise
