@@ -7,6 +7,10 @@ AllCops:
 Lint/InheritException:
   EnforcedStyle: standard_error
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/*_spec.rb'
+
 # The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
 #Metrics/ClassLength:
 #  Max: 1500
