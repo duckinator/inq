@@ -189,11 +189,10 @@ class HowIs
     str.string
   end
 
-private
   # convert_keys({'foo' => 'bar'}, :to_sym)
   # => {:foo => 'bar'}
   def self.convert_keys(data, method_name)
     data.map {|k, v| [k.send(method_name), v]}.to_h
   end
-
+  private_class_method :convert_keys
 end
