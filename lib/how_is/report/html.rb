@@ -19,7 +19,7 @@ class HowIs
     end
 
     def link(content, url)
-      %Q[<a href="#{url}">#{content}</a>]
+      %[<a href="#{url}">#{content}</a>]
     end
 
     def text(content)
