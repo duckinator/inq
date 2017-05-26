@@ -153,7 +153,7 @@ describe HowIs do
 
     let(:report_class) {
       Class.new {
-        def self.export(analysis, format)
+        def self.export(_analysis, _format)
           "[report]"
         end
       }
