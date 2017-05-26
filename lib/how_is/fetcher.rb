@@ -54,7 +54,8 @@ class HowIs::Fetcher
     )
   end
 
-private
+  private
+
   def obj_to_array_of_hashes(object)
     object.to_a.map(&:to_h)
   end
