@@ -183,7 +183,8 @@ class HowIs
       DateTime.parse(issue_or_pull['created_at'])
     end
 
-  private
+    private
+
     # Takes an Array of labels, and returns amodified list that includes links
     # to each label.
     def with_label_links(labels, repository)
