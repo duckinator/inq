@@ -118,7 +118,7 @@ class HowIs
     def average_age_for(issues_or_pulls)
       return nil if issues_or_pulls.empty?
 
-      ages = issues_or_pulls.map {|iop| time_ago_in_seconds(iop['created_at'])}
+      ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop['created_at']) }
       raw_average = ages.reduce(:+) / ages.length
 
       seconds_in_a_year = 31_556_926
@@ -142,12 +142,12 @@ class HowIs
         [months, "month"],
         [weeks, "week"],
         [days, "day"],
-      ].reject {|(v, k)| v == 0}.map{ |(v,k)|
+      ].reject { |(v, k)| v == 0 }.map{ |(v,k)|
         k = k + 's' if v != 1
         [v, k]
       }
 
-      most_significant = values[0, 2].map {|x| x.join(" ")}
+      most_significant = values[0, 2].map { |x| x.join(" ") }
 
       if most_significant.length < 2
         value = most_significant.first
@@ -159,7 +159,7 @@ class HowIs
     end
 
     def sort_iops_by_created_at(issues_or_pulls)
-      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }
+      issues_or_pulls.sort_by { |x| DateTime.parse(x['created_at']) }
     end
 
     # Given an Array of issues or pulls, return the oldest.
