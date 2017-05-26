@@ -186,5 +186,4 @@ describe HowIs do
       expect(actual_json).to eq(expected_json)
     end
   end
-
 end
