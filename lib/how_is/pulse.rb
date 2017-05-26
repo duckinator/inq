@@ -21,7 +21,7 @@ class HowIs
 
     # Gets the HTML Pulse summary.
     def html_summary
-      parts = 
+      parts =
         @pulse_page_response.body
           .split('<div class="section diffstat-summary">')
 
