@@ -188,11 +188,11 @@ class HowIs
     # Takes an Array of labels, and returns amodified list that includes links
     # to each label.
     def with_label_links(labels, repository)
-      labels.map do |label, num_issues|
+      labels.map { |label, num_issues|
         label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
 
         [label, {'link' => label_link, 'total' => num_issues}]
-      end.to_h
+      }.to_h
     end
 
     # Returns how many seconds ago a date (as a String) was.
