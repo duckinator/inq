@@ -12,12 +12,13 @@ HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-
 
 HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-empty-repository-report.html', __dir__)
 
-JEKYLL_HEADER = <<-EOF
----
-title: rubygems/rubygems report
-layout: default
----
-EOF
+JEKYLL_HEADER =
+  <<~EOF
+    ---
+    title: rubygems/rubygems report
+    layout: default
+    ---
+  EOF
 
 describe HowIs do
   before do
