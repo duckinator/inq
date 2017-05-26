@@ -142,6 +142,10 @@ Style/StringLiterals:
   Enabled: false
   #EnforcedStyle: double_quotes
 
+# TODO: Maybe make it so you have to do [:foo, :bar] not %i[foo bar]?
+Style/SymbolArray:
+  Enabled: false
+
 # Require parentheses around complex ternary conditions.
 Style/TernaryParentheses:
   Enabled: true
