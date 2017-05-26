@@ -4,6 +4,8 @@ AllCops:
     - 'how_is.gemspec'
     - 'bin/*'
     - '**/*~'
+    - 'lib/how_is/cli.rb' # FIXME: Make HowIs::CLI.parse not a disaster.
+
 # Exceptions should inherit from StandardError.
 # (RuboCop default is to inherit from RuntimeError.)
 Lint/InheritException:
