@@ -93,6 +93,8 @@ class HowIs
 
   # Generate an analysis.
   # TODO: This may make more sense as Analysis.new().
+  # TODO: Nothing overrides +fetcher+ and +analyzer+. Remove ability to do so.
+  # FIXME: THIS CODE AND EVERYTHING ASSOCIATED WITH IT IS A FUCKING ATROCITY.
   Contract C::KeywordArgs[repository: String,
                           fetcher: C::Optional[Class],
                           analyzer: C::Optional[Class],
