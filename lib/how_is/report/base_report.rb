@@ -70,19 +70,19 @@ class HowIs
 
     ##
     # Appends a link to the report.
-    def link(_text, url)
+    def link(_text, _url)
       raise NotImplementedError
     end
 
     ##
     # Appends an unordered list to the report.
-    def unordered_list(arr)
+    def unordered_list(_arr)
       raise NotImplementedError
     end
 
     ##
     # Appends a horizontal bar graph to the report.
-    def horizontal_bar_graph(data)
+    def horizontal_bar_graph(_data)
       raise NotImplementedError
     end
 
@@ -96,7 +96,7 @@ class HowIs
     # Exports a report to a file.
     #
     # NOTE: May be removed in the future.
-    def export_file(file)
+    def export_file(_file)
       raise NotImplementedError
     end
 
