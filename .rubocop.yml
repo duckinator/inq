@@ -31,6 +31,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 20
 
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
 # Most readable form.
 Style/AlignHash:
   EnforcedHashRocketStyle: table
