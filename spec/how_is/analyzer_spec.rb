@@ -37,7 +37,7 @@ describe HowIs::Analyzer do
 
       date = DateTime.parse('2016-07-07')
       Timecop.freeze(date) do
-        actual   = subject.average_age_for(fake_issues)
+        actual = subject.average_age_for(fake_issues)
       end
 
       expected = "approximately 10 years and 6 months"
