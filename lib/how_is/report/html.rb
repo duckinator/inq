@@ -48,7 +48,7 @@ class HowIs
 
       @r += "<table class=\"horizontal-bar-graph\">\n"
       data.each do |row|
-        percentage = get_percentage.(row[1])
+        percentage = get_percentage.call(row[1])
 
         if row[2]
           label_text = link(row[0], row[2])
