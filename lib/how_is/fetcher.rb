@@ -38,9 +38,13 @@ class HowIs::Fetcher
     github ||= Github.new(auto_pagination: true)
     pulse ||= HowIs::Pulse.new(repository)
     user, repo = repository.split('/', 2)
-    raise HowIs::CLI::OptionsError, 'To generate a report from GitHub, ' \
-                                    'provide the repository username/project. ' \
-                                    'Quitting!' unless user && repo
+
+    unless user && repo
+      raise HowIs::CLI::OptionsError, 'To generate a report from GitHub, ' \
+                                      'provide the repository ' \
+                                      'username/project. Quitting!'
+    end
+
     issues  = github.issues.list user: user, repo: repo
     pulls   = github.pulls.list  user: user, repo: repo
 
