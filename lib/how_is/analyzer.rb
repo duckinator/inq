@@ -149,11 +149,12 @@ class HowIs
 
       most_significant = values[0, 2].map { |x| x.join(" ") }
 
-      if most_significant.length < 2
-        value = most_significant.first
-      else
-        value = most_significant.join(" and ")
-      end
+      value =
+        if most_significant.length < 2
+          most_significant.first
+        else
+          most_significant.join(" and ")
+        end
 
       "approximately #{value}"
     end
