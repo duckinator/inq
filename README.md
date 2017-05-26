@@ -102,11 +102,6 @@ Every value under `reports` is a format string, so you can do e.g.
 report = HowIs.new('<orgname>/<reponame>').to_html
 File.open('report.html', 'w') { |f| f.puts report }
 
-# Generate a report from a config file located at ./how_is.yml.
-# Example config file: https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml
-require 'yaml'
-HowIs.from_config_file(YAML.load_file('how_is.yml'))
-
 # Generate a report from a config Hash.
 HowIs.from_config({
   repository: '<orgname>/<reponame>',
