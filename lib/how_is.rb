@@ -146,7 +146,6 @@ class HowIs
     report_class ||= HowIs::Report
 
     date = Date.strptime(Time.now.to_i.to_s, '%s')
-    date_string = date.strftime('%Y-%m-%d')
     friendly_date = date.strftime('%B %d, %y')
 
     analysis = HowIs.generate_analysis(repository: config['repository'], github: github)
