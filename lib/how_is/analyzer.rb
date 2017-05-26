@@ -63,11 +63,11 @@ class HowIs
     #
     # @param data [Hash] The hash to generate an Analysis from.
     def self.from_hash(data)
-      hash = data.map do |k, v|
+      hash = data.map { |k, v|
         v = DateTime.parse(v) if k.end_with?('_date')
 
         [k, v]
-      end.to_h
+      }.to_h
 
       hash.keys.each do |key|
         next unless hash[key].is_a?(Hash) && hash[key]['date']
