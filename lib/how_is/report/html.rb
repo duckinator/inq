@@ -9,21 +9,21 @@ class HowIs
       :html
     end
 
-    def title(_text)
-      @title = _text
-      @r += "\n<h1>#{_text}</h1>\n"
+    def title(content)
+      @title = content
+      @r += "\n<h1>#{content}</h1>\n"
     end
 
-    def header(_text)
-      @r += "\n<h2>#{_text}</h2>\n"
+    def header(content)
+      @r += "\n<h2>#{content}</h2>\n"
     end
 
-    def link(_text, url)
-      %Q[<a href="#{url}">#{_text}</a>]
+    def link(content, url)
+      %Q[<a href="#{url}">#{content}</a>]
     end
 
-    def text(_text)
-      @r += "<p>#{_text}</p>\n"
+    def text(content)
+      @r += "<p>#{content}</p>\n"
     end
 
     def unordered_list(arr)

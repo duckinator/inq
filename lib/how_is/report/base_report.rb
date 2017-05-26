@@ -52,25 +52,25 @@ class HowIs
 
     ##
     # Appends a title to the report.
-    def title(_text)
+    def title(_content)
       raise NotImplementedError
     end
 
     ##
     # Appends a header to the report.
-    def header(_text)
+    def header(_content)
       raise NotImplementedError
     end
 
     ##
     # Appends a line of text to the report.
-    def text(_text)
+    def text(_content)
       raise NotImplementedError
     end
 
     ##
     # Appends a link to the report.
-    def link(_text, _url)
+    def link(_content, _url)
       raise NotImplementedError
     end
 
