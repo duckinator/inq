@@ -25,7 +25,7 @@ class HelperFunctions
         format: format,
       }
 
-      cassette = repository.gsub('/', '-')
+      cassette = repository.tr('/', '-')
       VCR.use_cassette(cassette) do
         report = HowIs.generate_report(**options)
       end
