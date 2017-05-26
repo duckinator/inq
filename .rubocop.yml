@@ -21,6 +21,7 @@ Metrics/BlockLength:
 # It may be worth revisiting this in the future and refactoring those lines.
 Metrics/LineLength:
   Max: 120
+  AllowHeredoc: true
 
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class
