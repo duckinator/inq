@@ -10,7 +10,8 @@ HOW_IS_CONFIG_FILE = File.expand_path('./data/how_is.yml', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('./data/how-is-example-repository-report.json', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-repository-report.html', __dir__)
 
-HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-empty-repository-report.html', __dir__)
+HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT =
+  File.expand_path('./data/how-is-example-empty-repository-report.html', __dir__)
 
 JEKYLL_HEADER =
   <<~EOF
