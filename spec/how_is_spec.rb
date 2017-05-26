@@ -146,7 +146,8 @@ describe HowIs do
     let(:pulls) { JSON.parse(open(File.expand_path('./data/pulls.json', __dir__)).read) }
 
     let(:github) {
-      instance_double('GitHub',
+      instance_double(
+        'GitHub',
         issues: instance_double('GitHub::Issues', list: issues),
         pulls: instance_double('GitHub::Pulls', list: pulls)
       )
