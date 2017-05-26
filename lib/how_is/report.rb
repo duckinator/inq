@@ -63,7 +63,6 @@ class HowIs
       report.public_send("to_#{report_format}")
     end
 
-  private
     # Given a format name (+format+), returns the corresponding <blah>Report
     # class.
     def self.get_report_class(format)
@@ -73,5 +72,6 @@ class HowIs
 
       HowIs.const_get(class_name)
     end
+    private_class_method :get_report_class
   end
 end
