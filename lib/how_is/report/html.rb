@@ -76,35 +76,35 @@ class HowIs
       report = export
 
       File.open(file, 'w') do |f|
-        f.puts <<-EOF
-<!DOCTYPE html>
-<html>
-<head>
-  <title>#{@title}</title>
-  <style>
-  body { font: sans-serif; }
-  main {
-    max-width: 600px;
-    max-width: 72ch;
-    margin: auto;
-  }
+        f.puts <<~EOF
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>#{@title}</title>
+            <style>
+            body { font: sans-serif; }
+            main {
+              max-width: 600px;
+              max-width: 72ch;
+              margin: auto;
+            }
 
-  .horizontal-bar-graph {
-    position: relative;
-    width: 100%;
-  }
-  .horizontal-bar-graph .fill {
-    display: inline-block;
-    background: #CCC;
-  }
-  </style>
-</head>
-<body>
-  <main>
-  #{report}
-  </main>
-</body>
-</html>
+            .horizontal-bar-graph {
+              position: relative;
+              width: 100%;
+            }
+            .horizontal-bar-graph .fill {
+              display: inline-block;
+              background: #CCC;
+            }
+            </style>
+          </head>
+          <body>
+            <main>
+            #{report}
+            </main>
+          </body>
+          </html>
         EOF
       end
     end
