@@ -40,7 +40,7 @@ describe HowIs do
 
   context 'with a config' do
     it 'generates valid report files' do
-      Dir.mktmpdir {|dir|
+      Dir.mktmpdir { |dir|
         Dir.chdir(dir) {
           reports = nil
 
