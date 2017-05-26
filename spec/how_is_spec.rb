@@ -169,13 +169,13 @@ describe HowIs do
       actual_html = reports['output/report.html']
       actual_json = reports['output/report.json']
 
-      expected_html = <<-EOF
----
-title: rubygems/rubygems report
-layout: default
----
+      expected_html = <<~EOF
+        ---
+        title: rubygems/rubygems report
+        layout: default
+        ---
 
-[report]
+        [report]
       EOF
       # Not valid JSON, because report_class.export() is the same static string
       # regardless of format.
