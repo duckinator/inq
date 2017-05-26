@@ -103,7 +103,7 @@ class HowIs
     def to_h
       analysis.to_h
     end
-    alias :to_hash :to_h
+    alias_method :to_hash, :to_h
 
     def to_json
       JSON.pretty_generate(to_h)
