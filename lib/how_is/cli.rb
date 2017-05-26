@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# NOPE THIS IS BROKEN // frozen_string_literal: // true
 
 require "how_is"
 require "slop"
