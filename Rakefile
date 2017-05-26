@@ -1,7 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'timecop'
-#require 'vcr'
 require './spec/vcr_helper.rb'
 require 'how_is'
 
