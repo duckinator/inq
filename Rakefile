@@ -9,7 +9,7 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
 class HelperFunctions
-  def self.freeze_time(&block)
+  def self.freeze_time(&_block)
     date = DateTime.parse('2016-11-01').new_offset(0)
     Timecop.freeze(date) do
       yield
