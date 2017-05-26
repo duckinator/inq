@@ -36,7 +36,8 @@ class HowIs
         .strip
     end
 
-  private
+    private
+
     # Fetch Pulse page from GitHub for scraping.
     def fetch_pulse!(repository, period='monthly')
       Tessellator::Fetcher.new.call('get', "https://github.com/#{repository}/pulse/#{period}")
