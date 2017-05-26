@@ -3,7 +3,7 @@ AllCops:
   Exclude:
     - 'how_is.gemspec'
     - 'bin/*'
-    - '*~'
+    - '**/*~'
 # Exceptions should inherit from StandardError.
 # (RuboCop default is to inherit from RuntimeError.)
 Lint/InheritException:
