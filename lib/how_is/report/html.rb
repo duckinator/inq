@@ -50,11 +50,12 @@ class HowIs
       data.each do |row|
         percentage = get_percentage.call(row[1])
 
-        if row[2]
-          label_text = link(row[0], row[2])
-        else
-          label_text = row[0]
-        end
+        label_text =
+          if row[2]
+            link(row[0], row[2])
+          else
+            row[0]
+          end
 
         @r += <<-EOF
   <tr>
