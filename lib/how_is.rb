@@ -56,7 +56,7 @@ class HowIs
   # @return [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the JSON report as a cache.
   def self.from_json(json)
-    self.from_hash(JSON.parse(json))
+    from_hash(JSON.parse(json))
   end
 
   ##
@@ -69,7 +69,7 @@ class HowIs
   def self.from_hash(data)
     analysis = HowIs::Analyzer.from_hash(data)
 
-    self.new(analysis.repository, analysis)
+    new(analysis.repository, analysis)
   end
 
   ##
