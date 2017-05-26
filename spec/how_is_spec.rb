@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'open3'
 require 'timecop'
@@ -8,15 +10,16 @@ HOW_IS_CONFIG_FILE = File.expand_path('./data/how_is.yml', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path('./data/how-is-example-repository-report.json', __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-repository-report.html', __dir__)
 
+HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT =
+  File.expand_path('./data/how-is-example-empty-repository-report.html', __dir__)
 
-HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT = File.expand_path('./data/how-is-example-empty-repository-report.html', __dir__)
-
-JEKYLL_HEADER = <<-EOF
----
-title: rubygems/rubygems report
-layout: default
----
-EOF
+JEKYLL_HEADER =
+  <<~EOF
+    ---
+    title: rubygems/rubygems report
+    layout: default
+    ---
+  EOF
 
 describe HowIs do
   before do
@@ -40,7 +43,7 @@ describe HowIs do
 
   context 'with a config' do
     it 'generates valid report files' do
-      Dir.mktmpdir {|dir|
+      Dir.mktmpdir { |dir|
         Dir.chdir(dir) {
           reports = nil
 
@@ -51,7 +54,8 @@ describe HowIs do
           end
 
           html_report = reports['./report.html']
-          json_report = reports['./report.json']
+          # TODO: Verify that JSON report is correct.
+          # json_report = reports['./report.json']
 
           expect(html_report).to include(JEKYLL_HEADER)
         }
@@ -104,6 +108,8 @@ describe HowIs do
     end
   end
 
+  # Disable 'cop' that is violated by every .generate_frontmatter() calls.
+  # rubocop:disable Style/BracesAroundHashParameters
   context '#generate_frontmatter' do
     it 'works with frontmatter parameter using String keys, report_data using String keys' do
       actual = nil
@@ -122,13 +128,15 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.generate_frontmatter({:foo => "bar %{baz}"}, {:baz => "asdf"})      
+        actual = HowIs.generate_frontmatter({:foo => "bar %{baz}"}, {:baz => "asdf"})
         expected = "---\nfoo: bar asdf\n"
       end
 
       expect(actual).to eq(expected)
     end
   end
+  # Re-enable.
+  # rubocop:enable Style/BracesAroundHashParameters
 
   context '#from_config' do
     let(:config) {
@@ -140,7 +148,8 @@ describe HowIs do
     let(:pulls) { JSON.parse(open(File.expand_path('./data/pulls.json', __dir__)).read) }
 
     let(:github) {
-      instance_double('GitHub',
+      instance_double(
+        'GitHub',
         issues: instance_double('GitHub::Issues', list: issues),
         pulls: instance_double('GitHub::Pulls', list: pulls)
       )
@@ -148,7 +157,7 @@ describe HowIs do
 
     let(:report_class) {
       Class.new {
-        def self.export(analysis, format)
+        def self.export(_analysis, _format)
           "[report]"
         end
       }
@@ -164,13 +173,13 @@ describe HowIs do
       actual_html = reports['output/report.html']
       actual_json = reports['output/report.json']
 
-      expected_html = <<-EOF
----
-title: rubygems/rubygems report
-layout: default
----
+      expected_html = <<~EOF
+        ---
+        title: rubygems/rubygems report
+        layout: default
+        ---
 
-[report]
+        [report]
       EOF
       # Not valid JSON, because report_class.export() is the same static string
       # regardless of format.
@@ -180,5 +189,4 @@ layout: default
       expect(actual_json).to eq(expected_json)
     end
   end
-
 end

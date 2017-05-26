@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'how_is/report/base_report'
 
 class HowIs

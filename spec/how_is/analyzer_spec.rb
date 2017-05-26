@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe HowIs::Analyzer do
@@ -5,7 +7,7 @@ describe HowIs::Analyzer do
   let(:pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
   let(:fake_issues) { JSON.parse(open(File.expand_path('../data/fake/issues.json', __dir__)).read) }
-  #let(:fake_pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
+  # let(:fake_pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
   let(:fetcher_results) { HowIs::Fetcher::Results.new(issues, pulls) }
 
@@ -21,27 +23,27 @@ describe HowIs::Analyzer do
   end
 
   context '#average_date_for' do
-   it 'returns the average date for the provided issues or pulls' do
-     actual   = subject.average_date_for(fake_issues)
-     expected = DateTime.parse('2006-01-01')
+    it 'returns the average date for the provided issues or pulls' do
+      actual   = subject.average_date_for(fake_issues)
+      expected = DateTime.parse('2006-01-01')
 
-     expect(actual).to eq(expected)
-   end
+      expect(actual).to eq(expected)
+    end
   end
 
   context '#average_age_for' do
-   it 'returns the average age for the provided issues or pulls' do
-     actual = nil
+    it 'returns the average age for the provided issues or pulls' do
+      actual = nil
 
-     date = DateTime.parse('2016-07-07')
-     Timecop.freeze(date) do
-       actual   = subject.average_age_for(fake_issues)
-     end
+      date = DateTime.parse('2016-07-07')
+      Timecop.freeze(date) do
+        actual = subject.average_age_for(fake_issues)
+      end
 
-     expected = "approximately 10 years and 6 months"
+      expected = "approximately 10 years and 6 months"
 
-     expect(actual).to eq(expected)
-   end
+      expect(actual).to eq(expected)
+    end
   end
 
   context '#oldest_for' do

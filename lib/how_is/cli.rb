@@ -1,8 +1,10 @@
+# NOPE THIS IS BROKEN // frozen_string_literal: // true
+
 require "how_is"
 require "slop"
 
 class HowIs::CLI
-  DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}"
+  DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}".freeze
 
   # Parent class of all exceptions raised in HowIs::CLI.
   class OptionsError < StandardError
@@ -44,12 +46,23 @@ class HowIs::CLI
     opts.separator ""
     opts.separator "Options:"
 
+    # The extra spaces make this a lot easier to comprehend, so we don't want
+    # RuboCop to complain about them.
+    #
+    # Same for line length.
+    #
+    # rubocop:disable Style/SpaceBeforeFirstArg
+    # rubocop:disable Metrics/LineLength
+
     # Allowed arguments:
     opts.bool   "-h", "--help",    "Print help text"
     opts.string       "--config",  "YAML config file, used to generate a group of reports"
     opts.string       "--from",    "JSON report file, used instead of fetching the data again"
     opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})"
     opts.bool   "-v", "--version", "prints the version"
+
+    # rubocop:enable Style/SpaceBeforeFirstArg
+    # rubocop:enable Metrics/LineLength
 
     # Parse the arguments.
     parser    = Slop::Parser.new(opts)

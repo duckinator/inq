@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'how_is/version'
 require 'contracts'
 require 'cacert'
@@ -54,7 +56,7 @@ class HowIs
   # @return [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the JSON report as a cache.
   def self.from_json(json)
-    self.from_hash(JSON.parse(json))
+    from_hash(JSON.parse(json))
   end
 
   ##
@@ -67,7 +69,7 @@ class HowIs
   def self.from_hash(data)
     analysis = HowIs::Analyzer.from_hash(data)
 
-    self.new(analysis.repository, analysis)
+    new(analysis.repository, analysis)
   end
 
   ##
@@ -77,7 +79,7 @@ class HowIs
   #   generate.
   def self.supported_formats
     report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
-    report_constants.map {|x| x.to_s.split('Report').first.downcase }
+    report_constants.map { |x| x.to_s.split('Report').first.downcase }
   end
 
   ##
@@ -93,6 +95,8 @@ class HowIs
 
   # Generate an analysis.
   # TODO: This may make more sense as Analysis.new().
+  # TODO: Nothing overrides +fetcher+ and +analyzer+. Remove ability to do so.
+  # FIXME: THIS CODE AND EVERYTHING ASSOCIATED WITH IT IS A FUCKING ATROCITY.
   Contract C::KeywordArgs[repository: String,
                           fetcher: C::Optional[Class],
                           analyzer: C::Optional[Class],
@@ -142,7 +146,6 @@ class HowIs
     report_class ||= HowIs::Report
 
     date = Date.strptime(Time.now.to_i.to_s, '%s')
-    date_string = date.strftime('%Y-%m-%d')
     friendly_date = date.strftime('%B %d, %y')
 
     analysis = HowIs.generate_analysis(repository: config['repository'], github: github)
@@ -187,11 +190,10 @@ class HowIs
     str.string
   end
 
-private
   # convert_keys({'foo' => 'bar'}, :to_sym)
   # => {:foo => 'bar'}
   def self.convert_keys(data, method_name)
-    data.map {|k, v| [k.send(method_name), v]}.to_h
+    data.map { |k, v| [k.send(method_name), v] }.to_h
   end
-
+  private_class_method :convert_keys
 end

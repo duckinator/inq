@@ -1,7 +1,20 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'how_is.gemspec'
+    - 'bin/*'
+    - '**/*~'
+    - 'lib/how_is/cli.rb' # FIXME: Make HowIs::CLI.parse not a disaster.
+
 # Exceptions should inherit from StandardError.
 # (RuboCop default is to inherit from RuntimeError.)
 Lint/InheritException:
   EnforcedStyle: standard_error
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
 
 # The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
 #Metrics/ClassLength:
@@ -13,16 +26,32 @@ Lint/InheritException:
 # It may be worth revisiting this in the future and refactoring those lines.
 Metrics/LineLength:
   Max: 120
+  AllowHeredoc: true
 
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class
 Metrics/MethodLength:
   Max: 20
 
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
 # Most readable form.
 Style/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
+  # Disable because it wound up conflicting with a lot of things like:
+  # foo('bar',
+  #   baz: 'asdf',
+  #   beep: 'boop')
+  #
+  # I suspect these'll disappear when overarching architectural issues are
+  # addressed.
+  Enabled: false
+
+Style/AlignParameters:
+  # See Style/AlignedHash.
+  Enabled: false
 
 # This codebase may be English, but some English words contain diacritics.
 Style/AsciiComments:
@@ -114,6 +143,10 @@ Style/SpaceInsideHashLiteralBraces:
 Style/StringLiterals:
   Enabled: false
   #EnforcedStyle: double_quotes
+
+# TODO: Maybe make it so you have to do [:foo, :bar] not %i[foo bar]?
+Style/SymbolArray:
+  Enabled: false
 
 # Require parentheses around complex ternary conditions.
 Style/TernaryParentheses:

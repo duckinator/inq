@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'how_is/cli'
 
@@ -41,5 +43,4 @@ describe HowIs::CLI do
       }.to raise_error(HowIs::CLI::InvalidOutputFileError, /has_an.invalidformat/)
     end
   end
-
 end

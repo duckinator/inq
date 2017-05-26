@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 HOW_IS_EXE = File.expand_path('../../exe/how_is', __dir__)

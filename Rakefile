@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'timecop'
-#require 'vcr'
 require './spec/vcr_helper.rb'
 require 'how_is'
 
@@ -9,8 +10,9 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default => :spec
 
+# Helper functions used later in the Rakefile.
 class HelperFunctions
-  def self.freeze_time(&block)
+  def self.freeze_time(&_block)
     date = DateTime.parse('2016-11-01').new_offset(0)
     Timecop.freeze(date) do
       yield
@@ -26,7 +28,7 @@ class HelperFunctions
         format: format,
       }
 
-      cassette = repository.gsub('/', '-')
+      cassette = repository.tr('/', '-')
       VCR.use_cassette(cassette) do
         report = HowIs.generate_report(**options)
       end

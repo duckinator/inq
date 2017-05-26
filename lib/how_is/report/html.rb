@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cgi'
 require 'how_is/report/base_report'
 
@@ -7,21 +9,21 @@ class HowIs
       :html
     end
 
-    def title(_text)
-      @title = _text
-      @r += "\n<h1>#{_text}</h1>\n"
+    def title(content)
+      @title = content
+      @r += "\n<h1>#{content}</h1>\n"
     end
 
-    def header(_text)
-      @r += "\n<h2>#{_text}</h2>\n"
+    def header(content)
+      @r += "\n<h2>#{content}</h2>\n"
     end
 
-    def link(_text, url)
-      %Q[<a href="#{url}">#{_text}</a>]
+    def link(content, url)
+      %[<a href="#{url}">#{content}</a>]
     end
 
-    def text(_text)
-      @r += "<p>#{_text}</p>\n"
+    def text(content)
+      @r += "<p>#{content}</p>\n"
     end
 
     def unordered_list(arr)
@@ -46,13 +48,14 @@ class HowIs
 
       @r += "<table class=\"horizontal-bar-graph\">\n"
       data.each do |row|
-        percentage = get_percentage.(row[1])
+        percentage = get_percentage.call(row[1])
 
-        if row[2]
-          label_text = link(row[0], row[2])
-        else
-          label_text = row[0]
-        end
+        label_text =
+          if row[2]
+            link(row[0], row[2])
+          else
+            row[0]
+          end
 
         @r += <<-EOF
   <tr>
@@ -74,35 +77,35 @@ class HowIs
       report = export
 
       File.open(file, 'w') do |f|
-        f.puts <<-EOF
-<!DOCTYPE html>
-<html>
-<head>
-  <title>#{@title}</title>
-  <style>
-  body { font: sans-serif; }
-  main {
-    max-width: 600px;
-    max-width: 72ch;
-    margin: auto;
-  }
+        f.puts <<~EOF
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>#{@title}</title>
+            <style>
+            body { font: sans-serif; }
+            main {
+              max-width: 600px;
+              max-width: 72ch;
+              margin: auto;
+            }
 
-  .horizontal-bar-graph {
-    position: relative;
-    width: 100%;
-  }
-  .horizontal-bar-graph .fill {
-    display: inline-block;
-    background: #CCC;
-  }
-  </style>
-</head>
-<body>
-  <main>
-  #{report}
-  </main>
-</body>
-</html>
+            .horizontal-bar-graph {
+              position: relative;
+              width: 100%;
+            }
+            .horizontal-bar-graph .fill {
+              display: inline-block;
+              background: #CCC;
+            }
+            </style>
+          </head>
+          <body>
+            <main>
+            #{report}
+            </main>
+          </body>
+          </html>
         EOF
       end
     end

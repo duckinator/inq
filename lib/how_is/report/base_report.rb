@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 
 class HowIs
@@ -27,7 +29,7 @@ class HowIs
       issue_or_pr_summary "issue", "issue"
 
       header "Issues Per Label"
-      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(k, v)| v['total'].to_i }.reverse
+      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(_, v)| v['total'].to_i }.reverse
       issues_per_label.map! do |label, hash|
         [label, hash['total'], hash['link']]
       end
@@ -50,37 +52,37 @@ class HowIs
 
     ##
     # Appends a title to the report.
-    def title(_text)
+    def title(_content)
       raise NotImplementedError
     end
 
     ##
     # Appends a header to the report.
-    def header(_text)
+    def header(_content)
       raise NotImplementedError
     end
 
     ##
     # Appends a line of text to the report.
-    def text(_text)
+    def text(_content)
       raise NotImplementedError
     end
 
     ##
     # Appends a link to the report.
-    def link(_text, url)
+    def link(_content, _url)
       raise NotImplementedError
     end
 
     ##
     # Appends an unordered list to the report.
-    def unordered_list(arr)
+    def unordered_list(_arr)
       raise NotImplementedError
     end
 
     ##
     # Appends a horizontal bar graph to the report.
-    def horizontal_bar_graph(data)
+    def horizontal_bar_graph(_data)
       raise NotImplementedError
     end
 
@@ -94,26 +96,27 @@ class HowIs
     # Exports a report to a file.
     #
     # NOTE: May be removed in the future.
-    def export_file(file)
+    def export_file(_file)
       raise NotImplementedError
     end
 
     def to_h
       analysis.to_h
     end
-    alias :to_hash :to_h
+    alias_method :to_hash, :to_h
 
     def to_json
       JSON.pretty_generate(to_h)
     end
 
     private
+
     def pluralize(text, number)
-      number == 1 ? text : "#{text}s"
+      (number == 1) ? text : "#{text}s"
     end
 
     def are_is(number)
-      number == 1 ? "is" : "are"
+      (number == 1) ? "is" : "are"
     end
 
     def issue_or_pr_summary(type, type_label)

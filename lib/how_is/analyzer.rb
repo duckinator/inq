@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'contracts'
 require 'ostruct'
 require 'date'
@@ -52,7 +54,7 @@ class HowIs
         newest_issue: issue_or_pull_to_hash(newest_for(issues)),
         newest_pull: issue_or_pull_to_hash(newest_for(pulls)),
 
-        pulse: data.pulse,
+        pulse: data.pulse
       )
     end
 
@@ -61,11 +63,11 @@ class HowIs
     #
     # @param data [Hash] The hash to generate an Analysis from.
     def self.from_hash(data)
-      hash = data.map do |k, v|
+      hash = data.map { |k, v|
         v = DateTime.parse(v) if k.end_with?('_date')
 
         [k, v]
-      end.to_h
+      }.to_h
 
       hash.keys.each do |key|
         next unless hash[key].is_a?(Hash) && hash[key]['date']
@@ -116,7 +118,7 @@ class HowIs
     def average_age_for(issues_or_pulls)
       return nil if issues_or_pulls.empty?
 
-      ages = issues_or_pulls.map {|iop| time_ago_in_seconds(iop['created_at'])}
+      ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop['created_at']) }
       raw_average = ages.reduce(:+) / ages.length
 
       seconds_in_a_year = 31_556_926
@@ -140,24 +142,25 @@ class HowIs
         [months, "month"],
         [weeks, "week"],
         [days, "day"],
-      ].reject {|(v, k)| v == 0}.map{ |(v,k)|
-        k = k + 's' if v != 1
+      ].reject { |(v, _)| v == 0 }.map { |(v, k)|
+        k += 's' if v != 1
         [v, k]
       }
 
-      most_significant = values[0, 2].map {|x| x.join(" ")}
+      most_significant = values[0, 2].map { |x| x.join(" ") }
 
-      if most_significant.length < 2
-        value = most_significant.first
-      else
-        value = most_significant.join(" and ")
-      end
+      value =
+        if most_significant.length < 2
+          most_significant.first
+        else
+          most_significant.join(" and ")
+        end
 
       "approximately #{value}"
     end
 
     def sort_iops_by_created_at(issues_or_pulls)
-      issues_or_pulls.sort_by {|x| DateTime.parse(x['created_at']) }
+      issues_or_pulls.sort_by { |x| DateTime.parse(x['created_at']) }
     end
 
     # Given an Array of issues or pulls, return the oldest.
@@ -181,15 +184,16 @@ class HowIs
       DateTime.parse(issue_or_pull['created_at'])
     end
 
-  private
+    private
+
     # Takes an Array of labels, and returns amodified list that includes links
     # to each label.
     def with_label_links(labels, repository)
-      labels.map do |label, num_issues|
+      labels.map { |label, num_issues|
         label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
 
         [label, {'link' => label_link, 'total' => num_issues}]
-      end.to_h
+      }.to_h
     end
 
     # Returns how many seconds ago a date (as a String) was.

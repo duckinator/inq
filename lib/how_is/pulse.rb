@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tessellator/fetcher'
 
 class HowIs
@@ -19,7 +21,7 @@ class HowIs
 
     # Gets the HTML Pulse summary.
     def html_summary
-      parts = 
+      parts =
         @pulse_page_response.body
           .split('<div class="section diffstat-summary">')
 
@@ -34,10 +36,11 @@ class HowIs
         .strip
     end
 
-  private
+    private
+
     # Fetch Pulse page from GitHub for scraping.
-    def fetch_pulse!(repository, period='monthly')
-      Tessellator::Fetcher.new.call('get', "https://github.com/#{repository}/pulse/#{period}")
+    def fetch_pulse!(repository)
+      Tessellator::Fetcher.new.call('get', "https://github.com/#{repository}/pulse/monthly")
     end
   end
 end

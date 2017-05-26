@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
 require "how_is"
 require "how_is/cli"
 
 begin
-  result  = HowIs::CLI.parse(ARGV)
+  result = HowIs::CLI.parse(ARGV)
 rescue HowIs::CLI::OptionsError => e
   if ENV['SHOW_TRACE']
     raise
@@ -42,7 +44,6 @@ begin
       HowIs::Report.to_format_based_on(options[:report], report)
     )
   end
-
 rescue => e
   if ENV['SHOW_TRACE']
     raise
