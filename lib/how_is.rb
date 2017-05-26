@@ -79,7 +79,7 @@ class HowIs
   #   generate.
   def self.supported_formats
     report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
-    report_constants.map {|x| x.to_s.split('Report').first.downcase }
+    report_constants.map { |x| x.to_s.split('Report').first.downcase }
   end
 
   ##
@@ -194,7 +194,7 @@ class HowIs
   # convert_keys({'foo' => 'bar'}, :to_sym)
   # => {:foo => 'bar'}
   def self.convert_keys(data, method_name)
-    data.map {|k, v| [k.send(method_name), v]}.to_h
+    data.map { |k, v| [k.send(method_name), v] }.to_h
   end
   private_class_method :convert_keys
 end
