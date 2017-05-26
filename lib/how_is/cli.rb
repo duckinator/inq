@@ -4,7 +4,7 @@ require "how_is"
 require "slop"
 
 class HowIs::CLI
-  DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}"
+  DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}".freeze
 
   # Parent class of all exceptions raised in HowIs::CLI.
   class OptionsError < StandardError
