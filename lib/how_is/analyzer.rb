@@ -143,7 +143,7 @@ class HowIs
         [weeks, "week"],
         [days, "day"],
       ].reject { |(v, _)| v == 0 }.map { |(v, k)|
-        k = k + 's' if v != 1
+        k += 's' if v != 1
         [v, k]
       }
 
