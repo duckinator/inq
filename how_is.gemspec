@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "github_api", "~> 0.14.5"
-  spec.add_runtime_dependency "contracts", "~> 0.14.0"
+  spec.add_runtime_dependency "github_api", "~> 0.17.0"
+  spec.add_runtime_dependency "contracts", "~> 0.16.0"
   spec.add_runtime_dependency "slop", "~> 4.4.1"
 
   spec.add_runtime_dependency "tessellator-fetcher", "~> 5.0.0"
