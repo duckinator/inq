@@ -207,7 +207,8 @@ class HowIs
   private_class_method :silence_warnings
 
   def self.with_warnings(flag, &_block)
-    old_verbose, $VERBOSE = $VERBOSE, flag
+    old_verbose = $VERBOSE
+    $VERBOSE = flag
     yield
   ensure
     $VERBOSE = old_verbose
