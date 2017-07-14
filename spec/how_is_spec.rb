@@ -109,14 +109,14 @@ describe HowIs do
   end
 
   # Disable 'cop' that is violated by every .generate_frontmatter() calls.
-  # rubocop:disable Style/BracesAroundHashParameters
+  # rubocop:disable Layout/BracesAroundHashParameters
   context '#generate_frontmatter' do
     it 'works with frontmatter parameter using String keys, report_data using String keys' do
       actual = nil
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
+        actual = HowIs.generate_frontmatter({'foo' => "bar %<baz>s"}, {'baz' => "asdf"})
         expected = "---\nfoo: bar asdf\n"
       end
 
@@ -128,7 +128,7 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.generate_frontmatter({:foo => "bar %{baz}"}, {:baz => "asdf"})
+        actual = HowIs.generate_frontmatter({:foo => "bar %<baz>s"}, {:baz => "asdf"})
         expected = "---\nfoo: bar asdf\n"
       end
 

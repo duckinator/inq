@@ -23,7 +23,7 @@ class HowIs
     def html_summary
       parts =
         @pulse_page_response.body
-          .split('<div class="section diffstat-summary">')
+                            .split('<div class="section diffstat-summary">')
 
       if parts.length == 1
         return "There hasn't been any activity on #{@repository} in the last month."

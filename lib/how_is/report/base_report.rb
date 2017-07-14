@@ -129,7 +129,7 @@ class HowIs
       oldest = a.send("oldest_#{type}")
       newest = a.send("newest_#{type}")
 
-      if number_of_type == 0
+      if number_of_type.zero?
         text "There are #{link("no #{type_label}s open", type_link)}."
       else
         text "There #{are_is(number_of_type)} #{link("#{number_of_type} #{pluralize(type_label, number_of_type)} open", type_link)}."

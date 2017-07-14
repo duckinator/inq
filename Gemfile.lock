@@ -50,6 +50,7 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     openssl-better_defaults (0.0.1)
+    parallel (1.11.2)
     parser (2.4.0.0)
       ast (~> 2.2)
     powerpack (0.1.1)
@@ -70,7 +71,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
-    rubocop (0.47.1)
+    rubocop (0.49.1)
+      parallel (~> 1.10)
       parser (>= 2.3.3.1, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
@@ -101,7 +103,7 @@ DEPENDENCIES
   how_is!
   rake (~> 11.2)
   rspec (~> 3.5)
-  rubocop (~> 0.47.0)
+  rubocop (~> 0.49.1)
   timecop (~> 0.8.1)
   vcr (~> 3.0)
   webmock
