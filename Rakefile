@@ -7,7 +7,8 @@ require './spec/vcr_helper.rb'
 require 'how_is'
 
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.ruby_opts = '-w -r./spec/capture_warnings.rb'
+  # Warning.warn() was added in Ruby 2.4.0, so don't use -w on older versions.
+  t.ruby_opts = '-w -r./spec/capture_warnings.rb' if RUBY_VERSION >= '2.4.0'
 end
 
 task :default => :spec
