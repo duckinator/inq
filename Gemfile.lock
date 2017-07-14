@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    how_is (18.0.3)
+    how_is (18.0.4)
       contracts (~> 0.16.0)
       github_api (~> 0.17.0)
       slop (~> 4.4.1)
