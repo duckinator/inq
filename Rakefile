@@ -6,7 +6,9 @@ require 'timecop'
 require './spec/vcr_helper.rb'
 require 'how_is'
 
-RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.ruby_opts = '-w -r./spec/capture_warnings.rb'
+end
 
 task :default => :spec
 
