@@ -1,6 +1,13 @@
 module Warning
   CODEBASE_LOCATION = File.expand_path('../', __dir__)
   BUNDLER_DIR_LOCATION = File.expand_path('.bundle', CODEBASE_LOCATION)
+  # vendor/ is where gems are located on Travis CI.
+  VENDOR_DIR_LOCATION = File.expand_path('vendor', CODEBASE_LOCATION)
+
+  IGNORED_DIRS = [
+    BUNDLER_DIR_LOCATION,
+    VENDOR_DIR_LOCATION,
+  ]
 
   @@other_warnings = []
   @@howis_warnings = []
@@ -11,7 +18,7 @@ module Warning
     path = File.realpath(caller_locations.first.path)
 
     # Only print warnings for files in how_is' codebase.
-    if path.start_with?(CODEBASE_LOCATION) && !path.start_with?(BUNDLER_DIR_LOCATION)
+    if path.start_with?(CODEBASE_LOCATION) && IGNORED_DIRS.none? { |dir| path.start_with?(dir) }
       @@howis_warnings << msg
       super(msg)
     else
