@@ -115,6 +115,8 @@ Style/PercentLiteralDelimiters:
   Enabled: true
   PreferredDelimiters:
     default: "[]"
+    '%w': '[]'
+    '%W': '[]'
 
 # `has_key?` and `has_value?` are clearer than `key?` and `value?`.
 Style/PreferredHashMethods:
