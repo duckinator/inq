@@ -123,7 +123,9 @@ class HowIs
     report_data = convert_keys(report_data, :to_sym)
 
     frontmatter = frontmatter.map { |k, v|
-      v = v % report_data
+      # Sometimes report_data has unused keys, which generates a warning, but
+      # we're okay with it.
+      v = silence_warnings { v % report_data }
 
       [k, v]
     }.to_h
@@ -159,7 +161,9 @@ class HowIs
     generated_reports = {}
 
     config['reports'].map do |format, report_config|
-      filename = report_config['filename'] % report_data
+      # Sometimes report_data has unused keys, which generates a warning, but
+      # we're okay with it.
+      filename = silence_warnings { report_config['filename'] % report_data }
       file = File.join(report_config['directory'], filename)
 
       report = report_class.export(analysis, format)
@@ -196,4 +200,18 @@ class HowIs
     data.map { |k, v| [k.send(method_name), v] }.to_h
   end
   private_class_method :convert_keys
+
+  def self.silence_warnings(&block)
+    with_warnings(nil, &block)
+  end
+  private_class_method :silence_warnings
+
+  def self.with_warnings(flag, &_block)
+    old_verbose = $VERBOSE
+    $VERBOSE = flag
+    yield
+  ensure
+    $VERBOSE = old_verbose
+  end
+  private_class_method :with_warnings
 end

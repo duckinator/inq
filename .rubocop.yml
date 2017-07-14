@@ -4,6 +4,7 @@ AllCops:
     - 'how_is.gemspec'
     - 'bin/*'
     - '**/*~'
+    - 'spec/capture_warnings.rb'
     - 'lib/how_is/cli.rb' # FIXME: Make HowIs::CLI.parse not a disaster.
 
 # Exceptions should inherit from StandardError.
