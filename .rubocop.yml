@@ -88,6 +88,17 @@ Layout/EndOfLine:
 Layout/ExtraSpacing:
   Enabled: false
 
+#   # bad
+#
+#   format('%<greeting>s', greeting: 'Hello')
+#   format('%s', 'Hello')
+#
+#   # good
+#
+#   format('%{greeting}', greeting: 'Hello')
+Style/FormatStringToken:
+  EnforcedStyle: template
+
 # Freeze string literals to future-proof the code.
 # TODO: Enable this always. (Disabled due to not knowing what will happen.)
 Style/FrozenStringLiteralComment:
