@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'how_is/version'
-require 'contracts'
-require 'cacert'
+require "how_is/version"
+require "contracts"
+require "cacert"
 
 Cacert.set_in_env
 
@@ -14,9 +14,9 @@ C = Contracts
 class HowIs
   include Contracts::Core
 
-  require 'how_is/fetcher'
-  require 'how_is/analyzer'
-  require 'how_is/report'
+  require "how_is/fetcher"
+  require "how_is/analyzer"
+  require "how_is/report"
 
   DEFAULT_FORMAT = :html
 
@@ -82,7 +82,7 @@ class HowIs
   #   generate.
   def self.supported_formats
     report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
-    report_constants.map { |x| x.to_s.split('Report').first.downcase }
+    report_constants.map { |x| x.to_s.split("Report").first.downcase }
   end
 
   ##
@@ -93,7 +93,7 @@ class HowIs
   #   if it can't.
   def self.can_export_to?(file)
     # TODO: Check if the file is writable?
-    supported_formats.include?(file.split('.').last)
+    supported_formats.include?(file.split(".").last)
   end
 
   # Generate an analysis.
@@ -150,28 +150,28 @@ class HowIs
         report_class: nil)
     report_class ||= HowIs::Report
 
-    date = Date.strptime(Time.now.to_i.to_s, '%s')
-    friendly_date = date.strftime('%B %d, %y')
+    date = Date.strptime(Time.now.to_i.to_s, "%s")
+    friendly_date = date.strftime("%B %d, %y")
 
-    analysis = HowIs.generate_analysis(repository: config['repository'], github: github)
+    analysis = HowIs.generate_analysis(repository: config["repository"], github: github)
 
     report_data = {
-      repository: config['repository'],
+      repository: config["repository"],
       date: date,
       friendly_date: friendly_date,
     }
 
     generated_reports = {}
 
-    config['reports'].map do |format, report_config|
+    config["reports"].map do |format, report_config|
       # Sometimes report_data has unused keys, which generates a warning, but
       # we're okay with it.
-      filename = silence_warnings { report_config['filename'] % report_data }
-      file = File.join(report_config['directory'], filename)
+      filename = silence_warnings { report_config["filename"] % report_data }
+      file = File.join(report_config["directory"], filename)
 
       report = report_class.export(analysis, format)
 
-      result = build_report(report_config['frontmatter'], report_data, report)
+      result = build_report(report_config["frontmatter"], report_data, report)
 
       generated_reports[file] = result
 

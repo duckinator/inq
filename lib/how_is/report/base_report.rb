@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
+require "json"
 
 class HowIs
   BaseReport = Struct.new(:analysis)
@@ -31,11 +31,11 @@ class HowIs
       issue_or_pr_summary "issue", "issue"
 
       header "Issues Per Label"
-      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(_, v)| v['total'].to_i }.reverse
+      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(_, v)| v["total"].to_i }.reverse
       issues_per_label.map! do |label, hash|
-        [label, hash['total'], hash['link']]
+        [label, hash["total"], hash["link"]]
       end
-      issues_per_label << ["(No label)", analysis.issues_with_no_label['total'], nil]
+      issues_per_label << ["(No label)", analysis.issues_with_no_label["total"], nil]
       horizontal_bar_graph issues_per_label
 
       # See comment at beginning of function.

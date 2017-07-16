@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'how_is/report/base_report'
+require "how_is/report/base_report"
 
 class HowIs
   ##
@@ -26,7 +26,7 @@ class HowIs
     ##
     # Generates a report and writes it to a file.
     def export_file(file)
-      File.open(file, 'w') do |f|
+      File.open(file, "w") do |f|
         f.write export
       end
     end

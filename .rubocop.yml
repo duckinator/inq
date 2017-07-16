@@ -155,10 +155,8 @@ Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 # Use double quotes everywhere by default.
-# TODO: Enable Style/StringLiterals cop. Disabled due to number of violations.
 Style/StringLiterals:
-  Enabled: false
-  #EnforcedStyle: double_quotes
+  EnforcedStyle: double_quotes
 
 # TODO: Maybe make it so you have to do [:foo, :bar] not %i[foo bar]?
 Style/SymbolArray:

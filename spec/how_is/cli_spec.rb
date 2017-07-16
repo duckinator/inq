@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'how_is/cli'
+require "spec_helper"
+require "how_is/cli"
 
-CLI_EXAMPLE_REPORT_FILE = File.expand_path('../data/how_is/cli_spec/example_report.json', __dir__)
+CLI_EXAMPLE_REPORT_FILE = File.expand_path("../data/how_is/cli_spec/example_report.json", __dir__)
 
 describe HowIs::CLI do
   subject { HowIs::CLI }
 
-  context '#parse' do
-    it 'converts flags to a Hash' do
+  context "#parse" do
+    it "converts flags to a Hash" do
       actual = subject.parse(%w[--version])
 
       expect(actual[:options][:version]).to eq(true)
     end
 
-    it 'raises NoRepositoryError if a repository is required but not specified' do
+    it "raises NoRepositoryError if a repository is required but not specified" do
       expect {
         subject.parse(%w[])
       }.to raise_error(HowIs::CLI::NoRepositoryError)
@@ -37,7 +37,7 @@ describe HowIs::CLI do
       expect(actual[:options][:from]).to eq(CLI_EXAMPLE_REPORT_FILE)
     end
 
-    it 'raises InvalidOutputFileError if you specify an invalid format' do
+    it "raises InvalidOutputFileError if you specify an invalid format" do
       expect {
         subject.parse(%w[--report has_an.invalidformat how-is/example-repository])
       }.to raise_error(HowIs::CLI::InvalidOutputFileError, /has_an.invalidformat/)

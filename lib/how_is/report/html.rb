@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'cgi'
-require 'how_is/report/base_report'
+require "cgi"
+require "how_is/report/base_report"
 
 class HowIs
   # HTML Report implementation
@@ -70,14 +70,14 @@ class HowIs
     end
 
     def export
-      @r = ''
+      @r = ""
       generate_report_text!
     end
 
     def export_file(file)
       report = export
 
-      File.open(file, 'w') do |f|
+      File.open(file, "w") do |f|
         f.puts <<~EOF
           <!DOCTYPE html>
           <html>

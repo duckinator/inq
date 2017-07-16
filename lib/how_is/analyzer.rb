@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'contracts'
-require 'ostruct'
-require 'date'
-require 'json'
+require "contracts"
+require "ostruct"
+require "date"
+require "json"
 
 class HowIs
   ##
@@ -44,7 +44,7 @@ class HowIs
         number_of_pulls:   pulls.length,
 
         issues_with_label: with_label_links(num_with_label(issues), data.repository),
-        issues_with_no_label: {'link' => nil, 'total' => num_with_no_label(issues)},
+        issues_with_no_label: {"link" => nil, "total" => num_with_no_label(issues)},
 
         average_issue_age: average_age_for(issues),
         average_pull_age:  average_age_for(pulls),
@@ -65,15 +65,15 @@ class HowIs
     # @param data [Hash] The hash to generate an Analysis from.
     def self.from_hash(data)
       hash = data.map { |k, v|
-        v = DateTime.parse(v) if k.end_with?('_date')
+        v = DateTime.parse(v) if k.end_with?("_date")
 
         [k, v]
       }.to_h
 
       hash.keys.each do |key|
-        next unless hash[key].is_a?(Hash) && hash[key]['date']
+        next unless hash[key].is_a?(Hash) && hash[key]["date"]
 
-        hash[key]['date'] = DateTime.parse(hash[key]['date'])
+        hash[key]["date"] = DateTime.parse(hash[key]["date"])
       end
 
       Analysis.new(hash)
@@ -91,10 +91,10 @@ class HowIs
 
       hash = Hash.new(0)
       issues_or_pulls.each do |iop|
-        next unless iop['labels']
+        next unless iop["labels"]
 
-        iop['labels'].each do |label|
-          hash[label['name']] += 1
+        iop["labels"].each do |label|
+          hash[label["name"]] += 1
         end
       end
       hash
@@ -102,16 +102,16 @@ class HowIs
 
     # Returns the number of issues with no label.
     def num_with_no_label(issues)
-      issues.select { |x| x['labels'].empty? }.length
+      issues.select { |x| x["labels"].empty? }.length
     end
 
     # Given an Array of dates, average the timestamps and return the date that
     # represents.
     def average_date_for(issues_or_pulls)
-      timestamps = issues_or_pulls.map { |iop| Date.parse(iop['created_at']).strftime('%s').to_i }
+      timestamps = issues_or_pulls.map { |iop| Date.parse(iop["created_at"]).strftime("%s").to_i }
       average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
 
-      DateTime.strptime(average_timestamp.to_s, '%s')
+      DateTime.strptime(average_timestamp.to_s, "%s")
     end
 
     # Given an Array of issues or pulls, return the average age of them.
@@ -119,7 +119,7 @@ class HowIs
     def average_age_for(issues_or_pulls)
       return nil if issues_or_pulls.empty?
 
-      ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop['created_at']) }
+      ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["created_at"]) }
       raw_average = ages.reduce(:+) / ages.length
 
       seconds_in_a_year = 31_556_926
@@ -144,7 +144,7 @@ class HowIs
         [weeks, "week"],
         [days, "day"],
       ].reject { |(v, _)| v.zero? }.map { |(v, k)|
-        k += 's' if v != 1
+        k += "s" if v != 1
         [v, k]
       }
 
@@ -161,7 +161,7 @@ class HowIs
     end
 
     def sort_iops_by_created_at(issues_or_pulls)
-      issues_or_pulls.sort_by { |x| DateTime.parse(x['created_at']) }
+      issues_or_pulls.sort_by { |x| DateTime.parse(x["created_at"]) }
     end
 
     # Given an Array of issues or pulls, return the oldest.
@@ -182,7 +182,7 @@ class HowIs
 
     # Given an issue or PR, returns the date it was created.
     def date_for(issue_or_pull)
-      DateTime.parse(issue_or_pull['created_at'])
+      DateTime.parse(issue_or_pull["created_at"])
     end
 
     private
@@ -193,7 +193,7 @@ class HowIs
       labels.map { |label, num_issues|
         label_link = "https://github.com/#{repository}/issues?q=" + CGI.escape("is:open is:issue label:\"#{label}\"")
 
-        [label, {'link' => label_link, 'total' => num_issues}]
+        [label, {"link" => label_link, "total" => num_issues}]
       }.to_h
     end
 
@@ -207,9 +207,9 @@ class HowIs
 
       ret = {}
 
-      ret['html_url'] = iop['html_url']
-      ret['number'] = iop['number']
-      ret['date'] = date_for(iop)
+      ret["html_url"] = iop["html_url"]
+      ret["number"] = iop["number"]
+      ret["date"] = date_for(iop)
 
       ret
     end
