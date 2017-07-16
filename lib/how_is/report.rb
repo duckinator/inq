@@ -4,12 +4,15 @@ require 'date'
 require "pathname"
 
 class HowIs
+  # Error class
   class UnsupportedExportFormat < StandardError
     def initialize(format)
       super("Unsupported export format: #{format}")
     end
   end
 
+  # Report control class with class methods to make reports for an analysis
+  # or to save reports in files, or otherwise interact with the files.
   class Report
     require 'how_is/report/json'
     require 'how_is/report/html'

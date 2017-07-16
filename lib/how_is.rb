@@ -8,6 +8,9 @@ Cacert.set_in_env
 
 C = Contracts
 
+# HowIs control class used from the CLI tool.
+#
+# Generates an analysis and has methods to build reports from it.
 class HowIs
   include Contracts::Core
 

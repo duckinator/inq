@@ -4,6 +4,7 @@ require 'cgi'
 require 'how_is/report/base_report'
 
 class HowIs
+  # HTML Report implementation
   class HtmlReport < BaseReport
     def format
       :html

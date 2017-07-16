@@ -11,11 +11,12 @@ class HowIs
   class Analysis < OpenStruct
   end
 
+  # Creates Analysis objects with input data formatted in useful ways.
   class Analyzer
     include Contracts::Core
 
     ##
-    # Raised when attempting to export to an unsupported format.
+    # Raised when attempting to import to an unsupported format.
     class UnsupportedImportFormat < StandardError
       def initialize(format)
         super("Unsupported import format: #{format}")
@@ -23,7 +24,7 @@ class HowIs
     end
 
     ##
-    # Generates and returns an analysis.i
+    # Generates and returns an analysis.
     #
     # @param data [Fetcher::Results] The results gathered by Fetcher.
     # @param analysis_class (You don't need this.) A class to use instead of

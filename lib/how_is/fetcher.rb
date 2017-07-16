@@ -4,9 +4,9 @@ require 'contracts'
 require 'github_api'
 require 'how_is/pulse'
 
-##
-# Fetches data from GitHub.
 class HowIs
+  ##
+  # Fetches data from GitHub.
   class Fetcher
     include Contracts::Core
 
