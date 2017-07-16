@@ -142,7 +142,7 @@ class HowIs
         [months, "month"],
         [weeks, "week"],
         [days, "day"],
-      ].reject { |(v, _)| v == 0 }.map { |(v, k)|
+      ].reject { |(v, _)| v.zero? }.map { |(v, k)|
         k += 's' if v != 1
         [v, k]
       }

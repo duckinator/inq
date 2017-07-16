@@ -40,7 +40,7 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 
 # Most readable form.
-Style/AlignHash:
+Layout/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
   # Disable because it wound up conflicting with a lot of things like:
@@ -52,7 +52,7 @@ Style/AlignHash:
   # addressed.
   Enabled: false
 
-Style/AlignParameters:
+Layout/AlignParameters:
   # See Style/AlignedHash.
   Enabled: false
 
@@ -76,7 +76,7 @@ Style/Encoding:
   Enabled: true
 
 # Force Unix line endings.
-Style/EndOfLine:
+Layout/EndOfLine:
   Enabled: true
   EnforcedStyle: lf
 
@@ -87,8 +87,19 @@ Style/EndOfLine:
 # foobar = 'blah'
 # baz    = 'asdf'
 # beep   = 'boop'
-Style/ExtraSpacing:
+Layout/ExtraSpacing:
   Enabled: false
+
+#   # bad
+#
+#   format('%<greeting>s', greeting: 'Hello')
+#   format('%s', 'Hello')
+#
+#   # good
+#
+#   format('%{greeting}', greeting: 'Hello')
+Style/FormatStringToken:
+  EnforcedStyle: template
 
 # Freeze string literals to future-proof the code.
 # TODO: Enable this always. (Disabled due to not knowing what will happen.)
@@ -135,11 +146,11 @@ Style/MethodCalledOnDoEndBlock:
 
 # Indenting the chained dots beneath each other is not supported by this cop,
 # see https://github.com/bbatsov/rubocop/issues/1633
-Style/MultilineOperationIndentation:
+Layout/MultilineOperationIndentation:
   Enabled: false
 
 # {'foo' => 'bar'} not { 'foo' => 'bar' }
-Style/SpaceInsideHashLiteralBraces:
+Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: no_space
 
