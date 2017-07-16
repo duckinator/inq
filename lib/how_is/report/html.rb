@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require 'cgi'
-require 'how_is/report/base_report'
+require "cgi"
+require "how_is/report/base_report"
 
 class HowIs
+  # HTML Report implementation
   class HtmlReport < BaseReport
     def format
       :html
@@ -34,6 +35,14 @@ class HowIs
       @r += "</ul>\n\n"
     end
 
+    ROW_HTML_GRAPH = <<-EOF
+  <tr>
+    <td style="width: %{label_width}">%{label_text}</td>
+    <td><span class="fill" style="width: %{percentage}%%">%{link_text}</span></td>
+  </tr>
+
+    EOF
+
     def horizontal_bar_graph(data)
       if data.length == 1 && data[0][0] == "(No label)"
         text "There are no open issues to graph."
@@ -48,65 +57,63 @@ class HowIs
 
       @r += "<table class=\"horizontal-bar-graph\">\n"
       data.each do |row|
-        percentage = get_percentage.call(row[1])
-
-        label_text =
-          if row[2]
-            link(row[0], row[2])
-          else
-            row[0]
-          end
-
-        @r += <<-EOF
-  <tr>
-    <td style="width: #{label_width}">#{label_text}</td>
-    <td><span class="fill" style="width: #{percentage}%">#{row[1]}</span></td>
-  </tr>
-
-        EOF
+        @r += Kernel.format(ROW_HTML_GRAPH, label_width: label_width,
+          label_text: label_text_for(row),
+          percentage: get_percentage.call(row[1]),
+          link_text: row[1])
       end
       @r += "</table>\n"
     end
 
     def export
-      @r = ''
+      @r = ""
       generate_report_text!
     end
 
+    HTML_DOC_TEMPLATE = <<~EOF
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>%{title}</title>
+        <style>
+        body { font: sans-serif; }
+        main {
+          max-width: 600px;
+          max-width: 72ch;
+          margin: auto;
+        }
+         .horizontal-bar-graph {
+          position: relative;
+          width: 100%;
+        }
+        .horizontal-bar-graph .fill {
+          display: inline-block;
+          background: #CCC;
+        }
+        </style>
+      </head>
+      <body>
+        <main>
+        %{report}
+        </main>
+      </body>
+      </html>
+    EOF
+
     def export_file(file)
-      report = export
+      content = Kernel.format(HTML_DOC_TEMPLATE, title: @title, report: export)
+      File.open(file, "w") do |f|
+        f.puts content
+      end
+    end
 
-      File.open(file, 'w') do |f|
-        f.puts <<~EOF
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>#{@title}</title>
-            <style>
-            body { font: sans-serif; }
-            main {
-              max-width: 600px;
-              max-width: 72ch;
-              margin: auto;
-            }
+    private
 
-            .horizontal-bar-graph {
-              position: relative;
-              width: 100%;
-            }
-            .horizontal-bar-graph .fill {
-              display: inline-block;
-              background: #CCC;
-            }
-            </style>
-          </head>
-          <body>
-            <main>
-            #{report}
-            </main>
-          </body>
-          </html>
-        EOF
+    def label_text_for(row)
+      if row[2]
+        link(row[0], row[2])
+      else
+        row[0]
       end
     end
   end
