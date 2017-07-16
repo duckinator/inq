@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'contracts'
-require 'github_api'
-require 'how_is/pulse'
+require "contracts"
+require "github_api"
+require "how_is/pulse"
 
-##
-# Fetches data from GitHub.
 class HowIs
+  ##
+  # Fetches data from GitHub.
   class Fetcher
     include Contracts::Core
 
@@ -37,12 +37,12 @@ class HowIs
              pulse = nil)
       github ||= Github.new(auto_pagination: true)
       pulse ||= HowIs::Pulse.new(repository)
-      user, repo = repository.split('/', 2)
+      user, repo = repository.split("/", 2)
 
       unless user && repo
-        raise HowIs::CLI::OptionsError, 'To generate a report from GitHub, ' \
-          'provide the repository ' \
-          'username/project. Quitting!'
+        raise HowIs::CLI::OptionsError, "To generate a report from GitHub, " \
+          "provide the repository " \
+          "username/project. Quitting!"
       end
 
       issues  = github.issues.list user: user, repo: repo

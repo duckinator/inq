@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
-HOW_IS_EXE = File.expand_path('../../exe/how_is', __dir__)
+HOW_IS_EXE = File.expand_path("../../exe/how_is", __dir__)
 
-describe 'Integration Tests' do
-  context '--help and -h flags' do
-    it 'outputs usage information' do
+describe "Integration Tests" do
+  context "--help and -h flags" do
+    it "outputs usage information" do
       %w[--help -h].each do |flag|
         stub_const("ARGV", [flag])
 
@@ -17,8 +17,8 @@ describe 'Integration Tests' do
     end
   end
 
-  context '--version and -v flags' do
-    it 'outputs the version number' do
+  context "--version and -v flags" do
+    it "outputs the version number" do
       %w[--version -v].each do |flag|
         stub_const("ARGV", [flag])
 

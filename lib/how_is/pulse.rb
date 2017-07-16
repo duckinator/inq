@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'tessellator/fetcher'
+require "tessellator/fetcher"
 
 class HowIs
   # This entire class is a monstrous hack, because GitHub doesn't provide
@@ -36,12 +36,12 @@ class HowIs
     end
 
     def stats_html_fragment
-      parts.last.split('</div>').first.strip
+      parts.last.split("</div>").first.strip
     end
 
     # Fetch Pulse page from GitHub for scraping.
     def fetch_pulse!(repository)
-      Tessellator::Fetcher.new.call('get', "https://github.com/#{repository}/pulse/monthly")
+      Tessellator::Fetcher.new.call("get", "https://github.com/#{repository}/pulse/monthly")
     end
   end
 end

@@ -1,23 +1,26 @@
 # frozen_string_literal: true
 
-require 'date'
+require "date"
 require "pathname"
 
 class HowIs
+  # Raised when attempting to export to an unsupported format
   class UnsupportedExportFormat < StandardError
     def initialize(format)
       super("Unsupported export format: #{format}")
     end
   end
 
+  # Report control class with class methods to make reports for an analysis
+  # or to save reports in files, or otherwise interact with the files.
   class Report
-    require 'how_is/report/json'
-    require 'how_is/report/html'
+    require "how_is/report/json"
+    require "how_is/report/html"
 
     ##
     # Export a report to a file.
     def self.export_file(analysis, file)
-      format = file.split('.').last
+      format = file.split(".").last
       report = get_report_class(format).new(analysis)
 
       report.export_file(file)
@@ -37,7 +40,7 @@ class HowIs
     # @param file [String,Pathname] Name of file to write to
     # @param report [Report] Report to store
     def self.save_report(file, report)
-      File.open(file, 'w') do |f|
+      File.open(file, "w") do |f|
         f.write report
       end
     end
@@ -49,7 +52,7 @@ class HowIs
     #
     # @return [String] Report format inferred from file name
     def self.infer_format(file)
-      Pathname(file).extname.delete('.')
+      Pathname(file).extname.delete(".")
     end
 
     ##

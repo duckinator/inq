@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
+require "json"
 
 class HowIs
   BaseReport = Struct.new(:analysis)
@@ -31,11 +31,11 @@ class HowIs
       issue_or_pr_summary "issue", "issue"
 
       header "Issues Per Label"
-      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(_, v)| v['total'].to_i }.reverse
+      issues_per_label = analysis.issues_with_label.to_a.sort_by { |(_, v)| v["total"].to_i }.reverse
       issues_per_label.map! do |label, hash|
-        [label, hash['total'], hash['link']]
+        [label, hash["total"], hash["link"]]
       end
-      issues_per_label << ["(No label)", analysis.issues_with_no_label['total'], nil]
+      issues_per_label << ["(No label)", analysis.issues_with_no_label["total"], nil]
       horizontal_bar_graph issues_per_label
 
       # See comment at beginning of function.
@@ -125,19 +125,20 @@ class HowIs
       date_format = "%b %e, %Y"
       a = analysis
 
-      number_of_type = a.send("number_of_#{type}s")
+      number_of_type = a.public_send("number_of_#{type}s")
 
-      type_link = a.send("#{type}s_url")
-      oldest = a.send("oldest_#{type}")
-      newest = a.send("newest_#{type}")
+      type_link = a.public_send("#{type}s_url")
+      oldest = a.public_send("oldest_#{type}")
+      newest = a.public_send("newest_#{type}")
 
       if number_of_type.zero?
         text "There are #{link("no #{type_label}s open", type_link)}."
       else
-        text "There #{are_is(number_of_type)} #{link("#{number_of_type} #{pluralize(type_label, number_of_type)} open", type_link)}."
+        text "There #{are_is(number_of_type)} #{link("#{number_of_type} "\
+          "#{pluralize(type_label, number_of_type)} open", type_link)}."
 
         unordered_list [
-          "Average age: #{a.send("average_#{type}_age")}.",
+          "Average age: #{a.public_send("average_#{type}_age")}.",
           "#{link('Oldest ' + type_label, oldest['html_url'])} was opened on #{oldest['date'].strftime(date_format)}.",
           "#{link('Newest ' + type_label, newest['html_url'])} was opened on #{newest['date'].strftime(date_format)}.",
         ]
