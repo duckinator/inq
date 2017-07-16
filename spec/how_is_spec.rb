@@ -108,7 +108,7 @@ describe HowIs do
     end
   end
 
-  # Disable 'cop' that is violated by every .generate_frontmatter() calls.
+  # Disable RuboCop rule that is violated by every .generate_frontmatter() call.
   # rubocop:disable Style/BracesAroundHashParameters
   context "#generate_frontmatter" do
     it "works with frontmatter parameter using String keys, report_data using String keys" do
