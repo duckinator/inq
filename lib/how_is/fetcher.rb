@@ -15,7 +15,7 @@ class HowIs
     #
     # Implemented as a class instead of passing around a Hash so that it can
     # be more easily referenced by Contracts.
-    class Results < Struct.new(:repository, :issues, :pulls, :pulse)
+    Results = Struct.new(:repository, :issues, :pulls, :pulse) do
       include Contracts::Core
 
       Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String => nil

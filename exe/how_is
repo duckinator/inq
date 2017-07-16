@@ -8,11 +8,9 @@ require "how_is/cli"
 begin
   result = HowIs::CLI.parse(ARGV)
 rescue HowIs::CLI::OptionsError => e
-  if ENV['SHOW_TRACE']
-    raise
-  else
-    abort "Error: #{e.message}"
-  end
+  raise if ENV['SHOW_TRACE']
+
+  abort "Error: #{e.message}"
 end
 
 options = result[:options]
@@ -45,9 +43,7 @@ begin
     )
   end
 rescue => e
-  if ENV['SHOW_TRACE']
-    raise
-  else
-    abort "Error: #{e.message}"
-  end
+  raise if ENV['SHOW_TRACE']
+
+  abort "Error: #{e.message}"
 end
