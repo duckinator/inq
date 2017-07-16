@@ -35,6 +35,14 @@ class HowIs
       @r += "</ul>\n\n"
     end
 
+    ROW_HTML_GRAPH = <<-EOF
+  <tr>
+    <td style="width: %{label_width}">%{label_text}</td>
+    <td><span class="fill" style="width: %{percentage}%%">%{link_text}</span></td>
+  </tr>
+
+    EOF
+
     def horizontal_bar_graph(data)
       if data.length == 1 && data[0][0] == "(No label)"
         text "There are no open issues to graph."
@@ -49,22 +57,10 @@ class HowIs
 
       @r += "<table class=\"horizontal-bar-graph\">\n"
       data.each do |row|
-        percentage = get_percentage.call(row[1])
-
-        label_text =
-          if row[2]
-            link(row[0], row[2])
-          else
-            row[0]
-          end
-
-        @r += <<-EOF
-  <tr>
-    <td style="width: #{label_width}">#{label_text}</td>
-    <td><span class="fill" style="width: #{percentage}%">#{row[1]}</span></td>
-  </tr>
-
-        EOF
+        @r += Kernel.format(ROW_HTML_GRAPH, label_width: label_width,
+          label_text: label_text_for(row),
+          percentage: get_percentage.call(row[1]),
+          link_text: row[1])
       end
       @r += "</table>\n"
     end
@@ -108,6 +104,16 @@ class HowIs
           </body>
           </html>
         EOF
+      end
+    end
+
+    private
+
+    def label_text_for(row)
+      if row[2]
+        link(row[0], row[2])
+      else
+        row[0]
       end
     end
   end
