@@ -7,7 +7,11 @@ this project adheres to [Semantic Versioning](http://semver.org).
 
 ## [Unreleased]
 
-(Nothing so far.)
+### Changes
+
+* Include name of rules in RuboCop output. ([#175](https://github.com/how-is/how_is/pull/175))
+* RuboCop 0.49.1. ([#174](https://github.com/how-is/how_is/pull/174))
+* RuboCop warning removal. ([#173](https://github.com/how-is/how_is/pull/173))
 
 ## [v18.0.4]
 
@@ -15,13 +19,13 @@ This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.4))
 is exclusively cleaning up RuboCop violations and updating dependencies.
 There should be no noticeable changes in functionality.
 
-### Miscellaneous
+### Changes
 
 * Use Hashie stable; update Gemfile/add Gemfile.lock. ([#170](https://github.com/how-is/how_is/pull/170))
 * Pass -w to Ruby when running 'rake spec'. ([#169](https://github.com/how-is/how_is/pull/169))
 * Rubocop cleanup. ([#167](https://github.com/how-is/how_is/pull/167))
 * Gemfile: use Hashie from master branch. ([#166](https://github.com/how-is/how_is/pull/166))
-* Update github_api, contracst to latest. ([#165](https://github.com/how-is/how_is/pull/165))
+* Update github_api, contracts to latest. ([#165](https://github.com/how-is/how_is/pull/165))
 * Fix (a significant number of) RuboCop violations. ([#162](https://github.com/how-is/how_is/pull/162))
 * README: Drop from_config_file reference. ([#161](https://github.com/how-is/how_is/pull/161))
 * Move rubocop dependency to gemspec. ([#160](https://github.com/how-is/how_is/pull/160))
