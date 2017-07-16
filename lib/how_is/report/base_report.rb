@@ -3,9 +3,11 @@
 require 'json'
 
 class HowIs
+  BaseReport = Struct.new(:analysis)
+
   ##
   # Subclasses of BaseReport represent complete reports.
-  BaseReport = Struct.new(:analysis) do
+  class BaseReport
     def generate_report_text!
       # title, text, header, horizontal_bar_graph, etc,
       # append to @r, which is returned at the end of the function.
