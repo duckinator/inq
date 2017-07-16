@@ -116,7 +116,7 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.generate_frontmatter({'foo' => "bar %{baz>"}, {'baz' => "asdf"})
+        actual = HowIs.generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
         expected = "---\nfoo: bar asdf\n"
       end
 
