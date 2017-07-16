@@ -4,7 +4,7 @@ require 'date'
 require "pathname"
 
 class HowIs
-  # Error class
+  # Raised when attempting to export to an unsupported format
   class UnsupportedExportFormat < StandardError
     def initialize(format)
       super("Unsupported export format: #{format}")
