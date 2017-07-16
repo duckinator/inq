@@ -1,212 +1,330 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
+## [Unreleased](https://github.com/how-is/how_is/tree/HEAD)
 
-The format is based on [Keep a Changelog](http://keepachangelog.com) and
-this project adheres to [Semantic Versioning](http://semver.org).
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.4...HEAD)
 
-## [Unreleased]
+**Closed issues:**
 
-(Nothing so far.)
+- Stop using hashie's master branch [\#168](https://github.com/how-is/how_is/issues/168)
 
-## [v18.0.4]
+**Merged pull requests:**
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.4))
-is exclusively cleaning up RuboCop violations and updating dependencies.
-There should be no noticeable changes in functionality.
+- Include name of rules in RuboCop output [\#175](https://github.com/how-is/how_is/pull/175) ([olleolleolle](https://github.com/olleolleolle))
+- Rubocop 0.49.1 [\#174](https://github.com/how-is/how_is/pull/174) ([olleolleolle](https://github.com/olleolleolle))
+- Rubocop warning removal [\#173](https://github.com/how-is/how_is/pull/173) ([olleolleolle](https://github.com/olleolleolle))
 
-### Miscellaneous
+## [v18.0.4](https://github.com/how-is/how_is/tree/v18.0.4) (2017-07-14)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.3...v18.0.4)
 
-* Use Hashie stable; update Gemfile/add Gemfile.lock. ([#170](https://github.com/how-is/how_is/pull/170))
-* Pass -w to Ruby when running 'rake spec'. ([#169](https://github.com/how-is/how_is/pull/169))
-* Rubocop cleanup. ([#167](https://github.com/how-is/how_is/pull/167))
-* Gemfile: use Hashie from master branch. ([#166](https://github.com/how-is/how_is/pull/166))
-* Update github_api, contracst to latest. ([#165](https://github.com/how-is/how_is/pull/165))
-* Fix (a significant number of) RuboCop violations. ([#162](https://github.com/how-is/how_is/pull/162))
-* README: Drop from_config_file reference. ([#161](https://github.com/how-is/how_is/pull/161))
-* Move rubocop dependency to gemspec. ([#160](https://github.com/how-is/how_is/pull/160))
+**Closed issues:**
 
-## [v18.0.3]
+- HowIs::CLI refactor [\#156](https://github.com/how-is/how_is/issues/156)
+- "Invalid file" error doesn't include filename. [\#155](https://github.com/how-is/how_is/issues/155)
+- No report and Hashie::Mash\#default warnings [\#154](https://github.com/how-is/how_is/issues/154)
+- Remove from\_config\_file from docs [\#153](https://github.com/how-is/how_is/issues/153)
+- Fix warnings when running `rake spec` [\#124](https://github.com/how-is/how_is/issues/124)
+- Number of issues closed in the past month [\#106](https://github.com/how-is/how_is/issues/106)
+- Number of PRs merged in the past month. [\#105](https://github.com/how-is/how_is/issues/105)
+- Number of PRs/issues opened in past month [\#99](https://github.com/how-is/how_is/issues/99)
+- Number of PRs/issues not updated in the past month [\#87](https://github.com/how-is/how_is/issues/87)
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.3))
-fixes the things the last few releases broke. I think. Hopefully.
+**Merged pull requests:**
 
-It also includes some refactoring work, and the addition of a RuboCop
-configuration.
+- Release v18 0 4 [\#171](https://github.com/how-is/how_is/pull/171) ([duckinator](https://github.com/duckinator))
+- Use Hashie stable; update Gemfile/add Gemfile.lock [\#170](https://github.com/how-is/how_is/pull/170) ([duckinator](https://github.com/duckinator))
+- Pass -w to Ruby when running 'rake spec'. [\#169](https://github.com/how-is/how_is/pull/169) ([duckinator](https://github.com/duckinator))
+- Rubocop cleanup [\#167](https://github.com/how-is/how_is/pull/167) ([duckinator](https://github.com/duckinator))
+- Gemfile: use Hashie from master branch [\#166](https://github.com/how-is/how_is/pull/166) ([olleolleolle](https://github.com/olleolleolle))
+- Update github\_api, contracts to latest [\#165](https://github.com/how-is/how_is/pull/165) ([olleolleolle](https://github.com/olleolleolle))
+- Fix \(a significant number of\) RuboCop violations. [\#162](https://github.com/how-is/how_is/pull/162) ([duckinator](https://github.com/duckinator))
+- README: Drop from\_config\_file reference [\#161](https://github.com/how-is/how_is/pull/161) ([olleolleolle](https://github.com/olleolleolle))
+- move rubocop dep to gemspec [\#160](https://github.com/how-is/how_is/pull/160) ([duckinator](https://github.com/duckinator))
 
-@duckinator enabled [Hound CI](https://houndci.com) for the repository, which
-should find any RuboCop violations that are added in PRs. The preexisting
-RuboCop violations (of which there are many) need to be addressed separately,
-and there will likely be an entire release dedicated to that.
+## [v18.0.3](https://github.com/how-is/how_is/tree/v18.0.3) (2017-05-25)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.2...v18.0.3)
 
-### Changes
+**Closed issues:**
 
-* Add RuboCop config ([#158](https://github.com/how-is/how_is/pull/158))
-* CLI parser refactor ([#157](https://github.com/how-is/how_is/pull/157))
-* exe/how_is: Reinstate to_json, to_html ([#150](https://github.com/how-is/how_is/pull/150), by @olleolleolle)
+- Issue: report.html renders only \#\<HowIs:0x007fae56966700\> [\#149](https://github.com/how-is/how_is/issues/149)
+- Make CONFIG\_FILE optional when using --config. [\#41](https://github.com/how-is/how_is/issues/41)
 
-## [v18.0.2]
+**Merged pull requests:**
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.2))
-_actually_ fixes the `--config` flag, which made an unecessary method
-call.
+- v18.0.3 -- CHANGELOG and version bump. [\#159](https://github.com/how-is/how_is/pull/159) ([duckinator](https://github.com/duckinator))
+- Add RuboCop config [\#158](https://github.com/how-is/how_is/pull/158) ([duckinator](https://github.com/duckinator))
+- CLI parser refactor [\#157](https://github.com/how-is/how_is/pull/157) ([duckinator](https://github.com/duckinator))
+- exe/how\_is: Reinstate to\_json, to\_html [\#150](https://github.com/how-is/how_is/pull/150) ([olleolleolle](https://github.com/olleolleolle))
 
-### Changes
+## [v18.0.2](https://github.com/how-is/how_is/tree/v18.0.2) (2017-03-05)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.1...v18.0.2)
 
-* v18.0.2 - Remove unnecessary `.send()` call in exe/how_is.
-  ([#148](https://github.com/how-is/how_is/pull/148))
+**Merged pull requests:**
 
-## [v18.0.1]
+- v18.0.2 - Remove unnecessary .send\(\) call in exe/how\_is. [\#148](https://github.com/how-is/how_is/pull/148) ([duckinator](https://github.com/duckinator))
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.1))
-fixes the `--config` flag, which was previously using the wrong method.
+## [v18.0.1](https://github.com/how-is/how_is/tree/v18.0.1) (2017-03-05)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.0...v18.0.1)
 
-### Changes
+**Merged pull requests:**
 
-* v18.0.1 - fix `--config` flag.
-  ([#147](https://github.com/how-is/how_is/pull/147))
+- v18.0.1 - fix --config flag [\#147](https://github.com/how-is/how_is/pull/147) ([duckinator](https://github.com/duckinator))
 
-## [v18.0.0]
+## [v18.0.0](https://github.com/how-is/how_is/tree/v18.0.0) (2017-03-05)
+[Full Changelog](https://github.com/how-is/how_is/compare/v17.0.0...v18.0.0)
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v18.0.0))
-vastly improves documentation, fixes the `--from` flag, and adds the
-`HowIs.from_hash` method (used by the
-[dashboard](https://github.com/how-is/dashboard)).
+**Closed issues:**
 
-Pull Requests for this release can be [viewed on
-GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2017-02-10..2017-03-03).
+- Determine what is using open-uri [\#140](https://github.com/how-is/how_is/issues/140)
+- :from != :from\_file [\#137](https://github.com/how-is/how_is/issues/137)
+- Move --from documentation to README [\#136](https://github.com/how-is/how_is/issues/136)
+- Why is rack required? [\#135](https://github.com/how-is/how_is/issues/135)
+- Is :from\_file still an option? [\#134](https://github.com/how-is/how_is/issues/134)
+- Move from\_config/from\_config\_file out of HowIs::CLI [\#52](https://github.com/how-is/how_is/issues/52)
 
-### Additions
+**Merged pull requests:**
 
-* Add/improve inline code documentation.
-  ([#132](https://github.com/how-is/how_is/pull/132))
-* Move documentation from design/ to README.
-  ([#143](https://github.com/how-is/how_is/pull/143))
-* Add `HowIs.from_hash` method.
-  ([#144](https://github.com/how-is/how_is/pull/144))
+- v18.0.0 release [\#146](https://github.com/how-is/how_is/pull/146) ([duckinator](https://github.com/duckinator))
+- Add HowIs.from\_hash method [\#144](https://github.com/how-is/how_is/pull/144) ([indirect](https://github.com/indirect))
+- Move documentation from design/ to README. [\#143](https://github.com/how-is/how_is/pull/143) ([duckinator](https://github.com/duckinator))
+- Fix --from. [\#141](https://github.com/how-is/how_is/pull/141) ([duckinator](https://github.com/duckinator))
+- Unpin Rack version. [\#139](https://github.com/how-is/how_is/pull/139) ([duckinator](https://github.com/duckinator))
+- Documentation! [\#132](https://github.com/how-is/how_is/pull/132) ([duckinator](https://github.com/duckinator))
+- Remove shebang line from lib/ file. [\#131](https://github.com/how-is/how_is/pull/131) ([duckinator](https://github.com/duckinator))
+- Fix URL in gemspec. [\#130](https://github.com/how-is/how_is/pull/130) ([duckinator](https://github.com/duckinator))
+- Gemspec: Description grammar [\#129](https://github.com/how-is/how_is/pull/129) ([olleolleolle](https://github.com/olleolleolle))
 
-### Changes
+## [v17.0.0](https://github.com/how-is/how_is/tree/v17.0.0) (2017-02-09)
+[Full Changelog](https://github.com/how-is/how_is/compare/v16.0.0...v17.0.0)
 
-* Unpin Rack version. ([#139](https://github.com/how-is/how_is/pull/139))
-* Fix --from. ([#141](https://github.com/how-is/how_is/pull/141))
+**Merged pull requests:**
 
-### Miscellaneous
+- Make from\_json parse ALL dates, not just some of them. [\#128](https://github.com/how-is/how_is/pull/128) ([duckinator](https://github.com/duckinator))
 
-Things that don't affect users of how\_is.
+## [v16.0.0](https://github.com/how-is/how_is/tree/v16.0.0) (2017-02-09)
+[Full Changelog](https://github.com/how-is/how_is/compare/v15.0.0...v16.0.0)
 
-* Fix grammar in gemspec.
-  ([#129](https://github.com/how-is/how_is/pull/129))
-* Fix URL in gemspec. ([#130](https://github.com/how-is/how_is/pull/130))
-* Remove shebang line from lib/ file.
-  ([#131](https://github.com/how-is/how_is/pull/131))
+**Merged pull requests:**
+
+- Make from\_json\(\) parse dates. [\#127](https://github.com/how-is/how_is/pull/127) ([duckinator](https://github.com/duckinator))
 
+## [v15.0.0](https://github.com/how-is/how_is/tree/v15.0.0) (2017-02-09)
+[Full Changelog](https://github.com/how-is/how_is/compare/v14.0.0...v15.0.0)
 
-## [v17.0.0]
+**Closed issues:**
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v17.0.0))
-makes `HowIs.from_json` parse _all_ dates, not just _some_ dates.
-(Whoops.)
+- include data from GitHub Pulse in Analysis [\#116](https://github.com/how-is/how_is/issues/116)
+
+**Merged pull requests:**
+
+- Implement HowIs.from\_json\(\). [\#126](https://github.com/how-is/how_is/pull/126) ([duckinator](https://github.com/duckinator))
+
+## [v14.0.0](https://github.com/how-is/how_is/tree/v14.0.0) (2017-02-09)
+[Full Changelog](https://github.com/how-is/how_is/compare/v13.0.0...v14.0.0)
+
+**Closed issues:**
+
+- Remove dead code [\#121](https://github.com/how-is/how_is/issues/121)
+- Update documentation with API changes [\#118](https://github.com/how-is/how_is/issues/118)
+- design an API [\#115](https://github.com/how-is/how_is/issues/115)
+- correct readme [\#114](https://github.com/how-is/how_is/issues/114)
+
+**Merged pull requests:**
+
+- Include Pulse data in JSON reports. [\#125](https://github.com/how-is/how_is/pull/125) ([duckinator](https://github.com/duckinator))
+- Remove dead code. [\#123](https://github.com/how-is/how_is/pull/123) ([duckinator](https://github.com/duckinator))
+- Update README.md about API redesign. [\#120](https://github.com/how-is/how_is/pull/120) ([duckinator](https://github.com/duckinator))
+- CHANGELOG typo [\#119](https://github.com/how-is/how_is/pull/119) ([olleolleolle](https://github.com/olleolleolle))
+
+## [v13.0.0](https://github.com/how-is/how_is/tree/v13.0.0) (2017-02-09)
+[Full Changelog](https://github.com/how-is/how_is/compare/v12.0.0...v13.0.0)
+
+**Closed issues:**
 
-### Changes
+- Add ISSUES.md [\#102](https://github.com/how-is/how_is/issues/102)
+- Have change log link to tags [\#100](https://github.com/how-is/how_is/issues/100)
 
-* Make `HowIs.from_json` parse _all_ dates, not just some of them.
-  ([#128](https://github.com/how-is/how_is/pull/128))
+**Merged pull requests:**
+
+- API redesign [\#117](https://github.com/how-is/how_is/pull/117) ([duckinator](https://github.com/duckinator))
+- Update README.md [\#113](https://github.com/how-is/how_is/pull/113) ([duckinator](https://github.com/duckinator))
+- remove pdfs and relax rack version [\#112](https://github.com/how-is/how_is/pull/112) ([indirect](https://github.com/indirect))
+- \[design.md\] add 'information about how\_is' section. [\#109](https://github.com/how-is/how_is/pull/109) ([duckinator](https://github.com/duckinator))
+- Specifications [\#108](https://github.com/how-is/how_is/pull/108) ([duckinator](https://github.com/duckinator))
+- Have CHANGELOG link to code snapshots. [\#107](https://github.com/how-is/how_is/pull/107) ([duckinator](https://github.com/duckinator))
+- Add link for ungrouped issues. [\#104](https://github.com/how-is/how_is/pull/104) ([duckinator](https://github.com/duckinator))
+- Add ISSUES.md. [\#103](https://github.com/how-is/how_is/pull/103) ([duckinator](https://github.com/duckinator))
+- CLI warning on single-word repository argument [\#98](https://github.com/how-is/how_is/pull/98) ([olleolleolle](https://github.com/olleolleolle))
+
+## [v12.0.0](https://github.com/how-is/how_is/tree/v12.0.0) (2016-12-11)
+[Full Changelog](https://github.com/how-is/how_is/compare/v11.0.0...v12.0.0)
+
+**Closed issues:**
+
+- ZeroDivisionError [\#91](https://github.com/how-is/how_is/issues/91)
+- Rake task\(s\) for regenerating example reports. [\#84](https://github.com/how-is/how_is/issues/84)
+- make issue\_or\_pr\_summary use kwargs [\#78](https://github.com/how-is/how_is/issues/78)
+- Define unimplemented BaseReport methods [\#77](https://github.com/how-is/how_is/issues/77)
+- Extract BaseReport [\#76](https://github.com/how-is/how_is/issues/76)
+- Release v11.0 [\#75](https://github.com/how-is/how_is/issues/75)
+- convert average age/oldest/newest to lists [\#70](https://github.com/how-is/how_is/issues/70)
+- newest PR/issue [\#69](https://github.com/how-is/how_is/issues/69)
+
+**Merged pull requests:**
 
-## [v16.0.0]
+- version bump to 12.0.0 [\#97](https://github.com/how-is/how_is/pull/97) ([duckinator](https://github.com/duckinator))
+- rake generate =\> rake generate\_reports. [\#96](https://github.com/how-is/how_is/pull/96) ([duckinator](https://github.com/duckinator))
+- Rake tasks [\#94](https://github.com/how-is/how_is/pull/94) ([duckinator](https://github.com/duckinator))
+- Fix divide by zero when no issues [\#92](https://github.com/how-is/how_is/pull/92) ([duckinator](https://github.com/duckinator))
+- Changelog v12.0 [\#89](https://github.com/how-is/how_is/pull/89) ([duckinator](https://github.com/duckinator))
+- Refactoring Report + \*Report. [\#88](https://github.com/how-is/how_is/pull/88) ([duckinator](https://github.com/duckinator))
+- Rake tasks [\#86](https://github.com/how-is/how_is/pull/86) ([duckinator](https://github.com/duckinator))
+- Newest pr issue attempt 2 [\#85](https://github.com/how-is/how_is/pull/85) ([duckinator](https://github.com/duckinator))
+- Convert issue/PR info to a list. [\#83](https://github.com/how-is/how_is/pull/83) ([duckinator](https://github.com/duckinator))
+- Improve generated HTML, for easier debugging. [\#82](https://github.com/how-is/how_is/pull/82) ([duckinator](https://github.com/duckinator))
+- Update readme [\#81](https://github.com/how-is/how_is/pull/81) ([duckinator](https://github.com/duckinator))
+- Define unimplemented methods; make github\_pulse\_summary private. [\#80](https://github.com/how-is/how_is/pull/80) ([duckinator](https://github.com/duckinator))
+- Extract BaseReport into its own file. [\#79](https://github.com/how-is/how_is/pull/79) ([duckinator](https://github.com/duckinator))
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v16.0.0))
-makes `HowIs.from_json` actually parse dates.
+## [v11.0.0](https://github.com/how-is/how_is/tree/v11.0.0) (2016-11-13)
+[Full Changelog](https://github.com/how-is/how_is/compare/v10.0.0...v11.0.0)
 
-### Changes
+**Closed issues:**
 
-* Make `HowIs.from_json` parse dates.
-  ([#127](https://github.com/how-is/how_is/pull/127))
+- Failing tests. [\#68](https://github.com/how-is/how_is/issues/68)
+- `how\_is how-is/how\_is` is broken [\#61](https://github.com/how-is/how_is/issues/61)
+- Rename export! to export\_file [\#57](https://github.com/how-is/how_is/issues/57)
+- Remove how\_is/chart.rb [\#56](https://github.com/how-is/how_is/issues/56)
+- Unknown option --report-file referenced in the README [\#51](https://github.com/how-is/how_is/issues/51)
+- Specify period for reports [\#50](https://github.com/how-is/how_is/issues/50)
+- Handle singular/plural PRs and issues properly [\#49](https://github.com/how-is/how_is/issues/49)
+- HTML graph messes up "\(No label\)" graph label [\#48](https://github.com/how-is/how_is/issues/48)
+- Document library usage. [\#45](https://github.com/how-is/how_is/issues/45)
+- Use VCR instead of files containing API responses [\#37](https://github.com/how-is/how_is/issues/37)
+- Make integration tests not rely on GitHub API [\#36](https://github.com/how-is/how_is/issues/36)
+- Integration tests [\#26](https://github.com/how-is/how_is/issues/26)
+- Links [\#18](https://github.com/how-is/how_is/issues/18)
+- \[PDF\] Show labels outside of graph [\#8](https://github.com/how-is/how_is/issues/8)
 
-## [v15.0.0]
+**Merged pull requests:**
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v15.0.0))
-implements `HowIs.from_json`.
+- Add changelog. [\#73](https://github.com/how-is/how_is/pull/73) ([duckinator](https://github.com/duckinator))
+- Fix failing tests. [\#72](https://github.com/how-is/how_is/pull/72) ([duckinator](https://github.com/duckinator))
+- Add tests for --help, -h, --version, and -v. [\#67](https://github.com/how-is/how_is/pull/67) ([duckinator](https://github.com/duckinator))
+- Test refactoring [\#66](https://github.com/how-is/how_is/pull/66) ([duckinator](https://github.com/duckinator))
+- Handle singular/plural PRs and issues correctly. [\#65](https://github.com/how-is/how_is/pull/65) ([duckinator](https://github.com/duckinator))
+- Remove duplicate period. [\#64](https://github.com/how-is/how_is/pull/64) ([duckinator](https://github.com/duckinator))
+- Handle cases where there are no issues or PRs. [\#63](https://github.com/how-is/how_is/pull/63) ([duckinator](https://github.com/duckinator))
+- Fix "No label" graph label. [\#62](https://github.com/how-is/how_is/pull/62) ([duckinator](https://github.com/duckinator))
+- Rename export! to export\_file. [\#60](https://github.com/how-is/how_is/pull/60) ([duckinator](https://github.com/duckinator))
+- Remove remnants of PDF-related stuff. [\#59](https://github.com/how-is/how_is/pull/59) ([duckinator](https://github.com/duckinator))
+- FUCK YEAH DOCUMENTATION [\#58](https://github.com/how-is/how_is/pull/58) ([duckinator](https://github.com/duckinator))
+- Specify time period for reports. [\#55](https://github.com/how-is/how_is/pull/55) ([duckinator](https://github.com/duckinator))
+- SO LONG, PDF REPORTS. YOU WILL NOT BE MISSED. [\#54](https://github.com/how-is/how_is/pull/54) ([duckinator](https://github.com/duckinator))
+- Document Ruby API. [\#53](https://github.com/how-is/how_is/pull/53) ([duckinator](https://github.com/duckinator))
+- Update roadmap.markdown [\#47](https://github.com/how-is/how_is/pull/47) ([duckinator](https://github.com/duckinator))
+- New roadmap. [\#46](https://github.com/how-is/how_is/pull/46) ([duckinator](https://github.com/duckinator))
 
-### Changes
+## [v10.0.0](https://github.com/how-is/how_is/tree/v10.0.0) (2016-09-01)
+[Full Changelog](https://github.com/how-is/how_is/compare/v9.0.0...v10.0.0)
 
-* Implemented `How_is.from_json`.
-  ([#126](https://github.com/how-is/how_is/pull/126))
+**Closed issues:**
 
-## [v14.0.0]
+- --version is broken [\#42](https://github.com/how-is/how_is/issues/42)
+- report generation fails [\#25](https://github.com/how-is/how_is/issues/25)
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v14.0.0))
-made JSON reports include Pulse data, thus making `HowIs.from_json()`
-not make any network requests at all.
+**Merged pull requests:**
 
-### Changes
+- Parser specs [\#43](https://github.com/how-is/how_is/pull/43) ([duckinator](https://github.com/duckinator))
 
-* Remove dead code. ([#123](https://github.com/how-is/how_is/pull/123))
-* Include Pulse data in JSON reports.
-  ([#125](https://github.com/how-is/how_is/pull/125))
+## [v9.0.0](https://github.com/how-is/how_is/tree/v9.0.0) (2016-08-20)
+[Full Changelog](https://github.com/how-is/how_is/compare/v8.0.0...v9.0.0)
 
-## [v13.0.0]
+**Closed issues:**
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v13.0.0))
-largely focused on an API redesign.
+- Help text is outdated. [\#33](https://github.com/how-is/how_is/issues/33)
+- `how\_is rubygems/rubygems` raises contract violation [\#32](https://github.com/how-is/how_is/issues/32)
+- Warning when executing how\_is [\#29](https://github.com/how-is/how_is/issues/29)
+- Intermittent off-by-one date error in Analyzer\#average\_date\_for test [\#21](https://github.com/how-is/how_is/issues/21)
 
-Pull requests for this release can be [viewed on
-GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-12-12..2017-02-09).
+**Merged pull requests:**
 
-### Changed
+- We're not using Cucumber + Aruba. [\#40](https://github.com/how-is/how_is/pull/40) ([duckinator](https://github.com/duckinator))
+- Option parser refactor [\#39](https://github.com/how-is/how_is/pull/39) ([duckinator](https://github.com/duckinator))
+- Fix first integration test [\#38](https://github.com/how-is/how_is/pull/38) ([duckinator](https://github.com/duckinator))
+- Update documentation. [\#35](https://github.com/how-is/how_is/pull/35) ([duckinator](https://github.com/duckinator))
+- Fix contract error [\#34](https://github.com/how-is/how_is/pull/34) ([duckinator](https://github.com/duckinator))
+- Use the correct config file in integration tests. [\#31](https://github.com/how-is/how_is/pull/31) ([duckinator](https://github.com/duckinator))
+- Remove redundant definiton of C. [\#30](https://github.com/how-is/how_is/pull/30) ([duckinator](https://github.com/duckinator))
+- Fix Analyzer\#average\_age\_for test. [\#28](https://github.com/how-is/how_is/pull/28) ([duckinator](https://github.com/duckinator))
+- Integration tests [\#27](https://github.com/how-is/how_is/pull/27) ([duckinator](https://github.com/duckinator))
 
-* API overhaul. ([#115](https://github.com/how-is/how_is/issues/115), [#117](https://github.com/how-is/how_is/pull/117))
-* Raise an exception/show a CLI warning if the provided repository name
-  isn't in the "user/repo" format.
-  ([#98](https://github.com/how-is/how_is/pull/98))
+## [v8.0.0](https://github.com/how-is/how_is/tree/v8.0.0) (2016-07-28)
+[Full Changelog](https://github.com/how-is/how_is/compare/v7.0.0...v8.0.0)
 
-## [v12.0.0]
+## [v7.0.0](https://github.com/how-is/how_is/tree/v7.0.0) (2016-07-28)
+[Full Changelog](https://github.com/how-is/how_is/compare/v6.0.0...v7.0.0)
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v12.0.0))
-largely focused on refactoring and developer experience improvements
-(e.g. adding Rake tasks and improving the generated JSON and HTML).
+## [v6.0.0](https://github.com/how-is/how_is/tree/v6.0.0) (2016-07-28)
+[Full Changelog](https://github.com/how-is/how_is/compare/v5.0.0...v6.0.0)
 
-Pull Requests for this release can be [viewed on
-GitHub](https://github.com/how-is/how_is/pulls?utf8=&q=is%3Apr%20created%3A2016-11-11..2016-12-11).
+**Merged pull requests:**
 
-### Added
+- CLI specs [\#24](https://github.com/how-is/how_is/pull/24) ([duckinator](https://github.com/duckinator))
+- Spelling in OptParser help for --config [\#23](https://github.com/how-is/how_is/pull/23) ([olleolleolle](https://github.com/olleolleolle))
 
-- Include newest PR/issue in reports.
-  ([#85](https://github.com/how-is/how_is/pull/85))
+## [v5.0.0](https://github.com/how-is/how_is/tree/v5.0.0) (2016-07-21)
+[Full Changelog](https://github.com/how-is/how_is/compare/v4.0.0...v5.0.0)
 
-### Changed
+## [v4.0.0](https://github.com/how-is/how_is/tree/v4.0.0) (2016-07-19)
+[Full Changelog](https://github.com/how-is/how_is/compare/v3.0.0...v4.0.0)
 
-- Refactoring. ([#79](https://github.com/how-is/how_is/pull/79), [#80](https://github.com/how-is/how_is/pull/80), [#82](https://github.com/how-is/how_is/pull/82), [#88](https://github.com/how-is/how_is/pull/88))
-- JSON and HTML reports have nicer source.
-  ([#82](https://github.com/how-is/how_is/pulls/82),
-  [#84](https://github.com/how-is/how_is/pulls/84))
-- Handle generating a report on a repository with no open issues.
-  ([#92](https://github.com/how-is/how_is/pull/92))
-- Add Rake tasks to make development easier. ([#86](https://github.com/how-is/how_is/pull/86), [#94](https://github.com/how-is/how_is/pull/94), [#96](https://github.com/how-is/how_is/pull/96))
-- PR/issue info is now displayed as lists instead of paragraphs. ([#83](https://github.com/how-is/how_is/pull/83))
+**Closed issues:**
 
-## [11.0.0]
+- Monthly summary [\#19](https://github.com/how-is/how_is/issues/19)
 
-This release ([snapshot](https://github.com/how-is/how_is/tree/v11.0.0))
-removed PDF reports, handles more edge cases, and improves tests.
+**Merged pull requests:**
 
-### Added
+- Add text summary. [\#22](https://github.com/how-is/how_is/pull/22) ([duckinator](https://github.com/duckinator))
 
-- Document Ruby API
+## [v3.0.0](https://github.com/how-is/how_is/tree/v3.0.0) (2016-07-13)
+[Full Changelog](https://github.com/how-is/how_is/compare/v2.0.0...v3.0.0)
 
-### Changed
+**Closed issues:**
 
-- Fixed command-line help text (it was incorrect in v10.0.0 and some earlier versions)
-- Handles generating reports for repositories with no issues and/or no PRs
-- Handles generating reports for repositories with no activity in the
-  past month
-- Tests are improved
-- Tests no longer make actual network requests
+- Exception when running `how\_is duckinator/how\_is` from master [\#16](https://github.com/how-is/how_is/issues/16)
 
-### Removed
+**Merged pull requests:**
 
-- PDF reports
+- HTML links [\#20](https://github.com/how-is/how_is/pull/20) ([duckinator](https://github.com/duckinator))
 
-## [10.0.0 and earlier]
+## [v2.0.0](https://github.com/how-is/how_is/tree/v2.0.0) (2016-06-27)
+[Full Changelog](https://github.com/how-is/how_is/compare/v1.0.0...v2.0.0)
 
-This changelog was started while working on v11.0.0.
-Prior to that, I have no idea what was added or when.
+**Closed issues:**
+
+- HTML exports [\#13](https://github.com/how-is/how_is/issues/13)
+- When importing from JSON, don't require repository name as argument. [\#10](https://github.com/how-is/how_is/issues/10)
+- Allow export to Ruby objects as well as files [\#7](https://github.com/how-is/how_is/issues/7)
+
+**Merged pull requests:**
+
+- HTML graphs [\#17](https://github.com/how-is/how_is/pull/17) ([duckinator](https://github.com/duckinator))
+
+## [v1.0.0](https://github.com/how-is/how_is/tree/v1.0.0) (2016-06-22)
+**Closed issues:**
+
+- Fix failing tests [\#15](https://github.com/how-is/how_is/issues/15)
+- Update README [\#11](https://github.com/how-is/how_is/issues/11)
+- Find a better name [\#2](https://github.com/how-is/how_is/issues/2)
+- Metrics to track [\#1](https://github.com/how-is/how_is/issues/1)
+
+**Merged pull requests:**
+
+- waffle.io Badge [\#14](https://github.com/how-is/how_is/pull/14) ([waffle-iron](https://github.com/waffle-iron))
+- Executable: Fail faster, use abort [\#9](https://github.com/how-is/how_is/pull/9) ([olleolleolle](https://github.com/olleolleolle))
+- Rotate images with MiniMagick [\#5](https://github.com/how-is/how_is/pull/5) ([olleolleolle](https://github.com/olleolleolle))
+
+
+
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
