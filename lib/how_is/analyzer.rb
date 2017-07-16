@@ -120,30 +120,9 @@ class HowIs
       return nil if issues_or_pulls.empty?
 
       ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["created_at"]) }
-      raw_average = ages.reduce(:+) / ages.length
+      average_age_in_seconds = ages.reduce(:+) / ages.length
 
-      seconds_in_a_year = 31_556_926
-      seconds_in_a_month = 2_629_743
-      seconds_in_a_week = 604_800
-      seconds_in_a_day = 86_400
-
-      years = raw_average / seconds_in_a_year
-      years_remainder = raw_average % seconds_in_a_year
-
-      months = years_remainder / seconds_in_a_month
-      months_remainder = years_remainder % seconds_in_a_month
-
-      weeks = months_remainder / seconds_in_a_week
-      weeks_remainder = months_remainder % seconds_in_a_week
-
-      days = weeks_remainder / seconds_in_a_day
-
-      values = [
-        [years, "year"],
-        [months, "month"],
-        [weeks, "week"],
-        [days, "day"],
-      ].reject { |(v, _)| v.zero? }.map { |(v, k)|
+      values = period_pairs_for(average_age_in_seconds).reject { |(v, _)| v.zero? }.map { |(v, k)|
         k += "s" if v != 1
         [v, k]
       }
@@ -212,6 +191,32 @@ class HowIs
       ret["date"] = date_for(iop)
 
       ret
+    end
+
+    SECONDS_IN_A_YEAR = 31_556_926
+    SECONDS_IN_A_MONTH = 2_629_743
+    SECONDS_IN_A_WEEK = 604_800
+    SECONDS_IN_A_DAY = 86_400
+
+    # Calculates a list of pairs of value and period label.
+    #
+    # @param age_in_seconds [Float]
+    #
+    # @return [Array<Array>] The input age_in_seconds expressed as different
+    #                        units, as pairs of value and unit name.
+    def period_pairs_for(age_in_seconds)
+      years_remainder = age_in_seconds % SECONDS_IN_A_YEAR
+
+      months_remainder = years_remainder % SECONDS_IN_A_MONTH
+
+      weeks_remainder = months_remainder % SECONDS_IN_A_WEEK
+
+      [
+        [age_in_seconds / SECONDS_IN_A_YEAR, "year"],
+        [years_remainder / SECONDS_IN_A_MONTH, "month"],
+        [months_remainder / SECONDS_IN_A_WEEK, "week"],
+        [weeks_remainder / SECONDS_IN_A_DAY, "day"],
+      ]
     end
   end
 end
