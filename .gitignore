@@ -12,3 +12,4 @@ report.html
 *.dat
 *.png
 Thumbs.db
+Gemfile.lock
