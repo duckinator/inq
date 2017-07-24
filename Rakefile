@@ -69,3 +69,28 @@ namespace :generate_reports do
 
   task :all => [:html, :json]
 end
+
+desc 'TODO: get new collaborators'
+task :collaborators do
+  # get commits since start of month
+  date = "2017-07-01"
+  user = "how-is"
+  repo = "how_is"
+
+  # /repos/:owner/:repo/commits?since=<start date for the report>
+  github = Github.new(auto_pagination: true)
+  all_commits_since = github.repos.commits.list(user: user, repo: repo, since: date)
+
+  committers_by_login = all_commits_since.body.each_with_object({}) do |e, a|
+    a[e.author.login] = e.author
+  end
+
+  puts committers_by_login
+
+  new_committers = committers_by_login.keys.each_with_object([]) do |committer, a|
+    a << committer if github.repos.commit.list(user: user, repo: repo, until: date, author: committer).count == 0
+  end
+
+  puts "New committers:"
+  puts new_committers
+end
