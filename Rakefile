@@ -69,3 +69,18 @@ namespace :generate_reports do
 
   task :all => [:html, :json]
 end
+
+desc "List new contributors. Lists committers with no earlier commits then "\
+     "given since_date (as %Y-%m-%d). Defaults to first of current month."
+task :new_contributors, [:user, :repo, :since_date] => [] do |_t, args|
+  require "how_is/contributions"
+  user = args[:user] || "how-is"
+  repo = args[:repo] || "how_is"
+  since_date = args[:since_date] || Time.now.strftime("%Y-%m-01")
+
+  puts "New committers:"
+  puts Contributions.new(github: Github.new(auto_pagination: true),
+                         since_date: since_date,
+                         user: user,
+                         repo: repo).new_contributors
+end
