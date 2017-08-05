@@ -23,7 +23,7 @@ class Contributions
   # @return [Hash{String => Hash] Committers keyed by GitHub login name
   def new_committers
     committers_by_email = {}
-    @github.repos.commits.list(user: @user, repo: @repo, since: @since_date) do |commit|
+    commits.each do |commit|
       committers_by_email[commit.author.login] = commit.author
     end
 
@@ -34,5 +34,9 @@ class Contributions
                                  until: @since_date,
                                  author: login).count.zero?
     end
+  end
+
+  def commits
+    @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
   end
 end
