@@ -4,7 +4,7 @@ require "vcr"
 
 VCR.configure do |config|
   config.default_cassette_options = {
-    record: :new_episodes
+    record: :new_episodes,
   }
 
   config.cassette_library_dir = "fixtures/vcr_cassettes"
