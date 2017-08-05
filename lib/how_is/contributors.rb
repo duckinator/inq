@@ -1,3 +1,5 @@
+# frozen_string_literal: true.
+
 # Investigates who is a new committer since given date
 #
 #   # /repos/:owner/:repo/commits?since=<start date for the report>
@@ -36,7 +38,7 @@ class Contributors
       @github.repos.commits.list(user: @user,
                                  repo: @repo,
                                  until: @since_date,
-                                 author: login).count == 0
+                                 author: login).count.zero?
     end
   end
 end
