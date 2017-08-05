@@ -3,7 +3,7 @@
 # Investigates who is a new committer since given date
 #
 #   # /repos/:owner/:repo/commits?since=<start date for the report>
-class Contributors
+class Contributions
   # @param github [Github] configured github client
   # @param since_date [String] A value which fits Repos.Commits "since" and
   #                            "until" fields. This supports many formats, for
