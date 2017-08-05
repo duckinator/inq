@@ -18,25 +18,24 @@ class Contributions
     @repo = repo
   end
 
-  # Returns a list of committers that have zero commits before the @date.
+  # Returns a list of contributors that have zero commits before the @since_date.
   #
   # @return [Hash{String => Hash] Committers keyed by GitHub login name
   def new_contributors
     # author: GitHub login, name or email by which to filter by commit author.
-    all_contributors.select do |login, _committer|
+    all_contributors.select do |email, _committer|
       @github.repos.commits.list(user: @user,
                                  repo: @repo,
                                  until: @since_date,
-                                 author: login).count.zero?
+                                 author: email).count.zero?
     end
   end
 
+  # @return [Hash{String => Hash}] Author information keyed by author's email
   def all_contributors
-    committers_by_email = {}
-    commits.each do |commit|
-      committers_by_email[commit.author.login] = commit.author
-    end
-    committers_by_email
+    commits.map do |api_response|
+      [api_response.commit.author.email, api_response.commit.author.to_h]
+    end.to_h
   end
 
   def commits
