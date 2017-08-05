@@ -33,9 +33,9 @@ class Contributions
 
   # @return [Hash{String => Hash}] Author information keyed by author's email
   def all_contributors
-    commits.map do |api_response|
+    commits.map { |api_response|
       [api_response.commit.author.email, api_response.commit.author.to_h]
-    end.to_h
+    }.to_h
   end
 
   def commits
