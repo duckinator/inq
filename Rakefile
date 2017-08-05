@@ -70,27 +70,18 @@ namespace :generate_reports do
   task :all => [:html, :json]
 end
 
-desc 'TODO: get new collaborators'
-task :collaborators do
-  # get commits since start of month
-  date = "2017-07-01"
-  user = "how-is"
-  repo = "how_is"
-
-  # /repos/:owner/:repo/commits?since=<start date for the report>
-  github = Github.new(auto_pagination: true)
-  all_commits_since = github.repos.commits.list(user: user, repo: repo, since: date)
-
-  committers_by_login = all_commits_since.body.each_with_object({}) do |e, a|
-    a[e.author.login] = e.author
-  end
-
-  puts committers_by_login
-
-  new_committers = committers_by_login.keys.each_with_object([]) do |committer, a|
-    a << committer if github.repos.commit.list(user: user, repo: repo, until: date, author: committer).count == 0
-  end
+desc "List new committers. Lists committers with no earlier commits then "\
+     "given since_date (as %Y-%m-%d). Defaults to first of current month."
+task :new_committers, [:user, :repo, :since_date] => [] do |_t, args|
+  require 'how_is/contributors'
+  user = args[:user] || "how-is"
+  repo = args[:repo] || "how_is"
+  since_date = args[:since_date] || Time.now.strftime('%Y-%m-01')
 
   puts "New committers:"
-  puts new_committers
+  puts Contributors.new(github: Github.new(auto_pagination: true),
+                                    since_date: since_date,
+                                    user: user,
+                                    repo: repo
+                                    ).new_committers
 end
