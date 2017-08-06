@@ -4,6 +4,8 @@ require "contracts"
 require "github_api"
 require "how_is/pulse"
 
+C ||= Contracts
+
 class HowIs
   ##
   # Fetches data from GitHub.

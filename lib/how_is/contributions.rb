@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "how_is/fetcher"
+
 class HowIs
   # Fetch information about who has contributed to a repository during a given
   # period.
@@ -9,7 +11,7 @@ class HowIs
   #     github = Github.new()
   #     c = HowIs::Contributions.new(github: github, start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
   #     c.commits          #=> All commits during July 2017.
-  #     c.all_contributors #=> All contributors during July 2017.
+  #     c.contributors #=> All contributors during July 2017.
   #     c.new_contributors #=> New contributors during July 2017.
   class Contributions
     # Returns an object that fetches contributor information about a particular
@@ -20,7 +22,7 @@ class HowIs
     #                            to include commits from.
     # @param user [String] GitHub user of repository.
     # @param repo [String] GitHub repository name.
-    def initialize(github:, start_date:, user:, repo:)
+    def initialize(github: Fetcher.default_github_instance, start_date:, user:, repo:)
       @github = github
 
       # IMPL. DETAIL: The external API uses "start_date" so it's clearer,
@@ -42,7 +44,7 @@ class HowIs
     # @return [Hash{String => Hash] Committers keyed by GitHub login name
     def new_contributors
       # author: GitHub login, name or email by which to filter by commit author.
-      all_contributors.select do |email, _committer|
+      @new_contributors ||= contributors.select do |email, _committer|
         # Returns true if +email+ never wrote a commit for +@repo+ before +@since_date+.
         @github.repos.commits.list(user: @user,
                                    repo: @repo,
@@ -52,34 +54,67 @@ class HowIs
     end
 
     # @return [Hash{String => Hash}] Author information keyed by author's email.
-    def all_contributors
+    def contributors
       commits.map { |api_response|
         [api_response.commit.author.email, api_response.commit.author.to_h]
       }.to_h
     end
 
-    def commits_for_branch(branch)
-      # ???
+   def commits
+      return @commits unless @commits.nil?
+
+      commits = @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
+
+      # The commits list endpoint doesn't include all commit data, e.g. stats.
+      # So, we make N requests here, where N == number of commits returned,
+      # and then we die a bit inside.
+      @commits = commits.map { |c| commit(c.sha) }
     end
 
-    def commits
-      @commits ||= @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
+    def commit(sha)
+      @commit ||= {}
+      @commit[sha] ||= @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
     end
 
+    def changes
+      if @stats.nil? || @changed_files.nil?
+        @stats = {
+          "total" => 0,
+          "additions" => 0,
+          "deletions" => 0,
+        }
+
+        @changed_files = []
+
+        commits.map do |commit|
+          commit.stats.each do |k, v|
+            @stats[k] += v
+          end
+
+          @changed_files += commit.files.map { |file| file["filename"] }
+        end
+
+        @changed_files.sort.uniq!
+      end
+
+      { "stats" => @stats, "files" => @changed_files}
+    end
+
+    # TODO: Don't hard-code the default branch.
     def default_branch
-      '??? main branch ???'
+      "master"
     end
 
     def changed_files
-      ['??? changed files ???']
+      changes["files"]
     end
 
-    def total_additions
-      -1 # TODO
+    def additions_count
+      changes["stats"]["additions"]
     end
 
-    def total_deletions
-      -1 # TODO
+    def deletions_count
+      changes["stats"]["deletions"]
     end
 
     def compare_url
@@ -88,21 +123,39 @@ class HowIs
       "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D"
     end
 
+    def pretty_start_date
+      @since_date.strftime("%b %d, %Y")
+    end
+
+    def pretty_end_date
+      @until_date.strftime("%b %d, %Y")
+    end
+
     def summary
       # TODO: Pulse has information about _all_ branches. Do we want that?
       #       If we do, we'd need to pass a branch name as the 'sha' parameter
       #       to /repos/:owner/:repo/commits.
       #       https://developer.github.com/v3/repos/commits/
 
-      p commits.first
-      <<~EOF
-        Excluding merges, <strong>#{all_contributors.length} authors</strong>
-        <strong>#{commits.length} commits</strong> have been made.
-        A total of #{changed_files} files changed, and there have been
-        <a href="#{compare_url}">
-        <strong>#{total_additions} additions</strong> and
-        <strong>#{total_deletions} deletions</strong></a>.
-      EOF
+
+      # Style options
+      # 1. In total, this month 13 authors pushed 149 commits, including 1,668 additions and 306 deletions across 78 files.
+      # 2. In total, RubyGems.org gained 21 new commits, with 4 different contributors changing 63 files. There were 851 additions and 305 deletions.
+      # 3. In total, Gemstash gained 3 new commits. 2 different authors changed 5 files, with 37 additions and 6 deletions.
+
+      "From #{pretty_start_date} through #{pretty_end_date}, #{@user}/#{@repo} gained "\
+        "<a href=\"#{compare_url}\">#{pluralize('new commit', commits.length)}</a>, " \
+        "contributed by #{pluralize("author", contributors.length)}. There " \
+        "#{additions_count == 1 ? "was" : "were"} " \
+        "#{pluralize("addition", additions_count)} and " \
+        "#{pluralize("deletion", deletions_count)} across " \
+        "#{pluralize("file", changed_files.length)}."
+    end
+
+    private
+
+    def pluralize(string, number)
+      "#{number} #{string}#{number == 1 ? '' : 's'}"
     end
   end
 end

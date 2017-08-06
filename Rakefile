@@ -79,12 +79,11 @@ task :new_contributors, [:user, :repo, :start_date] => [] do |_t, args|
   repo = args[:repo] || "how_is"
   start_date = args[:start_date] || Time.now.strftime("%Y-%m-01")
 
-  contributions = HowIs::Contributions.new(github: HowIs::Fetcher.default_github_instance,
-                                           start_date: start_date,
+  contributions = HowIs::Contributions.new(start_date: start_date,
                                            user: user,
                                            repo: repo)
 
   puts "New committers:"
-  contributions.changes
+  puts contributions.summary
   puts contributions.new_contributors
 end
