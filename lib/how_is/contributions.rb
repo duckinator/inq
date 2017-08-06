@@ -137,11 +137,6 @@ class HowIs
       #       to /repos/:owner/:repo/commits.
       #       https://developer.github.com/v3/repos/commits/
 
-      # Style options
-      # 1. In total, this month 13 authors pushed 149 commits, including 1,668 additions and 306 deletions across 78 files.
-      # 2. In total, RubyGems.org gained 21 new commits, with 4 different contributors changing 63 files. There were 851 additions and 305 deletions.
-      # 3. In total, Gemstash gained 3 new commits. 2 different authors changed 5 files, with 37 additions and 6 deletions.
-
       start_text ||= "From #{pretty_start_date} through #{pretty_end_date}"
 
       "#{start_text}, #{@user}/#{@repo} gained "\
