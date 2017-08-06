@@ -1,15 +1,23 @@
 # Change Log
 
-## [Unreleased](https://github.com/how-is/how_is/tree/HEAD)
-
-[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.4...HEAD)
+## [v18.0.5](https://github.com/how-is/how_is/tree/v18.0.5) (2017-08-06)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.4...v18.0.5)
 
 **Closed issues:**
 
+- Track new contributors [\#172](https://github.com/how-is/how_is/issues/172)
 - Stop using hashie's master branch [\#168](https://github.com/how-is/how_is/issues/168)
+- Include JSON reports in HTML reports [\#110](https://github.com/how-is/how_is/issues/110)
 
 **Merged pull requests:**
 
+- re-add Gemfile.lock to .gitignore [\#186](https://github.com/how-is/how_is/pull/186) ([duckinator](https://github.com/duckinator))
+- List new contributors during period [\#184](https://github.com/how-is/how_is/pull/184) ([olleolleolle](https://github.com/olleolleolle))
+- Remove Gemfile.lock. [\#183](https://github.com/how-is/how_is/pull/183) ([duckinator](https://github.com/duckinator))
+- Gemfile: add pry as Git dep [\#182](https://github.com/how-is/how_is/pull/182) ([olleolleolle](https://github.com/olleolleolle))
+- Add config file for github\_changelog\_generator [\#179](https://github.com/how-is/how_is/pull/179) ([olleolleolle](https://github.com/olleolleolle))
+- RuboCop linting [\#178](https://github.com/how-is/how_is/pull/178) ([olleolleolle](https://github.com/olleolleolle))
+- Use github\_changelog\_generator for generating the changelog. [\#177](https://github.com/how-is/how_is/pull/177) ([duckinator](https://github.com/duckinator))
 - Include name of rules in RuboCop output [\#175](https://github.com/how-is/how_is/pull/175) ([olleolleolle](https://github.com/olleolleolle))
 - Rubocop 0.49.1 [\#174](https://github.com/how-is/how_is/pull/174) ([olleolleolle](https://github.com/olleolleolle))
 - Rubocop warning removal [\#173](https://github.com/how-is/how_is/pull/173) ([olleolleolle](https://github.com/olleolleolle))
