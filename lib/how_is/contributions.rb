@@ -60,7 +60,7 @@ class HowIs
       }.to_h
     end
 
-   def commits
+    def commits
       return @commits unless @commits.nil?
 
       commits = @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
@@ -131,19 +131,20 @@ class HowIs
       @until_date.strftime("%b %d, %Y")
     end
 
-    def summary
+    def summary(start_text: nil)
       # TODO: Pulse has information about _all_ branches. Do we want that?
       #       If we do, we'd need to pass a branch name as the 'sha' parameter
       #       to /repos/:owner/:repo/commits.
       #       https://developer.github.com/v3/repos/commits/
-
 
       # Style options
       # 1. In total, this month 13 authors pushed 149 commits, including 1,668 additions and 306 deletions across 78 files.
       # 2. In total, RubyGems.org gained 21 new commits, with 4 different contributors changing 63 files. There were 851 additions and 305 deletions.
       # 3. In total, Gemstash gained 3 new commits. 2 different authors changed 5 files, with 37 additions and 6 deletions.
 
-      "From #{pretty_start_date} through #{pretty_end_date}, #{@user}/#{@repo} gained "\
+      start_text ||= "From #{pretty_start_date} through #{pretty_end_date}"
+
+      "#{start_text}, #{@user}/#{@repo} gained "\
         "<a href=\"#{compare_url}\">#{pluralize('new commit', commits.length)}</a>, " \
         "contributed by #{pluralize("author", contributors.length)}. There " \
         "#{additions_count == 1 ? "was" : "were"} " \
