@@ -61,7 +61,7 @@ class HowIs
     end
 
     def commits
-      return @commits unless @commits.nil?
+      return @commits if defined?(@commits)
 
       commits = @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
 
