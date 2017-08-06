@@ -3,7 +3,6 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "timecop"
-require "./spec/vcr_helper.rb"
 require "how_is"
 
 RSpec::Core::RakeTask.new(:spec) do |t|
@@ -27,6 +26,8 @@ class HelperFunctions
   end
 
   def self.generate_report(repository, format)
+    require "./spec/vcr_helper.rb"
+
     freeze_time do
       report = nil
 
@@ -71,16 +72,18 @@ namespace :generate_reports do
 end
 
 desc "List new contributors. Lists committers with no earlier commits then "\
-     "given since_date (as %Y-%m-%d). Defaults to first of current month."
-task :new_contributors, [:user, :repo, :since_date] => [] do |_t, args|
+  "given start_date (as %Y-%m-%d). Defaults to first of current month."
+task :new_contributors, [:user, :repo, :start_date] => [] do |_t, args|
   require "how_is/contributions"
   user = args[:user] || "how-is"
   repo = args[:repo] || "how_is"
-  since_date = args[:since_date] || Time.now.strftime("%Y-%m-01")
+  start_date = args[:start_date] || Time.now.strftime("%Y-%m-01")
+
+  contributions = HowIs::Contributions.new(start_date: start_date,
+                                           user: user,
+                                           repo: repo)
 
   puts "New committers:"
-  puts Contributions.new(github: Github.new(auto_pagination: true),
-                         since_date: since_date,
-                         user: user,
-                         repo: repo).new_contributors
+  puts contributions.summary
+  puts contributions.new_contributors
 end
