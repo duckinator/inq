@@ -141,8 +141,8 @@ class HowIs
 
       "#{start_text}, #{@user}/#{@repo} gained "\
         "<a href=\"#{compare_url}\">#{pluralize('new commit', commits.length)}</a>, " \
-        "contributed by #{pluralize("author", contributors.length)}. There " \
-        "#{(additions_count == 1) ? "was" : "were"} " \
+        "contributed by #{pluralize('author', contributors.length)}. There " \
+        "#{(additions_count == 1) ? 'was' : 'were'} " \
         "#{pluralize('addition', additions_count)} and " \
         "#{pluralize('deletion', deletions_count)} across " \
         "#{pluralize('file', changed_files.length)}."
