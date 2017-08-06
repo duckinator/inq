@@ -41,7 +41,7 @@ class HowIs
 
     # Returns a list of contributors that have zero commits before the @since_date.
     #
-    # @return [Hash{String => Hash] Committers keyed by GitHub login name
+    # @return [Hash{String => Hash}] Contributors keyed by email
     def new_contributors
       # author: GitHub login, name or email by which to filter by commit author.
       @new_contributors ||= contributors.select do |email, _committer|
