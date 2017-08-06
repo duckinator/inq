@@ -3,7 +3,7 @@
 require "how_is/contributions"
 
 describe HowIs::Contributions do
-  let(:github) { Github.new(auto_pagination: true) }
+  let(:github) { HowIs::Fetcher.default_github_instance }
   let(:user) { "how-is" }
   let(:repo) { "example-repository" }
   let(:start_date) { "2017-08-01" }
@@ -15,10 +15,10 @@ describe HowIs::Contributions do
                         start_date: start_date)
   }
 
-  context "#all_contributors" do
+  context "#contributors" do
     it "lists the contributors hash keyed by email" do
       VCR.use_cassette("how_is_contributions_all_contributors") do
-        expect(contributions.all_contributors.keys).to(
+        expect(contributions.contributors.keys).to(
           match_array(["me@duckie.co", "fake@duckinator.net"])
         )
       end
