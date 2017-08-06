@@ -1,5 +1,12 @@
 # Change Log
 
+## [v18.1.0](https://github.com/how-is/how_is/tree/v18.1.0) (2017-08-06)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.0.5...v18.1.0)
+
+**Merged pull requests:**
+
+- Replace Pulse scraping with API calls [\#187](https://github.com/how-is/how_is/pull/187) ([duckinator](https://github.com/duckinator))
+
 ## [v18.0.5](https://github.com/how-is/how_is/tree/v18.0.5) (2017-08-06)
 [Full Changelog](https://github.com/how-is/how_is/compare/v18.0.4...v18.0.5)
 
@@ -11,6 +18,7 @@
 
 **Merged pull requests:**
 
+- version bump -- v18.0.5 [\#188](https://github.com/how-is/how_is/pull/188) ([duckinator](https://github.com/duckinator))
 - re-add Gemfile.lock to .gitignore [\#186](https://github.com/how-is/how_is/pull/186) ([duckinator](https://github.com/duckinator))
 - List new contributors during period [\#184](https://github.com/how-is/how_is/pull/184) ([olleolleolle](https://github.com/olleolleolle))
 - Remove Gemfile.lock. [\#183](https://github.com/how-is/how_is/pull/183) ([duckinator](https://github.com/duckinator))
