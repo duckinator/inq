@@ -37,6 +37,8 @@ class HowIs
 
       @user = user
       @repo = repo
+
+      @commit = {}
     end
 
     # Returns a list of contributors that have zero commits before the @since_date.
@@ -61,18 +63,19 @@ class HowIs
     end
 
     def commits
-      return @commits if defined?(@commits)
-
-      commits = @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
-
-      # The commits list endpoint doesn't include all commit data, e.g. stats.
-      # So, we make N requests here, where N == number of commits returned,
-      # and then we die a bit inside.
-      @commits = commits.map { |c| commit(c.sha) }
+      @commits ||= begin
+        @github.repos.commits.list(user: @user,
+                                   repo: @repo,
+                                   since: @since_date).map { |c|
+          # The commits list endpoint doesn't include all commit data, e.g. stats.
+          # So, we make N requests here, where N == number of commits returned,
+          # and then we die a bit inside.
+          commit(c.sha)
+        }
+      end
     end
 
     def commit(sha)
-      @commit ||= {}
       @commit[sha] ||= @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
     end
 
