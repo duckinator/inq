@@ -6,13 +6,13 @@ describe HowIs::Contributions do
   let(:github) { Github.new(auto_pagination: true) }
   let(:user) { "how-is" }
   let(:repo) { "example-repository" }
-  let(:since_date) { "2017-01-01" }
+  let(:start_date) { "2017-08-01" }
 
   let(:contributions) {
     described_class.new(github: github,
                         user: user,
                         repo: repo,
-                        since_date: since_date)
+                        start_date: start_date)
   }
 
   context "#all_contributors" do
