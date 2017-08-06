@@ -123,7 +123,8 @@ class HowIs
     def compare_url
       since_timestamp = @since_date.to_time.to_i
       until_timestamp = @until_date.to_time.to_i
-      "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D"
+      "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}"\
+        "@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D"
     end
 
     def pretty_start_date

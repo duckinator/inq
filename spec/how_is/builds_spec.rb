@@ -12,7 +12,7 @@ describe HowIs::Builds do
 
   describe "#summary" do
     it "returns a Hash" do
-      VCR.use_cassette('how-is-how-is-travis-api-repos-builds') do
+      VCR.use_cassette("how-is-how-is-travis-api-repos-builds") do
         expect(builds.summary).to be_a(Hash)
       end
     end

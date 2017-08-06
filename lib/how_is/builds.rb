@@ -29,7 +29,7 @@ class HowIs
         "get",
         "http://api.travis-ci.org/repos/#{@user}/#{@repo}/builds?event_type=push",
         {},
-        { headers: { 'Accept' => 'application/vnd.travis-ci.2+json' } }
+        headers: {"Accept" => "application/vnd.travis-ci.2+json"}
       ).body
     end
   end
