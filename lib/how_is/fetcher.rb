@@ -10,6 +10,14 @@ class HowIs
   class Fetcher
     include Contracts::Core
 
+    # TODO: Fix this bullshit.
+    # :nodoc:
+    def self.default_github_instance
+      Github.new(auto_pagination: true) do |config|
+        config.basic_auth = ENV["HOWIS_BASIC_AUTH"] if ENV["HOWIS_BASIC_AUTH"]
+      end
+    end
+
     ##
     # Standardized representation for fetcher results.
     #
@@ -35,7 +43,7 @@ class HowIs
     def call(repository,
              github = nil,
              pulse = nil)
-      github ||= Github.new(auto_pagination: true)
+      github ||= self.class.default_github_instance
       pulse ||= HowIs::Pulse.new(repository)
       user, repo = repository.split("/", 2)
 
