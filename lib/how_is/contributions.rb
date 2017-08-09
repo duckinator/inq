@@ -37,6 +37,8 @@ class HowIs
 
       @user = user
       @repo = repo
+
+      @commit = {}
     end
 
     # Returns a list of contributors that have zero commits before the @since_date.
@@ -61,18 +63,19 @@ class HowIs
     end
 
     def commits
-      return @commits if defined?(@commits)
-
-      commits = @github.repos.commits.list(user: @user, repo: @repo, since: @since_date)
-
-      # The commits list endpoint doesn't include all commit data, e.g. stats.
-      # So, we make N requests here, where N == number of commits returned,
-      # and then we die a bit inside.
-      @commits = commits.map { |c| commit(c.sha) }
+      @commits ||= begin
+        @github.repos.commits.list(user: @user,
+                                   repo: @repo,
+                                   since: @since_date).map { |c|
+          # The commits list endpoint doesn't include all commit data, e.g. stats.
+          # So, we make N requests here, where N == number of commits returned,
+          # and then we die a bit inside.
+          commit(c.sha)
+        }
+      end
     end
 
     def commit(sha)
-      @commit ||= {}
       @commit[sha] ||= @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
     end
 
@@ -120,7 +123,7 @@ class HowIs
     def compare_url
       since_timestamp = @since_date.to_time.to_i
       until_timestamp = @until_date.to_time.to_i
-      "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D"
+      "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D" # rubocop:disable Metrics/LineLength
     end
 
     def pretty_start_date

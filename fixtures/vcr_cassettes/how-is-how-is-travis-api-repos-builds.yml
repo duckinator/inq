@@ -1,0 +1,165 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.travis-ci.org/repos/how-is/how_is/builds?event_type=push
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - TessellatorFetcher/v5.0.1
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Sun, 06 Aug 2017 19:19:39 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Location:
+      - https://api.travis-ci.org/repos/how-is/how_is/builds?event_type=push
+      X-Request-Id:
+      - 10b0ed57-ec0e-48c2-ba64-6d89e18d6ca1
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sun, 06 Aug 2017 19:19:39 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repos/how-is/how_is/builds?event_type=push
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - TessellatorFetcher/v5.0.1
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Sun, 06 Aug 2017 19:20:42 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::Api::App::Endpoint::Repos
+      X-Pattern:
+      - "/:owner_name/:name/builds"
+      X-Oauth-Scopes:
+      - public
+      X-Accepted-Oauth-Scopes:
+      - public
+      Vary:
+      - Accept,Accept-Encoding
+      Cache-Control:
+      - no-cache
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - ccc7b2b7-9214-42eb-8203-ab4b1783d7ff
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: '{"builds":[{"id":261544542,"repository_id":8014235,"commit_id":76060199,"number":"594","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T14:56:07Z","finished_at":"2017-08-06T14:57:18Z","duration":137,"job_ids":[261544543,261544544]},{"id":261544463,"repository_id":8014235,"commit_id":76060169,"number":"593","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T14:55:34Z","finished_at":"2017-08-06T14:56:46Z","duration":138,"job_ids":[261544464,261544465]},{"id":261543823,"repository_id":8014235,"commit_id":76059955,"number":"591","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T14:51:49Z","finished_at":"2017-08-06T14:53:57Z","duration":203,"job_ids":[261543824,261543825]},{"id":261542619,"repository_id":8014235,"commit_id":76059595,"number":"590","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T14:45:38Z","finished_at":"2017-08-06T14:47:27Z","duration":181,"job_ids":[261542620,261542621]},{"id":261541975,"repository_id":8014235,"commit_id":76059412,"number":"588","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T14:42:39Z","finished_at":"2017-08-06T14:45:18Z","duration":220,"job_ids":[261541976,261541977]},{"id":261541831,"repository_id":8014235,"commit_id":76059360,"number":"586","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T14:41:33Z","finished_at":"2017-08-06T14:42:58Z","duration":157,"job_ids":[261541832,261541833]},{"id":261540169,"repository_id":8014235,"commit_id":76058893,"number":"584","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"failed","started_at":"2017-08-06T14:34:55Z","finished_at":"2017-08-06T14:37:05Z","duration":247,"job_ids":[261540170,261540171]},{"id":261539470,"repository_id":8014235,"commit_id":76058657,"number":"583","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"failed","started_at":"2017-08-06T14:30:55Z","finished_at":"2017-08-06T14:32:10Z","duration":143,"job_ids":[261539471,261539472]},{"id":261538934,"repository_id":8014235,"commit_id":76058517,"number":"580","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"failed","started_at":"2017-08-06T14:28:24Z","finished_at":"2017-08-06T14:29:47Z","duration":160,"job_ids":[261538935,261538936]},{"id":261538363,"repository_id":8014235,"commit_id":76058330,"number":"578","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"failed","started_at":"2017-08-06T14:24:52Z","finished_at":"2017-08-06T14:27:08Z","duration":203,"job_ids":[261538364,261538365]},{"id":261525512,"repository_id":8014235,"commit_id":76054257,"number":"576","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T13:14:14Z","finished_at":"2017-08-06T13:16:27Z","duration":259,"job_ids":[261525513,261525514]},{"id":261517523,"repository_id":8014235,"commit_id":76051565,"number":"575","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T12:25:48Z","finished_at":"2017-08-06T12:27:03Z","duration":144,"job_ids":[261517524,261517525]},{"id":261517503,"repository_id":8014235,"commit_id":76051555,"number":"574","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T12:25:32Z","finished_at":"2017-08-06T12:27:20Z","duration":178,"job_ids":[261517504,261517505]},{"id":261514987,"repository_id":8014235,"commit_id":76050771,"number":"571","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T12:10:31Z","finished_at":"2017-08-06T12:12:16Z","duration":188,"job_ids":[261514988,261514989]},{"id":261513254,"repository_id":8014235,"commit_id":76050220,"number":"570","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T12:00:41Z","finished_at":"2017-08-06T12:04:12Z","duration":269,"job_ids":[261513255,261513256]},{"id":261482578,"repository_id":8014235,"commit_id":76039974,"number":"569","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T08:40:46Z","finished_at":"2017-08-06T08:42:30Z","duration":143,"job_ids":[261482579,261482580]},{"id":261457931,"repository_id":8014235,"commit_id":76032205,"number":"567","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-06T05:25:31Z","finished_at":"2017-08-06T05:26:36Z","duration":127,"job_ids":[261457932,261457933]},{"id":261399424,"repository_id":8014235,"commit_id":76015649,"number":"566","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-08-05T21:22:52Z","finished_at":"2017-08-05T21:24:24Z","duration":163,"job_ids":[261399425,261399426]},{"id":257049384,"repository_id":8014235,"commit_id":74727936,"number":"551","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-24T20:29:15Z","finished_at":"2017-07-24T20:30:24Z","duration":133,"job_ids":[257049385,257049386]},{"id":257047944,"repository_id":8014235,"commit_id":74727483,"number":"549","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-24T20:25:37Z","finished_at":"2017-07-24T20:27:42Z","duration":189,"job_ids":[257047946,257047948]},{"id":257044081,"repository_id":8014235,"commit_id":74726378,"number":"548","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-24T20:15:30Z","finished_at":"2017-07-24T20:17:19Z","duration":208,"job_ids":[257044082,257044083]},{"id":254221687,"repository_id":8014235,"commit_id":73884312,"number":"544","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-16T19:43:21Z","finished_at":"2017-07-16T19:45:15Z","duration":164,"job_ids":[254221688,254221689]},{"id":254221003,"repository_id":8014235,"commit_id":73884104,"number":"542","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-16T19:40:11Z","finished_at":"2017-07-16T19:42:04Z","duration":224,"job_ids":[254221004,254221005]},{"id":254178194,"repository_id":8014235,"commit_id":73871523,"number":"532","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-16T16:24:08Z","finished_at":"2017-07-16T16:25:44Z","duration":161,"job_ids":[254178195,254178196]},{"id":254177271,"repository_id":8014235,"commit_id":73871232,"number":"529","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"precise"},"state":"passed","started_at":"2017-07-16T16:19:33Z","finished_at":"2017-07-16T16:21:34Z","duration":218,"job_ids":[254177272,254177273]}],"commits":[{"id":76060199,"sha":"5d148159a2d5e64f817cc0a844f5be8cd3b586ff","branch":"v18.1.0","message":"Merge
+        pull request #190 from how-is/new-release\n\nbump version -- 18.1.0","committed_at":null,"author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/v18.1.0","pull_request_number":null},{"id":76060169,"sha":"5d148159a2d5e64f817cc0a844f5be8cd3b586ff","branch":"master","message":"Merge
+        pull request #190 from how-is/new-release\n\nbump version -- 18.1.0","committed_at":"2017-08-06T14:55:30Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/591a16aa48ec...5d148159a2d5","pull_request_number":null},{"id":76059955,"sha":"407f8d59d932ffa868cedf9a745bcaa767db38af","branch":"new-release","message":"bump
+        version -- 18.1.0","committed_at":"2017-08-06T14:51:36Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/407f8d59d932","pull_request_number":null},{"id":76059595,"sha":"591a16aa48ec4000b40391d0c0970722c576d7f1","branch":"master","message":"Merge
+        pull request #187 from how-is/replace-pulse-with-api-calls\n\n[WIP] Replace
+        Pulse scraping with API calls","committed_at":"2017-08-06T14:45:31Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/25d9cafea1ba...591a16aa48ec","pull_request_number":null},{"id":76059412,"sha":"9869738c7a0f591212f2f0e1f1fb4a3897b57c3d","branch":"replace-pulse-with-api-calls","message":"follow
+        rubocop style guide","committed_at":"2017-08-06T14:42:04Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/3e4b53fa3a99...9869738c7a0f","pull_request_number":null},{"id":76059360,"sha":"3e4b53fa3a993fa2b13143ec037d7d8b1455e6c5","branch":"replace-pulse-with-api-calls","message":"fix
+        warning","committed_at":"2017-08-06T14:41:10Z","author_name":"Ellen Marie
+        Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/8a7efd57b650...3e4b53fa3a99","pull_request_number":null},{"id":76058893,"sha":"8a7efd57b650065685bd43faccb9ce8d2b5e68e4","branch":"replace-pulse-with-api-calls","message":"remove
+        unneccessary comment","committed_at":"2017-08-06T14:34:48Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/6ac661226c15...8a7efd57b650","pull_request_number":null},{"id":76058657,"sha":"6ac661226c159260056c619fd582188a676c0a63","branch":"replace-pulse-with-api-calls","message":"misc
+        cleanup","committed_at":"2017-08-06T14:29:31Z","author_name":"Ellen Marie
+        Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/ae42b759f810...6ac661226c15","pull_request_number":null},{"id":76058517,"sha":"ae42b759f810af9db4fe02fb90a61273865af569","branch":"replace-pulse-with-api-calls","message":"^.^","committed_at":"2017-08-06T14:28:18Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/e73594a7477e...ae42b759f810","pull_request_number":null},{"id":76058330,"sha":"e73594a7477e27662b27f5cc1d4e632c704a9993","branch":"replace-pulse-with-api-calls","message":"WOOOOOOOOO","committed_at":"2017-08-06T14:24:44Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/d714b771a1fd...e73594a7477e","pull_request_number":null},{"id":76054257,"sha":"d714b771a1fde5a5e615f3b1e15c4fb7038fbb00","branch":"replace-pulse-with-api-calls","message":"fix
+        Rakefile, handle authentication.","committed_at":"2017-08-06T13:13:03Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/8074b4861928...d714b771a1fd","pull_request_number":null},{"id":76051565,"sha":"25d9cafea1ba25f114f6bcaabb18974fd745a4d3","branch":"v18.0.5","message":"Merge
+        pull request #188 from how-is/new-release\n\nversion bump -- v18.0.5","committed_at":null,"author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/v18.0.5","pull_request_number":null},{"id":76051555,"sha":"25d9cafea1ba25f114f6bcaabb18974fd745a4d3","branch":"master","message":"Merge
+        pull request #188 from how-is/new-release\n\nversion bump -- v18.0.5","committed_at":"2017-08-06T12:25:28Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/406d29d0d78e...25d9cafea1ba","pull_request_number":null},{"id":76050771,"sha":"54ddc4564208b271764c64019d521b23f0350e43","branch":"new-release","message":"version
+        bump -- v18.0.5","committed_at":"2017-08-06T12:10:22Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/54ddc4564208","pull_request_number":null},{"id":76050220,"sha":"8074b48619283f9dc124401bf5b336e78bc15eb4","branch":"replace-pulse-with-api-calls","message":"beginning
+        of work on replacing Pulse","committed_at":"2017-08-06T12:00:29Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/8074b4861928","pull_request_number":null},{"id":76039974,"sha":"406d29d0d78e3e8bf930c18ee779aca3c70f462c","branch":"master","message":"Merge
+        pull request #186 from how-is/ignore-gemfile-lock\n\nre-add Gemfile.lock to
+        .gitignore","committed_at":"2017-08-06T08:40:37Z","author_name":"Ellen Marie
+        Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/7ab3658ef795...406d29d0d78e","pull_request_number":null},{"id":76032205,"sha":"8b676f7d2d501385c4e533cb428d800e90c8fa85","branch":"ignore-gemfile-lock","message":"re-add
+        Gemfile.lock to .gitignore","committed_at":"2017-08-06T05:25:18Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/8b676f7d2d50","pull_request_number":null},{"id":76015649,"sha":"7ab3658ef795581837d5a2a38f830566cd3d1901","branch":"master","message":"Merge
+        pull request #184 from olleolleolle/feature/track-new-contributors\n\nList
+        new contributors during period","committed_at":"2017-08-05T21:22:47Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/6baf9704252e...7ab3658ef795","pull_request_number":null},{"id":74727936,"sha":"6baf9704252e08989c6119f0d9b5fd931bf7a1e2","branch":"master","message":"Merge
+        pull request #183 from how-is/remove-gemfile-lock\n\nRemove Gemfile.lock.","committed_at":"2017-07-24T20:29:09Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/d22d6fa70b0d...6baf9704252e","pull_request_number":null},{"id":74727483,"sha":"2549a25b5a2eea47623c31c2101fc2d7c57119e5","branch":"remove-gemfile-lock","message":"Remove
+        Gemfile.lock.\n\nSee: http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/","committed_at":"2017-07-24T20:23:53Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/2549a25b5a2e","pull_request_number":null},{"id":74726378,"sha":"d22d6fa70b0d952cf16c538498752659b97bfa3c","branch":"master","message":"Merge
+        pull request #182 from olleolleolle/fix/pr-180-replacement\n\nGemfile: add
+        pry as Git dep","committed_at":"2017-07-24T20:15:24Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/7402d28c9a5c...d22d6fa70b0d","pull_request_number":null},{"id":73884312,"sha":"7402d28c9a5c99d00d6d7d7864ddde0d1ed839f4","branch":"master","message":"Merge
+        pull request #179 from olleolleolle/fix/params-file-for-github_changelog_generator\n\nAdd
+        config file for github_changelog_generator","committed_at":"2017-07-16T19:43:14Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/d2311beacc83...7402d28c9a5c","pull_request_number":null},{"id":73884104,"sha":"d2311beacc8380e7f7c3ca37180ba5deb7ed9181","branch":"master","message":"Merge
+        pull request #178 from olleolleolle/fix/rubocop-warnings\n\nRuboCop linting","committed_at":"2017-07-16T19:40:05Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/50a9b616043f...d2311beacc83","pull_request_number":null},{"id":73871523,"sha":"50a9b616043fdadfcb262d68c5be32bb5f350c5d","branch":"master","message":"Merge
+        pull request #177 from how-is/changelog-stuff\n\nUse github_changelog_generator
+        for generating the changelog.","committed_at":"2017-07-16T16:23:56Z","author_name":"Ellen
+        Marie Dash","author_email":"the@smallest.dog","committer_name":"GitHub","committer_email":"noreply@github.com","compare_url":"https://github.com/how-is/how_is/compare/b4a24011f4c9...50a9b616043f","pull_request_number":null},{"id":73871232,"sha":"27b252d3625d198ded7dee32a86387a8ec613588","branch":"changelog-stuff","message":"Use
+        github_changelog_generator for generating the changelog!","committed_at":"2017-07-16T16:19:20Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/27b252d3625d","pull_request_number":null}]}'
+    http_version: 
+  recorded_at: Sun, 06 Aug 2017 19:20:42 GMT
+recorded_with: VCR 3.0.3
