@@ -103,9 +103,9 @@ class HowIs
       {"stats" => @stats, "files" => @changed_files}
     end
 
-    # TODO: Don't hard-code the default branch.
     def default_branch
-      "master"
+      @default_branch ||= @github.repos.get(user: @user,
+                                            repo: @repo).default_branch
     end
 
     def changed_files
