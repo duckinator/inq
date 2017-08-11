@@ -34,4 +34,12 @@ describe HowIs::Contributions do
       end
     end
   end
+
+  context "#default_branch" do
+    it "fetches default branch" do
+      VCR.use_cassette("how_is_contributions_default_branch") do
+        expect(contributions.default_branch).to eq "master"
+      end
+    end
+  end
 end
