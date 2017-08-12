@@ -103,11 +103,6 @@ class HowIs
       {"stats" => @stats, "files" => @changed_files}
     end
 
-    def default_branch
-      @default_branch ||= @github.repos.get(user: @user,
-                                            repo: @repo).default_branch
-    end
-
     def changed_files
       changes["files"]
     end
@@ -124,6 +119,11 @@ class HowIs
       since_timestamp = @since_date.to_time.to_i
       until_timestamp = @until_date.to_time.to_i
       "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D" # rubocop:disable Metrics/LineLength
+    end
+
+    def default_branch
+      @default_branch ||= @github.repos.get(user: @user,
+        repo: @repo).default_branch
     end
 
     def summary(start_text: nil)
