@@ -103,11 +103,6 @@ class HowIs
       {"stats" => @stats, "files" => @changed_files}
     end
 
-    def default_branch
-      @default_branch ||= @github.repos.get(user: @user,
-                                            repo: @repo).default_branch
-    end
-
     def changed_files
       changes["files"]
     end
@@ -126,12 +121,9 @@ class HowIs
       "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D" # rubocop:disable Metrics/LineLength
     end
 
-    def pretty_start_date
-      @since_date.strftime("%b %d, %Y")
-    end
-
-    def pretty_end_date
-      @until_date.strftime("%b %d, %Y")
+    def default_branch
+      @default_branch ||= @github.repos.get(user: @user,
+        repo: @repo).default_branch
     end
 
     def summary(start_text: nil)
@@ -140,7 +132,7 @@ class HowIs
       #       to /repos/:owner/:repo/commits.
       #       https://developer.github.com/v3/repos/commits/
 
-      start_text ||= "From #{pretty_start_date} through #{pretty_end_date}"
+      start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
       "#{start_text}, #{@user}/#{@repo} gained "\
         "<a href=\"#{compare_url}\">#{pluralize('new commit', commits.length)}</a>, " \
@@ -152,6 +144,10 @@ class HowIs
     end
 
     private
+
+    def pretty_date(date)
+      date.strftime("%b %d, %Y")
+    end
 
     def pluralize(string, number)
       "#{number} #{string}#{(number == 1) ? '' : 's'}"
