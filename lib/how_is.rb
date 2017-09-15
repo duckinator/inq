@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "how_is/version"
-require "optparse"
 require "contracts"
 require "cacert"
 

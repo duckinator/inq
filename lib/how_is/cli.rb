@@ -1,7 +1,7 @@
 # NOPE THIS IS BROKEN // frozen_string_literal: // true
 
 require "how_is"
-require "slop"
+require "optparse"
 
 class HowIs::CLI
   DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}".freeze
@@ -90,7 +90,7 @@ class HowIs::CLI
     arguments = opt_parser.parse!(argv)
 
     # TODO: Should this raise an exception instead?
-    keep_only = lambda { |options, key| options.select {|k, v| k == key } }
+    keep_only = lambda { |options_, key| options_.select {|k, v| k == key } }
 
     if options[:help]
       # If --help is passed, _only_ accept --help.
