@@ -27,83 +27,104 @@ class HowIs::CLI
   # Parses +argv+ to generate an options Hash to control the behavior of
   # the library.
   def self.parse(argv)
-    opts = Slop::Options.new
+    options = {}
+    opts_ = nil
 
-    # General usage information.
-    opts.banner =
-      <<-EOF.gsub(/ *\| ?/, '')
+    opt_parser = OptionParser.new do |opts|
+      opts_ = opts
+      # General usage information.
+      opts.banner =
+        <<-EOF.gsub(/ *\| ?/, '')
         | Usage: how_is REPOSITORY [--report REPORT_FILE] [--from JSON_FILE]
         |        how_is --config CONFIG_FILE
         |
         | Where REPOSITORY is <GitHub username or org>/<repository name>.
-        | CONFIG_FILE defaults to how_is.yml.
         |
         | E.g., if you wanted to check https://github.com/how-is/how_is,
         | you'd run `how_is how-is/how_is`.
         |
       EOF
 
-    opts.separator ""
-    opts.separator "Options:"
+      opts.separator ""
+      opts.separator "Options:"
 
-    # The extra spaces make this a lot easier to comprehend, so we don't want
-    # RuboCop to complain about them.
-    #
-    # Same for line length.
-    #
-    # rubocop:disable Style/SpaceBeforeFirstArg
-    # rubocop:disable Metrics/LineLength
+      # The extra spaces make this a lot easier to comprehend, so we don't want
+      # RuboCop to complain about them.
+      #
+      # Same for line length.
+      #
+      # rubocop:disable Style/SpaceBeforeFirstArg
+      # rubocop:disable Metrics/LineLength
 
-    # Allowed arguments:
-    opts.bool   "-h", "--help",    "Print help text"
-    opts.string       "--config",  "YAML config file, used to generate a group of reports"
-    opts.string       "--from",    "JSON report file, used instead of fetching the data again"
-    opts.string       "--report",  "output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})"
-    opts.bool   "-v", "--version", "prints the version"
+      opts.on("--config CONFIG_FILE",
+              "YAML config file, used to generate a group of reports") do |filename|
+        options[:config] = filename
+      end
 
+      opts.on("--from JSON_FILE",
+              "JSON report file, used instead of fetching the data again") do |filename|
+        options[:from] = filename
+      end
+
+      opts.on("--report REPORT_FILE",
+              "Output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})") do |filename|
+        options[:report] = filename
+      end
+
+      opts.on("-v", "--version",
+              "Prints version information") do
+        options[:version] = true
+      end
+
+      opts.on("-h", "--help",
+              "Print help text") do
+        options[:help] = true
+      end
+    end
     # rubocop:enable Style/SpaceBeforeFirstArg
     # rubocop:enable Metrics/LineLength
 
-    # Parse the arguments.
-    parser    = Slop::Parser.new(opts)
-    result    = parser.parse(argv)
+    # `.parse!` populates the `options` Hash that was
+    # created above, and the return value is any non-flag
+    # arguments.
+    arguments = opt_parser.parse!(argv)
 
-    # +options+ is a Hash of flags/values.
-    options   = result.to_hash
-    # +arguments+ is an Array of values that don't correspond to a flag.
-    arguments = result.arguments
+    # TODO: Should this raise an exception instead?
+    keep_only = lambda { |options, key| options.select {|k, v| k == key } }
 
-    # If --report isn't specified, default to DEFAULT_REPORT_FILE.
-    options[:report] ||= DEFAULT_REPORT_FILE
+    if options[:help]
+      # If --help is passed, _only_ accept --help.
+      options = keep_only.call(options, :help)
+    elsif options[:version]
+      # If --version is passed, _only_ accept --version.
+      options = keep_only.call(options, :version)
+    elsif options[:config]
+      # If --config is passed, _only_ accept --config.
+      options = keep_only.call(options, :config)
+    elsif options[:from]
+      # Handle --from.
 
-    # The following are only useful if they're not nil or false.
-    # Removing them here simplifies contracts and keyword args for
-    # other APIs.
-    options.delete(:config)   unless options[:config]
-    options.delete(:help)     unless options[:help]
-    options.delete(:version)  unless options[:version]
+      raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
 
-    # If we can't export to the specified file, raise an exception.
-    unless HowIs.can_export_to?(options[:report])
-      raise InvalidOutputFileError, "Invalid file: #{options[:report]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
-    end
+      # Opening the file here is a bit gross, but I couldn't find a
+      # better way to do it. -@duckinator
+      options[:repository] = JSON.parse(open(options[:from]).read)['repository']
 
-    # If we pass --config, other options (excluding --help and
-    # --version) are ignored. As such, when --config is passed,
-    # everything in this `unless` block is irrelevant.
-    unless options[:config]
-      if options[:from]
-        raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
+      raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
+    else
+      # If we get here, we're generating a report from the command line,
+      # without using --from or --config.
 
-        # Opening the file here is a bit gross, but I couldn't find a
-        # better way to do it. -@duckinator
-        options[:repository] = JSON.parse(open(options[:from]).read)['repository']
+      # If --report isn't specified, default to DEFAULT_REPORT_FILE.
+      options[:report] ||= DEFAULT_REPORT_FILE
 
-        raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
+      # If we can't export to the specified file, raise an exception.
+      unless HowIs.can_export_to?(options[:report])
+        raise InvalidOutputFileError, "Invalid file: #{options[:report]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
+      end
 
-      elsif argv.length >= 1
+      if argv.length >= 1
         options[:repository] = argv.delete_at(0)
-
       else
         raise NoRepositoryError, "No repository specified."
       end
@@ -116,7 +137,7 @@ class HowIs::CLI
     #   +arguments+: an Array of arguments that don't have a
     #     corresponding flags.
     {
-      opts: opts,
+      opts: opts_,
       options: options,
       arguments: arguments,
     }
