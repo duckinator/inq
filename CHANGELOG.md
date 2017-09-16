@@ -1,10 +1,33 @@
 # Change Log
 
+## [19.0.0](https://github.com/how-is/how_is/tree/19.0.0) (2017-09-15)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.1.0...19.0.0)
+
+**Closed issues:**
+
+- move away from slop bc of conflicts [\#202](https://github.com/how-is/how_is/issues/202)
+- Contributions: look up default\_branch in GitHub API [\#195](https://github.com/how-is/how_is/issues/195)
+- Only enable VCR when used [\#185](https://github.com/how-is/how_is/issues/185)
+
+**Merged pull requests:**
+
+- Move away from slop [\#205](https://github.com/how-is/how_is/pull/205) ([duckinator](https://github.com/duckinator))
+- add .codeclimate.yml [\#204](https://github.com/how-is/how_is/pull/204) ([duckinator](https://github.com/duckinator))
+- quick refactor of spec/capture\_warnings. [\#203](https://github.com/how-is/how_is/pull/203) ([duckinator](https://github.com/duckinator))
+- \[docs\] YARD annotation for example [\#201](https://github.com/how-is/how_is/pull/201) ([olleolleolle](https://github.com/olleolleolle))
+- Refactor: introduce pretty\_date\(date\) [\#199](https://github.com/how-is/how_is/pull/199) ([olleolleolle](https://github.com/olleolleolle))
+- update VCR fixture [\#197](https://github.com/how-is/how_is/pull/197) ([duckinator](https://github.com/duckinator))
+- Contributions: default\_branch fetching [\#196](https://github.com/how-is/how_is/pull/196) ([olleolleolle](https://github.com/olleolleolle))
+- update tessellator-fetcher to ~\>5.0.2 [\#193](https://github.com/how-is/how_is/pull/193) ([duckinator](https://github.com/duckinator))
+- Builds: a Travis CI API fetcher [\#192](https://github.com/how-is/how_is/pull/192) ([olleolleolle](https://github.com/olleolleolle))
+- Contributions: YARD docblock type typo; typos [\#191](https://github.com/how-is/how_is/pull/191) ([olleolleolle](https://github.com/olleolleolle))
+
 ## [v18.1.0](https://github.com/how-is/how_is/tree/v18.1.0) (2017-08-06)
 [Full Changelog](https://github.com/how-is/how_is/compare/v18.0.5...v18.1.0)
 
 **Merged pull requests:**
 
+- bump version -- 18.1.0 [\#190](https://github.com/how-is/how_is/pull/190) ([duckinator](https://github.com/duckinator))
 - Replace Pulse scraping with API calls [\#187](https://github.com/how-is/how_is/pull/187) ([duckinator](https://github.com/duckinator))
 
 ## [v18.0.5](https://github.com/how-is/how_is/tree/v18.0.5) (2017-08-06)
