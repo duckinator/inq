@@ -76,6 +76,51 @@ class HowIs
   end
 
   ##
+  # Generates a series of report files based on a config Hash.
+  #
+  # @param config [Hash] A Hash specifying the formats, locations, etc
+  #   of the reports to generate.
+  # @param github (You don't need this.) An object to replace the GitHub
+  #   class when fetching data.
+  # @param report_class (You don't need this.) An object to replace the
+  #   HowIs::Report class when generating reports.
+  def self.from_config(config,
+        github: nil,
+        report_class: nil)
+    report_class ||= HowIs::Report
+
+    date = Date.strptime(Time.now.to_i.to_s, "%s")
+    friendly_date = date.strftime("%B %d, %y")
+
+    analysis = HowIs.generate_analysis(repository: config["repository"], github: github)
+
+    report_data = {
+      repository: config["repository"],
+      date: date,
+      friendly_date: friendly_date,
+    }
+
+    generated_reports = {}
+
+    config["reports"].map do |format, report_config|
+      # Sometimes report_data has unused keys, which generates a warning, but
+      # we're okay with it.
+      filename = silence_warnings { report_config["filename"] % report_data }
+      file = File.join(report_config["directory"], filename)
+
+      report = report_class.export(analysis, format)
+
+      result = build_report(report_config["frontmatter"], report_data, report)
+
+      generated_reports[file] = result
+
+      result
+    end
+
+    generated_reports
+  end
+
+  ##
   # Returns a list of possible export formats.
   #
   # @return [Array<String>] An array of the types of reports you can generate.
@@ -135,51 +180,6 @@ class HowIs
     YAML.dump(frontmatter)
   end
   private_class_method :generate_frontmatter
-
-  ##
-  # Generates a series of report files based on a config Hash.
-  #
-  # @param config [Hash] A Hash specifying the formats, locations, etc
-  #   of the reports to generate.
-  # @param github (You don't need this.) An object to replace the GitHub
-  #   class when fetching data.
-  # @param report_class (You don't need this.) An object to replace the
-  #   HowIs::Report class when generating reports.
-  def self.from_config(config,
-        github: nil,
-        report_class: nil)
-    report_class ||= HowIs::Report
-
-    date = Date.strptime(Time.now.to_i.to_s, "%s")
-    friendly_date = date.strftime("%B %d, %y")
-
-    analysis = HowIs.generate_analysis(repository: config["repository"], github: github)
-
-    report_data = {
-      repository: config["repository"],
-      date: date,
-      friendly_date: friendly_date,
-    }
-
-    generated_reports = {}
-
-    config["reports"].map do |format, report_config|
-      # Sometimes report_data has unused keys, which generates a warning, but
-      # we're okay with it.
-      filename = silence_warnings { report_config["filename"] % report_data }
-      file = File.join(report_config["directory"], filename)
-
-      report = report_class.export(analysis, format)
-
-      result = build_report(report_config["frontmatter"], report_data, report)
-
-      generated_reports[file] = result
-
-      result
-    end
-
-    generated_reports
-  end
 
   # Combine the frontmatter, report data, and raw report into a report with
   # frontmatter.
