@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 require "contracts"
-require "ostruct"
 require "date"
 require "json"
 
 class HowIs
-  ##
-  # Represents a completed analysis of the repository being analyzed.
-  class Analysis < OpenStruct
-  end
+  require "how_is/analysis"
 
   # Creates Analysis objects with input data formatted in useful ways.
   class Analyzer
