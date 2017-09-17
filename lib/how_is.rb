@@ -196,6 +196,7 @@ class HowIs
 
     str.string
   end
+  private_class_method :build_report
 
   # @example
   #   convert_keys({'foo' => 'bar'}, :to_sym)
