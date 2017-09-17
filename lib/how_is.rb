@@ -78,8 +78,7 @@ class HowIs
   ##
   # Returns a list of possible export formats.
   #
-  # @return [Array<String>] An array of the types of reports you can
-  #   generate.
+  # @return [Array<String>] An array of the types of reports you can generate.
   def self.supported_formats
     report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
     report_constants.map { |x| x.to_s.split("Report").first.downcase }
