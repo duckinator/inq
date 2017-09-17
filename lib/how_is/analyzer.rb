@@ -29,10 +29,8 @@ class HowIs
     # Generates and returns an analysis.
     #
     # @param data [Fetcher::Results] The results gathered by Fetcher.
-    # @param analysis_class (You don't need this.) A class to use instead of
-    #   HowIs::Analysis.
-    Contract Fetcher::Results, C::KeywordArgs[analysis_class: C::Optional[Class]] => Analysis
-    def self.from_fetcher_results(data, analysis_class: Analysis)
+    Contract Fetcher::Results => Analysis
+    def self.from_fetcher_results(data)
       issues = data.issues
       pulls = data.pulls
 
