@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class HowIs
+  # Miscellaneous helper methods for the Analysis class.
   module AnalysisHelpers
     # Given an Array of issues or pulls, return a Hash specifying how many
     # issues or pulls use each label.
