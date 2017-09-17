@@ -135,6 +135,7 @@ class HowIs
 
     YAML.dump(frontmatter)
   end
+  private_class_method :generate_frontmatter
 
   ##
   # Generates a series of report files based on a config Hash.
