@@ -142,18 +142,12 @@ class HowIs
 
   # Generate an analysis.
   # TODO: This may make more sense as Analysis.new().
-  # TODO: Nothing overrides +fetcher+ and +analyzer+. Remove ability to do so.
-  # FIXME: THIS CODE AND EVERYTHING ASSOCIATED WITH IT IS A FUCKING ATROCITY.
   Contract C::KeywordArgs[repository: String,
-                          fetcher: C::Optional[Class],
-                          analyzer: C::Optional[Class],
                           github: C::Optional[C::Any]] => C::Any
   def self.generate_analysis(repository:,
-        fetcher: Fetcher.new,
-        analyzer: Analyzer.new,
         github: nil)
-    raw_data = fetcher.call(repository, github)
-    analysis = analyzer.call(raw_data)
+    raw_data = Fetcher.new.call(repository, github)
+    analysis = Analyzer.new.call(raw_data)
 
     analysis
   end
