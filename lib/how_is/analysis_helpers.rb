@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HowIs
   module AnalysisHelpers
     # Given an Array of issues or pulls, return a Hash specifying how many
