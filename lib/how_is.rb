@@ -113,6 +113,7 @@ class HowIs
 
     analysis
   end
+  private_class_method :generate_analysis
 
   # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
   #
