@@ -70,7 +70,7 @@ class HowIs
   # @return [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the provided report data as a cache.
   def self.from_hash(data)
-    analysis = HowIs::Analyzer.from_hash(data)
+    analysis = HowIs::Analysis.from_hash(data)
 
     new(analysis.repository, analysis)
   end
@@ -147,7 +147,7 @@ class HowIs
   def self.generate_analysis(repository:,
         github: nil)
     raw_data = Fetcher.new.call(repository, github)
-    analysis = Analyzer.new.call(raw_data)
+    analysis = Analysis.from_fetcher_results(raw_data)
 
     analysis
   end
