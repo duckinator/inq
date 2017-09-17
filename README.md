@@ -1,5 +1,8 @@
-[![Stories in Ready](https://badge.waffle.io/how-is/how_is.png?label=ready&title=Ready)](https://waffle.io/how-is/how_is)
-[![Build Status](https://travis-ci.org/how-is/how_is.svg?branch=master)](https://travis-ci.org/how-is/how_is)
+[![Waffle.io](https://img.shields.io/waffle/label/how-is/how_is/in%20progress.svg)](https://waffle.io/how-is/how_is)
+[![Travis](https://img.shields.io/travis/how-is/how_is.svg)](https://travis-ci.org/how-is/how_is)
+[![Code Climate](https://img.shields.io/codeclimate/github/how-is/how_is.svg)](https://codeclimate.com/github/how-is/how_is)
+[![Gem](https://img.shields.io/gem/v/how_is.svg)](https://rubygems.org/gems/how_is)
+[![Gemnasium](https://img.shields.io/gemnasium/how-is/how_is.svg)](https://gemnasium.com/github.com/how-is/how_is)
 
 # How is [your repo]?
 
