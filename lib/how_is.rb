@@ -15,7 +15,7 @@ class HowIs
   include Contracts::Core
 
   require "how_is/fetcher"
-  require "how_is/analyzer"
+  require "how_is/analysis"
   require "how_is/report"
 
   DEFAULT_FORMAT = :html
