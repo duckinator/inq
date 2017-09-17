@@ -78,6 +78,5 @@ class HowIs
 
       Analysis.new(hash)
     end
-
   end
 end
