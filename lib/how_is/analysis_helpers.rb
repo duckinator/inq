@@ -1,84 +1,8 @@
 # frozen_string_literal: true
 
-require "contracts"
-require "ostruct"
-require "date"
-require "json"
-
 class HowIs
-  ##
-  # Represents a completed analysis of the repository being analyzed.
-  class Analysis < OpenStruct
-  end
-
-  # Creates Analysis objects with input data formatted in useful ways.
-  class Analyzer
-    include Contracts::Core
-
-    ##
-    # Raised when attempting to import to an unsupported format.
-    class UnsupportedImportFormat < StandardError
-      def initialize(format)
-        super("Unsupported import format: #{format}")
-      end
-    end
-
-    ##
-    # Generates and returns an analysis.
-    #
-    # @param data [Fetcher::Results] The results gathered by Fetcher.
-    # @param analysis_class (You don't need this.) A class to use instead of
-    #   HowIs::Analysis.
-    Contract Fetcher::Results, C::KeywordArgs[analysis_class: C::Optional[Class]] => Analysis
-    def call(data, analysis_class: Analysis)
-      issues = data.issues
-      pulls = data.pulls
-
-      analysis_class.new(
-        issues_url: "https://github.com/#{data.repository}/issues",
-        pulls_url: "https://github.com/#{data.repository}/pulls",
-
-        repository: data.repository,
-
-        number_of_issues:  issues.length,
-        number_of_pulls:   pulls.length,
-
-        issues_with_label: with_label_links(num_with_label(issues), data.repository),
-        issues_with_no_label: {"link" => nil, "total" => num_with_no_label(issues)},
-
-        average_issue_age: average_age_for(issues),
-        average_pull_age:  average_age_for(pulls),
-
-        oldest_issue: issue_or_pull_to_hash(oldest_for(issues)),
-        oldest_pull: issue_or_pull_to_hash(oldest_for(pulls)),
-
-        newest_issue: issue_or_pull_to_hash(newest_for(issues)),
-        newest_pull: issue_or_pull_to_hash(newest_for(pulls)),
-
-        pulse: data.pulse
-      )
-    end
-
-    ##
-    # Generates an analysis from a hash of report data.
-    #
-    # @param data [Hash] The hash to generate an Analysis from.
-    def self.from_hash(data)
-      hash = data.map { |k, v|
-        v = DateTime.parse(v) if k.end_with?("_date")
-
-        [k, v]
-      }.to_h
-
-      hash.keys.each do |key|
-        next unless hash[key].is_a?(Hash) && hash[key]["date"]
-
-        hash[key]["date"] = DateTime.parse(hash[key]["date"])
-      end
-
-      Analysis.new(hash)
-    end
-
+  # Miscellaneous helper methods for the Analysis class.
+  module AnalysisHelpers
     # Given an Array of issues or pulls, return a Hash specifying how many
     # issues or pulls use each label.
     def num_with_label(issues_or_pulls)

@@ -15,7 +15,7 @@ class HowIs
   include Contracts::Core
 
   require "how_is/fetcher"
-  require "how_is/analyzer"
+  require "how_is/analysis"
   require "how_is/report"
 
   DEFAULT_FORMAT = :html
@@ -70,70 +70,9 @@ class HowIs
   # @return [HowIs] A HowIs object that can be used for generating other
   #   reports, treating the provided report data as a cache.
   def self.from_hash(data)
-    analysis = HowIs::Analyzer.from_hash(data)
+    analysis = HowIs::Analysis.from_hash(data)
 
     new(analysis.repository, analysis)
-  end
-
-  ##
-  # Returns a list of possible export formats.
-  #
-  # @return [Array<String>] An array of the types of reports you can
-  #   generate.
-  def self.supported_formats
-    report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
-    report_constants.map { |x| x.to_s.split("Report").first.downcase }
-  end
-
-  ##
-  # Returns whether or not the specified +file+ can be exported to.
-  #
-  # @param file [String] A filename.
-  # @return [Boolean] +true+ if HowIs can export to the file, +false+
-  #   if it can't.
-  def self.can_export_to?(file)
-    # TODO: Check if the file is writable?
-    supported_formats.include?(file.split(".").last)
-  end
-
-  # Generate an analysis.
-  # TODO: This may make more sense as Analysis.new().
-  # TODO: Nothing overrides +fetcher+ and +analyzer+. Remove ability to do so.
-  # FIXME: THIS CODE AND EVERYTHING ASSOCIATED WITH IT IS A FUCKING ATROCITY.
-  Contract C::KeywordArgs[repository: String,
-                          fetcher: C::Optional[Class],
-                          analyzer: C::Optional[Class],
-                          github: C::Optional[C::Any]] => C::Any
-  def self.generate_analysis(repository:,
-        fetcher: Fetcher.new,
-        analyzer: Analyzer.new,
-        github: nil)
-    raw_data = fetcher.call(repository, github)
-    analysis = analyzer.call(raw_data)
-
-    analysis
-  end
-
-  # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
-  #
-  # E.g.,
-  #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
-  # =>  "---\nfoo: bar asdf\n"
-  Contract C::HashOf[C::Or[String, Symbol] => String],
-           C::HashOf[C::Or[String, Symbol] => C::Any] => String
-  def self.generate_frontmatter(frontmatter, report_data)
-    frontmatter = convert_keys(frontmatter, :to_s)
-    report_data = convert_keys(report_data, :to_sym)
-
-    frontmatter = frontmatter.map { |k, v|
-      # Sometimes report_data has unused keys, which generates a warning, but
-      # we're okay with it.
-      v = silence_warnings { v % report_data }
-
-      [k, v]
-    }.to_h
-
-    YAML.dump(frontmatter)
   end
 
   ##
@@ -181,6 +120,61 @@ class HowIs
     generated_reports
   end
 
+  ##
+  # Returns a list of possible export formats.
+  #
+  # @return [Array<String>] An array of the types of reports you can generate.
+  def self.supported_formats
+    report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
+    report_constants.map { |x| x.to_s.split("Report").first.downcase }
+  end
+
+  ##
+  # Returns whether or not the specified +file+ can be exported to.
+  #
+  # @param file [String] A filename.
+  # @return [Boolean] +true+ if HowIs can export to the file, +false+
+  #   if it can't.
+  def self.can_export_to?(file)
+    # TODO: Check if the file is writable?
+    supported_formats.include?(file.split(".").last)
+  end
+
+  # Generate an analysis.
+  # TODO: This may make more sense as Analysis.new().
+  Contract C::KeywordArgs[repository: String,
+                          github: C::Optional[C::Any]] => C::Any
+  def self.generate_analysis(repository:,
+        github: nil)
+    raw_data = Fetcher.new.call(repository, github)
+    analysis = Analysis.from_fetcher_results(raw_data)
+
+    analysis
+  end
+
+  # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
+  #
+  # E.g.,
+  #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
+  # =>  "---\nfoo: bar asdf\n"
+  Contract C::HashOf[C::Or[String, Symbol] => String],
+           C::HashOf[C::Or[String, Symbol] => C::Any] => String
+  def self.generate_frontmatter(frontmatter, report_data)
+    frontmatter = convert_keys(frontmatter, :to_s)
+    report_data = convert_keys(report_data, :to_sym)
+
+    frontmatter = frontmatter.map { |k, v|
+      # Sometimes report_data has unused keys, which generates a warning, but
+      # we're okay with it.
+      v = silence_warnings { v % report_data }
+
+      [k, v]
+    }.to_h
+
+    YAML.dump(frontmatter)
+  end
+  private_class_method :generate_frontmatter
+
   # Combine the frontmatter, report data, and raw report into a report with
   # frontmatter.
   def self.build_report(frontmatter, report_data, report)
@@ -196,6 +190,7 @@ class HowIs
 
     str.string
   end
+  private_class_method :build_report
 
   # @example
   #   convert_keys({'foo' => 'bar'}, :to_sym)
