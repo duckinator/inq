@@ -70,6 +70,14 @@ describe HowIs::Contributions do
     end
   end
 
+  context "#changed_files" do
+    it "returns a hash containing all of the changed files" do
+      VCR.use_cassette("how_is_contributions_changed_files") do
+        expect(contributions.changed_files).to eq(["README.md"])
+      end
+    end
+  end
+
   context "#default_branch" do
     it "fetches default branch" do
       VCR.use_cassette("how_is_contributions_default_branch") do
