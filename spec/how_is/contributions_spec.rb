@@ -42,8 +42,8 @@ describe HowIs::Contributions do
     it "lists all commits during the month starting with the specified date" do
       VCR.use_cassette("how_is_contributions_commits") do
         commit_shas = contributions.commits.map(&:commit).map { |commit|
-                        commit['tree']['sha']
-                      }
+          commit["tree"]["sha"]
+        }
         expect(commit_shas).to eq([
           "6911e0637822f44b83f04f47821adab56fdbc0b9",
           "8286e548e330cfe01efcf7189f4df1fa53e777a7",
