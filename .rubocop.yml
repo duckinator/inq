@@ -73,9 +73,9 @@ Style/AsciiIdentifiers:
 Style/BlockDelimiters:
   Enabled: false
 
+# There's more nuance around this than RuboCop seems capable of.
 Style/BracesAroundHashParameters:
-  Enabled: true
-  EnforcedStyle: braces
+  Enabled: false
 
 # Unicode is good, mkay?
 Style/Encoding:
