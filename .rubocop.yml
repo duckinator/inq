@@ -73,6 +73,10 @@ Style/AsciiIdentifiers:
 Style/BlockDelimiters:
   Enabled: false
 
+Style/BracesAroundHashParameters:
+  Enabled: true
+  EnforcedStyle: braces
+
 # Unicode is good, mkay?
 Style/Encoding:
   Enabled: true
