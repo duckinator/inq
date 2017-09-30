@@ -94,6 +94,14 @@ describe HowIs::Contributions do
     end
   end
 
+  context "#compare_url" do
+    it "returns the GitHub URL that shows information about the specified period" do
+      VCR.use_cassette("how_is_contributions_compare_url") do
+        expect(contributions.compare_url).to eq("https://github.com/how-is/example-repository/compare/master@%7B1501560000%7D...master@%7B1504238400%7D")
+      end
+    end
+  end
+
   context "#default_branch" do
     it "fetches default branch" do
       VCR.use_cassette("how_is_contributions_default_branch") do
