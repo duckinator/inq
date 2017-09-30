@@ -118,6 +118,14 @@ Style/FrozenStringLiteralComment:
 Style/HashSyntax:
   EnforcedStyle: no_mixed_keys
 
+Layout/IndentHash:
+  Enabled: true
+  EnforcedStyle: consistent
+
+Layout/IndentArray:
+  Enabled: true
+  EnforcedStyle: consistent
+
 # I deplore assignments in conditions and never want them in any codebase
 # I have direct control over.
 Style/ParenthesesAroundCondition:
