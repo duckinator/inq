@@ -25,12 +25,47 @@ describe HowIs::Contributions do
     end
   end
 
+  # NOTE: This implicitly tests #contributors. (Because it doesn't work right
+  #       if #contributors doesn't.)
   context "#new_contributors" do
-    it "lists only the new contributors since the given date" do
+    it "lists only the new contributors during the month starting with the specified date" do
       VCR.use_cassette("how_is_contributions_new_contributors") do
         expect(contributions.new_contributors.keys).to(
           match_array(["fake@duckinator.net"])
         )
+      end
+    end
+  end
+
+  # NOTE: This implicitly tests #commit, since it includes #commit's output.
+  context "#commits" do
+    it "lists all commits during the month starting with the specified date" do
+      VCR.use_cassette("how_is_contributions_commits") do
+        commit_shas = contributions.commits.map(&:commit).map { |commit|
+                        commit['tree']['sha']
+                      }
+        expect(commit_shas).to eq([
+          "6911e0637822f44b83f04f47821adab56fdbc0b9",
+          "8286e548e330cfe01efcf7189f4df1fa53e777a7",
+        ])
+      end
+    end
+  end
+
+  context "#changes" do
+    # TODO: Phrase this better.
+    it "returns a hash containing all of the changed stats and files" do
+      VCR.use_cassette("how_is_contributions_changes") do
+        results_hash = contributions.changes
+        stats = results_hash["stats"]
+        files = results_hash["files"]
+
+        expect(stats).to eq({
+          "total"     => 3,
+          "additions" => 2,
+          "deletions" => 1,
+        })
+        expect(files).to eq(["README.md"])
       end
     end
   end
