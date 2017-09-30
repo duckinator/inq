@@ -78,6 +78,22 @@ describe HowIs::Contributions do
     end
   end
 
+  context "#additions_count" do
+    it "returns the number of additions during the specified period" do
+      VCR.use_cassette("how_is_contributions_additions_count") do
+        expect(contributions.additions_count).to eq(2)
+      end
+    end
+  end
+
+  context "#deletions_count" do
+    it "returns the number of deletions during the specified period" do
+      VCR.use_cassette("how_is_contributions_deletions_count") do
+        expect(contributions.deletions_count).to eq(1)
+      end
+    end
+  end
+
   context "#default_branch" do
     it "fetches default branch" do
       VCR.use_cassette("how_is_contributions_default_branch") do
