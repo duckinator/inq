@@ -109,4 +109,14 @@ describe HowIs::Contributions do
       end
     end
   end
+
+  context "#summary" do
+    it "generate a summary of the changes" do
+      VCR.use_cassette("how_is_contributions_summary") do
+        summary = 'From Aug 01, 2017 through Sep 01, 2017, how-is/example-repository gained <a href="https://github.com/how-is/example-repository/compare/master@%7B1501560000%7D...master@%7B1504238400%7D">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file.'
+
+        expect(contributions.summary).to eq summary
+      end
+    end
+  end
 end
