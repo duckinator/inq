@@ -118,6 +118,14 @@ describe HowIs::Contributions do
         expect(contributions.summary).to eq summary
       end
     end
+
+    it "lets you change the beginning text" do
+      VCR.use_cassette("how_is_contributions_summary_2") do
+        expect(contributions.summary(start_text: "woof")).to start_with(
+          "woof, how-is/example-repository"
+        )
+      end
+    end
   end
 
   context "#pretty_date" do
