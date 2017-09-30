@@ -97,7 +97,7 @@ class HowIs
           @changed_files += commit.files.map { |file| file["filename"] }
         end
 
-        @changed_files.sort.uniq!
+        @changed_files = @changed_files.sort.uniq
       end
 
       {"stats" => @stats, "files" => @changed_files}
