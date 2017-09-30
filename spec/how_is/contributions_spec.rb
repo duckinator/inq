@@ -119,4 +119,11 @@ describe HowIs::Contributions do
       end
     end
   end
+
+  context "#pretty_date" do
+    it "formats the date correctly" do
+      date = Date.new(2017, 01, 02)
+      expect(contributions.send(:pretty_date, date)).to eq("Jan 02, 2017")
+    end
+  end
 end
