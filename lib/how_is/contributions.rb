@@ -90,8 +90,8 @@ class HowIs
         @changed_files = []
 
         commits.map do |commit|
-          commit.stats.each do |k, v|
-            @stats[k] += v
+          @stats.keys.each do |key|
+            @stats[key] += commit.stats[key]
           end
 
           @changed_files += commit.files.map { |file| file["filename"] }
