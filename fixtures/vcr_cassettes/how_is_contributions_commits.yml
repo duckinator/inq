@@ -2,81 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2017-01-01
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.17.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 05 Aug 2017 21:05:34 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '60'
-      X-Ratelimit-Remaining:
-      - '6'
-      X-Ratelimit-Reset:
-      - '1501967489'
-      Cache-Control:
-      - public, max-age=60, s-maxage=60
-      Vary:
-      - Accept
-      Etag:
-      - W/"c4e64de253131e8983284594017e505c"
-      Last-Modified:
-      - Sat, 05 Aug 2017 20:39:01 GMT
-      X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
-        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.046194'
-      X-Github-Request-Id:
-      - DA1A:795E:9C82C1:19614C6:5986331E
-    body:
-      encoding: ASCII-8BIT
-      string: '[{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"message":"meep","tree":{"sha":"6911e0637822f44b83f04f47821adab56fdbc0b9","url":"https://api.github.com/repos/how-is/example-repository/git/trees/6911e0637822f44b83f04f47821adab56fdbc0b9"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comment_count":0},"url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","html_url":"https://github.com/how-is/example-repository/commit/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[{"sha":"3794aa1c4b76623748faf280abe5760b76823162","url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162"}]},{"sha":"3794aa1c4b76623748faf280abe5760b76823162","commit":{"author":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"committer":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"message":"test
-        commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}]}]'
-    http_version: 
-  recorded_at: Sat, 05 Aug 2017 21:05:34 GMT
-- request:
-    method: get
     uri: https://api.github.com/repos/how-is/example-repository/commits?since=2017-08-01
     body:
       encoding: US-ASCII
@@ -98,7 +23,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 06 Aug 2017 11:59:36 GMT
+      - Sat, 30 Sep 2017 04:14:02 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -108,9 +33,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '60'
       X-Ratelimit-Remaining:
-      - '53'
+      - '59'
       X-Ratelimit-Reset:
-      - '1502024144'
+      - '1506748442'
       Cache-Control:
       - public, max-age=60, s-maxage=60
       Vary:
@@ -137,9 +62,9 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Runtime-Rack:
-      - '0.039385'
+      - '0.064377'
       X-Github-Request-Id:
-      - 9E8E:1896:1744691:2CC0D3E:598704A8
+      - AF6E:7A69:1621BD4:384FEDE:59CF1A0A
     body:
       encoding: ASCII-8BIT
       string: '[{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
@@ -149,7 +74,7 @@ http_interactions:
         author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"message":"test
         commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}]}]'
     http_version: 
-  recorded_at: Sun, 06 Aug 2017 11:59:36 GMT
+  recorded_at: Sat, 30 Sep 2017 04:14:02 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557
@@ -163,8 +88,6 @@ http_interactions:
       - utf-8
       User-Agent:
       - Github API Ruby Gem 0.17.0
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -175,7 +98,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 06 Aug 2017 14:38:46 GMT
+      - Sat, 30 Sep 2017 04:14:03 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -183,23 +106,19 @@ http_interactions:
       Status:
       - 200 OK
       X-Ratelimit-Limit:
-      - '5000'
+      - '60'
       X-Ratelimit-Remaining:
-      - '4267'
+      - '58'
       X-Ratelimit-Reset:
-      - '1502032380'
+      - '1506748442'
       Cache-Control:
-      - private, max-age=60, s-maxage=60
+      - public, max-age=60, s-maxage=60
       Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept
       Etag:
-      - W/"bd5838b7415002651312599a6ef25d69"
+      - W/"ea2c9c70eddab42617bda21ec5fec73c"
       Last-Modified:
       - Sat, 05 Aug 2017 20:39:01 GMT
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -218,9 +137,9 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Runtime-Rack:
-      - '0.038322'
+      - '0.072409'
       X-Github-Request-Id:
-      - BF04:189C:147E7B6:343A31C:598729F5
+      - 9400:7A68:1944A38:3259C1A:59CF1A0A
     body:
       encoding: ASCII-8BIT
       string: '{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
@@ -229,7 +148,7 @@ http_interactions:
         -1,3 +1,3 @@\n # example-repository\n \n-Example repository for testing how_is.\n+An
         example repository for testing how_is."}]}'
     http_version: 
-  recorded_at: Sun, 06 Aug 2017 14:38:46 GMT
+  recorded_at: Sat, 30 Sep 2017 04:14:03 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162
@@ -243,8 +162,6 @@ http_interactions:
       - utf-8
       User-Agent:
       - Github API Ruby Gem 0.17.0
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -255,7 +172,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 06 Aug 2017 14:38:46 GMT
+      - Sat, 30 Sep 2017 04:14:03 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -263,23 +180,19 @@ http_interactions:
       Status:
       - 200 OK
       X-Ratelimit-Limit:
-      - '5000'
+      - '60'
       X-Ratelimit-Remaining:
-      - '4266'
+      - '57'
       X-Ratelimit-Reset:
-      - '1502032380'
+      - '1506748442'
       Cache-Control:
-      - private, max-age=60, s-maxage=60
+      - public, max-age=60, s-maxage=60
       Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept
       Etag:
-      - W/"525a26315dba9559a411b937118bfbf6"
+      - W/"cc9258d67db223a8a17727616b35ce28"
       Last-Modified:
       - Sat, 05 Aug 2017 20:23:10 GMT
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
@@ -298,9 +211,9 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Runtime-Rack:
-      - '0.023286'
+      - '0.066913'
       X-Github-Request-Id:
-      - 800C:189C:147E7C7:343A349:598729F6
+      - AF72:7A69:1621C1E:384FF6E:59CF1A0B
     body:
       encoding: ASCII-8BIT
       string: '{"sha":"3794aa1c4b76623748faf280abe5760b76823162","commit":{"author":{"name":"fake
@@ -309,7 +222,7 @@ http_interactions:
         commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}],"stats":{"total":1,"additions":1,"deletions":0},"files":[{"sha":"a69ca6962d2a86d7c5a041338938e0b4fe6bf515","filename":"README.md","status":"modified","additions":1,"deletions":0,"changes":1,"blob_url":"https://github.com/how-is/example-repository/blob/3794aa1c4b76623748faf280abe5760b76823162/README.md","raw_url":"https://github.com/how-is/example-repository/raw/3794aa1c4b76623748faf280abe5760b76823162/README.md","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/README.md?ref=3794aa1c4b76623748faf280abe5760b76823162","patch":"@@
         -1,2 +1,3 @@\n # example-repository\n+\n Example repository for testing how_is."}]}'
     http_version: 
-  recorded_at: Sun, 06 Aug 2017 14:38:46 GMT
+  recorded_at: Sat, 30 Sep 2017 04:14:03 GMT
 - request:
     method: get
     uri: https://api.github.com/repos/how-is/example-repository/commits?since=2017-08-01T00:00:00%2B00:00
@@ -345,7 +258,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4967'
+      - '4963'
       X-Ratelimit-Reset:
       - '1506825323'
       Cache-Control:
@@ -378,9 +291,9 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Runtime-Rack:
-      - '0.068716'
+      - '0.052147'
       X-Github-Request-Id:
-      - C21C:5D12:186664D:31A46C2:59D053A7
+      - C224:5D13:160EB1E:371EC14:59D053A8
     body:
       encoding: ASCII-8BIT
       string: '[{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen

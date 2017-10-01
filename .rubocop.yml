@@ -73,6 +73,10 @@ Style/AsciiIdentifiers:
 Style/BlockDelimiters:
   Enabled: false
 
+# There's more nuance around this than RuboCop seems capable of.
+Style/BracesAroundHashParameters:
+  Enabled: false
+
 # Unicode is good, mkay?
 Style/Encoding:
   Enabled: true
@@ -113,6 +117,14 @@ Style/FrozenStringLiteralComment:
 # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/HashSyntax
 Style/HashSyntax:
   EnforcedStyle: no_mixed_keys
+
+Layout/IndentHash:
+  Enabled: true
+  EnforcedStyle: consistent
+
+Layout/IndentArray:
+  Enabled: true
+  EnforcedStyle: consistent
 
 # I deplore assignments in conditions and never want them in any codebase
 # I have direct control over.

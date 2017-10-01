@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "how_is/fetcher"
+require "date"
 
 class HowIs
   # Fetch information about who has contributed to a repository during a given
@@ -28,17 +29,26 @@ class HowIs
       # IMPL. DETAIL: The external API uses "start_date" so it's clearer,
       #               but internally we use "since_date" to match GitHub's API.
 
-      @since_date = Date.strptime(start_date, "%Y-%m-%d")
+      # NOTE: Use DateTime because it defaults to UTC and that's less gross
+      #       than trying to get Date to use UTC.
+      #
+      #       Not using UTC for this results in #compare_url giving different
+      #       results for different time zones, which makes it harder to test.
+      #
+      #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
+      @since_date = DateTime.strptime(start_date, "%Y-%m-%d")
 
       d = @since_date.day
       m = @since_date.month
       y = @since_date.year
-      @until_date = Date.new(y, m + 1, d)
+      @until_date = DateTime.new(y, m + 1, d)
 
       @user = user
       @repo = repo
 
       @commit = {}
+      @stats = nil
+      @changed_files = nil
     end
 
     # Returns a list of contributors that have zero commits before the @since_date.
@@ -90,14 +100,14 @@ class HowIs
         @changed_files = []
 
         commits.map do |commit|
-          commit.stats.each do |k, v|
-            @stats[k] += v
+          @stats.keys.each do |key|
+            @stats[key] += commit.stats[key]
           end
 
           @changed_files += commit.files.map { |file| file["filename"] }
         end
 
-        @changed_files.sort.uniq!
+        @changed_files = @changed_files.sort.uniq
       end
 
       {"stats" => @stats, "files" => @changed_files}
