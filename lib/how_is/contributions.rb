@@ -31,6 +31,11 @@ class HowIs
 
       # NOTE: Use DateTime because it defaults to UTC and that's less gross
       #       than trying to get Date to use UTC.
+      #
+      #       Not using UTC for this results in #compare_url giving different
+      #       results for different time zones, which makes it harder to test.
+      #
+      #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
       @since_date = DateTime.strptime(start_date, "%Y-%m-%d")
 
       d = @since_date.day
