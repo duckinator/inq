@@ -3,6 +3,7 @@
 require "how_is/version"
 require "contracts"
 require "cacert"
+require "date"
 
 Cacert.set_in_env
 
@@ -89,7 +90,7 @@ class HowIs
         report_class: nil)
     report_class ||= HowIs::Report
 
-    date = Date.strptime(Time.now.to_i.to_s, "%s")
+    date = DateTime.strptime(Time.now.to_i.to_s, "%s")
     friendly_date = date.strftime("%B %d, %y")
 
     analysis = HowIs.generate_analysis(repository: config["repository"], github: github)

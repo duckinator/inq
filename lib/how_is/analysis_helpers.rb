@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "date"
+
 class HowIs
   # Miscellaneous helper methods for the Analysis class.
   module AnalysisHelpers
@@ -32,7 +34,7 @@ class HowIs
     # Given an Array of dates, average the timestamps and return the date that
     # represents.
     def average_date_for(issues_or_pulls)
-      timestamps = issues_or_pulls.map { |iop| Date.parse(iop["created_at"]).strftime("%s").to_i }
+      timestamps = issues_or_pulls.map { |iop| DateTime.parse(iop["created_at"]).strftime("%s").to_i }
       average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
 
       DateTime.strptime(average_timestamp.to_s, "%s")
