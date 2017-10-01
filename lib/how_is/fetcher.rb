@@ -25,12 +25,12 @@ class HowIs
     #
     # Implemented as a class instead of passing around a Hash so that it can
     # be more easily referenced by Contracts.
-    Results = Struct.new(:repository, :issues, :pulls, :pulse) do
+    Results = Struct.new(:repository, :issues, :pulls) do
       include Contracts::Core
 
       Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String => nil
-      def initialize(repository, issues, pulls, pulse)
-        super(repository, issues, pulls, pulse)
+      def initialize(repository, issues, pulls)
+        super(repository, issues, pulls)
       end
 
       # Struct defines #to_h, but not #to_hash, so we alias them.
@@ -39,15 +39,19 @@ class HowIs
 
     ##
     # Fetches repository information from GitHub and returns a Results object.
-    Contract String,
-      C::Or[C::RespondTo[:issues, :pulls], nil],
-      C::Or[C::RespondTo[:html_summary], nil] => Results
+    Contract String, String,
+      C::Or[C::RespondTo[:issues, :pulls], nil] => Results
     def call(repository,
-             github = nil,
-             pulse = nil)
-      github ||= self.class.default_github_instance
-      pulse ||= HowIs::Pulse.new(repository)
+             start_date,
+             github = nil)
       user, repo = repository.split("/", 2)
+
+      github ||= self.class.default_github_instance
+      contributions = HowIs::Contributions.new(
+        start_date: start_date,
+        user: user,
+        repo: repo
+      )
 
       unless user && repo
         raise HowIs::CLI::OptionsError, "To generate a report from GitHub, " \
@@ -58,7 +62,7 @@ class HowIs
       issues  = github.issues.list user: user, repo: repo
       pulls   = github.pulls.list  user: user, repo: repo
 
-      summary = pulse.html_summary
+      summary = contributions.summary
 
       Results.new(
         repository,
