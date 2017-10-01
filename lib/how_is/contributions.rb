@@ -39,6 +39,8 @@ class HowIs
       @repo = repo
 
       @commit = {}
+      @stats = nil
+      @changed_files = nil
     end
 
     # Returns a list of contributors that have zero commits before the @since_date.
