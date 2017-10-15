@@ -163,26 +163,22 @@ describe HowIs do
       reports = nil
 
       VCR.use_cassette("how-is-from-config-frontmatter") do
-        reports = HowIs.from_config(config, github: github, report_class: report_class)
+        reports = HowIs.from_config(config, report_class: report_class)
       end
 
       actual_html = reports["output/report.html"]
       actual_json = reports["output/report.json"]
 
-      expected_html = <<~EOF
+      expected_frontmatter = <<~EOF
         ---
         title: rubygems/rubygems report
         layout: default
         ---
 
-        [report]
       EOF
-      # Not valid JSON, because report_class.export() is the same static string
-      # regardless of format.
-      expected_json = "[report]\n"
 
-      expect(actual_html).to eq(expected_html)
-      expect(actual_json).to eq(expected_json)
+      expect(actual_html).to start_with(expected_frontmatter)
+      expect(actual_json).to start_with(expected_frontmatter)
     end
   end
 end

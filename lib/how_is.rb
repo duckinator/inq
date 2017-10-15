@@ -83,8 +83,6 @@ class HowIs
   #   of the reports to generate.
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
-  # @param github (You don't need this.) An object to replace the GitHub
-  #   class when fetching data.
   # @param report_class (You don't need this.) An object to replace the
   #   HowIs::Report class when generating reports.
   def self.from_config(config, date,
@@ -103,8 +101,7 @@ class HowIs
     start_date = DateTime.new(y, m - 1, d).strftime("%Y-%m-%d")
 
     analysis = HowIs.generate_analysis(repository: config["repository"],
-                                       start_date: start_date,
-                                       github: github)
+                                       start_date: start_date)
 
     report_data = {
       repository: config["repository"],
@@ -155,10 +152,9 @@ class HowIs
   # Generate an analysis.
   # TODO: This may make more sense as Analysis.new().
   Contract C::KeywordArgs[repository: String,
-                          start_date: String,
-                          github: C::Optional[C::Any]] => C::Any
-  def self.generate_analysis(repository:, start_date:, github: nil)
-    raw_data = Fetcher.new.call(repository, start_date, github)
+                          start_date: String] => C::Any
+  def self.generate_analysis(repository:, start_date:)
+    raw_data = Fetcher.new.call(repository, start_date)
     analysis = Analysis.from_fetcher_results(raw_data)
 
     analysis

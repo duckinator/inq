@@ -9,8 +9,7 @@ class HowIs
   #
   # Usage:
   #
-  #     github = Github.new()
-  #     c = HowIs::Contributions.new(github: github, start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
+  #     c = HowIs::Contributions.new(start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
   #     c.commits          #=> All commits during July 2017.
   #     c.contributors #=> All contributors during July 2017.
   #     c.new_contributors #=> New contributors during July 2017.
@@ -18,13 +17,12 @@ class HowIs
     # Returns an object that fetches contributor information about a particular
     # repository for a month-long period starting on +start_date+.
     #
-    # @param github [Github] Github client instance.
     # @param start_date [String] Date in the format YYYY-MM-DD. The first date
     #                            to include commits from.
     # @param user [String] GitHub user of repository.
     # @param repo [String] GitHub repository name.
-    def initialize(github: Fetcher.default_github_instance, start_date:, user:, repo:)
-      @github = github
+    def initialize(start_date:, user:, repo:)
+      @github = Fetcher.default_github_instance
 
       # IMPL. DETAIL: The external API uses "start_date" so it's clearer,
       #               but internally we use "since_date" to match GitHub's API.

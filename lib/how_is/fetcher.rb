@@ -39,14 +39,12 @@ class HowIs
 
     ##
     # Fetches repository information from GitHub and returns a Results object.
-    Contract String, String,
-      C::Or[C::RespondTo[:issues, :pulls], nil] => Results
-    def call(repository,
-             start_date,
-             github = nil)
+    Contract String, String => Results
+    def call(repository, start_date)
       user, repo = repository.split("/", 2)
 
-      github ||= self.class.default_github_instance
+      github = self.class.default_github_instance
+
       contributions = HowIs::Contributions.new(
         start_date: start_date,
         user: user,
