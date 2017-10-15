@@ -40,5 +40,5 @@
     "number": 4,
     "date": "2016-08-07T04:02:59+00:00"
   },
-  "pulse": "There hasn't been any activity on how-is/example-repository in the last month."
+  "summary": "From Nov 01, 2016 through Dec 01, 2016, how-is/example-repository gained <a href=\"https://github.com/how-is/example-repository/compare/master@%7B1477958400%7D...master@%7B1480550400%7D\">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file."
 }

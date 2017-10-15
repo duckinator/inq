@@ -22,7 +22,7 @@ class HowIs
       # TODO: Stop pretending everyone who runs how_is is in UTC.
       text "Monthly report, ending on #{DateTime.now.new_offset(0).strftime('%B %e, %Y')}."
 
-      text analysis.pulse
+      text analysis.summary
 
       header "Pull Requests"
       issue_or_pr_summary "pull", "pull request"

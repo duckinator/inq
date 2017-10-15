@@ -49,7 +49,7 @@ describe HowIs do
 
           VCR.use_cassette("how-is-with-config-file") do
             expect {
-              reports = HowIs.from_config(YAML.load_file(HOW_IS_CONFIG_FILE))
+              reports = HowIs.from_config(YAML.load_file(HOW_IS_CONFIG_FILE), "2017-08-01")
             }.to_not output.to_stderr
           end
 
@@ -70,7 +70,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual = HowIs.new("how-is/example-repository").to_html
+          actual = HowIs.new("how-is/example-repository", start_date: "2016-11-01").to_html
         }.to_not output.to_stderr
       end
 
@@ -85,7 +85,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual = HowIs.new("how-is/example-repository").to_json
+          actual = HowIs.new("how-is/example-repository", start_date: "2016-11-01").to_json
         }.to_not output.to_stderr
       end
 
@@ -100,7 +100,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-empty-repository") do
         expect {
-          actual = HowIs.new("how-is/example-empty-repository").to_html
+          actual = HowIs.new("how-is/example-empty-repository", start_date: "2016-11-01").to_html
         }.to_not output.to_stderr
       end
 
