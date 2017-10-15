@@ -25,12 +25,12 @@ class HowIs
     #
     # Implemented as a class instead of passing around a Hash so that it can
     # be more easily referenced by Contracts.
-    Results = Struct.new(:repository, :issues, :pulls) do
+    Results = Struct.new(:repository, :issues, :pulls, :summary) do
       include Contracts::Core
 
-      Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String => nil
-      def initialize(repository, issues, pulls)
-        super(repository, issues, pulls)
+      Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String, String => nil
+      def initialize(repository, issues, pulls, summary)
+        super(repository, issues, pulls, summary)
       end
 
       # Struct defines #to_h, but not #to_hash, so we alias them.
