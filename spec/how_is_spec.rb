@@ -5,7 +5,7 @@ require "open3"
 require "timecop"
 require "yaml"
 
-HOW_IS_CONFIG_FILE = File.expand_path("./data/how_is.yml", __dir__)
+HOW_IS_CONFIG_FILE = File.expand_path("./data/how_is/cli_spec/how_is.yml", __dir__)
 
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path("./data/how-is-example-repository-report.json", __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path("./data/how-is-example-repository-report.html", __dir__)
@@ -19,7 +19,7 @@ JEKYLL_HEADER =
     title: rubygems/rubygems report
     layout: default
     ---
-  EOF
+EOF
 
 describe HowIs do
   it "from_json(json) works" do
@@ -29,7 +29,11 @@ describe HowIs do
     expect(expected.strip).to eq(actual.strip)
   end
 
-  context "with a config" do
+  context "#from_config" do
+    let(:config) {
+      YAML.load_file(HOW_IS_CONFIG_FILE)
+    }
+
     it "generates valid report files" do
       Dir.mktmpdir { |dir|
         Dir.chdir(dir) {
@@ -41,13 +45,36 @@ describe HowIs do
             }.to_not output.to_stderr
           end
 
-          html_report = reports["./report.html"]
-          # TODO: Verify that JSON report is correct.
-          # json_report = reports['./report.json']
+          html_report = reports["output/report.html"]
+          json_report = reports["output/report.json"]
 
           expect(html_report).to include(JEKYLL_HEADER)
+          expect {
+            JSON.parse(json_report)
+          }.to_not raise_error
         }
       }
+    end
+
+    it "adds correct frontmatter" do
+      reports = nil
+
+      VCR.use_cassette("how-is-from-config-frontmatter") do
+        reports = HowIs.from_config(config, "2017-08-01")
+      end
+
+      actual_html = reports["output/report.html"]
+      # actual_json = reports["output/report.json"]
+
+      expected_frontmatter = <<~EOF
+        ---
+        title: rubygems/rubygems report
+        layout: default
+        ---
+
+      EOF
+
+      expect(actual_html).to start_with(expected_frontmatter)
     end
   end
 
@@ -62,7 +89,8 @@ describe HowIs do
         }.to_not output.to_stderr
       end
 
-      expect(expected).to eq(actual)
+      expect(actual).to eq(expected)
+
     end
   end
 
@@ -119,54 +147,6 @@ describe HowIs do
       end
 
       expect(actual).to eq(expected)
-    end
-  end
-
-  context "#from_config" do
-    let(:config) {
-      file = File.expand_path("./data/how_is/cli_spec/how_is.yml", __dir__)
-      YAML.load_file(file)
-    }
-
-    let(:issues) { JSON.parse(open(File.expand_path("./data/issues.json", __dir__)).read) }
-    let(:pulls) { JSON.parse(open(File.expand_path("./data/pulls.json", __dir__)).read) }
-
-    let(:github) {
-      instance_double(
-        "GitHub",
-        issues: instance_double("GitHub::Issues", list: issues),
-        pulls: instance_double("GitHub::Pulls", list: pulls)
-      )
-    }
-
-    let(:report_class) {
-      Class.new {
-        def self.export(_analysis, _format)
-          "[report]"
-        end
-      }
-    }
-
-    it "generates a report, with correct frontmatter" do
-      reports = nil
-
-      VCR.use_cassette("how-is-from-config-frontmatter") do
-        reports = HowIs.from_config(config, report_class: report_class)
-      end
-
-      actual_html = reports["output/report.html"]
-      actual_json = reports["output/report.json"]
-
-      expected_frontmatter = <<~EOF
-        ---
-        title: rubygems/rubygems report
-        layout: default
-        ---
-
-      EOF
-
-      expect(actual_html).to start_with(expected_frontmatter)
-      expect(actual_json).to start_with(expected_frontmatter)
     end
   end
 end
