@@ -90,7 +90,6 @@ describe HowIs do
       end
 
       expect(actual).to eq(expected)
-
     end
   end
 
@@ -101,6 +100,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-repository") do
         expect {
+          # 2017-09-27?
           actual = HowIs.new("how-is/example-repository", start_date: "2016-11-01").to_json
         }.to_not output.to_stderr
       end
@@ -120,7 +120,7 @@ describe HowIs do
         }.to_not output.to_stderr
       end
 
-      expect(expected).to eq(actual)
+      expect(actual).to eq(expected)
     end
   end
 
