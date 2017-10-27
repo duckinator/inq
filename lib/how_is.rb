@@ -83,11 +83,7 @@ class HowIs
   #   of the reports to generate.
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
-  # @param report_class (You don't need this.) An object to replace the
-  #   HowIs::Report class when generating reports.
-  def self.from_config(config, date,
-        github: nil,
-        report_class: nil)
+  def self.from_config(config, date)
     report_class ||= HowIs::Report
 
     end_date = DateTime.strptime(date, '%Y-%m-%d')
