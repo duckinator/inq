@@ -90,8 +90,7 @@ class HowIs
         report_class: nil)
     report_class ||= HowIs::Report
 
-    #end_date = DateTime.strptime(end_date, "%Y-%m-%d")
-    end_date = DateTime.strptime(Time.now.to_i.to_s, "%s")
+    end_date = DateTime.strptime(date, '%Y-%m-%d')
     friendly_end_date = end_date.strftime("%B %d, %y")
 
     # start_date is one month prior to end_date.
