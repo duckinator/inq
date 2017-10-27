@@ -79,9 +79,10 @@ describe HowIs do
   end
 
   context "HTML report for how-is/example-repository" do
+    # TODO: Stop using Timecop once reports are no longer time-dependent.
+
     before do
       # 2016-11-01 00:00:00 UTC.
-      # See note in lib/how_is/report.rb about new_offset.
       # TODO: Stop pretending to always be in UTC.
       date = DateTime.parse("2016-11-01").new_offset(0)
       Timecop.freeze(date)
