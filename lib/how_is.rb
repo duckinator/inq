@@ -106,7 +106,7 @@ class HowIs
 
     config["reports"].map do |format, report_config|
       # Sometimes report_data has unused keys, which generates a warning, but
-      # we're okay with it.
+      # we're okay with it, so we wrap it with silence_warnings {}.
       filename = silence_warnings { report_config["filename"] % report_data }
       file = File.join(report_config["directory"], filename)
 
