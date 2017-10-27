@@ -79,33 +79,31 @@ describe HowIs do
   end
 
   context "HTML report for how-is/example-repository" do
-    it "generates a valid report" do
-      expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
-      actual = nil
-
-      VCR.use_cassette("how-is-example-repository") do
-        expect {
-          actual = HowIs.new("how-is/example-repository", start_date: "2016-11-01").to_html
-        }.to_not output.to_stderr
-      end
-
-      expect(actual).to eq(expected)
+    before do
+      # 2016-11-01 00:00:00 UTC.
+      # See note in lib/how_is/report.rb about new_offset.
+      # TODO: Stop pretending to always be in UTC.
+      date = DateTime.parse("2016-11-01").new_offset(0)
+      Timecop.freeze(date)
     end
-  end
 
-  context "JSON report for how-is/example-repository" do
-    it "generates a valid report file" do
-      expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
-      actual = nil
+    after do
+      Timecop.return
+    end
+
+    it "generates a valid report" do
+      expected_html = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
+      expected_json = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
+      actual_report = nil
 
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          # 2017-09-27?
-          actual = HowIs.new("how-is/example-repository", start_date: "2016-11-01").to_json
+          actual_report = HowIs.new("how-is/example-repository", start_date: "2016-11-01")
         }.to_not output.to_stderr
       end
 
-      expect(expected).to eq(actual)
+      expect(actual_report.to_html).to eq(expected_html)
+      expect(actual_report.to_json).to eq(expected_json)
     end
   end
 
