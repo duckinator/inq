@@ -84,8 +84,6 @@ class HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
-    report_class ||= HowIs::Report
-
     end_date = DateTime.strptime(date, '%Y-%m-%d')
     friendly_end_date = end_date.strftime("%B %d, %y")
 
@@ -112,7 +110,7 @@ class HowIs
       filename = silence_warnings { report_config["filename"] % report_data }
       file = File.join(report_config["directory"], filename)
 
-      report = report_class.export(analysis, format)
+      report = Report.export(analysis, format)
 
       result = build_report(report_config["frontmatter"], report_data, report)
 
