@@ -22,18 +22,6 @@ JEKYLL_HEADER =
   EOF
 
 describe HowIs do
-  before do
-    # 2016-11-01 00:00:00 UTC.
-    # See note in lib/how_is/report.rb about new_offset.
-    # TODO: Stop pretending to always be in UTC.
-    date = DateTime.parse("2016-11-01").new_offset(0)
-    Timecop.freeze(date)
-  end
-
-  after do
-    Timecop.return
-  end
-
   it "from_json(json) works" do
     expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read
     actual = HowIs.from_json(expected).to_json
