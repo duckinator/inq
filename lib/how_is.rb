@@ -84,7 +84,7 @@ class HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
-    end_date = DateTime.strptime(date, '%Y-%m-%d')
+    end_date = DateTime.strptime(date, "%Y-%m-%d")
     friendly_end_date = end_date.strftime("%B %d, %y")
 
     # start_date is one month prior to end_date.
