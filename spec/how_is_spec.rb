@@ -42,7 +42,7 @@ describe HowIs do
 
           VCR.use_cassette("how-is-with-config-file") do
             expect {
-              reports = HowIs.from_config(YAML.load_file(HOW_IS_CONFIG_FILE), "2017-08-01")
+              reports = HowIs.from_config(config, "2017-08-01")
             }.to_not output.to_stderr
           end
 
