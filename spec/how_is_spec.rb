@@ -4,6 +4,7 @@ require "spec_helper"
 require "open3"
 require "timecop"
 require "yaml"
+require "tmpdir"
 
 HOW_IS_CONFIG_FILE = File.expand_path("./data/how_is/cli_spec/how_is.yml", __dir__)
 
