@@ -26,14 +26,17 @@ class HowIs
   #
   # @param repository [String] The name of a GitHub repository (of the
   #   format <user or organization>/<repository>).
-  # @param analysis [HowIs::Analysis] Optional; if passed, this Analysis
-  #   object is used instead of generating one.
-  def initialize(repository, analysis = nil, **kw_args)
-    # If no Analysis is passed, generate one.
-    analysis ||= HowIs.generate_analysis(repository: repository, **kw_args)
-
-    # Used by to_html, to_json, etc.
-    @analysis = analysis
+  # @param end_date_or_analysis [String, HowIs::Analysis] If given a date in
+  #   the format YYYY-MM-DD, it is treated as the date to include commits from.
+  #   If given a +HowIs::Analysis+, use that instead of generating one.
+  #
+  # (This will, hopefully eventually be made less awkward.)
+  def initialize(repository, end_date_or_analysis)
+    if end_date_or_analysis.is_a?(Analysis)
+      @analysis = end_date_or_analysis
+    else
+      @analysis = HowIs.generate_analysis(repository, end_date_or_analysis)
+    end
   end
 
   ##
@@ -87,14 +90,7 @@ class HowIs
     end_date = DateTime.strptime(date, "%Y-%m-%d")
     friendly_end_date = end_date.strftime("%B %d, %y")
 
-    # start_date is one month prior to end_date.
-    d = end_date.day
-    m = end_date.month
-    y = end_date.year
-    start_date = DateTime.new(y, m - 1, d).strftime("%Y-%m-%d")
-
-    analysis = HowIs.generate_analysis(repository: config["repository"],
-                                       start_date: start_date)
+    analysis = HowIs.generate_analysis(config["repository"], date)
 
     report_data = {
       repository: config["repository"],
@@ -144,10 +140,9 @@ class HowIs
 
   # Generate an analysis.
   # TODO: This may make more sense as Analysis.new().
-  Contract C::KeywordArgs[repository: String,
-                          start_date: String] => C::Any
-  def self.generate_analysis(repository:, start_date:)
-    raw_data = Fetcher.new.call(repository, start_date)
+  Contract String, String => C::Any
+  def self.generate_analysis(repository, end_date)
+    raw_data = Fetcher.new.call(repository, end_date)
     analysis = Analysis.from_fetcher_results(raw_data)
 
     analysis

@@ -40,18 +40,14 @@ class HowIs
     ##
     # Fetches repository information from GitHub and returns a Results object.
     Contract String, String => Results
-    def call(repository, start_date)
+    def call(repository, end_date)
       user, repo = repository.split("/", 2)
 
       github = self.class.default_github_instance
 
-      contributions = HowIs::Contributions.new(
-        start_date: start_date,
-        user: user,
-        repo: repo
-      )
+      contributions = HowIs::Contributions.new(repository, end_date)
 
-      unless user && repo
+      unless repository
         raise HowIs::CLI::OptionsError, "To generate a report from GitHub, " \
           "provide the repository username/project. Quitting!"
       end
