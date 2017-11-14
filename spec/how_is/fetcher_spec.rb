@@ -10,7 +10,7 @@ describe HowIs::Fetcher do
   context "#call" do
     it "returns a hash containing issues and pull requests" do
       VCR.use_cassette("how_is_fetcher_call") do
-        actual = subject.call("how-is/example-repository", "2017-08-01")
+        actual = subject.call("how-is/example-repository", "2017-09-01")
         actual_json = actual.to_hash.to_json.strip
 
         expected_json = File.read(FETCHER_SPEC_EXAMPLE_OUTPUT_FILE).strip
