@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "how_is/fetcher"
+require "how_is/kludge_bucket"
 require "date"
 
 class HowIs
@@ -22,7 +22,7 @@ class HowIs
     #                          to include commits from.
     def initialize(repository, end_date)
       @user, @repo = repository.split("/")
-      @github = Fetcher.default_github_instance
+      @github = KludgeBucket.default_github_instance
 
       # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
       #               but internally we use "until_date" to match GitHub's API.

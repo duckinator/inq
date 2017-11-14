@@ -2,6 +2,7 @@
 
 require "contracts"
 require "github_api"
+require "how_is/kludge_bucket"
 require "how_is/contributions"
 
 C ||= Contracts
@@ -11,14 +12,6 @@ class HowIs
   # Fetches data from GitHub.
   class Fetcher
     include Contracts::Core
-
-    # TODO: Fix this bullshit.
-    # :nodoc:
-    def self.default_github_instance
-      Github.new(auto_pagination: true) do |config|
-        config.basic_auth = ENV["HOWIS_BASIC_AUTH"] if ENV["HOWIS_BASIC_AUTH"]
-      end
-    end
 
     ##
     # Standardized representation for fetcher results.
@@ -43,7 +36,7 @@ class HowIs
     def call(repository, end_date)
       user, repo = repository.split("/", 2)
 
-      github = self.class.default_github_instance
+      github = KludgeBucket.default_github_instance
 
       contributions = HowIs::Contributions.new(repository, end_date)
 
