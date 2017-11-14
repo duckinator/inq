@@ -53,8 +53,7 @@ class HowIs
 
       unless user && repo
         raise HowIs::CLI::OptionsError, "To generate a report from GitHub, " \
-          "provide the repository " \
-          "username/project. Quitting!"
+          "provide the repository username/project. Quitting!"
       end
 
       issues  = github.issues.list user: user, repo: repo
