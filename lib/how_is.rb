@@ -87,17 +87,8 @@ class HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
-    end_date = DateTime.strptime(date, "%Y-%m-%d")
-    friendly_end_date = end_date.strftime("%B %d, %y")
-
     analysis = HowIs.generate_analysis(config["repository"], date)
-
-    report_data = {
-      repository: config["repository"],
-      date: end_date,
-      friendly_date: friendly_end_date,
-    }
-
+    report_data = prepare_report_data(config["repository"], date)
     generated_reports = {}
 
     config["reports"].map do |format, report_config|
@@ -187,6 +178,18 @@ class HowIs
     str.string
   end
   private_class_method :build_report
+
+  def self.prepare_report_data(repository, date)
+    end_date = DateTime.strptime(date, "%Y-%m-%d")
+    friendly_end_date = end_date.strftime("%B %d, %y")
+
+    {
+      repository: repository,
+      date: end_date,
+      friendly_date: friendly_end_date,
+    }
+  end
+  private_class_method :prepare_report_data
 
   # @example
   #   convert_keys({'foo' => 'bar'}, :to_sym)
