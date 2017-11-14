@@ -15,12 +15,12 @@ HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT =
   File.expand_path("./data/how-is-example-empty-repository-report.html", __dir__)
 
 JEKYLL_HEADER =
-  <<~EOF
+  <<~HEADER
     ---
     title: rubygems/rubygems report
     layout: default
     ---
-EOF
+  HEADER
 
 describe HowIs do
   it "from_json(json) works" do
