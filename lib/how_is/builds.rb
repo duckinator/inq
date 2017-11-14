@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "how_is/fetcher"
+require "tessellator/fetcher"
 
 class HowIs
   # Fetches metadata about CI builds.
