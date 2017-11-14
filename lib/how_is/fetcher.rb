@@ -2,7 +2,7 @@
 
 require "contracts"
 require "github_api"
-require "how_is/pulse"
+require "how_is/contributions"
 
 C ||= Contracts
 
