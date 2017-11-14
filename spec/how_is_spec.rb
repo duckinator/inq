@@ -67,13 +67,13 @@ describe HowIs do
       actual_html = reports["output/report.html"]
       # actual_json = reports["output/report.json"]
 
-      expected_frontmatter = <<~EOF
+      expected_frontmatter = <<~FRONTMATTER
         ---
         title: rubygems/rubygems report
         layout: default
         ---
 
-      EOF
+      FRONTMATTER
 
       expect(actual_html).to start_with(expected_frontmatter)
     end
