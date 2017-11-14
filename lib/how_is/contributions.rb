@@ -21,7 +21,7 @@ class HowIs
     # @param end_date [String] Date in the format YYYY-MM-DD. The last date
     #                          to include commits from.
     def initialize(repository, end_date)
-      @user, @repo = repository.split('/')
+      @user, @repo = repository.split("/")
       @github = Fetcher.default_github_instance
 
       # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
