@@ -77,6 +77,10 @@ Style/BlockDelimiters:
 Style/BracesAroundHashParameters:
   Enabled: false
 
+# Don't force use of Time or Date; DateTime is okay.
+Style/DateTime:
+  Enabled: false
+
 # Unicode is good, mkay?
 Style/Encoding:
   Enabled: true

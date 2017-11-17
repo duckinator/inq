@@ -2,7 +2,8 @@
 
 require "contracts"
 require "github_api"
-require "how_is/pulse"
+require "how_is/kludge_bucket"
+require "how_is/contributions"
 
 C ||= Contracts
 
@@ -12,25 +13,17 @@ class HowIs
   class Fetcher
     include Contracts::Core
 
-    # TODO: Fix this bullshit.
-    # :nodoc:
-    def self.default_github_instance
-      Github.new(auto_pagination: true) do |config|
-        config.basic_auth = ENV["HOWIS_BASIC_AUTH"] if ENV["HOWIS_BASIC_AUTH"]
-      end
-    end
-
     ##
     # Standardized representation for fetcher results.
     #
     # Implemented as a class instead of passing around a Hash so that it can
     # be more easily referenced by Contracts.
-    Results = Struct.new(:repository, :issues, :pulls, :pulse) do
+    Results = Struct.new(:repository, :issues, :pulls, :summary) do
       include Contracts::Core
 
-      Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String => nil
-      def initialize(repository, issues, pulls, pulse)
-        super(repository, issues, pulls, pulse)
+      Contract String, C::ArrayOf[Hash], C::ArrayOf[Hash], String, String => nil
+      def initialize(repository, issues, pulls, summary)
+        super(repository, issues, pulls, summary)
       end
 
       # Struct defines #to_h, but not #to_hash, so we alias them.
@@ -39,26 +32,23 @@ class HowIs
 
     ##
     # Fetches repository information from GitHub and returns a Results object.
-    Contract String,
-      C::Or[C::RespondTo[:issues, :pulls], nil],
-      C::Or[C::RespondTo[:html_summary], nil] => Results
-    def call(repository,
-             github = nil,
-             pulse = nil)
-      github ||= self.class.default_github_instance
-      pulse ||= HowIs::Pulse.new(repository)
+    Contract String, String => Results
+    def call(repository, end_date)
       user, repo = repository.split("/", 2)
 
-      unless user && repo
+      github = KludgeBucket.default_github_instance
+
+      contributions = HowIs::Contributions.new(repository, end_date)
+
+      unless repository
         raise HowIs::CLI::OptionsError, "To generate a report from GitHub, " \
-          "provide the repository " \
-          "username/project. Quitting!"
+          "provide the repository username/project. Quitting!"
       end
 
       issues  = github.issues.list user: user, repo: repo
       pulls   = github.pulls.list  user: user, repo: repo
 
-      summary = pulse.html_summary
+      summary = contributions.summary
 
       Results.new(
         repository,

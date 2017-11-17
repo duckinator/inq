@@ -8,7 +8,7 @@ class HowIs
   #
   # TODO: Use GitHub's Statistics API to replace this garbage.
   #   See https://github.com/how-is/how_is/issues/122
-  class Pulse
+  class XPulse
     def initialize(repository)
       @repository = repository
       @pulse_page_response = fetch_pulse!(repository)

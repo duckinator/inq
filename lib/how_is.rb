@@ -26,14 +26,17 @@ class HowIs
   #
   # @param repository [String] The name of a GitHub repository (of the
   #   format <user or organization>/<repository>).
-  # @param analysis [HowIs::Analysis] Optional; if passed, this Analysis
-  #   object is used instead of generating one.
-  def initialize(repository, analysis = nil, **kw_args)
-    # If no Analysis is passed, generate one.
-    analysis ||= HowIs.generate_analysis(repository: repository, **kw_args)
-
-    # Used by to_html, to_json, etc.
-    @analysis = analysis
+  # @param end_date_or_analysis [String, HowIs::Analysis] If given a date in
+  #   the format YYYY-MM-DD, it is treated as the date to include commits from.
+  #   If given a +HowIs::Analysis+, use that instead of generating one.
+  #
+  # (This will, hopefully eventually be made less awkward.)
+  def initialize(repository, end_date_or_analysis)
+    if end_date_or_analysis.is_a?(Analysis)
+      @analysis = end_date_or_analysis
+    else
+      @analysis = HowIs.generate_analysis(repository, end_date_or_analysis)
+    end
   end
 
   ##
@@ -81,35 +84,20 @@ class HowIs
   #
   # @param config [Hash] A Hash specifying the formats, locations, etc
   #   of the reports to generate.
-  # @param github (You don't need this.) An object to replace the GitHub
-  #   class when fetching data.
-  # @param report_class (You don't need this.) An object to replace the
-  #   HowIs::Report class when generating reports.
-  def self.from_config(config,
-        github: nil,
-        report_class: nil)
-    report_class ||= HowIs::Report
-
-    date = DateTime.strptime(Time.now.to_i.to_s, "%s")
-    friendly_date = date.strftime("%B %d, %y")
-
-    analysis = HowIs.generate_analysis(repository: config["repository"], github: github)
-
-    report_data = {
-      repository: config["repository"],
-      date: date,
-      friendly_date: friendly_date,
-    }
-
+  # @param date [String] A string containing the date (YYYY-MM-DD) that the
+  #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
+  def self.from_config(config, date)
+    analysis = HowIs.generate_analysis(config["repository"], date)
+    report_data = prepare_report_data(config["repository"], date)
     generated_reports = {}
 
     config["reports"].map do |format, report_config|
       # Sometimes report_data has unused keys, which generates a warning, but
-      # we're okay with it.
+      # we're okay with it, so we wrap it with silence_warnings {}.
       filename = silence_warnings { report_config["filename"] % report_data }
       file = File.join(report_config["directory"], filename)
 
-      report = report_class.export(analysis, format)
+      report = Report.export(analysis, format)
 
       result = build_report(report_config["frontmatter"], report_data, report)
 
@@ -143,11 +131,9 @@ class HowIs
 
   # Generate an analysis.
   # TODO: This may make more sense as Analysis.new().
-  Contract C::KeywordArgs[repository: String,
-                          github: C::Optional[C::Any]] => C::Any
-  def self.generate_analysis(repository:,
-        github: nil)
-    raw_data = Fetcher.new.call(repository, github)
+  Contract String, String => C::Any
+  def self.generate_analysis(repository, end_date)
+    raw_data = Fetcher.new.call(repository, end_date)
     analysis = Analysis.from_fetcher_results(raw_data)
 
     analysis
@@ -192,6 +178,18 @@ class HowIs
     str.string
   end
   private_class_method :build_report
+
+  def self.prepare_report_data(repository, date)
+    end_date = DateTime.strptime(date, "%Y-%m-%d")
+    friendly_end_date = end_date.strftime("%B %d, %y")
+
+    {
+      repository: repository,
+      date: end_date,
+      friendly_date: friendly_end_date,
+    }
+  end
+  private_class_method :prepare_report_data
 
   # @example
   #   convert_keys({'foo' => 'bar'}, :to_sym)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "how_is/fetcher"
+require "how_is/kludge_bucket"
 require "date"
 
 class HowIs
@@ -9,8 +9,7 @@ class HowIs
   #
   # Usage:
   #
-  #     github = Github.new()
-  #     c = HowIs::Contributions.new(github: github, start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
+  #     c = HowIs::Contributions.new(start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
   #     c.commits          #=> All commits during July 2017.
   #     c.contributors #=> All contributors during July 2017.
   #     c.new_contributors #=> New contributors during July 2017.
@@ -18,16 +17,15 @@ class HowIs
     # Returns an object that fetches contributor information about a particular
     # repository for a month-long period starting on +start_date+.
     #
-    # @param github [Github] Github client instance.
-    # @param start_date [String] Date in the format YYYY-MM-DD. The first date
-    #                            to include commits from.
-    # @param user [String] GitHub user of repository.
-    # @param repo [String] GitHub repository name.
-    def initialize(github: Fetcher.default_github_instance, start_date:, user:, repo:)
-      @github = github
+    # @param repository [String] GitHub repository in the form of "user/repo".
+    # @param end_date [String] Date in the format YYYY-MM-DD. The last date
+    #                          to include commits from.
+    def initialize(repository, end_date)
+      @user, @repo = repository.split("/")
+      @github = KludgeBucket.default_github_instance
 
-      # IMPL. DETAIL: The external API uses "start_date" so it's clearer,
-      #               but internally we use "since_date" to match GitHub's API.
+      # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
+      #               but internally we use "until_date" to match GitHub's API.
 
       # NOTE: Use DateTime because it defaults to UTC and that's less gross
       #       than trying to get Date to use UTC.
@@ -36,15 +34,12 @@ class HowIs
       #       results for different time zones, which makes it harder to test.
       #
       #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
-      @since_date = DateTime.strptime(start_date, "%Y-%m-%d")
+      @until_date = DateTime.strptime(end_date, "%Y-%m-%d")
 
-      d = @since_date.day
-      m = @since_date.month
-      y = @since_date.year
-      @until_date = DateTime.new(y, m + 1, d)
-
-      @user = user
-      @repo = repo
+      d = @until_date.day
+      m = @until_date.month
+      y = @until_date.year
+      @since_date = DateTime.new(y, m - 1, d)
 
       @commit = {}
       @stats = nil

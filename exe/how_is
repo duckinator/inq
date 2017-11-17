@@ -4,6 +4,7 @@
 
 require "how_is"
 require "how_is/cli"
+require "date"
 
 begin
   result = HowIs::CLI.parse(ARGV)
@@ -23,9 +24,13 @@ elsif options[:version]
   exit
 end
 
+# TODO: Once retroactive issue reports are done, allow exe/how_is to be passed
+#       other dates.
+today = DateTime.now.strftime("%Y-%m-%d")
+
 begin
   if options[:config]
-    reports = HowIs.from_config(YAML.load_file(options[:config]))
+    reports = HowIs.from_config(YAML.load_file(options[:config]), today)
 
     reports.each { |file, report| HowIs::Report.save_report(file, report) }
   else
@@ -34,7 +39,7 @@ begin
         json_report = File.open(options[:from]).read
         HowIs.from_json(json_report)
       else
-        HowIs.new(options[:repository])
+        HowIs.new(options[:repository], today)
       end
 
     HowIs::Report.save_report(

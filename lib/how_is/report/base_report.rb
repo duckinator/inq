@@ -14,15 +14,7 @@ class HowIs
 
       title "How is #{analysis.repository}?"
 
-      # DateTime#new_offset(0) sets the timezone to UTC. I think it does this
-      # without changing anything besides the timezone, but who knows, 'cause
-      # new_offset is entirely undocumented! (Even though it's used in the
-      # DateTime documentation!)
-      #
-      # TODO: Stop pretending everyone who runs how_is is in UTC.
-      text "Monthly report, ending on #{DateTime.now.new_offset(0).strftime('%B %e, %Y')}."
-
-      text analysis.pulse
+      text analysis.summary
 
       header "Pull Requests"
       issue_or_pr_summary "pull", "pull request"

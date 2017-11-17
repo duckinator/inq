@@ -3,16 +3,8 @@
 require "how_is/contributions"
 
 describe HowIs::Contributions do
-  let(:github) { HowIs::Fetcher.default_github_instance }
-  let(:user) { "how-is" }
-  let(:repo) { "example-repository" }
-  let(:start_date) { "2017-08-01" }
-
   let(:contributions) {
-    described_class.new(github: github,
-                        user: user,
-                        repo: repo,
-                        start_date: start_date)
+    described_class.new("how-is/example-repository", "2017-09-01")
   }
 
   context "#contributors" do

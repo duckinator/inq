@@ -17,6 +17,7 @@ ratings:
   - Gemfile.lock
   - "**.rb"
 exclude_paths:
+- fixtures/vcr_cassettes/
 - spec/
 - ".bundle/"
 - vendor/
