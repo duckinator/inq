@@ -65,6 +65,9 @@ describe HowIs do
       end
 
       actual_html = reports["output/report.html"]
+      # NOTE: If JSON reports get frontmatter applied in the future,
+      #       uncomment the following line (+ the one at the end of
+      #       this block) to test it.
       # actual_json = reports["output/report.json"]
 
       expected_frontmatter = <<~FRONTMATTER
@@ -76,6 +79,10 @@ describe HowIs do
       FRONTMATTER
 
       expect(actual_html).to start_with(expected_frontmatter)
+      # NOTE: If JSON reports get frontmatter applied in the future,
+      #       uncomment the following line (+ the one earlier in
+      #       this block) to test it.
+      # expect(actual_json).to start_with(expected_frontmatter)
     end
   end
 
