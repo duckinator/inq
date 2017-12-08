@@ -2,10 +2,7 @@
 
 require "how_is/version"
 require "contracts"
-require "cacert"
 require "date"
-
-Cacert.set_in_env
 
 C = Contracts
 
