@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "tessellator/fetcher"
+require "okay/http"
 
 class HowIs
   # Fetches metadata about CI builds.
@@ -24,11 +24,8 @@ class HowIs
     #
     # @return [String] JSON result
     def travis_builds
-      Tessellator::Fetcher::Request::HTTP.call(
-        Tessellator::Fetcher::Config.new,
-        "get",
+      Okay::HTTP.get(
         "http://api.travis-ci.org/repos/#{@user}/#{@repo}/builds?event_type=push",
-        {},
         headers: {"Accept" => "application/vnd.travis-ci.2+json"}
       ).body
     end

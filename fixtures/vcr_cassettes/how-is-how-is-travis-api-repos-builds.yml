@@ -162,4 +162,191 @@ http_interactions:
         Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/27b252d3625d","pull_request_number":null}]}'
     http_version: 
   recorded_at: Sun, 06 Aug 2017 19:20:42 GMT
+- request:
+    method: get
+    uri: http://api.travis-ci.org/repos/how-is/how_is/builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Dec 2017 22:42:35 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Location:
+      - https://api.travis-ci.org/repos/how-is/how_is/builds
+      X-Request-Id:
+      - 9c91aa26-da8f-473a-8204-1ebf6dc3b508
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 08 Dec 2017 22:42:35 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repos/how-is/how_is/builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Fri, 08 Dec 2017 22:42:35 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::Api::App::Endpoint::Repos
+      X-Pattern:
+      - "/:owner_name/:name/builds"
+      X-Oauth-Scopes:
+      - public
+      X-Accepted-Oauth-Scopes:
+      - public
+      Vary:
+      - Accept,Accept-Encoding
+      Cache-Control:
+      - no-cache
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 363e1516-c2d6-4fca-9869-463110e4bdba
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: '{"builds":[{"id":303554788,"repository_id":8014235,"commit_id":89576423,"number":"761","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T14:20:34Z","finished_at":"2017-11-17T14:21:41Z","duration":131,"job_ids":[303554792,303554796]},{"id":303553747,"repository_id":8014235,"commit_id":89576137,"number":"760","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T14:18:39Z","finished_at":"2017-11-17T14:20:00Z","duration":125,"job_ids":[303553748,303553749]},{"id":303551237,"repository_id":8014235,"commit_id":89575396,"number":"759","event_type":"pull_request","pull_request":true,"pull_request_title":"Remove
+        XPulse class.","pull_request_number":213,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T14:14:05Z","finished_at":"2017-11-17T14:15:08Z","duration":101,"job_ids":[303551240,303551241]},{"id":303550935,"repository_id":8014235,"commit_id":89575273,"number":"758","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T14:13:18Z","finished_at":"2017-11-17T14:14:15Z","duration":97,"job_ids":[303550936,303550937]},{"id":303548963,"repository_id":8014235,"commit_id":89574573,"number":"757","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T14:08:32Z","finished_at":"2017-11-17T14:09:39Z","duration":110,"job_ids":[303548964,303548965]},{"id":303548542,"repository_id":8014235,"commit_id":89574419,"number":"756","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T14:07:27Z","finished_at":"2017-11-17T14:08:24Z","duration":93,"job_ids":[303548543,303548544]},{"id":303539472,"repository_id":8014235,"commit_id":89571283,"number":"755","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T13:44:45Z","finished_at":"2017-11-17T13:45:53Z","duration":111,"job_ids":[303539473,303539474]},{"id":303539446,"repository_id":8014235,"commit_id":89571274,"number":"754","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-17T13:44:40Z","finished_at":"2017-11-17T13:45:50Z","duration":130,"job_ids":[303539447,303539448]},{"id":301842034,"repository_id":8014235,"commit_id":89009741,"number":"753","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T09:03:58Z","finished_at":"2017-11-14T09:04:53Z","duration":94,"job_ids":[301842035,301842036]},{"id":301842009,"repository_id":8014235,"commit_id":89009735,"number":"752","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T09:03:53Z","finished_at":"2017-11-14T09:05:02Z","duration":107,"job_ids":[301842011,301842013]},{"id":301839291,"repository_id":8014235,"commit_id":89008760,"number":"751","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:55:12Z","finished_at":"2017-11-14T08:56:35Z","duration":145,"job_ids":[301839292,301839293]},{"id":301839278,"repository_id":8014235,"commit_id":89008757,"number":"750","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:55:09Z","finished_at":"2017-11-14T08:56:09Z","duration":112,"job_ids":[301839279,301839281]},{"id":301837732,"repository_id":8014235,"commit_id":89008261,"number":"749","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:50:39Z","finished_at":"2017-11-14T08:51:38Z","duration":110,"job_ids":[301837733,301837734]},{"id":301837450,"repository_id":8014235,"commit_id":89008151,"number":"748","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:49:35Z","finished_at":"2017-11-14T08:51:09Z","duration":134,"job_ids":[301837451,301837452]},{"id":301836173,"repository_id":8014235,"commit_id":89007762,"number":"747","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:46:26Z","finished_at":"2017-11-14T08:47:41Z","duration":112,"job_ids":[301836174,301836175]},{"id":301836166,"repository_id":8014235,"commit_id":89007758,"number":"746","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:46:03Z","finished_at":"2017-11-14T08:47:14Z","duration":126,"job_ids":[301836167,301836168]},{"id":301833905,"repository_id":8014235,"commit_id":89006905,"number":"745","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:38:10Z","finished_at":"2017-11-14T08:39:15Z","duration":104,"job_ids":[301833906,301833907]},{"id":301833893,"repository_id":8014235,"commit_id":89006900,"number":"744","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:38:05Z","finished_at":"2017-11-14T08:39:14Z","duration":109,"job_ids":[301833894,301833895]},{"id":301833017,"repository_id":8014235,"commit_id":89006580,"number":"743","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"failed","started_at":"2017-11-14T08:35:27Z","finished_at":"2017-11-14T08:36:48Z","duration":109,"job_ids":[301833020,301833023]},{"id":301832956,"repository_id":8014235,"commit_id":89006575,"number":"742","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"failed","started_at":"2017-11-14T08:35:12Z","finished_at":"2017-11-14T08:36:10Z","duration":95,"job_ids":[301832957,301832958]},{"id":301828340,"repository_id":8014235,"commit_id":89004987,"number":"741","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:21:00Z","finished_at":"2017-11-14T08:22:10Z","duration":113,"job_ids":[301828341,301828342]},{"id":301828323,"repository_id":8014235,"commit_id":89004980,"number":"740","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:20:56Z","finished_at":"2017-11-14T08:21:54Z","duration":101,"job_ids":[301828324,301828325]},{"id":301827162,"repository_id":8014235,"commit_id":89004557,"number":"739","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:16:41Z","finished_at":"2017-11-14T08:17:49Z","duration":123,"job_ids":[301827163,301827164]},{"id":301827147,"repository_id":8014235,"commit_id":89004553,"number":"738","event_type":"push","pull_request":false,"pull_request_title":null,"pull_request_number":null,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"passed","started_at":"2017-11-14T08:16:32Z","finished_at":"2017-11-14T08:17:33Z","duration":101,"job_ids":[301827148,301827149]},{"id":301826821,"repository_id":8014235,"commit_id":89004443,"number":"737","event_type":"pull_request","pull_request":true,"pull_request_title":"[WIP]
+        Switch from Pulse to Contributions","pull_request_number":212,"config":{"language":"ruby","rvm":["2.3.3","2.4.1"],".result":"configured","group":"stable","dist":"trusty"},"state":"failed","started_at":"2017-11-14T08:15:33Z","finished_at":"2017-11-14T08:17:48Z","duration":169,"job_ids":[301826822,301826823]}],"commits":[{"id":89576423,"sha":"a4c31b74ae09de583357c243da571d5f98e0392e","branch":"master","tag":null,"message":"Auto
+        merge of #213 - how-is:remove-pulse, r=duckinator\n\nRemove XPulse class.\n\nSecond
+        part of #212.","committed_at":"2017-11-17T14:18:26Z","author_name":"The Bundler
+        Bot","author_email":"bot@bundler.io","committer_name":"The Bundler Bot","committer_email":"bot@bundler.io","compare_url":"https://github.com/how-is/how_is/compare/44fab368e6b0...a4c31b74ae09","pull_request_number":null},{"id":89576137,"sha":"a4c31b74ae09de583357c243da571d5f98e0392e","branch":"auto","tag":null,"message":"Auto
+        merge of #213 - how-is:remove-pulse, r=duckinator\n\nRemove XPulse class.\n\nSecond
+        part of #212.","committed_at":"2017-11-17T14:18:26Z","author_name":"The Bundler
+        Bot","author_email":"bot@bundler.io","committer_name":"The Bundler Bot","committer_email":"bot@bundler.io","compare_url":"https://github.com/how-is/how_is/compare/44fab368e6b0...a4c31b74ae09","pull_request_number":null},{"id":89575396,"sha":"8223a75d3c3a5da9f0035e4b7f1c95b7a82ec003","branch":"master","tag":null,"message":"Remove
+        XPulse class.","committed_at":"2017-11-17T14:12:59Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/213","pull_request_number":213},{"id":89575273,"sha":"c1a78b3b5cd4ebf8c2d97cc8553689f91a875c36","branch":"remove-pulse","tag":null,"message":"Remove
+        XPulse class.","committed_at":"2017-11-17T14:12:59Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/commit/c1a78b3b5cd4","pull_request_number":null},{"id":89574573,"sha":"44fab368e6b0b090130e11f151d8c079a1b67202","branch":"master","tag":null,"message":"Auto
+        merge of #212 - how-is:switch-from-pulse-to-contributions, r=olleolleolle\n\nSwitch
+        from Pulse to Contributions\n\nThis PR switches from scraping `/pulse` to
+        using the `Contributions` class, which builds on the GitHub API instead.\n\nThis
+        PR will _not_ modify or remove the Pulse class in any way, to reduce noise
+        in the diff. That''ll be handled in a separate PR afterwards. However, I will
+        rename it to `XPulse` just to prove that it is in fact not used.\n\nTODO:\n\n1.
+        [x] Rename `Pulse` to `XPulse`.\n2. [x] Fix test failures.\n3. [x] Make `HowIs.from_config(config,
+        date)` actually use the `date` argument.","committed_at":"2017-11-17T14:07:19Z","author_name":"The
+        Bundler Bot","author_email":"bot@bundler.io","committer_name":"The Bundler
+        Bot","committer_email":"bot@bundler.io","compare_url":"https://github.com/how-is/how_is/compare/3a383d627a8b...44fab368e6b0","pull_request_number":null},{"id":89574419,"sha":"44fab368e6b0b090130e11f151d8c079a1b67202","branch":"auto","tag":null,"message":"Auto
+        merge of #212 - how-is:switch-from-pulse-to-contributions, r=olleolleolle\n\nSwitch
+        from Pulse to Contributions\n\nThis PR switches from scraping `/pulse` to
+        using the `Contributions` class, which builds on the GitHub API instead.\n\nThis
+        PR will _not_ modify or remove the Pulse class in any way, to reduce noise
+        in the diff. That''ll be handled in a separate PR afterwards. However, I will
+        rename it to `XPulse` just to prove that it is in fact not used.\n\nTODO:\n\n1.
+        [x] Rename `Pulse` to `XPulse`.\n2. [x] Fix test failures.\n3. [x] Make `HowIs.from_config(config,
+        date)` actually use the `date` argument.","committed_at":"2017-11-17T14:07:19Z","author_name":"The
+        Bundler Bot","author_email":"bot@bundler.io","committer_name":"The Bundler
+        Bot","committer_email":"bot@bundler.io","compare_url":"https://github.com/how-is/how_is/compare/3a383d627a8b...44fab368e6b0","pull_request_number":null},{"id":89571283,"sha":"a5a0899a3632bb6987e1ab1e3b54aaa2cf49b494","branch":"master","tag":null,"message":"Add
+        a note about potentially supporting frontmatter in JSON reports in the future.","committed_at":"2017-11-17T13:44:33Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89571274,"sha":"2cd22d4e6ffd82932d72fae574ae3524b006f632","branch":"switch-from-pulse-to-contributions","tag":null,"message":"Add
+        a note about potentially supporting frontmatter in JSON reports in the future.","committed_at":"2017-11-17T13:44:33Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/f00d72f55655...2cd22d4e6ffd","pull_request_number":null},{"id":89009741,"sha":"837a9308420c55be3b817eba9c34ae90ad4fdbb4","branch":"master","tag":null,"message":"Use
+        config, since it''s already defined.","committed_at":"2017-11-14T09:01:25Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89009735,"sha":"f00d72f556551a9baca14db6497d6e3d9c7722f6","branch":"switch-from-pulse-to-contributions","tag":null,"message":"Use
+        config, since it''s already defined.","committed_at":"2017-11-14T09:01:25Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/e50a0890cb5d...f00d72f55655","pull_request_number":null},{"id":89008760,"sha":"c7b32606541af1df9e20a674bb42556e541107c5","branch":"master","tag":null,"message":"add
+        frozen_string_literal magic comment.","committed_at":"2017-11-14T08:55:00Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89008757,"sha":"e50a0890cb5d0a4166b34821491f7243c3f20cd0","branch":"switch-from-pulse-to-contributions","tag":null,"message":"add
+        frozen_string_literal magic comment.","committed_at":"2017-11-14T08:55:00Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/dce3ba426987...e50a0890cb5d","pull_request_number":null},{"id":89008261,"sha":"c6bf7862e33d36038b7a7c988ea8bb1f46ea93fd","branch":"master","tag":null,"message":"Add
+        KludgeBucket to start isolating and clearly labeling hacky garbge.","committed_at":"2017-11-14T08:49:27Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89008151,"sha":"dce3ba42698799b58c752234295ec8ea8d53af9f","branch":"switch-from-pulse-to-contributions","tag":null,"message":"Add
+        KludgeBucket to start isolating and clearly labeling hacky garbge.","committed_at":"2017-11-14T08:49:27Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/9eea18daafcf...dce3ba426987","pull_request_number":null},{"id":89007762,"sha":"af0f8a0be4203e00906c5f2240a36c32e22ad4f2","branch":"master","tag":null,"message":"Split
+        out prepare_report_data().","committed_at":"2017-11-14T08:45:54Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89007758,"sha":"9eea18daafcfc5d5111a7e7226f9c1d9dbbda9e0","branch":"switch-from-pulse-to-contributions","tag":null,"message":"Split
+        out prepare_report_data().","committed_at":"2017-11-14T08:45:54Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/3625bf6400a7...9eea18daafcf","pull_request_number":null},{"id":89006905,"sha":"fd6f76ac010a04a37d02d74f741d1948239c3e40","branch":"master","tag":null,"message":"how
+        the everloving fuck did this work before?","committed_at":"2017-11-14T08:37:57Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89006900,"sha":"3625bf6400a7b2cffed7a7ad9d59ae4d98cc6089","branch":"switch-from-pulse-to-contributions","tag":null,"message":"how
+        the everloving fuck did this work before?","committed_at":"2017-11-14T08:37:57Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/7b8dc0605533...3625bf6400a7","pull_request_number":null},{"id":89006580,"sha":"6632f360af1de25c649aaef1b07a218b25d03246","branch":"master","tag":null,"message":"Make
+        exe/how_is work again.","committed_at":"2017-11-14T08:34:52Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89006575,"sha":"7b8dc0605533bb5306949c5f1ebadf5b75ae3502","branch":"switch-from-pulse-to-contributions","tag":null,"message":"Make
+        exe/how_is work again.","committed_at":"2017-11-14T08:34:52Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/c48b2f08c95e...7b8dc0605533","pull_request_number":null},{"id":89004987,"sha":"6734201344c03a3245f89ea7cec921a84a170461","branch":"master","tag":null,"message":"use
+        meaningful heredoc delimiters","committed_at":"2017-11-14T08:18:43Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89004980,"sha":"c48b2f08c95e39e743a48d40b2d2a0e9ed6fc6ff","branch":"switch-from-pulse-to-contributions","tag":null,"message":"use
+        meaningful heredoc delimiters","committed_at":"2017-11-14T08:18:43Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/cab26d8e845d...c48b2f08c95e","pull_request_number":null},{"id":89004557,"sha":"011a5940d3744811875e249b7c15406e25c77792","branch":"master","tag":null,"message":"Fixed
+        last failing test.","committed_at":"2017-11-14T08:16:19Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212},{"id":89004553,"sha":"cab26d8e845db50010e8c8a5c280bce2e1da160c","branch":"switch-from-pulse-to-contributions","tag":null,"message":"Fixed
+        last failing test.","committed_at":"2017-11-14T08:16:19Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/compare/bf9710ca93ca...cab26d8e845d","pull_request_number":null},{"id":89004443,"sha":"eee9b65cf729b2847d52f1ee0da36185dcfbf98d","branch":"master","tag":null,"message":"[BROKEN]
+        refactor to use end_date instead of start_date everywhere.","committed_at":"2017-11-14T08:15:19Z","author_name":"Ellen
+        Marie Dash","author_email":"me@duckie.co","committer_name":"Ellen Marie Dash","committer_email":"me@duckie.co","compare_url":"https://github.com/how-is/how_is/pull/212","pull_request_number":212}]}'
+    http_version: 
+  recorded_at: Fri, 08 Dec 2017 22:42:35 GMT
 recorded_with: VCR 3.0.3
