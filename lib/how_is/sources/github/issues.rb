@@ -60,6 +60,48 @@ module HowIs::Sources
         Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)
       end
 
+      # TODO: Clean up Issues Per Label stuff, or replace it with different functionality.
+
+      def issues_per_label
+        ipl = with_label_links(num_with_label(@data), @repository)
+        number_with_no_label = num_with_no_label(@data)
+        ipl["(No label)"] = number_with_no_label if number_with_no_label != 0
+        ipl
+      end
+
+      ROW_HTML_GRAPH = <<-EOF
+  <tr>
+    <td style="width: %{label_width}">%{label_text}</td>
+    <td><span class="fill" style="width: %{percentage}%%">%{link_text}</span></td>
+  </tr>
+
+      EOF
+
+      def issues_per_label_html
+        data = issues_per_label
+
+        return "<p>There are no open issues to graph.</p>" if data.empty?
+
+        biggest = data.map { |x| x[1] }.max
+        get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
+
+        longest_label_length = data.map(&:first).map(&:length).max
+        label_width = "#{longest_label_length}ch"
+
+        parts = data.map { |row|
+          Kernel.format(ROW_HTML_GRAPH, {
+            label_width: label_width,
+            label_text: label_text_for(row),
+            percentage: get_percentage.call(row[1]),
+            link_text: row[1]
+          })
+        }
+
+        "<table class=\"horizontal-bar-graph\">\n" +
+        parts.join("\n") +
+        "</table>\n"
+      end
+
       def to_a
         fetch!
         obj_to_array_of_hashes(@data)

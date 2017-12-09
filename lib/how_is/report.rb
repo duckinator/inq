@@ -25,6 +25,7 @@ module HowIs
         contributions_summary: @gh_contributions.to_html,
         issues_summary: @gh_issues.to_html,
         pulls_summary: @gh_pulls.to_html,
+        issues_per_label: @gh_issues.issues_per_label_html,
 
         issues: @gh_issues.to_a,
         pulls: @gh_issues.to_a,

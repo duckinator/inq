@@ -9,4 +9,4 @@
 %{issues_summary}
 
 <h2>Issues Per Label</h2>
-TODO
+%{issues_per_label}
