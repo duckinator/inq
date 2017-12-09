@@ -26,7 +26,7 @@ module HowIs::Sources
     # @return [String] JSON result
     def fetch_builds
       Okay::HTTP.get(
-        "http://api.travis-ci.org/repos/#{@user}/#{@repo}/builds?event_type=push",
+        "http://api.travis-ci.org/repos/#{@repository}/builds?event_type=push",
         headers: {"Accept" => "application/vnd.travis-ci.2+json"}
       ).body
     end

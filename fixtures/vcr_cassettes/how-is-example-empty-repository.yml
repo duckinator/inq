@@ -554,4 +554,112 @@ http_interactions:
       string: '{"file":"not found"}'
     http_version: 
   recorded_at: Sat, 09 Dec 2017 02:39:03 GMT
+- request:
+    method: get
+    uri: http://api.travis-ci.org/repos/how-is/example-empty-repository/builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Sat, 09 Dec 2017 04:24:12 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Location:
+      - https://api.travis-ci.org/repos/how-is/example-empty-repository/builds
+      X-Request-Id:
+      - 9bdada2d-24ee-464e-8460-868f900e21f5
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sat, 09 Dec 2017 04:24:12 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repos/how-is/example-empty-repository/builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Sat, 09 Dec 2017 04:24:13 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::Api::App::Endpoint::Repos
+      X-Pattern:
+      - "/:owner_name/:name/builds"
+      X-Oauth-Scopes:
+      - public
+      X-Accepted-Oauth-Scopes:
+      - public
+      Vary:
+      - Accept,Accept-Encoding
+      Cache-Control:
+      - no-cache
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 1339711c-0c65-49f4-bb04-c94f3d3011a7
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: '{"builds":[],"commits":[]}'
+    http_version: 
+  recorded_at: Sat, 09 Dec 2017 04:24:13 GMT
 recorded_with: VCR 3.0.3

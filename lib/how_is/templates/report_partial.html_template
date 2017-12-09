@@ -1,5 +1,5 @@
 <h1>%{title}</h1>
-%{contributions}
+%{contributions_summary}
 
 <h2>Pull Requests</h2>
 %{pulls_summary}

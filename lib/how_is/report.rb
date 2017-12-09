@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "how_is/sources/github/contributions"
+require "how_is/sources/github/issues"
+require "how_is/sources/github/pulls"
 require "how_is/sources/travis"
 
 module HowIs
@@ -10,8 +12,8 @@ module HowIs
       @end_date = end_date
 
       @gh_contributions = HowIs::Sources::Github::Contributions.new(repository, end_date)
-      #@gh_issues        = HowIs::Sources::Github::Issues.new(repository, end_date)
-      #@gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, end_date)
+      @gh_issues        = HowIs::Sources::Github::Issues.new(repository, end_date)
+      @gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, end_date)
       @travis           = HowIs::Sources::Travis.new(repository, end_date)
     end
 
@@ -19,18 +21,29 @@ module HowIs
       @report_hash ||= {
         title: "How is #{@repository}?",
         repository: @repository,
-        contributions: @gh_contributions.to_s,
-        issues_summary: "TODO",
-        pulls_summary: "TODO",
-        #issues_summary: @gh_issues.to_s,
-        #pulls_summary: @gh_pulls.to_s,
-        #issues: @gh_issues.to_h,
-        #pulls: @gh_issues.to_h,
-        average_issue_age: "TODO",
-        oldest_issue_link: "TODO",
-        oldest_issue_date: "TODO",
-        newest_issue_link: "TODO",
-        newest_issue_date: "TODO",
+
+        contributions_summary: @gh_contributions.to_s,
+        issues_summary: @gh_issues.to_s,
+        pulls_summary: @gh_pulls.to_s,
+
+        issues: @gh_issues.to_a,
+        pulls: @gh_issues.to_a,
+
+        number_of_issues: @gh_issues.to_a.length,
+        number_of_pulls:  @gh_pulls.to_a.length,
+
+        average_issue_age: @gh_issues.average_age,
+        average_pull_age:  @gh_pulls.average_age,
+
+        oldest_issue_link: @gh_issues.oldest[:link],
+        oldest_issue_date: @gh_issues.oldest[:creation_date],
+
+        newest_issue_link: @gh_issues.newest[:link],
+        newest_issue_date: @gh_issues.newest[:creation_date],
+
+        oldest_pull_link: @gh_pulls.oldest[:link],
+        oldest_pull_date: @gh_pulls.oldest[:creation_date],
+
         travis_builds: @travis.builds.to_h,
       }
     end
