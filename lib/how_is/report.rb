@@ -31,5 +31,14 @@ module HowIs
     def to_json
       to_h.to_json
     end
+
+    private
+
+    def template(filename)
+      dir  = File.expand_path("./templates/", __dir__)
+      path = File.join(dir, filename)
+
+      open(path).read
+    end
   end
 end
