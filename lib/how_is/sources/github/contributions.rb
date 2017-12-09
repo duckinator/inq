@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "how_is"
+require "how_is/version"
 require "how_is/sources/github"
 require "date"
 
@@ -133,7 +133,7 @@ module HowIs::Sources
           repo: @repo).default_branch
       end
 
-      def summary(start_text: nil)
+      def to_s(start_text: nil)
         # TODO: Pulse has information about _all_ branches. Do we want that?
         #       If we do, we'd need to pass a branch name as the 'sha' parameter
         #       to /repos/:owner/:repo/commits.
@@ -149,6 +149,7 @@ module HowIs::Sources
           "#{pluralize('deletion', deletions_count)} across " \
           "#{pluralize('file', changed_files.length)}."
       end
+      alias :summary :to_s # For backwards compatibility.
 
       private
 

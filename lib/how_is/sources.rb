@@ -1,4 +1,4 @@
-require "how_is"
+require "how_is/version"
 
 module HowIs
   module Sources

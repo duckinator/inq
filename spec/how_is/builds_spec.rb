@@ -4,7 +4,7 @@ require "how_is/sources/travis"
 
 describe HowIs::Sources::Travis do
   subject do
-    described_class.new("how-is/how_is")
+    described_class.new("how-is/how_is", "2017-08-06")
   end
 
   describe "#builds" do
