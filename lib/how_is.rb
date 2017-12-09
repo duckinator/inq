@@ -80,6 +80,13 @@ module HowIs
     ["html", "json"]
   end
 
+  def self.template(filename)
+    dir  = File.expand_path("./how_is/templates/", __dir__)
+    path = File.join(dir, filename)
+
+    open(path).read
+  end
+
   ##
   # Returns whether or not the specified +file+ can be exported to.
   #

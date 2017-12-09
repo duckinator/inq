@@ -16,7 +16,7 @@ module HowIs::Sources
       end
 
       def url
-        "https://github.com/#{repository}/#{type}"
+        "https://github.com/#{@repository}/#{type}"
       end
 
       def average_age
@@ -33,8 +33,31 @@ module HowIs::Sources
         newest_for(@data) || {}
       end
 
-      def to_s
-        "TODO"
+      def summary
+        pretty_number = (to_a.length == 0) ? "no" : to_a.length
+
+        "There are <a href=\"#{url}\">#{pretty_number} #{pretty_type} open</a>."
+      end
+
+      def to_html
+        fetch!
+
+        summary_ = "<p>#{summary}</p>"
+
+        return summary_ if to_a.length == 0
+
+        template_data = {
+          summary: summary_,
+          average_age: average_age,
+
+          oldest_link: oldest[:link],
+          oldest_date: oldest[:creation_date],
+
+          newest_link: newest[:link],
+          newest_date: newest[:creation_date],
+        }
+
+        Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)
       end
 
       def to_a

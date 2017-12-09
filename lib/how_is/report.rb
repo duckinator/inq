@@ -22,9 +22,9 @@ module HowIs
         title: "How is #{@repository}?",
         repository: @repository,
 
-        contributions_summary: @gh_contributions.to_s,
-        issues_summary: @gh_issues.to_s,
-        pulls_summary: @gh_pulls.to_s,
+        contributions_summary: @gh_contributions.to_html,
+        issues_summary: @gh_issues.to_html,
+        pulls_summary: @gh_pulls.to_html,
 
         issues: @gh_issues.to_a,
         pulls: @gh_issues.to_a,
@@ -49,24 +49,15 @@ module HowIs
     end
 
     def to_html_partial
-      Kernel.format(template('report_partial.html_template'), to_h)
+      Kernel.format(HowIs.template('report_partial.html_template'), to_h)
     end
 
     def to_html
-      Kernel.format(template('report.html_template'), to_h.merge({report: to_html_partial}))
+      Kernel.format(HowIs.template('report.html_template'), to_h.merge({report: to_html_partial}))
     end
 
     def to_json
       to_h.to_json
-    end
-
-    private
-
-    def template(filename)
-      dir  = File.expand_path("./templates/", __dir__)
-      path = File.join(dir, filename)
-
-      open(path).read
     end
   end
 end

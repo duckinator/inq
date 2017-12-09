@@ -3,16 +3,10 @@
 <p>%{contributions_summary}</p>
 
 <h2>Pull Requests</h2>
-<p>%{pulls_summary}</p>
+%{pulls_summary}
 
 <h2>Issues</h2>
-<p>%{issues_summary}</p>
-
-<ul>
-  <li>Average age: %{average_issue_age}</li>
-  <li><a href="%{oldest_issue_link}">Oldest issue</a> was opened on %{oldest_issue_date}.</li>
-  <li><a href="%{newest_issue_link}">Newest issue</a> was opened on %{newest_issue_date}.</li>
-</ul>
+%{issues_summary}
 
 <h2>Issues Per Label</h2>
 TODO

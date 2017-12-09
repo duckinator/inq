@@ -133,7 +133,7 @@ module HowIs::Sources
           repo: @repo).default_branch
       end
 
-      def to_s(start_text: nil)
+      def to_html(start_text: nil)
         # TODO: Pulse has information about _all_ branches. Do we want that?
         #       If we do, we'd need to pass a branch name as the 'sha' parameter
         #       to /repos/:owner/:repo/commits.
@@ -149,7 +149,7 @@ module HowIs::Sources
           "#{pluralize('deletion', deletions_count)} across " \
           "#{pluralize('file', changed_files.length)}."
       end
-      alias :summary :to_s # For backwards compatibility.
+      alias :summary :to_html # For backwards compatibility.
 
       private
 
