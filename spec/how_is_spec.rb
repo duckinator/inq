@@ -116,7 +116,7 @@ describe HowIs do
         }.to_not output.to_stderr
       end
 
-      expect(actual_report.to_html).to eq(expected_html)
+      expect(actual_report.to_html_partial).to eq(expected_html)
       expect(actual_report.to_json).to eq(expected_json)
     end
   end
@@ -128,7 +128,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-empty-repository") do
         expect {
-          actual = HowIs.new("how-is/example-empty-repository", "2016-12-01").to_html
+          actual = HowIs.new("how-is/example-empty-repository", "2016-12-01").to_html_partial
         }.to_not output.to_stderr
       end
 
