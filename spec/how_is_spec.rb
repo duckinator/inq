@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "how_is"
+require "how_is/frontmatter"
 require "open3"
 require "timecop"
 require "yaml"
@@ -137,7 +139,7 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.send(:generate_frontmatter, {"foo" => "bar %{baz}"}, {"baz" => "asdf"})
+        actual = HowIs::Frontmatter.generate({"foo" => "bar %{baz}"}, {"baz" => "asdf"})
         expected = "---\nfoo: bar asdf\n"
       end
 
@@ -149,7 +151,7 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.send(:generate_frontmatter, {:foo => "bar %{baz}"}, {:baz => "asdf"})
+        actual = HowIs::Frontmatter.generate({:foo => "bar %{baz}"}, {:baz => "asdf"})
         expected = "---\nfoo: bar asdf\n"
       end
 
