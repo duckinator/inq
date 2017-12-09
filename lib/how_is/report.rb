@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "how_is/frontmatter"
 require "how_is/sources/github/contributions"
 require "how_is/sources/github/issues"
 require "how_is/sources/github/pulls"
@@ -17,7 +18,8 @@ module HowIs
       @travis           = HowIs::Sources::Travis.new(repository, end_date)
     end
 
-    def to_h
+
+    def to_h(frontmatter_data = nil)
       @report_hash ||= {
         title: "How is #{@repository}?",
         repository: @repository,
@@ -47,18 +49,40 @@ module HowIs
 
         travis_builds: @travis.builds.to_h,
       }
+
+      if frontmatter_data
+        frontmatter = generate_frontmatter(frontmatter_data)
+        @report_hash.merge(frontmatter: frontmatter)
+      else
+        @report_hash
+      end
     end
 
-    def to_html_partial
-      Kernel.format(HowIs.template('report_partial.html_template'), to_h)
+    def to_html_partial(frontmatter = nil)
+      template_data = to_h(frontmatter)
+
+      Kernel.format(HowIs.template('report_partial.html_template'), template_data)
     end
 
-    def to_html
-      Kernel.format(HowIs.template('report.html_template'), to_h.merge({report: to_html_partial}))
+    def to_html(frontmatter = nil)
+      template_data = to_h(frontmatter).merge({report: to_html_partial})
+
+      Kernel.format(HowIs.template('report.html_template'), template_data)
     end
 
     def to_json
       to_h.to_json
     end
+
+    private
+
+    def generate_frontmatter(frontmatter_data)
+      return "" if frontmatter_data.nil?
+
+      frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
+
+      frontmatter + "\n---\n\n"
+    end
+
   end
 end

@@ -50,24 +50,20 @@ module HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
-    analysis = Analysis.new(config["repository"], date)
-    report_data = prepare_report_data(config["repository"], date)
-    generated_reports = {}
+    report = Report.new(config["repository"], date)
+    report_data = prepare_report_metadata(config["repository"], date)
 
-    config["reports"].map do |format, report_config|
-      # Sometimes report_data has unused keys, which generates a warning, but
-      # we're okay with it, so we wrap it with silence_warnings {}.
-      filename = silence_warnings { report_config["filename"] % report_data }
-      file = File.join(report_config["directory"], filename)
+    generated_reports =
+      config["reports"].map { |format, report_config|
+        # Sometimes report_data has unused keys, which generates a warning, but
+        # we're okay with it, so we wrap it with silence_warnings {}.
+        filename = silence_warnings { report_config["filename"] % report_data }
+        file = File.join(report_config["directory"], filename)
 
-      report = Report.export(analysis, format)
+        report = report.send("to_#{format}", report_config["frontmatter"])
 
-      result = build_report(report_config["frontmatter"], report_data, report)
-
-      generated_reports[file] = result
-
-      result
-    end
+        [file, report]
+      }
 
     generated_reports
   end
@@ -111,4 +107,16 @@ module HowIs
     $VERBOSE = old_verbose
   end
   private_class_method :with_warnings
+
+  def self.prepare_report_metadata(repository, date)
+    end_date = DateTime.strptime(date, "%Y-%m-%d")
+    friendly_end_date = end_date.strftime("%B %d, %y")
+
+    {
+      repository: repository,
+      date: end_date,
+      friendly_date: friendly_end_date,
+    }
+  end
+  private_class_method :prepare_report_metadata
 end
