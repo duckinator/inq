@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 require "how_is/version"
+require "how_is/report"
 require "github_api"
 
 module HowIs
   DEFAULT_REPORT_FILE = "report.html".freeze
+
+  def self.new(repository, date)
+    Report.new(repository, date)
+  end
 
   def self.github
     @@github ||=
