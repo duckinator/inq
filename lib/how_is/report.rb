@@ -40,11 +40,6 @@ module HowIs
     end
 
     def to_html
-      p to_html_partial
-      require 'pp'
-      pp to_h.merge({report: to_html_partial})
-      puts '???'
-      p template('report.html_template')
       Kernel.format(template('report.html_template'), to_h.merge({report: to_html_partial}))
     end
 
