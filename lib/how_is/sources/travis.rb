@@ -9,7 +9,7 @@ module HowIs::Sources
     # @param repository [String] GitHub repository name, of the format user/repo.
     # @param end_date [String] End date for the report being generated.
     def initialize(repository, end_date)
-      repository = @repository
+      @repository = repository
       # TODO: Do something with end_date.
       # TODO: Figure out Default Branch of the repo
     end

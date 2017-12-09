@@ -454,4 +454,104 @@ http_interactions:
         Pull Requests or Issues, for testing how_is."}]}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: http://api.travis-ci.org/repos///builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Sat, 09 Dec 2017 02:39:03 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Location:
+      - https://api.travis-ci.org/repos///builds
+      X-Request-Id:
+      - b43c66cb-b6b4-4ce4-b6f2-d983964df64c
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sat, 09 Dec 2017 02:39:03 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repos///builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Sat, 09 Dec 2017 02:39:03 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 79cbb461-99eb-40e5-88a4-67926d19e0d5
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: '{"file":"not found"}'
+    http_version: 
+  recorded_at: Sat, 09 Dec 2017 02:39:03 GMT
 recorded_with: VCR 3.0.3

@@ -11,7 +11,7 @@
       }
       .horizontal-bar-graph {
         position: relative;
-        width: 100%;
+        width: 100%%; /* lol Kernel.format() disapproves. */
       }
       .horizontal-bar-graph .fill {
         display: inline-block;

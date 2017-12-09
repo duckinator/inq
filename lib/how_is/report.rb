@@ -16,16 +16,36 @@ module HowIs
     end
 
     def to_h
-      @report ||= {
+      @report_hash ||= {
+        title: "How is #{@repository}?",
+        repository: @repository,
         contributions: @gh_contributions.to_s,
+        issues_summary: "TODO",
+        pulls_summary: "TODO",
+        #issues_summary: @gh_issues.to_s,
+        #pulls_summary: @gh_pulls.to_s,
         #issues: @gh_issues.to_h,
         #pulls: @gh_issues.to_h,
+        average_issue_age: "TODO",
+        oldest_issue_link: "TODO",
+        oldest_issue_date: "TODO",
+        newest_issue_link: "TODO",
+        newest_issue_date: "TODO",
         travis_builds: @travis.builds.to_h,
       }
     end
 
+    def to_html_partial
+      Kernel.format(template('report_partial.html_template'), to_h)
+    end
+
     def to_html
-      Kernel.format(template('report.html_template'), to_h)
+      p to_html_partial
+      require 'pp'
+      pp to_h.merge({report: to_html_partial})
+      puts '???'
+      p template('report.html_template')
+      Kernel.format(template('report.html_template'), to_h.merge({report: to_html_partial}))
     end
 
     def to_json
