@@ -3,9 +3,7 @@
 require "how_is"
 require "optparse"
 
-class HowIs::CLI
-  DEFAULT_REPORT_FILE = "report.#{HowIs::DEFAULT_FORMAT}".freeze
-
+module HowIs::CLI
   # Parent class of all exceptions raised in HowIs::CLI.
   class OptionsError < StandardError
   end
@@ -67,7 +65,7 @@ class HowIs::CLI
       end
 
       opts.on("--report REPORT_FILE",
-              "Output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{DEFAULT_REPORT_FILE})") do |filename|
+              "Output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{HowIs::DEFAULT_REPORT_FILE})") do |filename|
         options[:report] = filename
       end
 
@@ -115,8 +113,8 @@ class HowIs::CLI
       # If we get here, we're generating a report from the command line,
       # without using --from or --config.
 
-      # If --report isn't specified, default to DEFAULT_REPORT_FILE.
-      options[:report] ||= DEFAULT_REPORT_FILE
+      # If --report isn't specified, default to HowIs::DEFAULT_REPORT_FILE.
+      options[:report] ||= HowIs::DEFAULT_REPORT_FILE
 
       # If we can't export to the specified file, raise an exception.
       unless HowIs.can_export_to?(options[:report])

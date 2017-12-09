@@ -1,55 +1,16 @@
 # frozen_string_literal: true
 
 require "how_is/version"
-require "contracts"
-require "date"
+require "github_api"
 
-C = Contracts
+module HowIs
+  DEFAULT_REPORT_FILE = "report.html".freeze
 
-# HowIs control class used from the CLI tool.
-#
-# Generates an analysis and has methods to build reports from it.
-class HowIs
-  include Contracts::Core
-
-  require "how_is/fetcher"
-  require "how_is/analysis"
-  require "how_is/report"
-
-  DEFAULT_FORMAT = :html
-
-  ##
-  # Generate a HowIs instance, so you can generate reports.
-  #
-  # @param repository [String] The name of a GitHub repository (of the
-  #   format <user or organization>/<repository>).
-  # @param end_date_or_analysis [String, HowIs::Analysis] If given a date in
-  #   the format YYYY-MM-DD, it is treated as the date to include commits from.
-  #   If given a +HowIs::Analysis+, use that instead of generating one.
-  #
-  # (This will, hopefully eventually be made less awkward.)
-  def initialize(repository, end_date_or_analysis)
-    if end_date_or_analysis.is_a?(Analysis)
-      @analysis = end_date_or_analysis
-    else
-      @analysis = HowIs.generate_analysis(repository, end_date_or_analysis)
-    end
-  end
-
-  ##
-  # Generate an HTML report.
-  #
-  # @return [String] An HTML report.
-  def to_html
-    Report.export(@analysis, :html)
-  end
-
-  ##
-  # Generate a JSON report.
-  #
-  # @return [String] A JSON report.
-  def to_json
-    Report.export(@analysis, :json)
+  def self.github
+    @@github ||=
+      Github.new(auto_pagination: true) do |config|
+        config.basic_auth = ENV["HOWIS_BASIC_AUTH"] if ENV["HOWIS_BASIC_AUTH"]
+      end
   end
 
   ##
@@ -84,7 +45,7 @@ class HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
-    analysis = HowIs.generate_analysis(config["repository"], date)
+    analysis = Analysis.new(config["repository"], date)
     report_data = prepare_report_data(config["repository"], date)
     generated_reports = {}
 
@@ -111,8 +72,7 @@ class HowIs
   #
   # @return [Array<String>] An array of the types of reports you can generate.
   def self.supported_formats
-    report_constants = HowIs.constants.grep(/.Report/) - [:BaseReport]
-    report_constants.map { |x| x.to_s.split("Report").first.downcase }
+    ["html", "json"]
   end
 
   ##
@@ -125,76 +85,6 @@ class HowIs
     # TODO: Check if the file is writable?
     supported_formats.include?(file.split(".").last)
   end
-
-  # Generate an analysis.
-  # TODO: This may make more sense as Analysis.new().
-  Contract String, String => C::Any
-  def self.generate_analysis(repository, end_date)
-    raw_data = Fetcher.new.call(repository, end_date)
-    analysis = Analysis.from_fetcher_results(raw_data)
-
-    analysis
-  end
-
-  # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
-  #
-  # E.g.,
-  #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
-  # =>  "---\nfoo: bar asdf\n"
-  Contract C::HashOf[C::Or[String, Symbol] => String],
-           C::HashOf[C::Or[String, Symbol] => C::Any] => String
-  def self.generate_frontmatter(frontmatter, report_data)
-    frontmatter = convert_keys(frontmatter, :to_s)
-    report_data = convert_keys(report_data, :to_sym)
-
-    frontmatter = frontmatter.map { |k, v|
-      # Sometimes report_data has unused keys, which generates a warning, but
-      # we're okay with it.
-      v = silence_warnings { v % report_data }
-
-      [k, v]
-    }.to_h
-
-    YAML.dump(frontmatter)
-  end
-  private_class_method :generate_frontmatter
-
-  # Combine the frontmatter, report data, and raw report into a report with
-  # frontmatter.
-  def self.build_report(frontmatter, report_data, report)
-    str = StringIO.new
-
-    if frontmatter
-      str.puts generate_frontmatter(frontmatter, report_data)
-      str.puts "---"
-      str.puts
-    end
-
-    str.puts report
-
-    str.string
-  end
-  private_class_method :build_report
-
-  def self.prepare_report_data(repository, date)
-    end_date = DateTime.strptime(date, "%Y-%m-%d")
-    friendly_end_date = end_date.strftime("%B %d, %y")
-
-    {
-      repository: repository,
-      date: end_date,
-      friendly_date: friendly_end_date,
-    }
-  end
-  private_class_method :prepare_report_data
-
-  # @example
-  #   convert_keys({'foo' => 'bar'}, :to_sym)
-  #   # => {:foo => 'bar'}
-  def self.convert_keys(data, method_name)
-    data.map { |k, v| [k.send(method_name), v] }.to_h
-  end
-  private_class_method :convert_keys
 
   def self.silence_warnings(&block)
     with_warnings(nil, &block)

@@ -2,7 +2,7 @@
 
 require "date"
 
-class HowIs
+module HowIs
   # Miscellaneous helper methods for the Analysis class.
   module AnalysisHelpers
     # Given an Array of issues or pulls, return a Hash specifying how many

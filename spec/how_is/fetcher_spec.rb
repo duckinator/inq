@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+=begin
 require "spec_helper"
 require "json"
 
@@ -20,3 +20,4 @@ describe HowIs::Fetcher do
     end
   end
 end
+=end

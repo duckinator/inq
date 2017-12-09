@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "how_is/analysis"
 
 describe HowIs::Analysis do
   let(:issues) { JSON.parse(open(File.expand_path("../data/issues.json", __dir__)).read) }

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "how_is/builds"
+require "how_is/sources/github/builds"
 
-describe HowIs::Builds do
+describe HowIs::Sources::Github::Builds do
   let(:user) { "how-is" }
   let(:repo) { "how_is" }
 
