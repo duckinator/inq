@@ -1,11 +1,11 @@
 <h1>%{title}</h1>
-%{contributions_summary}
+<p>%{contributions_summary}</p>
 
 <h2>Pull Requests</h2>
-%{pulls_summary}
+<p>%{pulls_summary}</p>
 
 <h2>Issues</h2>
-%{issues_summary}
+<p>%{issues_summary}</p>
 
 <ul>
   <li>Average age: %{average_issue_age}</li>
