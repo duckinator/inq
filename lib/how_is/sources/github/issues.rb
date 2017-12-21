@@ -34,9 +34,11 @@ module HowIs::Sources
       end
 
       def summary
-        pretty_number = (to_a.length == 0) ? "no" : to_a.length
+        number_open = to_a.length
+        pretty_number =
+          pluralize(pretty_type, number_open, zero_is_no: true)
 
-        "There are <a href=\"#{url}\">#{pretty_number} #{pretty_type} open</a>."
+        "There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>."
       end
 
       def to_html
@@ -98,11 +100,18 @@ module HowIs::Sources
         label_width = "#{longest_label_length}ch"
 
         parts = data.map { |label, info|
+          # TODO: Remove this hack to get around unlabeled issues not having a link.
+          label_text = label
+          unless info["link"].nil?
+            label_text = '<a href="' + info["link"] + '">' + label_text + '</a>'
+          end
+
           Kernel.format(HTML_GRAPH_ROW, {
             label_width: label_width,
             label_text: label,
+            label_link: info["link"],
             percentage: get_percentage.call(info["total"]),
-            link_text: info["link"],
+            link_text: info["total"].to_s,
           })
         }
 
@@ -123,7 +132,7 @@ module HowIs::Sources
       end
 
       def pretty_type
-        type
+        "issue"
       end
 
       def fetch!

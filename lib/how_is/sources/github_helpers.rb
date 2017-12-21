@@ -157,6 +157,21 @@ module HowIs
           [weeks_remainder / SECONDS_IN_A_DAY, "day"],
         ]
       end
+
+      def pluralize(string, number, zero_is_no: false)
+        number_str = number
+        number_str = "no" if number.zero? && zero_is_no
+
+        "#{number_str} #{string}#{(number == 1) ? '' : 's'}"
+      end
+
+      def are_or_is(number)
+        if number == 1
+          "is"
+        else
+          "are"
+        end
+      end
     end
   end
 end

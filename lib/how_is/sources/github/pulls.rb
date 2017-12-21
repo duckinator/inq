@@ -13,7 +13,7 @@ module HowIs::Sources
       end
 
       def pretty_type
-        "pull requests"
+        "pull request"
       end
     end
   end

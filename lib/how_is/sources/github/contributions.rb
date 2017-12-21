@@ -2,6 +2,7 @@
 
 require "how_is/version"
 require "how_is/sources/github"
+require "how_is/sources/github_helpers"
 require "date"
 
 module HowIs::Sources
@@ -16,6 +17,8 @@ module HowIs::Sources
     #     c.contributors #=> All contributors during July 2017.
     #     c.new_contributors #=> New contributors during July 2017.
     class Contributions
+      include HowIs::Sources::GithubHelpers
+
       # Returns an object that fetches contributor information about a particular
       # repository for a month-long period starting on +start_date+.
       #
@@ -155,10 +158,6 @@ module HowIs::Sources
 
       def pretty_date(date)
         date.strftime("%b %d, %Y")
-      end
-
-      def pluralize(string, number)
-        "#{number} #{string}#{(number == 1) ? '' : 's'}"
       end
     end
   end
