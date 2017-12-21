@@ -81,7 +81,7 @@ module HowIs
 
         {
           created_at: iop["created_at"],
-          link: iop["url"],
+          link: iop["html_url"],
         }
       end
 
@@ -94,7 +94,7 @@ module HowIs
 
         {
           created_at: iop["created_at"],
-          link: iop["url"],
+          link: iop["html_url"],
         }
       end
 
