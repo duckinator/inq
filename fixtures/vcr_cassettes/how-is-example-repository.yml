@@ -626,4 +626,112 @@ http_interactions:
         commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}]}]'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: http://api.travis-ci.org/repos/how-is/example-repository/builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Dec 2017 22:37:54 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
+      Location:
+      - https://api.travis-ci.org/repos/how-is/example-repository/builds
+      X-Request-Id:
+      - 8fde6150-ae12-4f93-aeb7-9715324f2c9b
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repos/how-is/example-repository/builds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/vnd.travis-ci.2+json
+      User-Agent:
+      - Ruby
+      Host:
+      - api.travis-ci.org
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Thu, 21 Dec 2017 22:37:54 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::Api::App::Endpoint::Repos
+      X-Pattern:
+      - "/:owner_name/:name/builds"
+      X-Oauth-Scopes:
+      - public
+      X-Accepted-Oauth-Scopes:
+      - public
+      Vary:
+      - Accept,Accept-Encoding
+      Cache-Control:
+      - no-cache
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 4eaf4dde-199b-4d2c-9018-e1ce3d4387d5
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: '{"builds":[],"commits":[]}'
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 recorded_with: VCR 3.0.3
