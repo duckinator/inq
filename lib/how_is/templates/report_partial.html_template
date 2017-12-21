@@ -1,4 +1,4 @@
-
+%{frontmatter}
 <h1>%{title}</h1>
 <p>%{contributions_summary}</p>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+%{frontmatter}<!DOCTYPE html>
 <html>
   <head>
     <title>%{title}</title>

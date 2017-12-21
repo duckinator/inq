@@ -50,12 +50,15 @@ module HowIs
         travis_builds: @travis.builds.to_h,
       }
 
-      if frontmatter_data
-        frontmatter = generate_frontmatter(frontmatter_data)
-        @report_hash.merge(frontmatter: frontmatter)
-      else
-        @report_hash
-      end
+
+      frontmatter =
+        if frontmatter_data
+          frontmatter = generate_frontmatter(frontmatter_data)
+        else
+          ""
+        end
+
+      @report_hash.merge(frontmatter: frontmatter)
     end
 
     def to_html_partial(frontmatter = nil)

@@ -65,7 +65,7 @@ module HowIs
         [file, report]
       }
 
-    generated_reports
+    generated_reports.to_h
   end
 
   ##
