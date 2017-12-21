@@ -143,7 +143,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-repository") do
         actual = HowIs::Frontmatter.generate({"foo" => "bar %{baz}"}, {"baz" => "asdf"})
-        expected = "---\nfoo: bar asdf\n"
+        expected = "---\nfoo: bar asdf\n---\n\n"
       end
 
       expect(actual).to eq(expected)
@@ -155,7 +155,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-repository") do
         actual = HowIs::Frontmatter.generate({:foo => "bar %{baz}"}, {:baz => "asdf"})
-        expected = "---\nfoo: bar asdf\n"
+        expected = "---\nfoo: bar asdf\n---\n\n"
       end
 
       expect(actual).to eq(expected)

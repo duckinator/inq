@@ -53,7 +53,7 @@ module HowIs
 
       frontmatter =
         if frontmatter_data
-          frontmatter = generate_frontmatter(frontmatter_data)
+          frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
         else
           ""
         end
@@ -76,16 +76,5 @@ module HowIs
     def to_json
       to_h.to_json
     end
-
-    private
-
-    def generate_frontmatter(frontmatter_data)
-      return "" if frontmatter_data.nil?
-
-      frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
-
-      frontmatter + "\n---\n\n"
-    end
-
   end
 end

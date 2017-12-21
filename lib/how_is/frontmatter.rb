@@ -8,6 +8,8 @@ module HowIs
     #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
     # =>  "---\nfoo: bar asdf\n"
     def self.generate(frontmatter, report_data)
+      return "" if frontmatter.nil?
+
       frontmatter = convert_keys(frontmatter, :to_s)
       report_data = convert_keys(report_data, :to_sym)
 
@@ -19,7 +21,7 @@ module HowIs
         [k, v]
       }.to_h
 
-      YAML.dump(frontmatter)
+      YAML.dump(frontmatter) + "---\n\n"
     end
 
     # @example
