@@ -49,6 +49,8 @@ module HowIs::Sources
         template_data = {
           summary: summary_,
           average_age: average_age,
+          type: type,
+          pretty_type: pretty_type,
 
           oldest_link: oldest[:link],
           oldest_date: oldest[:creation_date],
