@@ -157,14 +157,6 @@ module HowIs
           [weeks_remainder / SECONDS_IN_A_DAY, "day"],
         ]
       end
-
-      def label_text_for(row)
-        if row[2]
-          link(row[0], row[2])
-        else
-          row[0]
-        end
-      end
     end
   end
 end

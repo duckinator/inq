@@ -65,11 +65,18 @@ module HowIs::Sources
       def issues_per_label
         ipl = with_label_links(num_with_label(@data), @repository)
         number_with_no_label = num_with_no_label(@data)
-        ipl["(No label)"] = number_with_no_label if number_with_no_label != 0
+
+        if number_with_no_label >0
+          ipl["(No label)"] = {
+            "link"  => nil,
+            "total" => number_with_no_label
+          }
+        end
+
         ipl
       end
 
-      ROW_HTML_GRAPH = <<-EOF
+      HTML_GRAPH_ROW = <<-EOF
   <tr>
     <td style="width: %{label_width}">%{label_text}</td>
     <td><span class="fill" style="width: %{percentage}%%">%{link_text}</span></td>
@@ -82,18 +89,18 @@ module HowIs::Sources
 
         return "<p>There are no open issues to graph.</p>" if data.empty?
 
-        biggest = data.map { |x| x[1] }.max
+        biggest = data.map { |label, info| info["total"] }.max
         get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
         longest_label_length = data.map(&:first).map(&:length).max
         label_width = "#{longest_label_length}ch"
 
-        parts = data.map { |row|
-          Kernel.format(ROW_HTML_GRAPH, {
+        parts = data.map { |label, info|
+          Kernel.format(HTML_GRAPH_ROW, {
             label_width: label_width,
-            label_text: label_text_for(row),
-            percentage: get_percentage.call(row[1]),
-            link_text: row[1]
+            label_text: label,
+            percentage: get_percentage.call(info["total"]),
+            link_text: info["link"],
           })
         }
 
