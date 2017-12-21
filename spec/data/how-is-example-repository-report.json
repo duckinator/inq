@@ -1,44 +1,441 @@
 {
-  "issues_url": "https://github.com/how-is/example-repository/issues",
-  "pulls_url": "https://github.com/how-is/example-repository/pulls",
+  "title": "How is how-is/example-repository?",
   "repository": "how-is/example-repository",
+  "contributions_summary": "From Nov 01, 2016 through Dec 01, 2016, how-is/example-repository gained <a href=\"https://github.com/how-is/example-repository/compare/master@%7B1477958400%7D...master@%7B1480550400%7D\">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file.",
+  "issues_summary": "<p>There are <a href=\"https://github.com/how-is/example-repository/issues\">4 issues open</a>.</p>\n\n<ul>\n  <li>Average age: approximately 2 months and 3 weeks.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/issues/1\">Oldest issue</a> was opened on Aug  7, 2016.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/pull/4\">Newest issue</a> was opened on Aug  7, 2016.</li>\n</ul>\n",
+  "pulls_summary": "<p>There is <a href=\"https://github.com/how-is/example-repository/pulls\">1 pull request open</a>.</p>\n\n<ul>\n  <li>Average age: approximately 2 months and 3 weeks.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/pull/4\">Oldest pull request</a> was opened on Aug  7, 2016.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/pull/4\">Newest pull request</a> was opened on Aug  7, 2016.</li>\n</ul>\n",
+  "issues_per_label": "<table class=\"horizontal-bar-graph\">\n  <tr>\n    <td style=\"width: 10ch\"><a href=\"https://github.com/how-is/example-repository/issues?q=is%3Aopen+is%3Aissue+label%3A%22bug%22\">bug</a></td>\n    <td><span class=\"fill\" style=\"width: 100%\">2</span></td>\n  </tr>\n\n  <tr>\n    <td style=\"width: 10ch\"><a href=\"https://github.com/how-is/example-repository/issues?q=is%3Aopen+is%3Aissue+label%3A%22question%22\">question</a></td>\n    <td><span class=\"fill\" style=\"width: 50%\">1</span></td>\n  </tr>\n\n  <tr>\n    <td style=\"width: 10ch\">(No label)</td>\n    <td><span class=\"fill\" style=\"width: 100%\">2</span></td>\n  </tr>\n\n</table>",
+  "issues": [
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/4",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/4/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/4/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/4/events",
+      "html_url": "https://github.com/how-is/example-repository/pull/4",
+      "id": 169778701,
+      "number": 4,
+      "title": "Example Pull Request.",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T04:02:59Z",
+      "updated_at": "2016-08-07T04:02:59Z",
+      "closed_at": null,
+      "pull_request": {
+        "url": "https://api.github.com/repos/how-is/example-repository/pulls/4",
+        "html_url": "https://github.com/how-is/example-repository/pull/4",
+        "diff_url": "https://github.com/how-is/example-repository/pull/4.diff",
+        "patch_url": "https://github.com/how-is/example-repository/pull/4.patch"
+      },
+      "body": ""
+    },
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/3",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/3/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/3/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/3/events",
+      "html_url": "https://github.com/how-is/example-repository/issues/3",
+      "id": 169778492,
+      "number": 3,
+      "title": "Yet another issue!",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T03:54:33Z",
+      "updated_at": "2016-08-07T03:54:33Z",
+      "closed_at": null,
+      "body": "An issue with a description and no labels.\n"
+    },
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/2",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/2/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/2/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/2/events",
+      "html_url": "https://github.com/how-is/example-repository/issues/2",
+      "id": 169778484,
+      "number": 2,
+      "title": "Another issue",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 420702040,
+          "url": "https://api.github.com/repos/how-is/example-repository/labels/bug",
+          "name": "bug",
+          "color": "ee0701",
+          "default": true
+        },
+        {
+          "id": 420702046,
+          "url": "https://api.github.com/repos/how-is/example-repository/labels/question",
+          "name": "question",
+          "color": "cc317c",
+          "default": true
+        }
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T03:54:13Z",
+      "updated_at": "2016-08-07T03:54:13Z",
+      "closed_at": null,
+      "body": "With a description and two labels!\n"
+    },
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/1",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/1/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/1/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/1/events",
+      "html_url": "https://github.com/how-is/example-repository/issues/1",
+      "id": 169778463,
+      "number": 1,
+      "title": "An issue",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 420702040,
+          "url": "https://api.github.com/repos/how-is/example-repository/labels/bug",
+          "name": "bug",
+          "color": "ee0701",
+          "default": true
+        }
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T03:53:26Z",
+      "updated_at": "2016-08-07T03:53:49Z",
+      "closed_at": null,
+      "body": "With a description and a label!\n"
+    }
+  ],
+  "pulls": [
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/4",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/4/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/4/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/4/events",
+      "html_url": "https://github.com/how-is/example-repository/pull/4",
+      "id": 169778701,
+      "number": 4,
+      "title": "Example Pull Request.",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T04:02:59Z",
+      "updated_at": "2016-08-07T04:02:59Z",
+      "closed_at": null,
+      "pull_request": {
+        "url": "https://api.github.com/repos/how-is/example-repository/pulls/4",
+        "html_url": "https://github.com/how-is/example-repository/pull/4",
+        "diff_url": "https://github.com/how-is/example-repository/pull/4.diff",
+        "patch_url": "https://github.com/how-is/example-repository/pull/4.patch"
+      },
+      "body": ""
+    },
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/3",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/3/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/3/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/3/events",
+      "html_url": "https://github.com/how-is/example-repository/issues/3",
+      "id": 169778492,
+      "number": 3,
+      "title": "Yet another issue!",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T03:54:33Z",
+      "updated_at": "2016-08-07T03:54:33Z",
+      "closed_at": null,
+      "body": "An issue with a description and no labels.\n"
+    },
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/2",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/2/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/2/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/2/events",
+      "html_url": "https://github.com/how-is/example-repository/issues/2",
+      "id": 169778484,
+      "number": 2,
+      "title": "Another issue",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 420702040,
+          "url": "https://api.github.com/repos/how-is/example-repository/labels/bug",
+          "name": "bug",
+          "color": "ee0701",
+          "default": true
+        },
+        {
+          "id": 420702046,
+          "url": "https://api.github.com/repos/how-is/example-repository/labels/question",
+          "name": "question",
+          "color": "cc317c",
+          "default": true
+        }
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T03:54:13Z",
+      "updated_at": "2016-08-07T03:54:13Z",
+      "closed_at": null,
+      "body": "With a description and two labels!\n"
+    },
+    {
+      "url": "https://api.github.com/repos/how-is/example-repository/issues/1",
+      "repository_url": "https://api.github.com/repos/how-is/example-repository",
+      "labels_url": "https://api.github.com/repos/how-is/example-repository/issues/1/labels{/name}",
+      "comments_url": "https://api.github.com/repos/how-is/example-repository/issues/1/comments",
+      "events_url": "https://api.github.com/repos/how-is/example-repository/issues/1/events",
+      "html_url": "https://github.com/how-is/example-repository/issues/1",
+      "id": 169778463,
+      "number": 1,
+      "title": "An issue",
+      "user": {
+        "login": "duckinator",
+        "id": 39698,
+        "avatar_url": "https://avatars.githubusercontent.com/u/39698?v=3",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/duckinator",
+        "html_url": "https://github.com/duckinator",
+        "followers_url": "https://api.github.com/users/duckinator/followers",
+        "following_url": "https://api.github.com/users/duckinator/following{/other_user}",
+        "gists_url": "https://api.github.com/users/duckinator/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/duckinator/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/duckinator/subscriptions",
+        "organizations_url": "https://api.github.com/users/duckinator/orgs",
+        "repos_url": "https://api.github.com/users/duckinator/repos",
+        "events_url": "https://api.github.com/users/duckinator/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/duckinator/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "labels": [
+        {
+          "id": 420702040,
+          "url": "https://api.github.com/repos/how-is/example-repository/labels/bug",
+          "name": "bug",
+          "color": "ee0701",
+          "default": true
+        }
+      ],
+      "state": "open",
+      "locked": false,
+      "assignee": null,
+      "assignees": [
+
+      ],
+      "milestone": null,
+      "comments": 0,
+      "created_at": "2016-08-07T03:53:26Z",
+      "updated_at": "2016-08-07T03:53:49Z",
+      "closed_at": null,
+      "body": "With a description and a label!\n"
+    }
+  ],
   "number_of_issues": 4,
   "number_of_pulls": 1,
-  "issues_with_label": {
-    "bug": {
-      "link": "https://github.com/how-is/example-repository/issues?q=is%3Aopen+is%3Aissue+label%3A%22bug%22",
-      "total": 2
-    },
-    "question": {
-      "link": "https://github.com/how-is/example-repository/issues?q=is%3Aopen+is%3Aissue+label%3A%22question%22",
-      "total": 1
-    }
-  },
-  "issues_with_no_label": {
-    "link": null,
-    "total": 2
-  },
   "average_issue_age": "approximately 2 months and 3 weeks",
   "average_pull_age": "approximately 2 months and 3 weeks",
-  "oldest_issue": {
-    "html_url": "https://github.com/how-is/example-repository/issues/1",
-    "number": 1,
-    "date": "2016-08-07T03:53:26+00:00"
+  "oldest_issue_link": "https://github.com/how-is/example-repository/issues/1",
+  "oldest_issue_date": null,
+  "newest_issue_link": "https://github.com/how-is/example-repository/pull/4",
+  "newest_issue_date": null,
+  "oldest_pull_link": "https://github.com/how-is/example-repository/pull/4",
+  "oldest_pull_date": null,
+  "travis_builds": {
+    "builds": [
+
+    ],
+    "commits": [
+
+    ]
   },
-  "oldest_pull": {
-    "html_url": "https://github.com/how-is/example-repository/pull/4",
-    "number": 4,
-    "date": "2016-08-07T04:02:59+00:00"
-  },
-  "newest_issue": {
-    "html_url": "https://github.com/how-is/example-repository/pull/4",
-    "number": 4,
-    "date": "2016-08-07T04:02:59+00:00"
-  },
-  "newest_pull": {
-    "html_url": "https://github.com/how-is/example-repository/pull/4",
-    "number": 4,
-    "date": "2016-08-07T04:02:59+00:00"
-  },
-  "summary": "From Nov 01, 2016 through Dec 01, 2016, how-is/example-repository gained <a href=\"https://github.com/how-is/example-repository/compare/master@%7B1477958400%7D...master@%7B1480550400%7D\">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file."
+  "frontmatter": ""
 }

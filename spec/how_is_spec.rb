@@ -114,7 +114,7 @@ describe HowIs do
         expect {
           actual_report = HowIs.new("how-is/example-repository", "2016-12-01")
         }.to_not output.to_stderr
- 
+
         expect(actual_report.to_html_partial).to eq(expected_html)
         expect(actual_report.to_json).to eq(expected_json)
      end
