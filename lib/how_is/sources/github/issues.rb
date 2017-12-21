@@ -55,10 +55,10 @@ module HowIs::Sources
           pretty_type: pretty_type,
 
           oldest_link: oldest[:link],
-          oldest_date: oldest[:created_at],
+          oldest_date: pretty_date(oldest[:created_at]),
 
           newest_link: newest[:link],
-          newest_date: newest[:created_at],
+          newest_date: pretty_date(newest[:created_at]),
         }
 
         Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)

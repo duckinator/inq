@@ -172,6 +172,18 @@ module HowIs
           "are"
         end
       end
+
+      def pretty_date(date_or_str)
+        if date_or_str.is_a?(DateTime)
+          date = datetime_or_str
+        elsif date_or_str.is_a?(String)
+          date = DateTime.parse(date_or_str)
+        else
+          raise ArgumentError, "expected DateTime or String, got #{date_or_str.class}"
+        end
+
+        date.strftime('%b %_d, %Y')
+      end
     end
   end
 end
