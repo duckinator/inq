@@ -1,7 +1,7 @@
 %{summary}
 
 <ul>
-  <li>Average age: %{average_age}</li>
+  <li>Average age: %{average_age}.</li>
   <li><a href="%{oldest_link}">Oldest %{pretty_type}</a> was opened on %{oldest_date}.</li>
   <li><a href="%{newest_link}">Newest %{pretty_type}</a> was opened on %{newest_date}.</li>
 </ul>
