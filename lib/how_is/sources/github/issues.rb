@@ -116,7 +116,7 @@ module HowIs::Sources
 
         "<table class=\"horizontal-bar-graph\">\n" +
         parts.join("\n") +
-        "\n</table>\n"
+        "\n</table>"
       end
 
       def to_a
