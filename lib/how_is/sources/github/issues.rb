@@ -108,7 +108,7 @@ module HowIs::Sources
 
           Kernel.format(HTML_GRAPH_ROW, {
             label_width: label_width,
-            label_text: label,
+            label_text: label_text,
             label_link: info["link"],
             percentage: get_percentage.call(info["total"]),
             link_text: info["total"].to_s,
