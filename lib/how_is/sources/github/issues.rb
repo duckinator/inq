@@ -55,10 +55,10 @@ module HowIs::Sources
           pretty_type: pretty_type,
 
           oldest_link: oldest[:link],
-          oldest_date: oldest[:creation_date],
+          oldest_date: oldest[:created_at],
 
           newest_link: newest[:link],
-          newest_date: newest[:creation_date],
+          newest_date: newest[:created_at],
         }
 
         Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)
@@ -85,7 +85,6 @@ module HowIs::Sources
     <td style="width: %{label_width}">%{label_text}</td>
     <td><span class="fill" style="width: %{percentage}%%">%{link_text}</span></td>
   </tr>
-
       EOF
 
       def issues_per_label_html
@@ -117,7 +116,7 @@ module HowIs::Sources
 
         "<table class=\"horizontal-bar-graph\">\n" +
         parts.join("\n") +
-        "</table>\n"
+        "\n</table>\n"
       end
 
       def to_a
