@@ -74,7 +74,7 @@ module HowIs
     end
 
     def to_json
-      to_h.to_json
+      JSON.pretty_generate(to_h)
     end
   end
 end
