@@ -49,7 +49,6 @@ module HowIs
         travis_builds: @travis.builds.to_h,
       }
 
-
       frontmatter =
         if frontmatter_data
           frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
