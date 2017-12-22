@@ -27,7 +27,7 @@ module HowIs::Sources
       #                          to include commits from.
       def initialize(repository, end_date)
         @user, @repo = repository.split("/")
-        @github = HowIs.github
+        @github = Github.rest
 
         # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
         #               but internally we use "until_date" to match GitHub's API.

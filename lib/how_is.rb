@@ -11,13 +11,6 @@ module HowIs
     Report.new(repository, date)
   end
 
-  def self.github
-    @@github ||=
-      Github.new(auto_pagination: true) do |config|
-        config.basic_auth = ENV["HOWIS_BASIC_AUTH"] if ENV["HOWIS_BASIC_AUTH"]
-      end
-  end
-
   ##
   # Given a JSON report, create a new HowIs object (for generating other
   # reports).

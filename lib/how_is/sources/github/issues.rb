@@ -135,7 +135,7 @@ module HowIs::Sources
       end
 
       def fetch!
-        @data ||= HowIs.github.send(type).list(user: @user, repo: @repo)
+        @data ||= Github.rest.send(type).list(user: @user, repo: @repo)
       end
     end
   end
