@@ -184,7 +184,7 @@ module HowIs
           raise ArgumentError, "expected DateTime or String, got #{date_or_str.class}"
         end
 
-        date.strftime('%b %_d, %Y')
+        date.strftime("%b %_d, %Y")
       end
     end
   end
