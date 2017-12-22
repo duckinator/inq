@@ -1,7 +1,33 @@
 # Change Log
 
-## [19.0.0](https://github.com/how-is/how_is/tree/19.0.0) (2017-09-15)
-[Full Changelog](https://github.com/how-is/how_is/compare/v18.1.0...19.0.0)
+## [20.0.0](https://github.com/how-is/how_is/tree/v20.0.0) (2017-12-21)
+
+[Full Changelog](https://github.com/how-is/how_is/compare/v19.0.0...v20.0.0)
+
+**Closed issues:**
+
+- Figure out why CodeClimate is unhappy [\#200](https://github.com/how-is/how_is/issues/200)
+- Refactor + improve tests for Contributions class [\#194](https://github.com/how-is/how_is/issues/194)
+- Analysis/Analyzer refactor. [\#142](https://github.com/how-is/how_is/issues/142)
+- Make internal-only methods private [\#138](https://github.com/how-is/how_is/issues/138)
+- Export cleanup [\#133](https://github.com/how-is/how_is/issues/133)
+- Use APIs instead of scraping /pulse [\#122](https://github.com/how-is/how_is/issues/122)
+- Rake task for clearing VCR cache [\#95](https://github.com/how-is/how_is/issues/95)
+
+**Merged pull requests:**
+
+- Partial rewrite [\#215](https://github.com/how-is/how_is/pull/215) ([duckinator](https://github.com/duckinator))
+- switch from Tessellator::Fetcher to Okay::HTTP. [\#214](https://github.com/how-is/how_is/pull/214) ([duckinator](https://github.com/duckinator))
+- Remove XPulse class. [\#213](https://github.com/how-is/how_is/pull/213) ([duckinator](https://github.com/duckinator))
+- Switch from Pulse to Contributions [\#212](https://github.com/how-is/how_is/pull/212) ([duckinator](https://github.com/duckinator))
+- Gem: github\_api 0.18.1 [\#211](https://github.com/how-is/how_is/pull/211) ([olleolleolle](https://github.com/olleolleolle))
+- Add tests for Contributions class [\#210](https://github.com/how-is/how_is/pull/210) ([duckinator](https://github.com/duckinator))
+- Refactor [\#209](https://github.com/how-is/how_is/pull/209) ([duckinator](https://github.com/duckinator))
+- use stable version of pry since there's no longer a conflict with slop [\#208](https://github.com/how-is/how_is/pull/208) ([duckinator](https://github.com/duckinator))
+- add icons to README for Waffle.io, Travis, Code Climate, RubyGems, Gemnasium. [\#207](https://github.com/how-is/how_is/pull/207) ([duckinator](https://github.com/duckinator))
+
+## [v19.0.0](https://github.com/how-is/how_is/tree/v19.0.0) (2017-09-16)
+[Full Changelog](https://github.com/how-is/how_is/compare/v18.1.0...v19.0.0)
 
 **Closed issues:**
 
@@ -11,6 +37,7 @@
 
 **Merged pull requests:**
 
+- bump version to 19.0.0; update changelog [\#206](https://github.com/how-is/how_is/pull/206) ([duckinator](https://github.com/duckinator))
 - Move away from slop [\#205](https://github.com/how-is/how_is/pull/205) ([duckinator](https://github.com/duckinator))
 - add .codeclimate.yml [\#204](https://github.com/how-is/how_is/pull/204) ([duckinator](https://github.com/duckinator))
 - quick refactor of spec/capture\_warnings. [\#203](https://github.com/how-is/how_is/pull/203) ([duckinator](https://github.com/duckinator))
