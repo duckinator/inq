@@ -73,8 +73,8 @@ module HowIs
       Kernel.format(HowIs.template('report.html_template'), template_data)
     end
 
-    def to_json
-      JSON.pretty_generate(to_h)
+    def to_json(frontmatter = nil)
+      frontmatter.to_s + JSON.pretty_generate(to_h)
     end
   end
 end

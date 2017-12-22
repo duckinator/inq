@@ -60,9 +60,9 @@ module HowIs
         filename = silence_warnings { report_config["filename"] % report_data }
         file = File.join(report_config["directory"], filename)
 
-        report = report.send("to_#{format}", report_config["frontmatter"])
+        report_export = report.send("to_#{format}", report_config["frontmatter"])
 
-        [file, report]
+        [file, report_export]
       }
 
     generated_reports.to_h
