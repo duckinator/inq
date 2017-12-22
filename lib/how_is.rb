@@ -5,7 +5,7 @@ require "how_is/report"
 require "github_api"
 
 module HowIs
-  DEFAULT_REPORT_FILE = "report.html".freeze
+  DEFAULT_REPORT_FILE = "report.html"
 
   def self.new(repository, date)
     Report.new(repository, date)
