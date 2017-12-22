@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class HowIs
+module HowIs
   VERSION = "19.0.0"
 end

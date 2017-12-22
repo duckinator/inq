@@ -1,82 +1,78 @@
 # frozen_string_literal: true
 
-require "date"
-require "pathname"
+require "how_is/frontmatter"
+require "how_is/sources/github/contributions"
+require "how_is/sources/github/issues"
+require "how_is/sources/github/pulls"
+require "how_is/sources/travis"
 
-class HowIs
-  # Raised when attempting to export to an unsupported format
-  class UnsupportedExportFormat < StandardError
-    def initialize(format)
-      super("Unsupported export format: #{format}")
-    end
-  end
-
-  # Report control class with class methods to make reports for an analysis
-  # or to save reports in files, or otherwise interact with the files.
+module HowIs
   class Report
-    require "how_is/report/json"
-    require "how_is/report/html"
+    def initialize(repository, end_date)
+      @repository = repository
+      @end_date = end_date
 
-    ##
-    # Export a report to a file.
-    def self.export_file(analysis, file)
-      format = file.split(".").last
-      report = get_report_class(format).new(analysis)
-
-      report.export_file(file)
+      @gh_contributions = HowIs::Sources::Github::Contributions.new(repository, end_date)
+      @gh_issues        = HowIs::Sources::Github::Issues.new(repository, end_date)
+      @gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, end_date)
+      @travis           = HowIs::Sources::Travis.new(repository, end_date)
     end
 
-    ##
-    # Export a report to a String.
-    def self.export(analysis, format = HowIs::DEFAULT_FORMAT)
-      report = get_report_class(format).new(analysis)
+    def to_h(frontmatter_data = nil)
+      @report_hash ||= {
+        title: "How is #{@repository}?",
+        repository: @repository,
 
-      report.export
+        contributions_summary: @gh_contributions.to_html,
+        issues_summary: @gh_issues.to_html,
+        pulls_summary: @gh_pulls.to_html,
+        issues_per_label: @gh_issues.issues_per_label_html,
+
+        issues: @gh_issues.to_a,
+        pulls: @gh_issues.to_a,
+
+        number_of_issues: @gh_issues.to_a.length,
+        number_of_pulls:  @gh_pulls.to_a.length,
+
+        average_issue_age: @gh_issues.average_age,
+        average_pull_age:  @gh_pulls.average_age,
+
+        oldest_issue_link: @gh_issues.oldest[:link],
+        oldest_issue_date: @gh_issues.oldest[:creation_date],
+
+        newest_issue_link: @gh_issues.newest[:link],
+        newest_issue_date: @gh_issues.newest[:creation_date],
+
+        oldest_pull_link: @gh_pulls.oldest[:link],
+        oldest_pull_date: @gh_pulls.oldest[:creation_date],
+
+        travis_builds: @travis.builds.to_h,
+      }
+
+      frontmatter =
+        if frontmatter_data
+          HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
+        else
+          ""
+        end
+
+      @report_hash.merge(frontmatter: frontmatter)
     end
 
-    ##
-    # Saves given Report in given file.
-    #
-    # @param file [String,Pathname] Name of file to write to
-    # @param report [Report] Report to store
-    def self.save_report(file, report)
-      File.open(file, "w") do |f|
-        f.write report
-      end
+    def to_html_partial(frontmatter = nil)
+      template_data = to_h(frontmatter)
+
+      Kernel.format(HowIs.template("report_partial.html_template"), template_data)
     end
 
-    ##
-    # Returns the report format for given filename.
-    #
-    # @param file [String] Filename of a report
-    #
-    # @return [String] Report format inferred from file name
-    def self.infer_format(file)
-      Pathname(file).extname.delete(".")
+    def to_html(frontmatter = nil)
+      template_data = to_h(frontmatter).merge({report: to_html_partial})
+
+      Kernel.format(HowIs.template("report.html_template"), template_data)
     end
 
-    ##
-    # Exports given +report+ to the format suitable for given +file+.
-    #
-    # @param file [String,Pathname]
-    # @param report [Report]
-    #
-    # @return [String] The rendered report
-    def self.to_format_based_on(file, report)
-      report_format = infer_format(file)
-
-      report.public_send("to_#{report_format}")
+    def to_json(frontmatter = nil)
+      frontmatter.to_s + JSON.pretty_generate(to_h)
     end
-
-    # Given a format name (+format+), returns the corresponding <blah>Report
-    # class.
-    def self.get_report_class(format)
-      class_name = "#{format.capitalize}Report"
-
-      raise UnsupportedExportFormat, format unless HowIs.const_defined?(class_name)
-
-      HowIs.const_get(class_name)
-    end
-    private_class_method :get_report_class
   end
 end

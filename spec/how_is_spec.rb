@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "how_is"
+require "how_is/frontmatter"
 require "open3"
 require "timecop"
 require "yaml"
@@ -23,13 +25,6 @@ JEKYLL_HEADER =
   HEADER
 
 describe HowIs do
-  it "from_json(json) works" do
-    expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read
-    actual = HowIs.from_json(expected).to_json
-
-    expect(expected.strip).to eq(actual.strip)
-  end
-
   context "#from_config" do
     let(:config) {
       YAML.load_file(HOW_IS_CONFIG_FILE)
@@ -109,10 +104,10 @@ describe HowIs do
         expect {
           actual_report = HowIs.new("how-is/example-repository", "2016-12-01")
         }.to_not output.to_stderr
-      end
 
-      expect(actual_report.to_html).to eq(expected_html)
-      expect(actual_report.to_json).to eq(expected_json)
+        expect(actual_report.to_html_partial).to eq(expected_html)
+        expect(actual_report.to_json).to eq(expected_json)
+     end
     end
   end
 
@@ -123,7 +118,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-empty-repository") do
         expect {
-          actual = HowIs.new("how-is/example-empty-repository", "2016-12-01").to_html
+          actual = HowIs.new("how-is/example-empty-repository", "2016-12-01").to_html_partial
         }.to_not output.to_stderr
       end
 
@@ -137,8 +132,8 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.send(:generate_frontmatter, {"foo" => "bar %{baz}"}, {"baz" => "asdf"})
-        expected = "---\nfoo: bar asdf\n"
+        actual = HowIs::Frontmatter.generate({"foo" => "bar %{baz}"}, {"baz" => "asdf"})
+        expected = "---\nfoo: bar asdf\n---\n\n"
       end
 
       expect(actual).to eq(expected)
@@ -149,8 +144,8 @@ describe HowIs do
       expected = nil
 
       VCR.use_cassette("how-is-example-repository") do
-        actual = HowIs.send(:generate_frontmatter, {:foo => "bar %{baz}"}, {:baz => "asdf"})
-        expected = "---\nfoo: bar asdf\n"
+        actual = HowIs::Frontmatter.generate({:foo => "bar %{baz}"}, {:baz => "asdf"})
+        expected = "---\nfoo: bar asdf\n---\n\n"
       end
 
       expect(actual).to eq(expected)

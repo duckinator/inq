@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "how_is/contributions"
+require "how_is/sources/github/contributions"
 
-describe HowIs::Contributions do
+describe HowIs::Sources::Github::Contributions do
   let(:contributions) {
     described_class.new("how-is/example-repository", "2017-09-01")
   }

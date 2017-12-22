@@ -1,0 +1,12 @@
+%{frontmatter}
+<h1>%{title}</h1>
+<p>%{contributions_summary}</p>
+
+<h2>Pull Requests</h2>
+%{pulls_summary}
+
+<h2>Issues</h2>
+%{issues_summary}
+
+<h2>Issues Per Label</h2>
+%{issues_per_label}
