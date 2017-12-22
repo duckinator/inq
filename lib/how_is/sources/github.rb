@@ -4,6 +4,7 @@ require "how_is"
 require "how_is/sources"
 require "github_api"
 require "graphql/client"
+require "graphql/client/http"
 
 module HowIs
   module Sources
