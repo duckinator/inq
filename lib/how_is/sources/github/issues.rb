@@ -46,7 +46,7 @@ module HowIs::Sources
 
         summary_ = "<p>#{summary}</p>"
 
-        return summary_ if to_a.length == 0
+        return summary_ if to_a.empty?
 
         template_data = {
           summary: summary_,
