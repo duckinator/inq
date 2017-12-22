@@ -25,16 +25,6 @@ JEKYLL_HEADER =
   HEADER
 
 describe HowIs do
-=begin
-  # TODO: Determine if this should be removed or not.
-  it "from_json(json) works" do
-    expected = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read
-    actual = HowIs.from_json(expected).to_json
-
-    expect(expected.strip).to eq(actual.strip)
-  end
-=end
-
   context "#from_config" do
     let(:config) {
       YAML.load_file(HOW_IS_CONFIG_FILE)

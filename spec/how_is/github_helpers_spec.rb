@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "how_is/analysis"
+require "how_is/sources/github_helpers"
 
-describe HowIs::Analysis do
+describe HowIs::Sources::GithubHelpers do
   let(:issues) { JSON.parse(open(File.expand_path("../data/issues.json", __dir__)).read) }
   let(:pulls) { JSON.parse(open(File.expand_path("../data/pulls.json", __dir__)).read) }
 
   let(:fake_issues) { JSON.parse(open(File.expand_path("../data/fake/issues.json", __dir__)).read) }
   # let(:fake_pulls) { JSON.parse(open(File.expand_path('../data/pulls.json', __dir__)).read) }
 
-  let(:fetcher_results) { HowIs::Fetcher::Results.new(issues, pulls) }
-
-  subject { HowIs::Analysis.new }
+  subject { Class.new { extend HowIs::Sources::GithubHelpers } }
 
   context "#num_with_label" do
     it "returns a Hash mapping labels to the number of issues or pulls with that label" do
@@ -50,7 +48,10 @@ describe HowIs::Analysis do
   context "#oldest_for" do
     it "returns the oldest item for the provided issues or pulls" do
       actual = subject.oldest_for(fake_issues)
-      expected = JSON.parse(open(File.expand_path("../data/how_is/analyzer_spec/oldest_for.json", __dir__)).read)
+      expected = {
+        created_at: "1999-01-01T00:00:00Z",
+        link: "https://github.com/rubygems/rubygems/issues/9001",
+      }
 
       expect(actual).to eq(expected)
     end
