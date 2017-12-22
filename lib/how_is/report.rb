@@ -62,13 +62,13 @@ module HowIs
     def to_html_partial(frontmatter = nil)
       template_data = to_h(frontmatter)
 
-      Kernel.format(HowIs.template('report_partial.html_template'), template_data)
+      Kernel.format(HowIs.template("report_partial.html_template"), template_data)
     end
 
     def to_html(frontmatter = nil)
       template_data = to_h(frontmatter).merge({report: to_html_partial})
 
-      Kernel.format(HowIs.template('report.html_template'), template_data)
+      Kernel.format(HowIs.template("report.html_template"), template_data)
     end
 
     def to_json(frontmatter = nil)
