@@ -18,7 +18,6 @@ module HowIs
       @travis           = HowIs::Sources::Travis.new(repository, end_date)
     end
 
-
     def to_h(frontmatter_data = nil)
       @report_hash ||= {
         title: "How is #{@repository}?",
