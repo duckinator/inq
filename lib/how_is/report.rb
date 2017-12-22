@@ -51,7 +51,7 @@ module HowIs
 
       frontmatter =
         if frontmatter_data
-          frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
+          HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
         else
           ""
         end
