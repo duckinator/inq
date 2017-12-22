@@ -34,7 +34,7 @@ module HowIs
     end
     private_class_method :convert_keys
 
-    def self.silence_warnings(&block)
+    def self.silence_warnings(&_block)
       old_verbose = $VERBOSE
       $VERBOSE = nil # Disable warnings entirely.
       yield
