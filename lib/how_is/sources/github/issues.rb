@@ -70,7 +70,7 @@ module HowIs::Sources
         ipl = with_label_links(num_with_label(@data), @repository)
         number_with_no_label = num_with_no_label(@data)
 
-        if number_with_no_label >0
+        if number_with_no_label > 0
           ipl["(No label)"] = {
             "link"  => nil,
             "total" => number_with_no_label
