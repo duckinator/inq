@@ -73,7 +73,7 @@ module HowIs::Sources
         if number_with_no_label > 0
           ipl["(No label)"] = {
             "link"  => nil,
-            "total" => number_with_no_label
+            "total" => number_with_no_label,
           }
         end
 
