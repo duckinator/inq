@@ -92,7 +92,7 @@ module HowIs::Sources
 
         return "<p>There are no open issues to graph.</p>" if data.empty?
 
-        biggest = data.map { |label, info| info["total"] }.max
+        biggest = data.map { |_label, info| info["total"] }.max
         get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
         longest_label_length = data.map(&:first).map(&:length).max
