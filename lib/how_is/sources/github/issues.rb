@@ -137,6 +137,33 @@ module HowIs::Sources
       def fetch!
         @data ||= Github.rest.send(type).list(user: @user, repo: @repo)
       end
+
+      def fetch_graphql!
+        # mmmm, scoping weirdness.
+        type_ = type
+        user_ = @user
+        repo_ = @repo
+        query = Okay::GraphQL.query {
+          repository(owner: user_, name: repo_) {
+            send(type_, first: 10) {
+              edges {
+                node {
+                  number
+                  createdAt
+                  closedAt
+                  updatedAt
+                  state
+                  title
+                  url
+                }
+              }
+            }
+          }
+        }
+
+        headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
+        query.submit!(:github, headers).or_raise!.from_json
+      end
     end
   end
 end
