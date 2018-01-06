@@ -153,10 +153,17 @@ module HowIs::Sources
         return @data if instance_variable_defined?(:@data)
 
         @data = []
-        last_cursor = fetch_last_cursor
         return @data if last_cursor.nil?
 
-        after, data = fetch_issues(after, data, last_cursor)
+        loop do
+          after, data = fetch_issues(after, data)
+          p after
+          p last_cursor
+          puts
+          break if after == last_cursor
+        end
+        puts
+        puts
 
         @data = data.select(&method(:issue_is_relevant?))
       end
@@ -175,7 +182,9 @@ module HowIs::Sources
         query.submit!(:github, headers).or_raise!.from_json
       end
 
-      def fetch_last_cursor
+      def last_cursor
+        return @last_cursor if instance_variable_defined?(:@last_cursor)
+
         raw_data = graphql <<~QUERY
           repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
             #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
@@ -187,14 +196,15 @@ module HowIs::Sources
         QUERY
 
         edges = raw_data.dig("data", "repository", type, "edges")
-        if edges.nil? || edges.empty?
-          nil
-        else
-          edges.last["cursor"]
-        end
+        @last_cursor =
+          if edges.nil? || edges.empty?
+            nil
+          else
+            edges.last["cursor"]
+          end
       end
 
-      def fetch_issues(after, data, last_cursor)
+      def fetch_issues(after, data)
         data ||= []
         chunk_size = 100
         after_str = ", after: #{after.inspect}" unless after.nil?
