@@ -12,30 +12,6 @@ module HowIs
   end
 
   ##
-  # Given a JSON report, create a new HowIs object (for generating other
-  # reports).
-  #
-  # @param json [String] A JSON report object.
-  # @return [HowIs] A HowIs object that can be used for generating other
-  #   reports, treating the JSON report as a cache.
-  def self.from_json(json)
-    from_hash(JSON.parse(json))
-  end
-
-  ##
-  # Given report data as a hash, create a new HowIs object (for generating
-  # other reports).
-  #
-  # @param data [Hash] A hash containing report data.
-  # @return [HowIs] A HowIs object that can be used for generating other
-  #   reports, treating the provided report data as a cache.
-  def self.from_hash(data)
-    analysis = HowIs::Analysis.from_hash(data)
-
-    new(analysis.repository, analysis)
-  end
-
-  ##
   # Generates a series of report files based on a config Hash.
   #
   # @param config [Hash] A Hash specifying the formats, locations, etc

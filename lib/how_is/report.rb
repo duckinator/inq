@@ -95,7 +95,7 @@ module HowIs
     end
 
     def save_as(filename)
-      File.write(filename, self.to_format_for(filename))
+      File.write(filename, to_format_for(filename))
     end
 
     def to_format_for(filename)

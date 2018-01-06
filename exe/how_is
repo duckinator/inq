@@ -35,20 +35,12 @@ begin
 
     reports.each { |file, report| report.save_as(file) }
   else
-    report =
-      if options[:from]
-        json_report = File.open(options[:from]).read
-        HowIs.from_json(json_report)
-      else
-        HowIs.new(options[:repository], date)
-      end
+    report = HowIs.new(options[:repository], date)
 
-    report_format = options[:report].split('.').last
-    File.write(options[:report], report.send("to_#{report_format}"))
     report.save_as(options[:report])
   end
 rescue => e
   raise if ENV["SHOW_TRACE"]
 
-  abort "Error: #{e.message}"
+  abort "Error: #{e.message} (Set the SHOW_TRACE variable for a stack trace.)"
 end

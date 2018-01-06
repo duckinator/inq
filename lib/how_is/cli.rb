@@ -33,7 +33,7 @@ module HowIs::CLI
       # General usage information.
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
-        | Usage: how_is REPOSITORY REPORT_DATE [--report REPORT_FILE] [--from JSON_FILE]
+        | Usage: how_is REPOSITORY REPORT_DATE [--output REPORT_FILE]
         |        how_is REPORT_DATE --config CONFIG_FILE
         |
         | Where:
@@ -63,12 +63,7 @@ module HowIs::CLI
         options[:config] = filename
       end
 
-      opts.on("--from JSON_FILE",
-              "JSON report file, used instead of fetching the data again") do |filename|
-        options[:from] = filename
-      end
-
-      opts.on("--report REPORT_FILE",
+      opts.on("--output REPORT_FILE",
               "Output file for the report (valid extensions: #{HowIs.supported_formats.join(', ')}; default: #{HowIs::DEFAULT_REPORT_FILE})") do |filename|
         options[:report] = filename
       end
@@ -103,16 +98,6 @@ module HowIs::CLI
     elsif options[:config]
       # If --config is passed, _only_ accept --config.
       options = keep_only.call(options, :config)
-    elsif options[:from]
-      # Handle --from.
-
-      raise InvalidInputFileError, "No such file: #{options[:from]}" unless File.file?(options[:from])
-
-      # Opening the file here is a bit gross, but I couldn't find a
-      # better way to do it. -@duckinator
-      options[:repository] = JSON.parse(open(options[:from]).read)['repository']
-
-      raise InvalidInputFileError, "Invalid JSON report file." unless options[:repository]
     else
       # If we get here, we're generating a report from the command line,
       # without using --from or --config.
@@ -127,7 +112,7 @@ module HowIs::CLI
 
       if argv.length >= 2
         options[:repository] = argv.delete_at(0)
-        options[:date] = ARGV[0]
+        options[:date] = argv.delete_at(0)
       else
         raise HowIsArgumentError, "Expected both repository and date."
       end
