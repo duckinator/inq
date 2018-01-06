@@ -110,8 +110,6 @@ describe HowIs::Sources::Github::Contributions do
         # rubocop:disable Metrics/LineLength
         summary = 'From Aug 01, 2017 through Sep 01, 2017, how-is/example-repository gained <a href="https://github.com/how-is/example-repository/compare/master@%7B2017-08-01%7D...master@%7B2017-09-01%7D">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file.'
         # rubocop:enable Metrics/LineLength
-        p contributions.summary
-        p summary
         expect(contributions.summary).to eq summary
       end
     end
