@@ -38,7 +38,6 @@ module HowIs::Sources
         @since_date = start_date
         @until_date = end_date
 
-
         @commit = {}
         @stats = nil
         @changed_files = nil
