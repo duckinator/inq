@@ -22,17 +22,15 @@ module HowIs::Sources
       end
 
       def average_age
-        average_age_for(@data)
+        average_age_for(data)
       end
 
       def oldest
-        fetch!
-        oldest_for(@data) || {}
+        oldest_for(data) || {}
       end
 
       def newest
-        fetch!
-        newest_for(@data) || {}
+        newest_for(data) || {}
       end
 
       def summary
@@ -44,8 +42,6 @@ module HowIs::Sources
       end
 
       def to_html
-        fetch!
-
         summary_ = "<p>#{summary}</p>"
 
         return summary_ if to_a.empty?
@@ -69,8 +65,8 @@ module HowIs::Sources
       # TODO: Clean up Issues Per Label stuff, or replace it with different functionality.
 
       def issues_per_label
-        ipl = with_label_links(num_with_label(@data), @repository)
-        number_with_no_label = num_with_no_label(@data)
+        ipl = with_label_links(num_with_label(data), @repository)
+        number_with_no_label = num_with_no_label(data)
 
         if number_with_no_label > 0
           ipl["(No label)"] = {
@@ -90,17 +86,17 @@ module HowIs::Sources
       EOF
 
       def issues_per_label_html
-        data = issues_per_label
+        ipl = issues_per_label
 
-        return "<p>There are no open issues to graph.</p>" if data.empty?
+        return "<p>There are no open issues to graph.</p>" if ipl.empty?
 
-        biggest = data.map { |_label, info| info["total"] }.max
+        biggest = ipl.map { |_label, info| info["total"] }.max
         get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
-        longest_label_length = data.map(&:first).map(&:length).max
+        longest_label_length = ipl.map(&:first).map(&:length).max
         label_width = "#{longest_label_length}ch"
 
-        parts = data.map { |label, info|
+        parts = ipl.map { |label, info|
           # TODO: Remove this hack to get around unlabeled issues not having a link.
           label_text = label
           unless info["link"].nil?
@@ -122,8 +118,7 @@ module HowIs::Sources
       end
 
       def to_a
-        fetch!
-        obj_to_array_of_hashes(@data)
+        obj_to_array_of_hashes(data)
       end
 
       private
@@ -134,10 +129,6 @@ module HowIs::Sources
 
       def pretty_type
         "issue"
-      end
-
-      def fetch!
-        @data ||= Github.rest.send(type).list(user: @user, repo: @repo)
       end
 
       def fetch_last_cursor
@@ -152,29 +143,37 @@ module HowIs::Sources
         QUERY
 
         headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
-        data = query.submit!(:github, headers).or_raise!.from_json
+        raw_data = query.submit!(:github, headers).or_raise!.from_json
 
-        data.dig("data", "repository", "issues", "edges").last["cursor"]
+        edges = raw_data.dig("data", "repository", "issues", "edges")
+        if edges.nil? || edges.length == 0
+          nil
+        else
+          edges.last["cursor"]
+        end
       end
 
 
-      def fetch_graphql!
-        @issues = []
+      def data
+        return @data if instance_variable_defined?(:@data)
+
+        @data = []
         last_cursor = fetch_last_cursor
+        return @data if last_cursor.nil?
 
         begin
           after = fetch_issues(after, last_cursor)
         end until after.nil?
 
-        require 'pp'
-        pp @issues
-
-        @issues.select! { |issue|
-          date_ge(issue["createdAt"], @start_date) &&
-            (issue["closedAt"].nil? || date_le(issue["closedAt"], @end_date))
+        @data.select! { |issue|
+          if !issue["closedAt"].nil? && date_le(issue["closedAt"], @start_date)
+             false
+          else
+            date_ge(issue["createdAt"], @start_date)
+          end
         }
 
-        @issues
+        @data
       end
 
       def fetch_issues(after, last_cursor)
@@ -194,6 +193,11 @@ module HowIs::Sources
                   state
                   title
                   url
+                  labels(first: 100) {
+                    nodes {
+                      name
+                    }
+                  }
                 }
               }
             }
@@ -201,19 +205,20 @@ module HowIs::Sources
         QUERY
 
         headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
-        data = query.submit!(:github, headers).or_raise!.from_json
-        puts "after: #{after}, last_cursor: #{last_cursor}"
-
-        edges = data.dig("data", "repository", "issues", "edges")
+        raw_data = query.submit!(:github, headers).or_raise!.from_json
+        edges = raw_data.dig("data", "repository", "issues", "edges")
 
         current_last_cursor = edges.last["cursor"]
 
         unless edges.nil?
-          issues = edges.map { |issue|
-            issue["node"]
+          new_data = edges.map { |issue|
+            node = issue["node"]
+            node["labels"] = node["labels"]["nodes"]
+
+            node
           }
 
-          @issues += issues
+          @data += new_data
         end
 
 
@@ -229,14 +234,14 @@ module HowIs::Sources
         left  = str_to_dt(left)
         right = str_to_dt(right)
 
-        date_left <= date_right
+        left <= right
       end
 
       def date_ge(left, right)
         left  = str_to_dt(left)
         right = str_to_dt(right)
 
-        date_left >= date_right
+        left >= right
       end
 
       def str_to_dt(str)

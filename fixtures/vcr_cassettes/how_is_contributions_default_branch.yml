@@ -2,77 +2,6 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/how-is/how_is
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.17.0
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Thu, 10 Aug 2017 20:59:50 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '60'
-      X-Ratelimit-Remaining:
-      - '59'
-      X-Ratelimit-Reset:
-      - '1502402390'
-      Cache-Control:
-      - public, max-age=60, s-maxage=60
-      Vary:
-      - Accept
-      Etag:
-      - W/"5a8e2fe83bdc6bf80131eb88c2cc2ddb"
-      Last-Modified:
-      - Thu, 15 Jun 2017 21:46:29 GMT
-      X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
-        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.028766'
-      X-Github-Request-Id:
-      - CB49:5C59:4C6E84:A743C3:598CC946
-    body:
-      encoding: ASCII-8BIT
-      string: '{"id":54295243,"name":"how_is","full_name":"how-is/how_is","owner":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/how-is/how_is","description":"A
-        gem that explains the state of a GitHub repository.","fork":false,"url":"https://api.github.com/repos/how-is/how_is","forks_url":"https://api.github.com/repos/how-is/how_is/forks","keys_url":"https://api.github.com/repos/how-is/how_is/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/how_is/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/how_is/teams","hooks_url":"https://api.github.com/repos/how-is/how_is/hooks","issue_events_url":"https://api.github.com/repos/how-is/how_is/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/how_is/events","assignees_url":"https://api.github.com/repos/how-is/how_is/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/how_is/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/how_is/tags","blobs_url":"https://api.github.com/repos/how-is/how_is/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/how_is/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/how_is/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/how_is/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/how_is/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/how_is/languages","stargazers_url":"https://api.github.com/repos/how-is/how_is/stargazers","contributors_url":"https://api.github.com/repos/how-is/how_is/contributors","subscribers_url":"https://api.github.com/repos/how-is/how_is/subscribers","subscription_url":"https://api.github.com/repos/how-is/how_is/subscription","commits_url":"https://api.github.com/repos/how-is/how_is/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/how_is/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/how_is/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/how_is/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/how_is/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/how_is/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/how_is/merges","archive_url":"https://api.github.com/repos/how-is/how_is/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/how_is/downloads","issues_url":"https://api.github.com/repos/how-is/how_is/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/how_is/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/how_is/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/how_is/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/how_is/labels{/name}","releases_url":"https://api.github.com/repos/how-is/how_is/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/how_is/deployments","created_at":"2016-03-20T01:37:02Z","updated_at":"2017-06-15T21:46:29Z","pushed_at":"2017-08-09T07:51:43Z","git_url":"git://github.com/how-is/how_is.git","ssh_url":"git@github.com:how-is/how_is.git","clone_url":"https://github.com/how-is/how_is.git","svn_url":"https://github.com/how-is/how_is","homepage":"","size":1353,"stargazers_count":27,"watchers_count":27,"language":"Ruby","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":5,"mirror_url":null,"open_issues_count":20,"forks":5,"open_issues":20,"watchers":27,"default_branch":"master","organization":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"network_count":5,"subscribers_count":2}'
-    http_version: 
-  recorded_at: Thu, 10 Aug 2017 20:59:56 GMT
-- request:
-    method: get
     uri: https://api.github.com/repos/how-is/example-repository
     body:
       encoding: US-ASCII
@@ -83,9 +12,9 @@ http_interactions:
       Accept-Charset:
       - utf-8
       User-Agent:
-      - Github API Ruby Gem 0.17.0
+      - Github API Ruby Gem 0.18.2
       Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5"
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -96,7 +25,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Fri, 11 Aug 2017 04:15:20 GMT
+      - Sat, 06 Jan 2018 14:58:09 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -106,15 +35,15 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4986'
+      - '4936'
       X-Ratelimit-Reset:
-      - '1502425710'
+      - '1515251555'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"43d9383ed14ed79ce34282a54e3d9815"
+      - W/"02dd21f50224a2337aab5dbd59c947ca"
       Last-Modified:
       - Sun, 07 Aug 2016 03:52:53 GMT
       X-Oauth-Scopes:
@@ -124,8 +53,8 @@ http_interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
-      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
-        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
       Access-Control-Allow-Origin:
       - "*"
       Content-Security-Policy:
@@ -139,13 +68,13 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       X-Runtime-Rack:
-      - '0.040584'
+      - '0.053169'
       X-Github-Request-Id:
-      - 9D7E:1122:3D7850:7B6762:598D2F58
+      - C170:4D95:F45848:1C7F644:5A50E401
     body:
       encoding: ASCII-8BIT
       string: '{"id":65114449,"name":"example-repository","full_name":"how-is/example-repository","owner":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/how-is/example-repository","description":"Example
-        repository for testing how_is.","fork":false,"url":"https://api.github.com/repos/how-is/example-repository","forks_url":"https://api.github.com/repos/how-is/example-repository/forks","keys_url":"https://api.github.com/repos/how-is/example-repository/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/example-repository/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/example-repository/teams","hooks_url":"https://api.github.com/repos/how-is/example-repository/hooks","issue_events_url":"https://api.github.com/repos/how-is/example-repository/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/example-repository/events","assignees_url":"https://api.github.com/repos/how-is/example-repository/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/example-repository/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/example-repository/tags","blobs_url":"https://api.github.com/repos/how-is/example-repository/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/example-repository/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/example-repository/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/example-repository/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/example-repository/languages","stargazers_url":"https://api.github.com/repos/how-is/example-repository/stargazers","contributors_url":"https://api.github.com/repos/how-is/example-repository/contributors","subscribers_url":"https://api.github.com/repos/how-is/example-repository/subscribers","subscription_url":"https://api.github.com/repos/how-is/example-repository/subscription","commits_url":"https://api.github.com/repos/how-is/example-repository/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/example-repository/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/example-repository/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/example-repository/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/example-repository/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/example-repository/merges","archive_url":"https://api.github.com/repos/how-is/example-repository/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/example-repository/downloads","issues_url":"https://api.github.com/repos/how-is/example-repository/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/example-repository/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/example-repository/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/example-repository/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/example-repository/labels{/name}","releases_url":"https://api.github.com/repos/how-is/example-repository/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/example-repository/deployments","created_at":"2016-08-07T03:52:53Z","updated_at":"2016-08-07T03:52:53Z","pushed_at":"2017-08-05T20:39:30Z","git_url":"git://github.com/how-is/example-repository.git","ssh_url":"git@github.com:how-is/example-repository.git","clone_url":"https://github.com/how-is/example-repository.git","svn_url":"https://github.com/how-is/example-repository","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"open_issues_count":4,"forks":0,"open_issues":4,"watchers":0,"default_branch":"master","permissions":{"admin":true,"push":true,"pull":true},"organization":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"network_count":0,"subscribers_count":1}'
+        repository for testing how_is.","fork":false,"url":"https://api.github.com/repos/how-is/example-repository","forks_url":"https://api.github.com/repos/how-is/example-repository/forks","keys_url":"https://api.github.com/repos/how-is/example-repository/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/example-repository/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/example-repository/teams","hooks_url":"https://api.github.com/repos/how-is/example-repository/hooks","issue_events_url":"https://api.github.com/repos/how-is/example-repository/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/example-repository/events","assignees_url":"https://api.github.com/repos/how-is/example-repository/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/example-repository/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/example-repository/tags","blobs_url":"https://api.github.com/repos/how-is/example-repository/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/example-repository/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/example-repository/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/example-repository/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/example-repository/languages","stargazers_url":"https://api.github.com/repos/how-is/example-repository/stargazers","contributors_url":"https://api.github.com/repos/how-is/example-repository/contributors","subscribers_url":"https://api.github.com/repos/how-is/example-repository/subscribers","subscription_url":"https://api.github.com/repos/how-is/example-repository/subscription","commits_url":"https://api.github.com/repos/how-is/example-repository/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/example-repository/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/example-repository/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/example-repository/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/example-repository/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/example-repository/merges","archive_url":"https://api.github.com/repos/how-is/example-repository/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/example-repository/downloads","issues_url":"https://api.github.com/repos/how-is/example-repository/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/example-repository/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/example-repository/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/example-repository/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/example-repository/labels{/name}","releases_url":"https://api.github.com/repos/how-is/example-repository/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/example-repository/deployments","created_at":"2016-08-07T03:52:53Z","updated_at":"2016-08-07T03:52:53Z","pushed_at":"2017-08-05T20:39:30Z","git_url":"git://github.com/how-is/example-repository.git","ssh_url":"git@github.com:how-is/example-repository.git","clone_url":"https://github.com/how-is/example-repository.git","svn_url":"https://github.com/how-is/example-repository","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"open_issues_count":4,"license":null,"forks":0,"open_issues":4,"watchers":0,"default_branch":"master","permissions":{"admin":true,"push":true,"pull":true},"organization":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"network_count":0,"subscribers_count":1}'
     http_version: 
-  recorded_at: Fri, 11 Aug 2017 04:15:20 GMT
+  recorded_at: Sat, 06 Jan 2018 14:58:09 GMT
 recorded_with: VCR 3.0.3

@@ -102,7 +102,7 @@ describe HowIs do
 
       VCR.use_cassette("how-is-example-repository") do
         expect {
-          actual_report = HowIs.new("how-is/example-repository", "2016-12-01")
+          actual_report = HowIs.new("how-is/example-repository", "2016-09-01")
         }.to_not output.to_stderr
 
         expect(actual_report.to_html_partial).to eq(expected_html)
