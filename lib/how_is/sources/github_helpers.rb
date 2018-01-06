@@ -96,7 +96,11 @@ module HowIs
       end
 
       def label_url_for(label_name)
-        url({"label"=>label_name})
+        if label_name == "(No label)"
+          url({"no"=>"label"})
+        else
+          url({"label"=>label_name})
+        end
       end
 
       private
