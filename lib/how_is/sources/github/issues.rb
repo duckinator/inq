@@ -17,8 +17,19 @@ module HowIs::Sources
         @end_date = end_date
       end
 
-      def url
-        "https://github.com/#{@repository}/#{url_suffix}"
+      def url(values = {})
+        defaults = {
+          "is" => singular_type,
+          "created" => "#{@start_date}..#{@end_date}",
+        }
+        values = defaults.merge(values)
+        raw_query = values.map {|k, v|
+          [k, v].join(":")
+        }.join(" ")
+
+        query = CGI.escape(raw_query)
+
+        "https://github.com/#{@repository}/#{url_suffix}?q=#{query}"
       end
 
       def average_age

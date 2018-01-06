@@ -96,7 +96,7 @@ module HowIs
       end
 
       def label_url_for(label_name)
-        url + "?q=is%3A#{singular_type}+label%3A#{label_name}+created:%3E#{@start_date}+updated:%3C#{@end_date}"
+        url({"label"=>label_name})
       end
 
       private
