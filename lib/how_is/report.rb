@@ -53,9 +53,6 @@ module HowIs
         issues: @gh_issues.to_a,
         pulls: @gh_issues.to_a,
 
-        number_of_issues: @gh_issues.to_a.length,
-        number_of_pulls:  @gh_pulls.to_a.length,
-
         average_issue_age: @gh_issues.average_age,
         average_pull_age:  @gh_pulls.average_age,
 
