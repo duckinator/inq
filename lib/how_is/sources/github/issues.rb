@@ -185,9 +185,9 @@ module HowIs::Sources
 
         @data.select! { |issue|
           if !issue["closedAt"].nil? && date_le(issue["closedAt"], @start_date)
-             false
+            false
           else
-            date_ge(issue["createdAt"], @start_date)
+            date_ge(issue["createdAt"], @start_date) && date_le(issue["createdAt"], @end_date)
           end
         }
 
