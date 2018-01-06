@@ -171,7 +171,6 @@ module HowIs::Sources
         @data
       end
 
-
       def graphql(query_string)
         query = Okay::GraphQL.query(query_string)
         headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
@@ -196,7 +195,6 @@ module HowIs::Sources
           edges.last["cursor"]
         end
       end
-
 
       def fetch_issues(after, last_cursor)
         chunk_size = 100
