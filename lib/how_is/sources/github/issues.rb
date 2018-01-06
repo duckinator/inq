@@ -18,7 +18,7 @@ module HowIs::Sources
       end
 
       def url
-        "https://github.com/#{@repository}/#{type}"
+        "https://github.com/#{@repository}/#{url_suffix}"
       end
 
       def average_age
@@ -123,6 +123,10 @@ module HowIs::Sources
 
       private
 
+      def url_suffix
+        "issues"
+      end
+
       def type
         "issues"
       end
@@ -145,7 +149,7 @@ module HowIs::Sources
         headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
         raw_data = query.submit!(:github, headers).or_raise!.from_json
 
-        edges = raw_data.dig("data", "repository", "issues", "edges")
+        edges = raw_data.dig("data", "repository", type, "edges")
         if edges.nil? || edges.length == 0
           nil
         else
@@ -206,7 +210,7 @@ module HowIs::Sources
 
         headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
         raw_data = query.submit!(:github, headers).or_raise!.from_json
-        edges = raw_data.dig("data", "repository", "issues", "edges")
+        edges = raw_data.dig("data", "repository", type, "edges")
 
         current_last_cursor = edges.last["cursor"]
 
