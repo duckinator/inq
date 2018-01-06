@@ -4,7 +4,7 @@ require "how_is/sources/github/contributions"
 
 describe HowIs::Sources::Github::Contributions do
   let(:contributions) {
-    described_class.new("how-is/example-repository", "2017-08-1", "2017-09-01")
+    described_class.new("how-is/example-repository", "2017-08-01", "2017-09-01")
   }
 
   context "#contributors" do
@@ -90,7 +90,7 @@ describe HowIs::Sources::Github::Contributions do
     it "returns the GitHub URL that shows information about the specified period" do
       VCR.use_cassette("how_is_contributions_compare_url") do
         # rubocop:disable Metrics/LineLength
-        expect(contributions.compare_url).to eq("https://github.com/how-is/example-repository/compare/master@%7B1501545600%7D...master@%7B1504224000%7D")
+        expect(contributions.compare_url).to eq("https://github.com/how-is/example-repository/compare/master@%7B2017-08-01%7D...master@%7B2017-09-01%7D")
         # rubocop:enable Metrics/LineLength
       end
     end
@@ -108,9 +108,10 @@ describe HowIs::Sources::Github::Contributions do
     it "generate a summary of the changes" do
       VCR.use_cassette("how_is_contributions_summary") do
         # rubocop:disable Metrics/LineLength
-        summary = 'From Aug 01, 2017 through Sep 01, 2017, how-is/example-repository gained <a href="https://github.com/how-is/example-repository/compare/master@%7B1501545600%7D...master@%7B1504224000%7D">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file.'
+        summary = 'From Aug 01, 2017 through Sep 01, 2017, how-is/example-repository gained <a href="https://github.com/how-is/example-repository/compare/master@%7B2017-08-01%7D...master@%7B2017-09-01%7D">2 new commits</a>, contributed by 2 authors. There were 2 additions and 1 deletion across 1 file.'
         # rubocop:enable Metrics/LineLength
-
+        p contributions.summary
+        p summary
         expect(contributions.summary).to eq summary
       end
     end

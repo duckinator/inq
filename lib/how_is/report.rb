@@ -23,7 +23,13 @@ module HowIs
       d = end_dt.day
       m = end_dt.month
       y = end_dt.year
-      start_dt = DateTime.new(y, m - 1, d)
+      start_year = y
+      start_month = m - 1
+      if start_month <= 0
+        start_month = 12 - start_month
+        start_year -= 1
+      end
+      start_dt = DateTime.new(start_year, start_month, d)
 
       @end_date = end_dt.strftime("%Y-%m-%d")
       @start_date = start_dt.strftime("%Y-%m-%d")

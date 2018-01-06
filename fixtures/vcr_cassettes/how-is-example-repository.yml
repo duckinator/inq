@@ -1056,4 +1056,83 @@ http_interactions:
         -0,0 +1,2 @@\n+# example-repository\n+Example repository for testing how_is."}]}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2016-08-01&until=2016-09-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 06 Jan 2018 19:39:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4830'
+      X-Ratelimit-Reset:
+      - '1515270096'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - W/"849c4a32910ea52f608a02d0ae3309ed"
+      Last-Modified:
+      - Sun, 07 Aug 2016 03:52:54 GMT
+      X-Oauth-Scopes:
+      - ''
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.049821'
+      X-Github-Request-Id:
+      - ED46:4D95:1093D3D:1EEF866:5A5125F2
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","commit":{"author":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"committer":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"message":"Initial
+        commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[]}]'
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 recorded_with: VCR 3.0.3

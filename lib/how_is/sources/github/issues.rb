@@ -171,7 +171,6 @@ module HowIs::Sources
         end
       end
 
-
       def data
         return @data if instance_variable_defined?(:@data)
 
@@ -239,7 +238,6 @@ module HowIs::Sources
           @data += new_data
         end
 
-
         if current_last_cursor == last_cursor
           nil
         else
@@ -247,7 +245,8 @@ module HowIs::Sources
         end
       end
 
-    private
+      private
+
       def date_le(left, right)
         left  = str_to_dt(left)
         right = str_to_dt(right)

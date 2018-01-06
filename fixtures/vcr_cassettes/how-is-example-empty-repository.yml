@@ -642,4 +642,379 @@ http_interactions:
       string: '{"builds":[],"commits":[]}'
     http_version: 
   recorded_at: Sat, 06 Jan 2018 15:02:32 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/how-is/example-empty-repository/commits?since=2016-11-01&until=2016-12-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 06 Jan 2018 19:39:30 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4829'
+      X-Ratelimit-Reset:
+      - '1515270096'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - '"74b5718094ce8869d8149d99338cb4f8"'
+      X-Oauth-Scopes:
+      - ''
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.041962'
+      X-Github-Request-Id:
+      - ED48:4D96:A360C2:153FA00:5A5125F2
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Sat, 06 Jan 2018 19:39:30 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/how-is/example-empty-repository/commits?since=2017-12-01&until=2017-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 06 Jan 2018 19:42:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4828'
+      X-Ratelimit-Reset:
+      - '1515270096'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - '"74b5718094ce8869d8149d99338cb4f8"'
+      X-Oauth-Scopes:
+      - ''
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.051525'
+      X-Github-Request-Id:
+      - ED72:4D95:1097A5A:1EF6AA6:5A5126B6
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Sat, 06 Jan 2018 19:42:46 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/how-is/example-empty-repository/commits?since=2016-12-01&until=2016-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 06 Jan 2018 19:46:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4827'
+      X-Ratelimit-Reset:
+      - '1515270096'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - '"74b5718094ce8869d8149d99338cb4f8"'
+      X-Oauth-Scopes:
+      - ''
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.044390'
+      X-Github-Request-Id:
+      - CADC:4D95:109B45E:1EFDFB9:5A512778
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Sat, 06 Jan 2018 19:46:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/how-is/example-empty-repository/commits?since=2015-12-01&until=2016-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 06 Jan 2018 19:47:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4826'
+      X-Ratelimit-Reset:
+      - '1515270096'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - '"74b5718094ce8869d8149d99338cb4f8"'
+      X-Oauth-Scopes:
+      - ''
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.042630'
+      X-Github-Request-Id:
+      - CAF0:4D97:9B34BE:1EA7582:5A5127D4
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Sat, 06 Jan 2018 19:47:32 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/how-is/example-empty-repository/commits?since=2016-12-01&until=2017-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - Github API Ruby Gem 0.18.2
+      Authorization:
+      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 06 Jan 2018 19:48:14 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4825'
+      X-Ratelimit-Reset:
+      - '1515270096'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - W/"f2b143b787eb63a9dadcded7eca8f27d"
+      Last-Modified:
+      - Fri, 09 Dec 2016 02:42:10 GMT
+      X-Oauth-Scopes:
+      - ''
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.061814'
+      X-Github-Request-Id:
+      - CAFA:4D97:9B3B05:1EA8D03:5A5127FE
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"sha":"a825118ed65c486c0b35c5926ac88086c958457b","commit":{"author":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-12-09T02:42:10Z"},"committer":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-12-09T02:42:10Z"},"message":"Initial
+        commit","tree":{"sha":"6bbe79cba96095077c91fe6dc44166233c273c3e","url":"https://api.github.com/repos/how-is/example-empty-repository/git/trees/6bbe79cba96095077c91fe6dc44166233c273c3e"},"url":"https://api.github.com/repos/how-is/example-empty-repository/git/commits/a825118ed65c486c0b35c5926ac88086c958457b","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-empty-repository/commits/a825118ed65c486c0b35c5926ac88086c958457b","html_url":"https://github.com/how-is/example-empty-repository/commit/a825118ed65c486c0b35c5926ac88086c958457b","comments_url":"https://api.github.com/repos/how-is/example-empty-repository/commits/a825118ed65c486c0b35c5926ac88086c958457b/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[]}]'
+    http_version: 
+  recorded_at: Sat, 06 Jan 2018 19:48:15 GMT
 recorded_with: VCR 3.0.3

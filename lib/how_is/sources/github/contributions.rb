@@ -120,9 +120,7 @@ module HowIs::Sources
       end
 
       def compare_url
-        since_timestamp = timestamp_for(@since_date)
-        until_timestamp = timestamp_for(@until_date)
-        "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D" # rubocop:disable Metrics/LineLength
+        "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{@since_date}%7D...#{default_branch}@%7B#{@until_date}%7D" # rubocop:disable Metrics/LineLength
       end
 
       def default_branch
