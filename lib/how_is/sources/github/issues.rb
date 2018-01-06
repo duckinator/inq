@@ -140,16 +140,14 @@ module HowIs::Sources
         @data ||= Github.rest.send(type).list(user: @user, repo: @repo)
       end
 
-      def fetch_graphql!
-        # mmmm, scoping weirdness.
-        type_ = type
-        user_ = @user
-        repo_ = @repo
-        query = Okay::GraphQL.query {
-          repository(owner: user_, name: repo_) {
-            send(type_, first: 10) {
+      def fetch_last_cursor
+        query = Okay::GraphQL.query <<~QUERY
+          repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
+            #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
               edges {
-                node send(:@filter, ge(createdAt, "")) {
+                cursor
+                node {
+                  id
                   number
                   createdAt
                   closedAt
@@ -161,10 +159,99 @@ module HowIs::Sources
               }
             }
           }
-        }
+        QUERY
 
         headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
-        query.submit!(:github, headers).or_raise!.from_json
+        data = query.submit!(:github, headers).or_raise!.from_json
+
+        data.dig("data", "repository", "issues", "edges").last["cursor"]
+      end
+
+
+      def fetch_graphql!
+        @issues = []
+        last_cursor = fetch_last_cursor
+
+        begin
+          after = fetch_issues(after, last_cursor)
+        end until after.nil?
+
+        require 'pp'
+        pp @issues
+
+        @issues.select! { |issue|
+          date_ge(issue["createdAt"], @start_date) &&
+            (issue["closedAt"].nil? || date_le(issue["closedAt"], @end_date))
+        }
+
+        @issues
+      end
+
+      def fetch_issues(after, last_cursor)
+        chunk_size = 100
+        after_str = ", after: #{after.inspect}" unless after.nil?
+
+        query = Okay::GraphQL.query <<~QUERY
+          repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
+            #{type}(first: #{chunk_size}#{after_str}, orderBy:{field: CREATED_AT, direction: ASC}) {
+              edges {
+                cursor
+                node {
+                  id
+                  number
+                  createdAt
+                  closedAt
+                  updatedAt
+                  state
+                  title
+                  url
+                }
+              }
+            }
+          }
+        QUERY
+
+        headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
+        data = query.submit!(:github, headers).or_raise!.from_json
+        puts "after: #{after}, last_cursor: #{last_cursor}"
+
+        edges = data.dig("data", "repository", "issues", "edges")
+
+        current_last_cursor = edges.last["cursor"]
+
+        unless edges.nil?
+          issues = edges.map { |issue|
+            issue["node"]
+          }
+
+          @issues += issues
+        end
+
+
+        if current_last_cursor == last_cursor
+          nil
+        else
+          current_last_cursor
+        end
+      end
+
+    private
+      def date_le(left, right)
+        left  = str_to_dt(left)
+        right = str_to_dt(right)
+
+        date_left <= date_right
+      end
+
+      def date_ge(left, right)
+        left  = str_to_dt(left)
+        right = str_to_dt(right)
+
+        date_left >= date_right
+      end
+
+      def str_to_dt(str)
+        DateTime.parse(str)
       end
     end
   end
