@@ -23,7 +23,7 @@ module HowIs::Sources
           "created" => "#{@start_date}..#{@end_date}",
         }
         values = defaults.merge(values)
-        raw_query = values.map {|k, v|
+        raw_query = values.map { |k, v|
           [k, v].join(":")
         }.join(" ")
 
