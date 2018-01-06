@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "how_is"
+require "how_is/version"
 require "how_is/sources"
 require "github_api"
 require "okay/graphql"
