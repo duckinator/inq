@@ -19,7 +19,7 @@ module HowIs::CLI
 
   # Raised when no repository is specified, but one is required.
   # (It's _not_ required, e.g., when +--config+ is passed.)
-  class NoRepositoryError < OptionsError
+  class HowIsArgumentError < OptionsError
   end
 
   # Parses +argv+ to generate an options Hash to control the behavior of
@@ -33,13 +33,17 @@ module HowIs::CLI
       # General usage information.
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
-        | Usage: how_is REPOSITORY [--report REPORT_FILE] [--from JSON_FILE]
-        |        how_is --config CONFIG_FILE
+        | Usage: how_is REPOSITORY REPORT_DATE [--report REPORT_FILE] [--from JSON_FILE]
+        |        how_is REPORT_DATE --config CONFIG_FILE
         |
-        | Where REPOSITORY is <GitHub username or org>/<repository name>.
+        | Where:
+        |   REPOSITORY is <GitHub username or org>/<repository name>.
+        | and
+        |   REPORT_DATE is the last day the report covers, in the format YYYY-mm-dd.
         |
-        | E.g., if you wanted to check https://github.com/how-is/how_is,
-        | you'd run `how_is how-is/how_is`.
+        | E.g., if you wanted to check https://github.com/how-is/how_is for
+        | November 01 2016 through December 01 2016, you'd run:
+        |   how_is how-is/how_is 2016-12-01
         |
       EOF
 
@@ -121,10 +125,11 @@ module HowIs::CLI
         raise InvalidOutputFileError, "Invalid file: #{options[:report]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
-      if argv.length >= 1
+      if argv.length >= 2
         options[:repository] = argv.delete_at(0)
+        options[:date] = ARGV[0]
       else
-        raise NoRepositoryError, "No repository specified."
+        raise HowIsArgumentError, "Expected both repository and date."
       end
     end
 

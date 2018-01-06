@@ -93,5 +93,15 @@ module HowIs
     def to_json(frontmatter = nil)
       frontmatter.to_s + JSON.pretty_generate(to_h)
     end
+
+    def save_as(filename)
+      File.write(filename, self.to_format_for(filename))
+    end
+
+    def to_format_for(filename)
+      format = filename.split('.').last
+      send("to_#{format}")
+    end
+    private :to_format_for
   end
 end
