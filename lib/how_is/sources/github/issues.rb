@@ -189,7 +189,7 @@ module HowIs::Sources
         QUERY
 
         edges = raw_data.dig("data", "repository", type, "edges")
-        if edges.nil? || edges.length == 0
+        if edges.nil? || edges.empty?
           nil
         else
           edges.last["cursor"]
