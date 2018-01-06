@@ -15,10 +15,10 @@ describe HowIs::CLI do
       expect(actual[:options][:version]).to eq(true)
     end
 
-    it "raises NoRepositoryError if a repository is required but not specified" do
+    it "raises HowIsArgumentError if a repository is required but not specified" do
       expect {
         subject.parse(%w[])
-      }.to raise_error(HowIs::CLI::NoRepositoryError)
+      }.to raise_error(HowIs::CLI::HowIsArgumentError)
     end
 
     it 'raises InvalidInputFileError if a specified JSON file doesn\'t exist' do
