@@ -160,7 +160,7 @@ module HowIs::Sources
           }
         QUERY
 
-        headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
+        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
         raw_data = query.submit!(:github, headers).or_raise!.from_json
 
         edges = raw_data.dig("data", "repository", type, "edges")
@@ -221,7 +221,7 @@ module HowIs::Sources
           }
         QUERY
 
-        headers = { bearer_token: HowIs::Sources::Github::ACCESS_TOKEN }
+        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
         raw_data = query.submit!(:github, headers).or_raise!.from_json
         edges = raw_data.dig("data", "repository", type, "edges")
 
