@@ -24,10 +24,7 @@ elsif options[:version]
   exit
 end
 
-# TODO: Once retroactive issue reports are done, allow exe/how_is to be passed
-#       other dates.
-#today = DateTime.now.strftime("%Y-%m-%d")
-date = ARGV[0]
+date = options[:date]
 
 begin
   if options[:config]
