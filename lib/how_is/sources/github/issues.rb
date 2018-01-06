@@ -245,8 +245,6 @@ module HowIs::Sources
         end
       end
 
-      private
-
       def date_le(left, right)
         left  = str_to_dt(left)
         right = str_to_dt(right)
