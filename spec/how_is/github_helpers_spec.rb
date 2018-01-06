@@ -48,12 +48,9 @@ describe HowIs::Sources::GithubHelpers do
   context "#oldest_for" do
     it "returns the oldest item for the provided issues or pulls" do
       actual = subject.oldest_for(fake_issues)
-      expected = {
-        created_at: "1999-01-01T00:00:00Z",
-        link: "https://github.com/rubygems/rubygems/issues/9001",
-      }
 
-      expect(actual).to eq(expected)
+      expect(actual["createdAt"]).to eq("1999-01-01T00:00:00Z")
+      expect(actual["url"]).to eq("https://github.com/rubygems/rubygems/issues/9001")
     end
   end
 end

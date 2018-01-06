@@ -53,14 +53,17 @@ module HowIs
         average_issue_age: @gh_issues.average_age,
         average_pull_age:  @gh_pulls.average_age,
 
-        oldest_issue_link: @gh_issues.oldest[:link],
-        oldest_issue_date: @gh_issues.oldest[:created_at],
+        oldest_issue_link: @gh_issues.oldest["url"],
+        oldest_issue_date: @gh_issues.oldest["createdAt"],
 
-        newest_issue_link: @gh_issues.newest[:link],
-        newest_issue_date: @gh_issues.newest[:created_at],
+        newest_issue_link: @gh_issues.newest["url"],
+        newest_issue_date: @gh_issues.newest["createdAt"],
 
-        oldest_pull_link: @gh_pulls.oldest[:link],
-        oldest_pull_date: @gh_pulls.oldest[:created_at],
+        newest_pull_link: @gh_pulls.newest["url"],
+        newest_pull_date: @gh_pulls.newest["createdAt"],
+
+        oldest_pull_link: @gh_pulls.oldest["url"],
+        oldest_pull_date: @gh_pulls.oldest["createdAt"],
 
         travis_builds: @travis.builds.to_h,
       }

@@ -78,13 +78,8 @@ module HowIs
       # Returns nil if no issues or pulls are provided.
       def oldest_for(issues_or_pulls)
         return nil if issues_or_pulls.empty?
-
-        iop = sort_iops_by_created_at(issues_or_pulls).first
-
-        {
-          created_at: iop["createdAt"],
-          link: iop["url"],
-        }
+require'pp';pp sort_iops_by_created_at(issues_or_pulls)
+        sort_iops_by_created_at(issues_or_pulls).first
       end
 
       # Given an Array of issues or pulls, return the newest.
@@ -92,12 +87,7 @@ module HowIs
       def newest_for(issues_or_pulls)
         return nil if issues_or_pulls.empty?
 
-        iop = sort_iops_by_created_at(issues_or_pulls).last
-
-        {
-          created_at: iop["createdAt"],
-          link: iop["html_url"],
-        }
+        sort_iops_by_created_at(issues_or_pulls).last
       end
 
       # Given an issue or PR, returns the date it was created.

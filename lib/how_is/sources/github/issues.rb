@@ -52,11 +52,11 @@ module HowIs::Sources
           type: type,
           pretty_type: pretty_type,
 
-          oldest_link: oldest[:link],
-          oldest_date: pretty_date(oldest[:created_at]),
+          oldest_link: oldest["url"],
+          oldest_date: pretty_date(oldest["createdAt"]),
 
-          newest_link: newest[:link],
-          newest_date: pretty_date(newest[:created_at]),
+          newest_link: newest["url"],
+          newest_date: pretty_date(newest["createdAt"]),
         }
 
         Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)
@@ -70,7 +70,7 @@ module HowIs::Sources
 
         if number_with_no_label > 0
           ipl["(No label)"] = {
-            "link"  => nil,
+            "url"  => nil,
             "total" => number_with_no_label,
           }
         end
@@ -99,14 +99,14 @@ module HowIs::Sources
         parts = ipl.map { |label, info|
           # TODO: Remove this hack to get around unlabeled issues not having a link.
           label_text = label
-          unless info["link"].nil?
-            label_text = '<a href="' + info["link"] + '">' + label_text + '</a>'
+          unless info["url"].nil?
+            label_text = '<a href="' + info["url"] + '">' + label_text + '</a>'
           end
 
           Kernel.format(HTML_GRAPH_ROW, {
             label_width: label_width,
             label_text: label_text,
-            label_link: info["link"],
+            label_link: info["url"],
             percentage: get_percentage.call(info["total"]),
             link_text: info["total"].to_s,
           })
