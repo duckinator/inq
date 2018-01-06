@@ -14,12 +14,7 @@ module HowIs
       # Used for the the Authorization header when talking to the
       # GitHub API.
       # https://developer.github.com/v4/guides/forming-calls/#communicating-with-graphql
-      AUTHORIZATION_HEADER =
-        if ACCESS_TOKEN
-          "bearer " + ACCESS_TOKEN
-        else
-          nil
-        end
+      AUTHORIZATION_HEADER = "bearer " + ACCESS_TOKEN
     end
   end
 end
