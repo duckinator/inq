@@ -155,15 +155,11 @@ module HowIs::Sources
         @data = []
         return @data if last_cursor.nil?
 
+        data = []
         loop do
           after, data = fetch_issues(after, data)
-          p after
-          p last_cursor
-          puts
           break if after == last_cursor
         end
-        puts
-        puts
 
         @data = data.select(&method(:issue_is_relevant?))
       end
