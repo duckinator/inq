@@ -155,22 +155,20 @@ module HowIs::Sources
         @data = []
         last_cursor = fetch_last_cursor
         return @data if last_cursor.nil?
-        after = nil
 
-        loop do
-          after = fetch_issues(after)
-          break if after == last_cursor
-        end
+        after = fetch_issues(after, last_cursor)
 
-        @data.select! { |issue|
-          if !issue["closedAt"].nil? && date_le(issue["closedAt"], @start_date)
-            false
-          else
-            date_ge(issue["createdAt"], @start_date) && date_le(issue["createdAt"], @end_date)
-          end
-        }
+        @data = @data.select!(&method(:issue_is_relevant?))
 
         @data
+      end
+
+      def issue_is_relevant?(issue)
+        if !issue["closedAt"].nil? && date_le(issue["closedAt"], @start_date)
+          false
+        else
+          date_ge(issue["createdAt"], @start_date) && date_le(issue["createdAt"], @end_date)
+        end
       end
 
       def graphql(query_string)
@@ -198,7 +196,7 @@ module HowIs::Sources
         end
       end
 
-      def fetch_issues(after)
+      def fetch_issues(after, last_cursor)
         chunk_size = 100
         after_str = ", after: #{after.inspect}" unless after.nil?
 
