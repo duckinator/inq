@@ -12,6 +12,10 @@ module HowIs::Sources
         "pulls"
       end
 
+      def singular_type
+        "pull"
+      end
+
       def type
         "pullRequests"
       end

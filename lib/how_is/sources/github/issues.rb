@@ -19,6 +19,7 @@ module HowIs::Sources
 
       def url(values = {})
         defaults = {
+          "is" => singular_type,
           "created" => "#{@start_date}..#{@end_date}",
         }
         values = defaults.merge(values)
