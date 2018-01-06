@@ -20,16 +20,6 @@ module HowIs
         else
           nil
         end
-
-      def self.rest
-        @rest_client ||= build_rest_client
-      end
-
-      def self.build_rest_client
-        ::Github.new(auto_pagination: true) do |config|
-          config.basic_auth = BASIC_AUTH
-        end
-      end
     end
   end
 end

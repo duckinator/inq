@@ -29,7 +29,9 @@ module HowIs::Sources
       #                          to include commits from.
       def initialize(repository, start_date, end_date)
         @user, @repo = repository.split("/")
-        @github = Github.rest
+        @github = ::Github.new(auto_pagination: true) do |config|
+          config.basic_auth = HowIs::Sources::Github::BASIC_AUTH
+        end
 
         # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
         #               but internally we use "until_date" to match GitHub's API.
@@ -67,7 +69,8 @@ module HowIs::Sources
         @commits ||= begin
           @github.repos.commits.list(user: @user,
                                     repo: @repo,
-                                    since: @since_date).map { |c|
+                                    since: @since_date,
+                                    until: @until_date).map { |c|
             # The commits list endpoint doesn't include all commit data, e.g. stats.
             # So, we make N requests here, where N == number of commits returned,
             # and then we die a bit inside.
