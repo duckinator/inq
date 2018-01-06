@@ -8,6 +8,8 @@
 
 `how_is` is tool for generating summaries of the health of a codebase hosted on GitHub. It uses information available from issues and pull requests to provide an overview of a repository and highlight problem areas of the codebase.
 
+Reports can be generated retroactively.
+
 The summary includes:
 
 * repository name,
@@ -29,32 +31,17 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
 ### Command Line
 
-    $ how_is <orgname>/<reponame> [--report FILENAME]
+    $ how_is <orgname>/<reponame> [--output FILENAME]
 
 E.g.,
 
-    $ how_is rubygems/rubygems --report report.html
+    $ how_is rubygems/rubygems 2016-12-01 --output report.html
 
-The above command creates a HTML file containing the summary at `./report.html`.
+The above command creates a HTML file containing the report for the state of
+the rubygems/rubygems repository, as of December 01 2016, at `./report.html`.
 
-If you don't pass the `--report` flag, it defaults to
+If you don't pass the `--output` flag, it defaults to
 `./report.html`.
-
-#### Generating reports, using a JSON report as a cache
-
-You can use a JSON report as a cache when generating another rpeort.
-
-E.g.,
-
-    $ how_is rubygems/rubygems --report report.json
-    $ how_is --from report.json --report report.html
-
-The first command generates a JSON report at `./report.json`. The second
-command generates an HTML report at `./report.html`, using information
-from `./report.json`.
-
-When using `--from`, no network requests are made, because all of the
-required information is in the JSON report.
 
 #### Generating reports from a config file
 
@@ -79,7 +66,7 @@ reports:
 ```
 
 The config file is a YAML file. The two root keys are `repository` (the
-repository name, of format USER_OR_ORG/REPOSITORY &mdash; e.g. how-is/how_is)
+repository name, of format `USER_OR_ORG/REPOSITORY` &mdash; e.g. `how-is/how_is`)
 and `reports`.
 
 `reports` is a hash of key/value pairs, with the keys being the type of report
@@ -100,14 +87,14 @@ Every value under `reports` is a format string, so you can do e.g.
 ### Ruby API
 
 ```ruby
-# Generate an HTML report for <orgname>/<reponame>, and save it to
-# report.html
-report = HowIs.new('<orgname>/<reponame>').to_html
-File.open('report.html', 'w') { |f| f.puts report }
+# Generate an HTML report for rubygems/rubygems, for December 01
+# 2017, and save it to report.html:
+report = HowIs.new("rubygems/rubygems", "2017-12-01").to_html
+report.save_as("report.html")
 
 # Generate a report from a config Hash.
 HowIs.from_config({
-  repository: '<orgname>/<reponame>',
+  repository: 'rubygems/rubygems',
   reports: {
     html: {
       directory: '_posts',
