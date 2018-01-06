@@ -146,16 +146,6 @@ module HowIs::Sources
             #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
               edges {
                 cursor
-                node {
-                  id
-                  number
-                  createdAt
-                  closedAt
-                  updatedAt
-                  state
-                  title
-                  url
-                }
               }
             }
           }
@@ -197,7 +187,6 @@ module HowIs::Sources
               edges {
                 cursor
                 node {
-                  id
                   number
                   createdAt
                   closedAt
