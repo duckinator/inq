@@ -156,11 +156,9 @@ module HowIs::Sources
         last_cursor = fetch_last_cursor
         return @data if last_cursor.nil?
 
-        after = fetch_issues(after, last_cursor)
+        after, data = fetch_issues(after, data, last_cursor)
 
-        @data = @data.select!(&method(:issue_is_relevant?))
-
-        @data
+        @data = data.select(&method(:issue_is_relevant?))
       end
 
       def issue_is_relevant?(issue)
@@ -196,7 +194,8 @@ module HowIs::Sources
         end
       end
 
-      def fetch_issues(after, last_cursor)
+      def fetch_issues(after, data, last_cursor)
+        data ||= []
         chunk_size = 100
         after_str = ", after: #{after.inspect}" unless after.nil?
 
@@ -236,10 +235,10 @@ module HowIs::Sources
             node
           }
 
-          @data += new_data
+          data += new_data
         end
 
-        current_last_cursor
+        [current_last_cursor, data]
       end
 
       def date_le(left, right)
