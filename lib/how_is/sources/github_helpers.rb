@@ -78,7 +78,7 @@ module HowIs
       # Returns nil if no issues or pulls are provided.
       def oldest_for(issues_or_pulls)
         return nil if issues_or_pulls.empty?
-require'pp';pp sort_iops_by_created_at(issues_or_pulls)
+
         sort_iops_by_created_at(issues_or_pulls).first
       end
 
@@ -93,6 +93,10 @@ require'pp';pp sort_iops_by_created_at(issues_or_pulls)
       # Given an issue or PR, returns the date it was created.
       def date_for(issue_or_pull)
         DateTime.parse(issue_or_pull["createdAt"])
+      end
+
+      def label_url_for(label_name)
+        url + "?q=is%3A#{singular_type}+label%3A#{label_name}+created:%3E#{@start_date}+updated:%3C#{@end_date}"
       end
 
       private

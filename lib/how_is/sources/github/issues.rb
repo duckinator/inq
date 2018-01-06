@@ -99,9 +99,8 @@ module HowIs::Sources
         parts = ipl.map { |label, info|
           # TODO: Remove this hack to get around unlabeled issues not having a link.
           label_text = label
-          unless info["url"].nil?
-            label_text = '<a href="' + info["url"] + '">' + label_text + '</a>'
-          end
+          label_url  = label_url_for(info["name"])
+          label_text = '<a href="' + label_url + '">' + label_text + '</a>'
 
           Kernel.format(HTML_GRAPH_ROW, {
             label_width: label_width,
@@ -127,8 +126,12 @@ module HowIs::Sources
         "issues"
       end
 
+      def singular_type
+        "issue"
+      end
+
       def type
-        "issues"
+        singular_type + "s"
       end
 
       def pretty_type
