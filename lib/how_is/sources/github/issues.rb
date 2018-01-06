@@ -149,28 +149,6 @@ module HowIs::Sources
         "issue"
       end
 
-      def fetch_last_cursor
-        query = Okay::GraphQL.query <<~QUERY
-          repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
-            #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
-              edges {
-                cursor
-              }
-            }
-          }
-        QUERY
-
-        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
-        raw_data = query.submit!(:github, headers).or_raise!.from_json
-
-        edges = raw_data.dig("data", "repository", type, "edges")
-        if edges.nil? || edges.length == 0
-          nil
-        else
-          edges.last["cursor"]
-        end
-      end
-
       def data
         return @data if instance_variable_defined?(:@data)
 
@@ -193,11 +171,38 @@ module HowIs::Sources
         @data
       end
 
+
+      def graphql(query_string)
+        query = Okay::GraphQL.query(query_string)
+        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
+        query.submit!(:github, headers).or_raise!.from_json
+      end
+
+      def fetch_last_cursor
+        raw_data = graphql <<~QUERY
+          repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
+            #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
+              edges {
+                cursor
+              }
+            }
+          }
+        QUERY
+
+        edges = raw_data.dig("data", "repository", type, "edges")
+        if edges.nil? || edges.length == 0
+          nil
+        else
+          edges.last["cursor"]
+        end
+      end
+
+
       def fetch_issues(after, last_cursor)
         chunk_size = 100
         after_str = ", after: #{after.inspect}" unless after.nil?
 
-        query = Okay::GraphQL.query <<~QUERY
+        raw_data = graphql <<~QUERY
           repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
             #{type}(first: #{chunk_size}#{after_str}, orderBy:{field: CREATED_AT, direction: ASC}) {
               edges {
@@ -221,8 +226,6 @@ module HowIs::Sources
           }
         QUERY
 
-        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
-        raw_data = query.submit!(:github, headers).or_raise!.from_json
         edges = raw_data.dig("data", "repository", type, "edges")
 
         current_last_cursor = edges.last["cursor"]
