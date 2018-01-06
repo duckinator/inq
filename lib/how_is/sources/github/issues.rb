@@ -10,9 +10,11 @@ module HowIs::Sources
     class Issues
       include HowIs::Sources::GithubHelpers
 
-      def initialize(repository, end_date)
+      def initialize(repository, start_date, end_date)
         @repository = repository
         @user, @repo = repository.split("/", 2)
+        @start_date = start_date
+        @end_date = end_date
       end
 
       def url
@@ -147,7 +149,7 @@ module HowIs::Sources
           repository(owner: user_, name: repo_) {
             send(type_, first: 10) {
               edges {
-                node {
+                node send(:@filter, ge(createdAt, "")) {
                   number
                   createdAt
                   closedAt

@@ -4,7 +4,7 @@ require "how_is/sources/github/contributions"
 
 describe HowIs::Sources::Github::Contributions do
   let(:contributions) {
-    described_class.new("how-is/example-repository", "2017-09-01")
+    described_class.new("how-is/example-repository", "2017-08-1", "2017-09-01")
   }
 
   context "#contributors" do
@@ -126,7 +126,7 @@ describe HowIs::Sources::Github::Contributions do
 
   context "#pretty_date" do
     it "formats the date correctly" do
-      date = DateTime.new(2017, 1, 2)
+      date = "2017-01-02"
       expect(contributions.send(:pretty_date, date)).to eq("Jan 02, 2017")
     end
   end

@@ -7,10 +7,13 @@ module HowIs::Sources
   # Fetches metadata about CI builds from travis-ci.org.
   class Travis
     # @param repository [String] GitHub repository name, of the format user/repo.
+    # @param start_date [String] Start date for the report being generated.
     # @param end_date [String] End date for the report being generated.
-    def initialize(repository, end_date)
+    def initialize(repository, start_date, end_date)
       @repository = repository
-      # TODO: Do something with end_date.
+      @start_date = start_date
+      @end_date = end_date
+      # TODO: Use start/end date.
       # TODO: Figure out Default Branch of the repo
     end
 

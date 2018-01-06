@@ -23,28 +23,19 @@ module HowIs::Sources
       # repository for a month-long period starting on +start_date+.
       #
       # @param repository [String] GitHub repository in the form of "user/repo".
+      # @param start_date [String] Date in the format YYYY-MM-DD. The first date
+      #                            to include commits from.
       # @param end_date [String] Date in the format YYYY-MM-DD. The last date
       #                          to include commits from.
-      def initialize(repository, end_date)
+      def initialize(repository, start_date, end_date)
         @user, @repo = repository.split("/")
         @github = Github.rest
 
         # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
         #               but internally we use "until_date" to match GitHub's API.
+        @since_date = start_date
+        @until_date = end_date
 
-        # NOTE: Use DateTime because it defaults to UTC and that's less gross
-        #       than trying to get Date to use UTC.
-        #
-        #       Not using UTC for this results in #compare_url giving different
-        #       results for different time zones, which makes it harder to test.
-        #
-        #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
-        @until_date = DateTime.strptime(end_date, "%Y-%m-%d")
-
-        d = @until_date.day
-        m = @until_date.month
-        y = @until_date.year
-        @since_date = DateTime.new(y, m - 1, d)
 
         @commit = {}
         @stats = nil
@@ -126,8 +117,8 @@ module HowIs::Sources
       end
 
       def compare_url
-        since_timestamp = @since_date.to_time.to_i
-        until_timestamp = @until_date.to_time.to_i
+        since_timestamp = timestamp_for(@since_date)
+        until_timestamp = timestamp_for(@until_date)
         "https://github.com/#{@user}/#{@repo}/compare/#{default_branch}@%7B#{since_timestamp}%7D...#{default_branch}@%7B#{until_timestamp}%7D" # rubocop:disable Metrics/LineLength
       end
 
@@ -156,8 +147,16 @@ module HowIs::Sources
 
       private
 
+      def date_to_dt(date)
+        DateTime.strptime(date, "%Y-%m-%d")
+      end
+
+      def timestamp_for(date)
+        date_to_dt(date).strftime("%s")
+      end
+
       def pretty_date(date)
-        date.strftime("%b %d, %Y")
+        date_to_dt(date).strftime("%b %d, %Y")
       end
     end
   end

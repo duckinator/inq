@@ -12,10 +12,28 @@ module HowIs
       @repository = repository
       @end_date = end_date
 
-      @gh_contributions = HowIs::Sources::Github::Contributions.new(repository, end_date)
-      @gh_issues        = HowIs::Sources::Github::Issues.new(repository, end_date)
-      @gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, end_date)
-      @travis           = HowIs::Sources::Travis.new(repository, end_date)
+        # NOTE: Use DateTime because it defaults to UTC and that's less gross
+        #       than trying to get Date to use UTC.
+        #
+        #       Not using UTC for this results in #compare_url giving different
+        #       results for different time zones, which makes it harder to test.
+        #
+        #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
+      end_dt = DateTime.strptime(end_date, "%Y-%m-%d")
+
+      d = end_dt.day
+      m = end_dt.month
+      y = end_dt.year
+      start_dt = DateTime.new(y, m - 1, d)
+
+      @end_date = end_dt.strftime("%Y-%m-%d")
+      @start_date = start_dt.strftime("%Y-%m-%d")
+
+
+      @gh_contributions = HowIs::Sources::Github::Contributions.new(repository, @start_date, @end_date)
+      @gh_issues        = HowIs::Sources::Github::Issues.new(repository, @start_date, @end_date)
+      @gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, @start_date, @end_date)
+      @travis           = HowIs::Sources::Travis.new(repository, @start_date, @end_date)
     end
 
     def to_h(frontmatter_data = nil)
