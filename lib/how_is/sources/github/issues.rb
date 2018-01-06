@@ -155,10 +155,12 @@ module HowIs::Sources
         @data = []
         last_cursor = fetch_last_cursor
         return @data if last_cursor.nil?
+        after = nil
 
-        begin
-          after = fetch_issues(after, last_cursor)
-        end until after.nil?
+        loop do
+          after = fetch_issues(after)
+          break if after == last_cursor
+        end
 
         @data.select! { |issue|
           if !issue["closedAt"].nil? && date_le(issue["closedAt"], @start_date)
@@ -196,7 +198,7 @@ module HowIs::Sources
         end
       end
 
-      def fetch_issues(after, last_cursor)
+      def fetch_issues(after)
         chunk_size = 100
         after_str = ", after: #{after.inspect}" unless after.nil?
 
@@ -239,11 +241,7 @@ module HowIs::Sources
           @data += new_data
         end
 
-        if current_last_cursor == last_cursor
-          nil
-        else
-          current_last_cursor
-        end
+        current_last_cursor
       end
 
       def date_le(left, right)
