@@ -2,7 +2,6 @@
 
 require "how_is/version"
 require "how_is/report"
-require "github_api"
 
 module HowIs
   DEFAULT_REPORT_FILE = "report.html"
