@@ -10,6 +10,8 @@ module HowIs::Sources
     class Issues
       include HowIs::Sources::GithubHelpers
 
+      TERMINATE_GRAPHQL_LOOP = :terminate_graphql_loop
+
       def initialize(repository, start_date, end_date)
         @repository = repository
         @user, @repo = repository.split("/", 2)
@@ -155,10 +157,10 @@ module HowIs::Sources
         @data = []
         return @data if last_cursor.nil?
 
+        after = nil
         data = []
-        loop do
+        until after == TERMINATE_GRAPHQL_LOOP
           after, data = fetch_issues(after, data)
-          break if after == last_cursor
         end
 
         @data = data.select(&method(:issue_is_relevant?))
@@ -242,6 +244,10 @@ module HowIs::Sources
           }
 
           data += new_data
+        end
+
+        if current_last_cursor == last_cursor
+          current_last_cursor = TERMINATE_GRAPHQL_LOOP
         end
 
         [current_last_cursor, data]
