@@ -39,7 +39,7 @@ module HowIs
       # Given an Array of dates, average the timestamps and return the date that
       # represents.
       def average_date_for(issues_or_pulls)
-        timestamps = issues_or_pulls.map { |iop| DateTime.parse(iop["created_at"]).strftime("%s").to_i }
+        timestamps = issues_or_pulls.map { |iop| DateTime.parse(iop["createdAt"]).strftime("%s").to_i }
         average_timestamp = timestamps.reduce(:+) / issues_or_pulls.length
 
         DateTime.strptime(average_timestamp.to_s, "%s")
@@ -50,7 +50,7 @@ module HowIs
       def average_age_for(issues_or_pulls)
         return nil if issues_or_pulls.empty?
 
-        ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["created_at"]) }
+        ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["createdAt"]) }
         average_age_in_seconds = ages.reduce(:+) / ages.length
 
         values = period_pairs_for(average_age_in_seconds).reject { |(v, _)| v.zero? }.map { |(v, k)|
@@ -71,7 +71,7 @@ module HowIs
       end
 
       def sort_iops_by_created_at(issues_or_pulls)
-        issues_or_pulls.sort_by { |x| DateTime.parse(x["created_at"]) }
+        issues_or_pulls.sort_by { |x| DateTime.parse(x["createdAt"]) }
       end
 
       # Given an Array of issues or pulls, return the oldest.
@@ -79,12 +79,7 @@ module HowIs
       def oldest_for(issues_or_pulls)
         return nil if issues_or_pulls.empty?
 
-        iop = sort_iops_by_created_at(issues_or_pulls).first
-
-        {
-          created_at: iop["created_at"],
-          link: iop["html_url"],
-        }
+        sort_iops_by_created_at(issues_or_pulls).first
       end
 
       # Given an Array of issues or pulls, return the newest.
@@ -92,17 +87,20 @@ module HowIs
       def newest_for(issues_or_pulls)
         return nil if issues_or_pulls.empty?
 
-        iop = sort_iops_by_created_at(issues_or_pulls).last
-
-        {
-          created_at: iop["created_at"],
-          link: iop["html_url"],
-        }
+        sort_iops_by_created_at(issues_or_pulls).last
       end
 
       # Given an issue or PR, returns the date it was created.
       def date_for(issue_or_pull)
-        DateTime.parse(issue_or_pull["created_at"])
+        DateTime.parse(issue_or_pull["createdAt"])
+      end
+
+      def label_url_for(label_name)
+        if label_name == "(No label)"
+          url({"no"=>"label"})
+        else
+          url({"label"=>label_name})
+        end
       end
 
       private

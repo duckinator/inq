@@ -2,44 +2,12 @@
 
 require "how_is/version"
 require "how_is/report"
-require "github_api"
 
 module HowIs
   DEFAULT_REPORT_FILE = "report.html"
 
   def self.new(repository, date)
     Report.new(repository, date)
-  end
-
-  def self.github
-    @@github ||=
-      Github.new(auto_pagination: true) do |config|
-        config.basic_auth = ENV["HOWIS_BASIC_AUTH"] if ENV["HOWIS_BASIC_AUTH"]
-      end
-  end
-
-  ##
-  # Given a JSON report, create a new HowIs object (for generating other
-  # reports).
-  #
-  # @param json [String] A JSON report object.
-  # @return [HowIs] A HowIs object that can be used for generating other
-  #   reports, treating the JSON report as a cache.
-  def self.from_json(json)
-    from_hash(JSON.parse(json))
-  end
-
-  ##
-  # Given report data as a hash, create a new HowIs object (for generating
-  # other reports).
-  #
-  # @param data [Hash] A hash containing report data.
-  # @return [HowIs] A HowIs object that can be used for generating other
-  #   reports, treating the provided report data as a cache.
-  def self.from_hash(data)
-    analysis = HowIs::Analysis.from_hash(data)
-
-    new(analysis.repository, analysis)
   end
 
   ##

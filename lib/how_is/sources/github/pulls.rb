@@ -8,8 +8,16 @@ require "date"
 module HowIs::Sources
   class Github
     class Pulls < Issues
-      def type
+      def url_suffix
         "pulls"
+      end
+
+      def singular_type
+        "pull"
+      end
+
+      def type
+        "pullRequests"
       end
 
       def pretty_type

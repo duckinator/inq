@@ -11,7 +11,7 @@ begin
 rescue HowIs::CLI::OptionsError => e
   raise if ENV["SHOW_TRACE"]
 
-  abort "Error: #{e.message}"
+  abort "Error: #{e.message} (See --help for usage.)"
 end
 
 options = result[:options]
@@ -24,31 +24,20 @@ elsif options[:version]
   exit
 end
 
-# TODO: Once retroactive issue reports are done, allow exe/how_is to be passed
-#       other dates.
-today = DateTime.now.strftime("%Y-%m-%d")
+date = options[:date]
 
 begin
   if options[:config]
-    reports = HowIs.from_config(YAML.load_file(options[:config]), today)
+    reports = HowIs.from_config(YAML.load_file(options[:config]), date)
 
-    reports.each { |file, report| HowIs::Report.save_report(file, report) }
+    reports.each { |file, report| report.save_as(file) }
   else
-    report =
-      if options[:from]
-        json_report = File.open(options[:from]).read
-        HowIs.from_json(json_report)
-      else
-        HowIs.new(options[:repository], today)
-      end
+    report = HowIs.new(options[:repository], date)
 
-    HowIs::Report.save_report(
-      options[:report],
-      HowIs::Report.to_format_based_on(options[:report], report)
-    )
+    report.save_as(options[:report])
   end
 rescue => e
   raise if ENV["SHOW_TRACE"]
 
-  abort "Error: #{e.message}"
+  abort "Error: #{e.message} (Set the SHOW_TRACE variable for a stack trace.)"
 end

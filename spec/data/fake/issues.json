@@ -1,8 +1,6 @@
 [
   {
-    "url": "https://api.github.com/repos/rubygems/rubygems/issues/9001",
-    "repository_url": "https://api.github.com/repos/rubygems/rubygems",
-    "html_url": "https://github.com/rubygems/rubygems/issues/9001",
+    "url": "https://github.com/rubygems/rubygems/issues/9001",
     "id": 150951839,
     "number": 9001,
     "title": "Fake Oldest Issue",
@@ -10,12 +8,10 @@
       "login": "example",
       "id": 57936,
       "avatar_url": "https://avatars.githubusercontent.com/u/57936?v=3",
-      "url": "https://api.github.com/users/example",
-      "html_url": "https://github.com/example"
+      "url": "https://github.com/example"
     },
     "labels": [
       {
-        "url": "https://api.github.com/repos/rubygems/rubygems/labels/triage",
         "name": "triage",
         "color": "ffffff"
       }
@@ -25,16 +21,14 @@
     "assignee": null,
     "milestone": null,
     "comments": 2,
-    "created_at": "1999-01-01T00:00:00Z",
-    "updated_at": "1999-01-01T20:30:40Z",
-    "closed_at": null,
+    "createdAt": "1999-01-01T00:00:00Z",
+    "updatedAt": "1999-01-01T20:30:40Z",
+    "closedAt": null,
     "body": "Argle bargle example issue #9001.\r\nMade artificially old."
   },
 
   {
-    "url": "https://api.github.com/repos/rubygems/rubygems/issues/9002",
-    "repository_url": "https://api.github.com/repos/rubygems/rubygems",
-    "html_url": "https://github.com/rubygems/rubygems/issues/9002",
+    "url": "https://github.com/rubygems/rubygems/issues/9002",
     "id": 150951839,
     "number": 9001,
     "title": "Fake Second-Oldest Issue",
@@ -42,17 +36,14 @@
       "login": "example",
       "id": 57936,
       "avatar_url": "https://avatars.githubusercontent.com/u/57936?v=3",
-      "url": "https://api.github.com/users/example",
-      "html_url": "https://github.com/example"
+      "url": "https://github.com/example"
     },
     "labels": [
       {
-        "url": "https://api.github.com/repos/rubygems/rubygems/labels/administrative",
         "name": "administrative",
         "color": "C0C0C0"
       },
       {
-        "url": "https://api.github.com/repos/rubygems/rubygems/labels/triage",
         "name": "triage",
         "color": "ffffff"
       }
@@ -62,16 +53,14 @@
     "assignee": null,
     "milestone": null,
     "comments": 2,
-    "created_at": "1999-01-02T00:00:00Z",
-    "updated_at": "1999-01-02T20:30:40Z",
-    "closed_at": null,
+    "createdAt": "1999-01-02T00:00:00Z",
+    "updatedAt": "1999-01-02T20:30:40Z",
+    "closedAt": null,
     "body": "Argle bargle example issue #9002.\r\nWith extra old-ness, but less-so than issue #9001."
   },
 
   {
-    "url": "https://api.github.com/repos/rubygems/rubygems/issues/9003",
-    "repository_url": "https://api.github.com/repos/rubygems/rubygems",
-    "html_url": "https://github.com/rubygems/rubygems/issues/9003",
+    "url": "https://github.com/rubygems/rubygems/issues/9003",
     "id": 150951839,
     "number": 9001,
     "title": "Fake Third-Oldest Issue",
@@ -80,11 +69,10 @@
       "id": 57936,
       "avatar_url": "https://avatars.githubusercontent.com/u/57936?v=3",
       "url": "https://api.github.com/users/example",
-      "html_url": "https://github.com/example"
+      "url": "https://github.com/example"
     },
     "labels": [
       {
-        "url": "https://api.github.com/repos/rubygems/rubygems/labels/triage",
         "name": "triage",
         "color": "ffffff"
       }
@@ -94,16 +82,14 @@
     "assignee": null,
     "milestone": null,
     "comments": 2,
-    "created_at": "2010-01-01T00:00:00Z",
-    "updated_at": "2010-01-01T20:30:40Z",
-    "closed_at": null,
+    "createdAt": "2010-01-01T00:00:00Z",
+    "updatedAt": "2010-01-01T20:30:40Z",
+    "closedAt": null,
     "body": "Argle bargle example issue #9003."
   },
 
   {
-    "url": "https://api.github.com/repos/rubygems/rubygems/issues/9004",
-    "repository_url": "https://api.github.com/repos/rubygems/rubygems",
-    "html_url": "https://github.com/rubygems/rubygems/issues/9004",
+    "url": "https://github.com/rubygems/rubygems/issues/9004",
     "id": 150951839,
     "number": 9001,
     "title": "Fake Fourth-Oldest Issue",
@@ -111,12 +97,10 @@
       "login": "example",
       "id": 57936,
       "avatar_url": "https://avatars.githubusercontent.com/u/57936?v=3",
-      "url": "https://api.github.com/users/example",
-      "html_url": "https://github.com/example"
+      "url": "https://github.com/example"
     },
     "labels": [
       {
-        "url": "https://api.github.com/repos/rubygems/rubygems/labels/administrative",
         "name": "administrative",
         "color": "C0C0C0"
       }
@@ -126,9 +110,9 @@
     "assignee": null,
     "milestone": null,
     "comments": 2,
-    "created_at": "2016-01-01T00:00:00Z",
-    "updated_at": "2016-01-01T20:30:40Z",
-    "closed_at": null,
+    "createdAt": "2016-01-01T00:00:00Z",
+    "updatedAt": "2016-01-01T20:30:40Z",
+    "closedAt": null,
     "body": "Argle bargle example issue #9004.\r\nIt's magic."
   }
 ]
