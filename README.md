@@ -10,17 +10,6 @@
 
 Reports can be generated retroactively.
 
-The summary includes:
-
-* repository name,
-* number of open issues,
-* number of open pull requests,
-* number of open issues associated with each label and with no label,
-* average issue age,
-* average pull request age,
-* date oldest issue was opened,
-* date oldest pull request was opened.
-
 If you want to contribute or discuss how_is, you can [join Bundler's slack](http://slack.bundler.io/) and join the #how_is channel.
 
 ## Installation
@@ -31,42 +20,56 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
 ### Command Line
 
-    $ how_is <orgname>/<reponame> [--output FILENAME]
+    $ how_is REPOSITORY DATE [--output OUTPUT_FILENAME]
+    # OUTPUT_FILENAME defaults to ./report.html.
 
-E.g.,
+or
 
-    $ how_is rubygems/rubygems 2016-12-01 --output report.html
+    $ how_is REPOSITORY --config CONFIG_FILENAME
+
+
+#### Example \#1
+
+    $ how_is rubygems/rubygems 2016-12-01 --output report-2016-12-01.html
 
 The above command creates a HTML file containing the report for the state of
-the rubygems/rubygems repository, as of December 01 2016, at `./report.html`.
+the rubygems/rubygems repository, for November 01 2016 to
+December 01 2016, and saves it as `./report-2016-12-01.html`.
 
-If you don't pass the `--output` flag, it defaults to
-`./report.html`.
+#### Example \#2
+
+    $ how_is 2016-12-01 --config some-config.yml
+
+Generates the report(s) specified in the config file, for the period
+from November 01 2016 to December 01 2016, and saves them in the
+locations specified in the config file.
 
 #### Generating reports from a config file
 
-You can also create a config file &mdash; typically called
-how_is.yml &mdash; and run `how_is --config YAML_CONFIG_FILE`. (E.g., if
-the config file is how_is.yml, you would run `how_is --config how_is.yml`.)
+You can also create a config file and run
+`how_is --config YAML_CONFIG_FILE_PATH`.
 
-Below is an example config file, [from the how-is-rubygems repository](https://github.com/how-is/how-is-rubygems/blob/gh-pages/how_is.yml).
+E.g., if the config file is `how_is.yml`, you would run
+`how_is --config how_is.yml`.
+
+Below is an example config file, [from the how-is/manual-reports
+repository](https://raw.githubusercontent.com/how-is/manual-reports/gh-pages/how-is-configs/01-rubygems-rubygems.yml).
 
 ```yaml
 repository: rubygems/rubygems
 reports:
   html:
-    directory: _posts
+    directory: rubygems/_posts
     frontmatter:
       title: "%{date} Report"
       layout: default
     filename: "%{date}-report.html"
   json:
-    directory: json
+    directory: json/rubygems
     filename: "%{date}.json"
 ```
 
-The config file is a YAML file. The two root keys are `repository` (the
-repository name, of format `USER_OR_ORG/REPOSITORY` &mdash; e.g. `how-is/how_is`)
+The config file is a YAML file. The two root keys are `repository`
 and `reports`.
 
 `reports` is a hash of key/value pairs, with the keys being the type of report
@@ -93,7 +96,7 @@ report = HowIs.new("rubygems/rubygems", "2017-12-01").to_html
 report.save_as("report.html")
 
 # Generate a report from a config Hash.
-HowIs.from_config({
+reports = HowIs.from_config({
   repository: 'rubygems/rubygems',
   reports: {
     html: {
@@ -109,7 +112,10 @@ HowIs.from_config({
       filename: '%{date}.json'
     }
   }
-})
+}, "2017-12-01")
+# Save all of the rports.
+# This assumes all of the directories the files go in already exist!
+reports.map {|file, report| File.write(file, report) }
 ```
 
 ## Development
@@ -121,7 +127,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/how-is/how_is. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 
 ## License
 
