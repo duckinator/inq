@@ -21,12 +21,12 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 ### Command Line
 
     $ how_is REPOSITORY DATE [--output OUTPUT_FILENAME]
+    # OUTPUT_FILENAME defaults to ./report.html.
 
 or
 
     $ how_is REPOSITORY --config CONFIG_FILENAME
 
-If you don't pass the `--output` flag, it defaults to `./report.html`.
 
 #### Example \#1
 
