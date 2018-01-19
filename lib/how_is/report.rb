@@ -69,6 +69,8 @@ module HowIs
         oldest_pull_date: @gh_pulls.oldest["createdAt"],
 
         travis_builds: @travis.builds.to_h,
+
+        date: @end_date,
       }
 
       frontmatter =
