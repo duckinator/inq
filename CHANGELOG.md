@@ -1,10 +1,18 @@
 # Change Log
 
+## [v22.0.0](https://github.com/how-is/how_is/tree/v22.0.0) (2018-01-19)
+[Full Changelog](https://github.com/how-is/how_is/compare/v21.0.0...v22.0.0)
+
+**Merged pull requests:**
+
+- Update readme [\#219](https://github.com/how-is/how_is/pull/219) ([duckinator](https://github.com/duckinator))
+
 ## [v21.0.0](https://github.com/how-is/how_is/tree/v21.0.0) (2018-01-19)
 [Full Changelog](https://github.com/how-is/how_is/compare/v20.0.0...v21.0.0)
 
 **Merged pull requests:**
 
+- Release v21.0.0 [\#218](https://github.com/how-is/how_is/pull/218) ([duckinator](https://github.com/duckinator))
 - Idempotent reports [\#217](https://github.com/how-is/how_is/pull/217) ([duckinator](https://github.com/duckinator))
 
 ## [v20.0.0](https://github.com/how-is/how_is/tree/v20.0.0) (2017-12-22)
