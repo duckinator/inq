@@ -98,6 +98,11 @@ module HowIs::CLI
     elsif options[:config]
       # If --config is passed, _only_ accept --config.
       options = keep_only.call(options, :config)
+      if argv.length >= 1
+        options[:date] = argv.delete_at(0)
+      else
+        raise HowIsArgumentError, "Expected date."
+      end
     else
       # If we get here, we're generating a report from the command line,
       # without using --from or --config.
