@@ -1,7 +1,13 @@
 # Change Log
 
-## [20.0.0](https://github.com/how-is/how_is/tree/v20.0.0) (2017-12-21)
+## [v21.0.0](https://github.com/how-is/how_is/tree/v21.0.0) (2018-01-19)
+[Full Changelog](https://github.com/how-is/how_is/compare/v20.0.0...v21.0.0)
 
+**Merged pull requests:**
+
+- Idempotent reports [\#217](https://github.com/how-is/how_is/pull/217) ([duckinator](https://github.com/duckinator))
+
+## [v20.0.0](https://github.com/how-is/how_is/tree/v20.0.0) (2017-12-22)
 [Full Changelog](https://github.com/how-is/how_is/compare/v19.0.0...v20.0.0)
 
 **Closed issues:**
@@ -16,6 +22,7 @@
 
 **Merged pull requests:**
 
+- version bump to v20.0.0. :3 [\#216](https://github.com/how-is/how_is/pull/216) ([duckinator](https://github.com/duckinator))
 - Partial rewrite [\#215](https://github.com/how-is/how_is/pull/215) ([duckinator](https://github.com/duckinator))
 - switch from Tessellator::Fetcher to Okay::HTTP. [\#214](https://github.com/how-is/how_is/pull/214) ([duckinator](https://github.com/duckinator))
 - Remove XPulse class. [\#213](https://github.com/how-is/how_is/pull/213) ([duckinator](https://github.com/duckinator))
