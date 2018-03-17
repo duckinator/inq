@@ -16,6 +16,41 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
     $ gem install how_is
 
+## Configuration
+
+HowIs can hit the default API limits for GitHub for even small reports.
+
+To avoid errors due to hitting rate limits, HowIs requires a Personal
+Access Token, which GitHub provides with higher rate limits.
+
+### Acquiring A Personal Access Token
+
+To acquire a personal access token:
+
+1. Go to: https://github.com/settings/tokens/new
+2. For `Token description`, enter `how_is CLI client`.
+3. Scroll to the bottom of the page.
+4. Click `Generate token`. This will take you to a new page.
+5. Save the token somewhere. **You can't access it again.**
+
+**NOTE:** HowIs _only_ needs read access.
+
+#### Using The Token
+
+You now need to define the `HOWIS_GITHUB_TOKEN` and `HOWIS_BASIC_AUTH`
+variables.
+
+An example of how to do so for the Bash shell is provided below.
+
+Make sure to replaceall instances of `<TOKEN>` with the actual token,
+and `<USERNAME>` with your GitHub username.
+
+```bash
+export HOWIS_GITHUB_TOKEN=<TOKEN>
+export HOWIS_BASIC_AUTH="<USERNAME>:<TOKEN>"
+```
+
+
 ## Usage
 
 ### Command Line
@@ -26,7 +61,6 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 or
 
     $ how_is REPOSITORY --config CONFIG_FILENAME
-
 
 #### Example \#1
 
