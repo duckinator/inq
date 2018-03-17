@@ -9,6 +9,8 @@ module HowIs
   module Sources
     # Contains configuration information for GitHub-based sources.
     class Github
+      # An exception which is only raised if an environment variable
+      # is undefined.
       class ConfigurationError < StandardError
         def initialize(env_variable)
           super("environment variable #{env_variable} not defined." \
