@@ -16,6 +16,10 @@ task :generate_changelog do
   sh "github_changelog_generator"
 end
 
+task :future_changelog do
+  sh "github_changelog_generator --future-release v#{HowIs::VERSION}"
+end
+
 # Helper functions used later in the Rakefile.
 class HelperFunctions
   def self.freeze_time(&_block)
