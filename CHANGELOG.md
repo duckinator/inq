@@ -1,10 +1,26 @@
 # Change Log
 
+## [v24.0.0](https://github.com/how-is/how_is/tree/v24.0.0) (2018-03-17)
+[Full Changelog](https://github.com/how-is/how_is/compare/v23.0.0...v24.0.0)
+
+**Merged pull requests:**
+
+- Improve error output; update README. [\#224](https://github.com/how-is/how_is/pull/224) ([duckinator](https://github.com/duckinator))
+- update .travis.yml. [\#223](https://github.com/how-is/how_is/pull/223) ([duckinator](https://github.com/duckinator))
+
+## [v23.0.0](https://github.com/how-is/how_is/tree/v23.0.0) (2018-01-19)
+[Full Changelog](https://github.com/how-is/how_is/compare/v22.0.0...v23.0.0)
+
+**Merged pull requests:**
+
+- Make config-based reports work again. [\#221](https://github.com/how-is/how_is/pull/221) ([duckinator](https://github.com/duckinator))
+
 ## [v22.0.0](https://github.com/how-is/how_is/tree/v22.0.0) (2018-01-19)
 [Full Changelog](https://github.com/how-is/how_is/compare/v21.0.0...v22.0.0)
 
 **Merged pull requests:**
 
+- Make CLI parser store the date when passed --config. [\#220](https://github.com/how-is/how_is/pull/220) ([duckinator](https://github.com/duckinator))
 - Update readme [\#219](https://github.com/how-is/how_is/pull/219) ([duckinator](https://github.com/duckinator))
 
 ## [v21.0.0](https://github.com/how-is/how_is/tree/v21.0.0) (2018-01-19)
