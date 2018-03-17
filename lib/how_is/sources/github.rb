@@ -11,7 +11,7 @@ module HowIs
     class Github
       class ConfigurationError < StandardError
         def initialize(env_variable)
-          super("environment variable #{env_variable} not defined." +
+          super("environment variable #{env_variable} not defined." \
                   " See README.md for details.")
         end
       end
