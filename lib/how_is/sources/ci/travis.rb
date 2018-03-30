@@ -14,39 +14,34 @@ module HowIs::Sources
         @repository = repository
         @start_date = start_date
         @end_date = end_date
-        @default_branch = nil
+        @default_branch = :default
         # TODO: Use start/end date.
-      end
-
-      # Returns the builds for a specific branch.
-      #
-      # @params branch [String] The branch to fetch builds for.
-      # @return [Hash] Hash containing the builds for +branch+.
-      def builds_for_branch(branch)
-        fetch("builds", {
-          "event_type" => "push",
-          "branch.name" => branch,
-        })
       end
 
       # @return [String] The default branch name.
       def default_branch
-        return @default_branch unless @default_branch.nil?
+        return @default_branch unless @default_branch == :default
 
         sorted_branches = fetch("branches", {"sort_by" => "default_branch"})
-        @default_branch = sorted_branches["branches"].first["name"]
+        @default_branch = sorted_branches["branches"]&.first["name"]
       end
 
-      # Fetches builds for the default branch.
+      # Returns the builds for the default branch.
       #
-      # @return [Hash] Builds for the default branch.
+      # @return [Hash] Hash containing the builds for the default branch.
       def builds
-        builds_for_branch(default_branch)
+        fetch("builds", {
+          "event_type" => "push",
+          "branch.name" => default_branch,
+        })
+      rescue Net::HTTPServerException
+        # It's not elegant, but it works™.
+        {}
       end
 
       private
 
-      # Returns API result of /repos/:user/:repo/<path>.
+      # Returns API results for /repos/:user/:repo/<path>.
       #
       # @param path [String] Path suffix (appended to /repo/<repo name>/).
       # @param parameters [Hash] Parameters.
@@ -59,8 +54,8 @@ module HowIs::Sources
           "https://api.travis-ci.org/repo/#{repo}/#{path}",
           parameters: parameters,
           headers: {
-            "Travis-Api-Version": "3",
-            "Accept" => "application/json"
+            "Travis-Api-Version" => "3",
+            "Accept" => "application/json",
             "User-Agent" => HowIs::USER_AGENT,
           },
         ).or_raise!.from_json

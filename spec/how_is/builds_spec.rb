@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require "how_is/sources/travis"
+require "how_is/sources/ci/travis"
+require "how_is/sources/ci/appveyor"
 
-describe HowIs::Sources::Travis do
+describe HowIs::Sources::CI::Travis do
   subject do
     described_class.new("how-is/how_is", "2017-07-06", "2017-08-06")
   end

@@ -18,22 +18,26 @@ module HowIs::Sources
         # TODO: Figure out default branch of the repo
       end
 
+      # Fetches builds for the default branch.
+      #
+      # @return [Hash] Builds for the default branch.
       def builds
         fetch_builds
+      rescue Net::HTTPServerException
+        # It's not elegant, but it works™.
+        {}
       end
 
       private
 
-      # Returns API result of /repos/:user/:repo/builds for Push type Travis
-      # events.
+      # Returns API result of /api/projects/:repository.
       #
-      # @return [String] JSON result
+      # @return [Hash] API results.
       def fetch_builds
         Okay::HTTP.get(
-          "https://ci.appveyor.com/api/projects/#{@user}/#{@repo}",
-          headers: {"Accept" => "application/json"}
+          "https://ci.appveyor.com/api/projects/#{@repository}",
           headers: {
-            "Accept" => "application/json"
+            "Accept" => "application/json",
             "User-Agent" => HowIs::USER_AGENT,
           }
         ).or_raise!.from_json
