@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "okay/default"
 require "okay/http"
 require "how_is/sources/github"
 
@@ -7,6 +8,8 @@ module HowIs::Sources
   module CI
     # Fetches metadata about CI builds from travis-ci.org.
     class Travis
+      BadResponseError = Class.new(StandardError)
+
       # @param repository [String] GitHub repository name, of the format user/repo.
       # @param start_date [String] Start date for the report being generated.
       # @param end_date [String] End date for the report being generated.
@@ -14,16 +17,40 @@ module HowIs::Sources
         @repository = repository
         @start_date = start_date
         @end_date = end_date
-        @default_branch = :default
+        @default_branch = Okay.default
         # TODO: Use start/end date.
       end
 
       # @return [String] The default branch name.
       def default_branch
-        return @default_branch unless @default_branch == :default
+        return @default_branch unless @default_branch == Okay.default
 
-        sorted_branches = fetch("branches", {"sort_by" => "default_branch"})
-        @default_branch = sorted_branches["branches"]&.first["name"]
+        response = fetch("branches", {"sort_by" => "default_branch"})
+
+        # Fail if +response+ isn't a Hash.
+        unless response.is_a?(Hash)
+          raise BadResponseError, "expected `response' to be a Hash, got #{response.class}."
+        end
+
+        # Fail if +response+ is a Hash, but doesn't have the key +"branches"+.
+        unless response.has_key?("branches")
+          raise BadResponseError, "expected `response' to have key `\"branches\"'"
+        end
+
+        branches = response["branches"]
+
+        # Fail if +branches+ is an Array, but not an Array of Hashes.
+        unless branches.all? { |branch| branch.is_a?(Hash) }
+          classes = branches.map(&:class).sort.uniq
+          raise BadResponseError, "expected Array of Hashes, got Array containing: #{classes.inspect}."
+        end
+
+        branch = branches.find { |b| b["default_branch"] == true }
+        if branch
+          @default_branch = branch["name"]
+        else
+          @default_branch = nil
+        end
       end
 
       # Returns the builds for the default branch.
