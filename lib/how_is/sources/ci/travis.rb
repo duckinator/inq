@@ -88,35 +88,17 @@ module HowIs::Sources
       end
 
       def normalize_build(build)
-        build_keys = %w[
-          @href
-          pull_request_title
-          pull_request_number
-          started_at
-          finished_at
-          repository
-          commit
-          jobs
-        ]
+        build_keys = %w[@href pull_request_title pull_request_number
+                        started_at finished_at repository commit jobs]
         result = pluck_keys(build, build_keys)
 
-        result["repository"] = result["repository"]["slug"]
-
-        commit_keys = %w[
-          sha
-          ref
-          message
-          compare_url
-          committed_at
-          jobs
-        ]
+        commit_keys = %w[sha ref message compare_url committed_at jobs]
         result["commit"] = pluck_keys(result["commit"], commit_keys)
 
-        job_keys = %w[
-          href
-          id
-        ]
+        job_keys = %w[href id]
         result["jobs"] = result["jobs"].map { |j| pluck_keys(j, job_keys) }
+
+        result["repository"] = result["repository"]["slug"]
 
         %w[started_at finished_at].each do |k|
           result[k] = DateTime.parse(result[k])
