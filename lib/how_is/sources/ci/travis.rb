@@ -26,24 +26,10 @@ module HowIs::Sources
         return @default_branch unless @default_branch == Okay.default
 
         response = fetch("branches", {"sort_by" => "default_branch"})
-
-        # Fail if +response+ isn't a Hash.
-        unless response.is_a?(Hash)
-          raise BadResponseError, "expected `response' to be a Hash, got #{response.class}."
-        end
-
-        # Fail if +response+ is a Hash, but doesn't have the key +"branches"+.
-        unless response.has_key?("branches")
-          raise BadResponseError, "expected `response' to have key `\"branches\"'"
-        end
+        validate_default_branch_response!(response)
 
         branches = response["branches"]
-
-        # Fail if +branches+ is an Array, but not an Array of Hashes.
-        unless branches.all? { |branch| branch.is_a?(Hash) }
-          classes = branches.map(&:class).sort.uniq
-          raise BadResponseError, "expected Array of Hashes, got Array containing: #{classes.inspect}."
-        end
+        validate_branches_response!(branches)
 
         branch = branches.find { |b| b["default_branch"] == true }
         if branch
@@ -63,6 +49,26 @@ module HowIs::Sources
       end
 
       private
+
+      def validate_default_branch_response!(response)
+        # Fail if +response+ isn't a Hash.
+        unless response.is_a?(Hash)
+          raise BadResponseError, "expected `response' to be a Hash, got #{response.class}."
+        end
+
+        # Fail if +response+ is a Hash, but doesn't have the key +"branches"+.
+        unless response.has_key?("branches")
+          raise BadResponseError, "expected `response' to have key `\"branches\"'"
+        end
+      end
+
+      def validate_branches_response!(branches)
+        # Fail if +branches+ is an Array, but not an Array of Hashes.
+        unless branches.all? { |branch| branch.is_a?(Hash) }
+          classes = branches.map(&:class).sort.uniq
+          raise BadResponseError, "expected Array of Hashes, got Array containing: #{classes.inspect}."
+        end
+      end
 
       def in_date_range?(build, start_date = @start_date, end_date = @end_date)
         (build["started_at"] >= start_date) \
