@@ -145,7 +145,7 @@ module HowIs::Sources
             "Travis-Api-Version" => "3",
             "Accept" => "application/json",
             "User-Agent" => HowIs::USER_AGENT,
-          },
+          }
         ).or_raise!.from_json
       end
     end
