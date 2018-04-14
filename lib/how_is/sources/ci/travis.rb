@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "date"
 require "okay/default"
 require "okay/http"
 require "how_is/sources/github"
@@ -15,10 +16,9 @@ module HowIs::Sources
       # @param end_date [String] End date for the report being generated.
       def initialize(repository, start_date, end_date)
         @repository = repository
-        @start_date = start_date
-        @end_date = end_date
+        @start_date = DateTime.parse(start_date)
+        @end_date = DateTime.parse(end_date)
         @default_branch = Okay.default
-        # TODO: Use start/end date.
       end
 
       # @return [String] The default branch name.
@@ -57,16 +57,71 @@ module HowIs::Sources
       #
       # @return [Hash] Hash containing the builds for the default branch.
       def builds
-        fetch("builds", {
+        raw_builds \
+          .map(&method(:normalize_build)) \
+          .select(&method(:in_date_range?))
+      end
+
+      private
+
+      def in_date_range?(build, start_date = @start_date, end_date = @end_date)
+        (build["started_at"] >= start_date) \
+          && (build["finished_at"] <= end_date)
+      end
+
+      def raw_builds
+        results = fetch("builds", {
           "event_type" => "push",
           "branch.name" => default_branch,
         })
+
+        results["builds"] || {}
       rescue Net::HTTPServerException
         # It's not elegant, but it works™.
         {}
       end
 
-      private
+      def normalize_build(build)
+        build_keys = %w[
+          @href
+          pull_request_title
+          pull_request_number
+          started_at
+          finished_at
+          repository
+          commit
+          jobs
+        ]
+        result = pluck_keys(build, build_keys)
+
+        result["repository"] = result["repository"]["slug"]
+
+        commit_keys = %w[
+          sha
+          ref
+          message
+          compare_url
+          committed_at
+          jobs
+        ]
+        result["commit"] = pluck_keys(result["commit"], commit_keys)
+
+        job_keys = %w[
+          href
+          id
+        ]
+        result["jobs"] = result["jobs"].map { |j| pluck_keys(j, job_keys) }
+
+        %w[started_at finished_at].each do |k|
+          result[k] = DateTime.parse(result[k])
+        end
+
+        result
+      end
+
+      def pluck_keys(hsh, keys)
+        keys.map { |k| [k, hsh[k]] }.to_h
+      end
 
       # Returns API results for /repos/:user/:repo/<path>.
       #
