@@ -136,7 +136,7 @@ module HowIs::Sources
       # @return [String] JSON result.
       def fetch(path, parameters = {})
         # Apparently this is required for the Travis CI API to work.
-        repo = @repository.sub('/', '%2F')
+        repo = @repository.sub("/", "%2F")
 
         Okay::HTTP.get(
           "https://api.travis-ci.org/repo/#{repo}/#{path}",
