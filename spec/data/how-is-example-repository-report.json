@@ -105,14 +105,12 @@
   "newest_pull_date": null,
   "oldest_pull_link": null,
   "oldest_pull_date": null,
-  "travis_builds": {
-    "builds": [
+  "travis_builds": [
 
-    ],
-    "commits": [
+  ],
+  "appveyor_builds": [
 
-    ]
-  },
+  ],
   "date": "2016-09-01",
   "frontmatter": ""
 }

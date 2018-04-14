@@ -25,7 +25,7 @@ module HowIs::Sources
         fetch_builds
       rescue Net::HTTPServerException
         # It's not elegant, but it works™.
-        {}
+        []
       end
 
       private
