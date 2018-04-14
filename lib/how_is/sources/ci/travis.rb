@@ -33,11 +33,7 @@ module HowIs
           validate_branches_response!(branches)
 
           branch = branches.find { |b| b["default_branch"] == true }
-          if branch
-            @default_branch = branch["name"]
-          else
-            @default_branch = nil
-          end
+          @default_branch = branch ? branch["name"] : nil
         end
 
         # Returns the builds for the default branch.
