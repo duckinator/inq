@@ -72,8 +72,8 @@ module HowIs
         oldest_pull_link: @gh_pulls.oldest["url"],
         oldest_pull_date: @gh_pulls.oldest["createdAt"],
 
-        travis_builds: @travis.builds.to_h,
-        appveyor_builds: @appveyor.builds.to_h,
+        travis_builds: @travis.builds,
+        appveyor_builds: @appveyor.builds,
 
         date: @end_date,
       }
