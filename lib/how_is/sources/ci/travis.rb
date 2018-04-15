@@ -30,7 +30,10 @@ module HowIs
           validate_default_branch_response!(response)
 
           branches = response["branches"]
-          validate_branches_response!(branches)
+          # Fail if +branches+ isn't an Array of Hashes.
+          unless branches.is_a?(Array) && branches.all? { |branch| branch.is_a?(Hash) }
+            raise BadResponseError, "expected `branches' to be Array of Hashes."
+          end
 
           branch = branches.find { |b| b["default_branch"] == true }
           @default_branch = branch ? branch["name"] : nil
@@ -56,14 +59,6 @@ module HowIs
           # Fail if +response+ is a Hash, but doesn't have the key +"branches"+.
           unless response.has_key?("branches")
             raise BadResponseError, "expected `response' to have key `\"branches\"'"
-          end
-        end
-
-        def validate_branches_response!(branches)
-          # Fail if +branches+ is an Array, but not an Array of Hashes.
-          unless branches.all? { |branch| branch.is_a?(Hash) }
-            classes = branches.map(&:class).sort.uniq
-            raise BadResponseError, "expected Array of Hashes, got Array containing: #{classes.inspect}."
           end
         end
 
