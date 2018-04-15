@@ -27,12 +27,12 @@ module HowIs
           return @default_branch unless @default_branch == Okay.default
 
           response = fetch("branches", {"sort_by" => "default_branch"})
-          unless is_hash_with_key?(response, "branches")
+          unless hash_with_key?(response, "branches")
             raise BadResponseError, "expected `response' (#{response.class}) to be a Hash with key `\"branches\"'."
           end
 
           branches = response["branches"]
-          unless is_array_of_hashes?(branches)
+          unless array_of_hashes?(branches)
             raise BadResponseError, "expected `branches' to be Array of Hashes."
           end
 
@@ -51,11 +51,11 @@ module HowIs
 
         private
 
-        def is_array_of_hashes?(ary)
+        def array_of_hashes?(ary)
           ary.is_a?(Array) && ary.all? { |obj| obj.is_a?(Hash) }
         end
 
-        def is_hash_with_key?(hsh, key)
+        def hash_with_key?(hsh, key)
           hsh.is_a?(Hash) && hsh.has_key?(key)
         end
 
