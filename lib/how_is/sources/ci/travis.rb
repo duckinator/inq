@@ -27,10 +27,12 @@ module HowIs
           return @default_branch unless @default_branch == Okay.default
 
           response = fetch("branches", {"sort_by" => "default_branch"})
-          validate_default_branch_response!(response)
+          unless is_hash_with_key?(response, "branches")
+            raise BadResponseError, "expected `response' (#{response.class}) to be a Hash with key `\"branches\"'."
+          end
 
           branches = response["branches"]
-          unless array_of_hashes?(branches)
+          unless is_array_of_hashes?(branches)
             raise BadResponseError, "expected `branches' to be Array of Hashes."
           end
 
@@ -49,20 +51,12 @@ module HowIs
 
         private
 
-        def array_of_hashes?(ary)
+        def is_array_of_hashes?(ary)
           ary.is_a?(Array) && ary.all? { |obj| obj.is_a?(Hash) }
         end
 
-        def validate_default_branch_response!(response)
-          # Fail if +response+ isn't a Hash.
-          unless response.is_a?(Hash)
-            raise BadResponseError, "expected `response' to be a Hash, got #{response.class}."
-          end
-
-          # Fail if +response+ is a Hash, but doesn't have the key +"branches"+.
-          unless response.has_key?("branches")
-            raise BadResponseError, "expected `response' to have key `\"branches\"'"
-          end
+        def is_hash_with_key?(hsh, key)
+          hsh.is_a?(Hash) && hsh.has_key?(key)
         end
 
         def in_date_range?(build, start_date = @start_date, end_date = @end_date)
