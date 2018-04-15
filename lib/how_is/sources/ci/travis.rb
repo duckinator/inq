@@ -30,8 +30,7 @@ module HowIs
           validate_default_branch_response!(response)
 
           branches = response["branches"]
-          # Fail if +branches+ isn't an Array of Hashes.
-          unless branches.is_a?(Array) && branches.all? { |branch| branch.is_a?(Hash) }
+          unless array_of_hashes?(branches)
             raise BadResponseError, "expected `branches' to be Array of Hashes."
           end
 
@@ -49,6 +48,10 @@ module HowIs
         end
 
         private
+
+        def array_of_hashes?(ary)
+          ary.is_a?(Array) && ary.all? { |obj| obj.is_a?(Hash) }
+        end
 
         def validate_default_branch_response!(response)
           # Fail if +response+ isn't a Hash.
