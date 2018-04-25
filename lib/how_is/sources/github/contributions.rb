@@ -142,7 +142,7 @@ module HowIs::Sources
       private
 
       def date_to_dt(date)
-        DateTime.strptime(date, "%Y-%m-%d")
+        DateTime.strptime(date.to_s, "%Y-%m-%d")
       end
 
       def timestamp_for(date)
