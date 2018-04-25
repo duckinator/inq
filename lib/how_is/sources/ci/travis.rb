@@ -27,17 +27,13 @@ module HowIs
           return @default_branch unless @default_branch == Okay.default
 
           response = fetch("branches", {"sort_by" => "default_branch"})
-          unless hash_with_key?(response, "branches")
-            raise BadResponseError, "expected `response' (#{response.class}) to be a Hash with key `\"branches\"'."
-          end
+          validate_response!(response)
 
           branches = response["branches"]
-          unless array_of_hashes?(branches)
-            raise BadResponseError, "expected `branches' to be Array of Hashes."
-          end
+          validate_branches!(branches)
 
           branch = branches.find { |b| b["default_branch"] == true }
-          @default_branch = branch ? branch["name"] : nil
+          @default_branch = branch&.fetch("name", nil)
         end
 
         # Returns the builds for the default branch.
@@ -50,6 +46,19 @@ module HowIs
         end
 
         private
+
+        def validate_response!(response)
+          unless hash_with_key?(response, "branches")
+            raise BadResponseError,
+              "expected `response' (#{response.class}) to be a Hash with key `\"branches\"'."
+          end
+        end
+
+        def validate_branches!(branches)
+          unless array_of_hashes?(branches)
+            raise BadResponseError, "expected `branches' to be Array of Hashes."
+          end
+        end
 
         def array_of_hashes?(ary)
           ary.is_a?(Array) && ary.all? { |obj| obj.is_a?(Hash) }
