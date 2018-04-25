@@ -15,16 +15,32 @@ describe HowIs::CLI do
       expect(actual[:options][:version]).to eq(true)
     end
 
-    it "raises HowIs::CLI::ArgumentError if a repository is required but not specified" do
-      expect {
-        subject.parse(%w[])
-      }.to raise_error(HowIs::CLI::ArgumentError)
+    it "returns an error if no date is specified" do
+      result = subject.parse(%w[])
+      expect(result).to have_key(:error)
+
+      error, data = result[:error]
+      expect(error).to eq(:no_date)
+      expect(data).to be_nil
     end
 
-    it "raises HowIs::CLI::ArgumentError if you specify an invalid format" do
-      expect {
-        subject.parse(%w[--output has_an.invalidformat how-is/example-repository])
-      }.to raise_error(HowIs::CLI::ArgumentError, /has_an.invalidformat/)
+    it "returns an error if a repository is required but not specified" do
+      result = subject.parse(%w[--date 2018-01-01])
+      expect(result).to have_key(:error)
+
+      error, data = result[:error]
+      expect(error).to eq(:no_repo)
+      expect(data).to be_nil
+    end
+
+    it "returns an error if you specify an invalid format" do
+      result =
+        subject.parse(%w[--output invalid.format --date 2018-01-01 how-is/example-repository])
+      expect(result).to have_key(:error)
+
+      error, data = result[:error]
+      expect(error).to eq(:unsupported_format)
+      expect(data).to eq("format")
     end
   end
 end

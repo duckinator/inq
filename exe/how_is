@@ -6,18 +6,34 @@ require "how_is"
 require "how_is/cli"
 require "date"
 
-begin
-  result = HowIs::CLI.parse(ARGV)
-rescue HowIs::CLI::ArgumentError => e
-  raise if ENV["SHOW_TRACE"]
-
-  abort "Error: #{e.message} (See --help for usage.)"
+def error(message)
+  abort "Error: #{message} (See --help for usage.)"
 end
 
-options = result[:options]
+def error_with_exception(message)
+  abort "Error: #{message} (Pass --verbose for more information.)"
+end
+
+def handle_error(error)
+  key, data = error
+
+  case key
+  when :no_date
+    error("No date provided.")
+  when :no_repo
+    error("No repository provided.")
+  when :unsupported_format
+    error("Unsupported format: #{data}")
+  end
+end
+
+results = HowIs::CLI.parse(ARGV)
+options = results[:options]
+
+handle_error(results[:error]) if results.has_key?(:error)
 
 if options[:help]
-  puts result[:opts]
+  puts results[:opts]
   exit
 elsif options[:version]
   puts HowIs::VERSION
@@ -32,12 +48,13 @@ begin
 
     reports.each { |file, report| report.save_as(file) }
   else
-    report = HowIs.new(options[:repository], date)
+    repository = ARGV.first
+    report = HowIs.new(repository, date)
 
     report.save_as(options[:report])
   end
 rescue => e
-  raise if ENV["SHOW_TRACE"]
+  raise if options[:verbose]
 
-  abort "Error: #{e.message} (Set the SHOW_TRACE variable for a stack trace.)"
+  error_with_exception(e.message)
 end
