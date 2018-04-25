@@ -86,7 +86,6 @@ module HowIs::CLI
     # arguments.
     arguments = opt_parser.parse!(argv)
 
-    # TODO: Should this raise an exception instead?
     keep_only = lambda { |options_, key| options_.select { |k, v| k == key } }
 
     if options[:help]
