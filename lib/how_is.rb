@@ -58,8 +58,7 @@ module HowIs
   # @return [Boolean] +true+ if HowIs can export to the file, +false+
   #   if it can't.
   def self.can_export_to?(file)
-    # TODO: Check if the file is writable?
-    supported_formats.include?(file.split(".").last)
+    supported_formats.include?(File.extname(file)[1..-1])
   end
 
   def self.silence_warnings(&block)

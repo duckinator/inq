@@ -104,7 +104,7 @@ module HowIs
     end
 
     def to_format_for(filename)
-      format = filename.split(".").last
+      format = File.extname(filename)[1..-1]
       send("to_#{format}")
     end
     private :to_format_for
