@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
+require "okay/default"
 require "okay/http"
 require "how_is/sources"
+require "how_is/sources/github/contributions"
 
 module HowIs
   module Sources
     module CI
       # Fetches metadata about CI builds from appveyor.com.
       class Appveyor
+        # TODO: Use start/end date.
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
@@ -15,8 +18,17 @@ module HowIs
           @repository = repository
           @start_date = start_date
           @end_date = end_date
-          # TODO: Use start/end date.
-          # TODO: Figure out default branch of the repo
+          @default_branch = Okay.default
+        end
+
+        # @return [String] The default branch name.
+        def default_branch
+          return @default_branch unless @default_branch.nil?
+
+          contributions =
+            HowIs::Sources::GitHub::Contributions.new(repository, nil, nil)
+
+          @default_branch = contributions.default_branch
         end
 
         # Fetches builds for the default branch.
