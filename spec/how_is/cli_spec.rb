@@ -15,16 +15,16 @@ describe HowIs::CLI do
       expect(actual[:options][:version]).to eq(true)
     end
 
-    it "raises HowIsArgumentError if a repository is required but not specified" do
+    it "raises HowIs::CLI::ArgumentError if a repository is required but not specified" do
       expect {
         subject.parse(%w[])
-      }.to raise_error(HowIs::CLI::HowIsArgumentError)
+      }.to raise_error(HowIs::CLI::ArgumentError)
     end
 
-    it "raises InvalidOutputFileError if you specify an invalid format" do
+    it "raises HowIs::CLI::ArgumentError if you specify an invalid format" do
       expect {
         subject.parse(%w[--output has_an.invalidformat how-is/example-repository])
-      }.to raise_error(HowIs::CLI::InvalidOutputFileError, /has_an.invalidformat/)
+      }.to raise_error(HowIs::CLI::ArgumentError, /has_an.invalidformat/)
     end
   end
 end

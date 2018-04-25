@@ -4,23 +4,8 @@ require "how_is"
 require "optparse"
 
 module HowIs::CLI
-  # Parent class of all exceptions raised in HowIs::CLI.
-  class OptionsError < StandardError
-  end
-
-  # Raised when the specified output file can't be used.
-  class InvalidOutputFileError < OptionsError
-  end
-
-  # Raised when the specified input file doesn't contain
-  # a valid JSON report.
-  class InvalidInputFileError < OptionsError
-  end
-
-  # Raised when no repository is specified, but one is required.
-  # (It's _not_ required, e.g., when +--config+ is passed.)
-  class HowIsArgumentError < OptionsError
-  end
+  # Argument errors specific to HowIs::CLI.
+  ArgumentError = Class.new(::ArgumentError)
 
   # Parses +argv+ to generate an options Hash to control the behavior of
   # the library.
@@ -100,7 +85,7 @@ module HowIs::CLI
       if argv.length >= 1
         options[:date] = argv.delete_at(0)
       else
-        raise HowIsArgumentError, "Expected date."
+        raise ArgumentError, "Expected date."
       end
     else
       # If we get here, we're generating a report from the command line,
@@ -111,14 +96,14 @@ module HowIs::CLI
 
       # If we can't export to the specified file, raise an exception.
       unless HowIs.can_export_to?(options[:report])
-        raise InvalidOutputFileError, "Invalid file: #{options[:report]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
+        raise ArgumentError, "Invalid file: #{options[:report]}. Supported formats: #{HowIs.supported_formats.join(', ')}"
       end
 
       if argv.length >= 2
         options[:repository] = argv.delete_at(0)
         options[:date] = argv.delete_at(0)
       else
-        raise HowIsArgumentError, "Expected both repository and date."
+        raise ArgumentError, "Expected both repository and date."
       end
     end
 
