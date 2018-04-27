@@ -6,31 +6,12 @@ require "how_is"
 require "how_is/cli"
 require "date"
 
-def error(message)
-  abort "Error: #{message} (See --help for usage.)"
+begin
+  results = HowIs::CLI.parse(ARGV)
+rescue OptionParser::ParseError => e
+  abort "how_is: error: #{e.message}"
 end
-
-def error_with_exception(message)
-  abort "Error: #{message} (Pass --verbose for more information.)"
-end
-
-def handle_error(error)
-  key, data = error
-
-  case key
-  when :no_date
-    error("No date provided.")
-  when :no_repo
-    error("No repository provided.")
-  when :unsupported_format
-    error("Unsupported format: #{data}")
-  end
-end
-
-results = HowIs::CLI.parse(ARGV)
 options = results[:options]
-
-handle_error(results[:error]) if results.has_key?(:error)
 
 if options[:help]
   puts results[:opts]
@@ -56,5 +37,7 @@ begin
 rescue => e
   raise if options[:verbose]
 
-  error_with_exception(e.message)
+  warn "how_is: error: #{e.message} (Pass --verbose for more details.)"
+  warn "  at: #{e.backtrace_locations.first}"
+  exit 1
 end

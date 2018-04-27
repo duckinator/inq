@@ -18,14 +18,11 @@ module HowIs::CLI
         | Usage: how_is REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
         |        how_is --config CONFIG_FILE --date REPORT_DATE
         |
-        | Where:
-        |   REPOSITORY is <GitHub username or org>/<repository name>.
-        | and
-        |   REPORT_DATE is the last day the report covers, in the format YYYY-mm-dd.
+        | Where REPOSITORY is <GitHub username or org>/<repository name>.
         |
-        | E.g., if you wanted to check https://github.com/how-is/how_is for
-        | November 01 2016 through December 01 2016, you'd run:
-        |   how_is how-is/how_is 2016-12-01
+        | E.g., to generate a report for how-is/how_is for Nov 01 2016
+        | through Dec 01 2016, you'd run:
+        |     how_is how-is/how_is --date 2016-12-01
         |
         | Valid extensions: #{HowIs.supported_formats.join(', ')}.
       EOF
@@ -44,7 +41,8 @@ module HowIs::CLI
       end
 
       opts.on("--date DATE",
-              "Date of the format YYYY-MM-DD") do |date|
+              /\d\d\d\d-\d\d-\d\d/,
+              "Last date of the report, in the format YYYY-MM-DD") do |date|
         options[:date] = date
       end
 
@@ -68,25 +66,20 @@ module HowIs::CLI
     # the return value is any non-flag arguments.
     arguments = opt_parser.parse!(argv)
 
-    has_keys  = lambda { |options_, keys|
-      keys.all? { |key| options_.has_key?(key) }
-    }
-    keep_only = lambda { |options_, key| options_.select { |k, v| k == key } }
-
     # Options that are mutually-exclusive with everything else.
     options = {:help    => true} if options[:help]
     options = {:version => true} if options[:version]
 
     if !options[:help] && !options[:version]
-      return error(:no_date) unless options[:date]
-      return error(:no_repo) if argv.length.zero?
+      return missing_argument("--date") unless options[:date]
+      return missing_argument("REPOSITORY") if argv.length.zero?
 
       # If --report isn't specified, default to HowIs::DEFAULT_REPORT_FILE.
       options[:report] ||= HowIs::DEFAULT_REPORT_FILE
 
       file_format = File.extname(options[:report])[1..-1]
       unless HowIs.supported_format?(file_format)
-        return error(:unsupported_format, file_format)
+        raise OptionParser::InvalidArgument, "unsupported format: #{file_format}"
       end
     end
 
@@ -103,7 +96,7 @@ module HowIs::CLI
     }
   end
 
-  def self.error(error_key, data=nil)
-    {:error => [error_key, data]}
+  def self.missing_argument(argument)
+    raise OptionParser::MissingArgument, argument
   end
 end
