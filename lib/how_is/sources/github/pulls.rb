@@ -7,6 +7,8 @@ require "date"
 
 module HowIs::Sources
   class Github
+    ##
+    # Fetches various information about GitHub Pull Requests
     class Pulls < Issues
       def url_suffix
         "pulls"

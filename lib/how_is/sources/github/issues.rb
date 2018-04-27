@@ -8,6 +8,8 @@ require "date"
 module HowIs
   module Sources
     class Github
+      ##
+      # Fetches various information about GitHub Issues.
       class Issues
         include HowIs::Sources::GithubHelpers
 
