@@ -128,11 +128,6 @@ module HowIs::Sources
       end
 
       def to_html(start_text: nil)
-        # TODO: Pulse has information about _all_ branches. Do we want that?
-        #       If we do, we'd need to pass a branch name as the 'sha' parameter
-        #       to /repos/:owner/:repo/commits.
-        #       https://developer.github.com/v3/repos/commits/
-
         start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
         "#{start_text}, #{@user}/#{@repo} gained "\
