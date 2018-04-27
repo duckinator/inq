@@ -3,6 +3,8 @@
 require "how_is/version"
 require "how_is/report"
 
+##
+# Top-level module for creating a report.
 module HowIs
   DEFAULT_REPORT_FILE = "report.html"
 
