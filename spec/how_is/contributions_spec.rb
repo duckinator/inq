@@ -45,7 +45,6 @@ describe HowIs::Sources::Github::Contributions do
   end
 
   context "#changes" do
-    # TODO: Phrase this better.
     it "returns a hash containing all of the changed stats and files" do
       VCR.use_cassette("how_is_contributions_changes") do
         results_hash = contributions.changes
