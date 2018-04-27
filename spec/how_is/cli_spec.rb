@@ -20,19 +20,19 @@ describe HowIs::CLI do
     it "raises an OptionParser::MissingArgument if no date is specified" do
       expect {
         subject.parse(%w[])
-      }.to raise_error(OptionParser::MissingArgument)
+      }.to raise_error(OptionParser::MissingArgument, /--date/)
     end
 
     it "raises an OptionParser::MissingArgument if a repository is required but not specified" do
       expect {
         subject.parse(%w[--date 2018-01-01])
-      }.to raise_error(OptionParser::MissingArgument)
+      }.to raise_error(OptionParser::MissingArgument, /--repository/)
     end
 
     it "returns an error if you specify an invalid format" do
       expect {
-        subject.parse(%w[--output invalid.format --date 2018-01-01 how-is/example-repository])
-      }.to raise_error(OptionParser::InvalidArgument)
+        subject.parse(%w[--output invalid.format --date 2018-01-01 --resitory how-is/example-repository])
+      }.to raise_error(OptionParser::InvalidArgument, /--output/)
     end
   end
 end
