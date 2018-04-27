@@ -111,10 +111,8 @@ module HowIs
           label_width = "#{longest_label_length}ch"
 
           parts = ipl.map { |label, info|
-            # TODO: Remove this hack to get around unlabeled issues not having a link.
-            label_text = label
             label_url  = label_url_for(info["name"])
-            label_text = '<a href="' + label_url + '">' + label_text + '</a>'
+            label_text = "<a href=\"#{label_url}\">#{label}</a>"
 
             Kernel.format(HTML_GRAPH_ROW, {
               label_width: label_width,
