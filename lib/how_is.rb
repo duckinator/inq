@@ -46,7 +46,7 @@ module HowIs
 
   ##
   # Returns whether or not the specified +format+ is supported.
-  # 
+  #
   # @param format_name [String] The format in question.
   # @return [Boolean] +true+ if HowIs supports the format, +false+ otherwise.
   def self.supported_format?(format_name)
