@@ -3,6 +3,9 @@
 require "how_is/version"
 
 module HowIs
+  ##
+  # Module for generating YAML frontmatter, as used by Jekyll and other
+  # blog engines.
   module Frontmatter
     # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
     #

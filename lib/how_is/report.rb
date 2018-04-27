@@ -7,6 +7,8 @@ require "how_is/sources/github/pulls"
 require "how_is/sources/travis"
 
 module HowIs
+  ##
+  # Class for generating a HowIs report.
   class Report
     def initialize(repository, end_date)
       @repository = repository
