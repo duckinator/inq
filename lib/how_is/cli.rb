@@ -33,11 +33,6 @@ module HowIs::CLI
       opts.separator ""
       opts.separator "Options:"
 
-      # The extra spaces make this a lot easier to comprehend, so we don't
-      # want RuboCop to complain about them.
-      #
-      # rubocop:disable Style/SpaceBeforeFirstArg
-
       opts.on("--config CONFIG_FILE",
               "YAML config file for automating reports.") do |filename|
         options[:config] = filename
@@ -68,7 +63,6 @@ module HowIs::CLI
         options[:help] = true
       end
     end
-    # rubocop:enable Style/SpaceBeforeFirstArg
 
     # `.parse!` populates the `options` Hash that was created above, and
     # the return value is any non-flag arguments.
