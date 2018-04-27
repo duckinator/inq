@@ -120,18 +120,6 @@ module HowIs
         DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
       end
 
-      def issue_or_pull_to_hash(iop)
-        return nil if iop.nil?
-
-        ret = {}
-
-        ret["html_url"] = iop["html_url"]
-        ret["number"] = iop["number"]
-        ret["date"] = date_for(iop)
-
-        ret
-      end
-
       SECONDS_IN_A_YEAR = 31_556_926
       SECONDS_IN_A_MONTH = 2_629_743
       SECONDS_IN_A_WEEK = 604_800
