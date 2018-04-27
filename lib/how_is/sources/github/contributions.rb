@@ -138,7 +138,6 @@ module HowIs::Sources
           "#{pluralize('deletion', deletions_count)} across " \
           "#{pluralize('file', changed_files.length)}."
       end
-      alias :summary :to_html # For backwards compatibility.
 
       private
 
