@@ -16,18 +16,10 @@ module HowIs::CLI
       opts_ = opts
       # General usage information.
       opts.banner =
-        <<-EOF.gsub(/ *\| ?/, '')
-        | Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
-        |        how_is --config CONFIG_FILE --date REPORT_DATE
-        |
-        | Where REPOSITORY is of the format GITHUB_USERNAME/REPO_NAME.
-        |
-        | E.g., to generate a report for how-is/how_is for Nov 01 2016
-        | through Dec 01 2016, you'd run:
-        |     how_is how-is/how_is --date 2016-12-01
-        |
-        | Valid extensions: #{HowIs.supported_formats.join(', ')}.
-      EOF
+        <<~EOF
+          Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
+                 how_is --config CONFIG_FILE --date REPORT_DATE
+        EOF
 
       opts.separator ""
       opts.separator "Options:"
@@ -37,26 +29,24 @@ module HowIs::CLI
         options[:config] = filename
       end
 
-      opts.on("--repository REPOSITORY",
+      opts.on("--repository USER/REPO",
               /.+\/.+/,
               "Repository to generate a report for.") do |repository|
         options[:repository] = repository
       end
 
-      supported_format_regexp =
-        HowIs.supported_formats
-          .map(&Regexp.method(:escape))
-          .join("|")
-      opts.on("--output REPORT_FILE",
-              /.+\.(#{supported_format_regexp})/,
-              "Output file for the report.") do |filename|
-        options[:report] = filename
+      opts.on("--date YYYY-MM-DD",
+              /\d\d\d\d-\d\d-\d\d/,
+              "Last date of the report.") do |date|
+        options[:date] = date
       end
 
-      opts.on("--date DATE",
-              /\d\d\d\d-\d\d-\d\d/,
-              "Last date of the report, in the format YYYY-MM-DD") do |date|
-        options[:date] = date
+      opts.on("--output REPORT_FILE",
+              format_regexp,
+              "Output file for the report.",
+              "Supported file types: #{HowIs.supported_formats.join(', ')}."
+             ) do |filename|
+        options[:report] = filename
       end
 
       opts.on("--verbose",
@@ -99,6 +89,13 @@ module HowIs::CLI
     #   +opts+: the original OptionParser object.
     #   +options+: the Hash of flags/values.
     [opts_, options]
+  end
+
+  def self.format_regexp
+    format_regexp_parts =
+      HowIs.supported_formats.map { |x| Regexp.escape(x) }
+
+    /.+\.(#{format_regexp_parts.join("|")})/
   end
 
   def self.missing_argument(argument)
