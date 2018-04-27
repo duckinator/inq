@@ -9,38 +9,30 @@ describe HowIs::CLI do
   subject { HowIs::CLI }
 
   context "#parse" do
-    it "converts flags to a Hash" do
-      actual = subject.parse(%w[--version])
+    it "converts flags to a Array" do
+      opts, options = subject.parse(%w[--version])
 
-      expect(actual[:options][:version]).to eq(true)
+      expect(opts).to_not be(nil)
+      expect(options).to be_a(Hash)
+      expect(options[:version]).to eq(true)
     end
 
-    it "returns an error if no date is specified" do
-      result = subject.parse(%w[])
-      expect(result).to have_key(:error)
-
-      error, data = result[:error]
-      expect(error).to eq(:no_date)
-      expect(data).to be_nil
+    it "raises an OptionParser::MissingArgument if no date is specified" do
+      expect {
+        subject.parse(%w[])
+      }.to raise_error(OptionParser::MissingArgument)
     end
 
-    it "returns an error if a repository is required but not specified" do
-      result = subject.parse(%w[--date 2018-01-01])
-      expect(result).to have_key(:error)
-
-      error, data = result[:error]
-      expect(error).to eq(:no_repo)
-      expect(data).to be_nil
+    it "raises an OptionParser::MissingArgument if a repository is required but not specified" do
+      expect {
+        subject.parse(%w[--date 2018-01-01])
+      }.to raise_error(OptionParser::MissingArgument)
     end
 
     it "returns an error if you specify an invalid format" do
-      result =
+      expect {
         subject.parse(%w[--output invalid.format --date 2018-01-01 how-is/example-repository])
-      expect(result).to have_key(:error)
-
-      error, data = result[:error]
-      expect(error).to eq(:unsupported_format)
-      expect(data).to eq("format")
+      }.to raise_error(OptionParser::InvalidArgument)
     end
   end
 end

@@ -7,7 +7,9 @@ module HowIs::CLI
   # Parses +argv+ to generate an options Hash to control the behavior of
   # the library.
   def self.parse(argv)
-    options = {}
+    options = {
+      report: HowIs::DEFAULT_REPORT_FILE,
+    }
     opts_ = nil
 
     opt_parser = OptionParser.new do |opts|
@@ -15,10 +17,10 @@ module HowIs::CLI
       # General usage information.
       opts.banner =
         <<-EOF.gsub(/ *\| ?/, '')
-        | Usage: how_is REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
+        | Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
         |        how_is --config CONFIG_FILE --date REPORT_DATE
         |
-        | Where REPOSITORY is <GitHub username or org>/<repository name>.
+        | Where REPOSITORY is of the format GITHUB_USERNAME/REPO_NAME.
         |
         | E.g., to generate a report for how-is/how_is for Nov 01 2016
         | through Dec 01 2016, you'd run:
@@ -35,7 +37,18 @@ module HowIs::CLI
         options[:config] = filename
       end
 
+      opts.on("--repository REPOSITORY",
+              /.+\/.+/,
+              "Repository to generate a report for.") do |repository|
+        options[:repository] = repository
+      end
+
+      supported_format_regexp =
+        HowIs.supported_formats
+          .map(&Regexp.method(:escape))
+          .join("|")
       opts.on("--output REPORT_FILE",
+              /.+\.(#{supported_format_regexp})/,
               "Output file for the report.") do |filename|
         options[:report] = filename
       end
@@ -64,7 +77,7 @@ module HowIs::CLI
 
     # `.parse!` populates the `options` Hash that was created above, and
     # the return value is any non-flag arguments.
-    arguments = opt_parser.parse!(argv)
+    opt_parser.parse!(argv)
 
     # Options that are mutually-exclusive with everything else.
     options = {:help    => true} if options[:help]
@@ -72,28 +85,20 @@ module HowIs::CLI
 
     if !options[:help] && !options[:version]
       return missing_argument("--date") unless options[:date]
-      return missing_argument("REPOSITORY") if argv.length.zero?
-
-      # If --report isn't specified, default to HowIs::DEFAULT_REPORT_FILE.
-      options[:report] ||= HowIs::DEFAULT_REPORT_FILE
-
-      file_format = File.extname(options[:report])[1..-1]
-      unless HowIs.supported_format?(file_format)
-        raise OptionParser::InvalidArgument, "unsupported format: #{file_format}"
-      end
     end
 
-    # Return a Hash with:
-    #   +opts+: the original Slop::Options object.
-    #   +options+: the Hash of flags/values (e.g. +--foo bar+ becomes
-    #     +options[:foo]+ with the value of +"bar"+).
-    #   +arguments+: an Array of arguments that don't have a
-    #     corresponding flags.
-    {
-      opts: opts_,
-      options: options,
-      arguments: arguments,
-    }
+    if (options[:repository] || options[:config]) && !options[:date]
+      missing_argument("--date")
+    end
+
+    if (!options[:repository] && !options[:config]) && options[:date]
+      missing_argument("expected wither --repository or --config.")
+    end
+
+    # Return an Array containing:
+    #   +opts+: the original OptionParser object.
+    #   +options+: the Hash of flags/values.
+    [opts_, options]
   end
 
   def self.missing_argument(argument)

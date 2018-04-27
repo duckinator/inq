@@ -7,14 +7,13 @@ require "how_is/cli"
 require "date"
 
 begin
-  results = HowIs::CLI.parse(ARGV)
+  opts, options = HowIs::CLI.parse(ARGV)
 rescue OptionParser::ParseError => e
   abort "how_is: error: #{e.message}"
 end
-options = results[:options]
 
 if options[:help]
-  puts results[:opts]
+  puts opts
   exit
 elsif options[:version]
   puts HowIs::VERSION
@@ -29,8 +28,7 @@ begin
 
     reports.each { |file, report| report.save_as(file) }
   else
-    repository = ARGV.first
-    report = HowIs.new(repository, date)
+    report = HowIs.new(options[:repository], date)
 
     report.save_as(options[:report])
   end
