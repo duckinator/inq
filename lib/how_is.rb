@@ -44,22 +44,20 @@ module HowIs
     ["html", "json"]
   end
 
+  ##
+  # Returns whether or not the specified +format+ is supported.
+  #
+  # @param format_name [String] The format in question.
+  # @return [Boolean] +true+ if HowIs supports the format, +false+ otherwise.
+  def self.supported_format?(format_name)
+    supported_formats.include?(format_name)
+  end
+
   def self.template(filename)
     dir  = File.expand_path("./how_is/templates/", __dir__)
     path = File.join(dir, filename)
 
     open(path).read
-  end
-
-  ##
-  # Returns whether or not the specified +file+ can be exported to.
-  #
-  # @param file [String] A filename.
-  # @return [Boolean] +true+ if HowIs can export to the file, +false+
-  #   if it can't.
-  def self.can_export_to?(file)
-    # TODO: Check if the file is writable?
-    supported_formats.include?(file.split(".").last)
   end
 
   def self.silence_warnings(&block)

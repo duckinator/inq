@@ -7,17 +7,13 @@ require "how_is/cli"
 require "date"
 
 begin
-  result = HowIs::CLI.parse(ARGV)
-rescue HowIs::CLI::OptionsError => e
-  raise if ENV["SHOW_TRACE"]
-
-  abort "Error: #{e.message} (See --help for usage.)"
+  opts, options = HowIs::CLI.parse(ARGV)
+rescue OptionParser::ParseError => e
+  abort "how_is: error: #{e.message}"
 end
 
-options = result[:options]
-
 if options[:help]
-  puts result[:opts]
+  puts opts
   exit
 elsif options[:version]
   puts HowIs::VERSION
@@ -37,7 +33,9 @@ begin
     report.save_as(options[:report])
   end
 rescue => e
-  raise if ENV["SHOW_TRACE"]
+  raise if options[:verbose]
 
-  abort "Error: #{e.message} (Set the SHOW_TRACE variable for a stack trace.)"
+  warn "how_is: error: #{e.message} (Pass --verbose for more details.)"
+  warn "  at: #{e.backtrace_locations.first}"
+  exit 1
 end
