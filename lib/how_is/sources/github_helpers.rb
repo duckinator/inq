@@ -53,19 +53,12 @@ module HowIs
         ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["createdAt"]) }
         average_age_in_seconds = ages.reduce(:+) / ages.length
 
-        values = period_pairs_for(average_age_in_seconds).reject { |(v, _)| v.zero? }.map { |(v, k)|
-          k += "s" if v != 1
-          [v, k]
-        }
+        values =
+          period_pairs_for(average_age_in_seconds)
+          .reject { |(v, _)| v.zero? }
+          .map { |(v, k)| pluralize(k, v) }
 
-        most_significant = values[0, 2].map { |x| x.join(" ") }
-
-        value =
-          if most_significant.length < 2
-            most_significant.first
-          else
-            most_significant.join(" and ")
-          end
+        value = values[0, 2].join(" and ")
 
         "approximately #{value}"
       end
