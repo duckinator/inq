@@ -6,6 +6,7 @@ require "how_is/sources/github/issues"
 require "how_is/sources/github/pulls"
 require "how_is/sources/ci/travis"
 require "how_is/sources/ci/appveyor"
+require "json"
 
 module HowIs
   ##

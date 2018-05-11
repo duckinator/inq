@@ -3,10 +3,11 @@
 require "spec_helper"
 require "how_is"
 require "how_is/frontmatter"
+require "json"
 require "open3"
 require "timecop"
-require "yaml"
 require "tmpdir"
+require "yaml"
 
 HOW_IS_CONFIG_FILE = File.expand_path("./data/how_is/cli_spec/how_is.yml", __dir__)
 
