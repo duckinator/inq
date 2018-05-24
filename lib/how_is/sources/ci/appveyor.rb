@@ -35,13 +35,19 @@ module HowIs
         #
         # @return [Hash] Builds for the default branch.
         def builds
-          fetch_builds
+          fetch_builds.map(&method(:add_build_urls))
         rescue Net::HTTPServerException
           # It's not elegant, but it works™.
           []
         end
 
         private
+
+        def add_build_urls(build)
+          require 'pp'; pp build
+          #build["html_url"] = "https://ci.appveyor.com/#{build["repository"]}#{build["@href"]}"
+          build
+        end
 
         # Returns API result of /api/projects/:repository.
         #

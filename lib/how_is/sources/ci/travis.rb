@@ -3,6 +3,7 @@
 require "date"
 require "okay/default"
 require "okay/http"
+require "how_is"
 require "how_is/sources/github"
 
 module HowIs
@@ -42,10 +43,16 @@ module HowIs
         def builds
           raw_builds \
             .map(&method(:normalize_build)) \
-            .select(&method(:in_date_range?))
+            .select(&method(:in_date_range?)) \
+            .map(&method(:add_build_urls))
         end
 
         private
+
+        def add_build_urls(build)
+          build["html_url"] = "https://travis-ci.org/#{build["repository"]}#{build["@href"]}"
+          build
+        end
 
         def validate_response!(response)
           unless hash_with_key?(response, "branches")
