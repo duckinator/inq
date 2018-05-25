@@ -11,7 +11,7 @@ puts "Number of builds: #{builds.length}"
 puts "First build:      #{builds.first['html_url']} (#{builds.first['started_at'].rfc3339})"
 puts "Last build:       #{builds.last['html_url']} (#{builds.last['started_at'].rfc3339})"
 
-appveyor = HowIs::Sources::CI::Appveyor.new("rubygems/rubygems", "2018-01-01", "2018-04-30")
+appveyor = HowIs::Sources::CI::Appveyor.new("segiddins/rubygems", "2018-01-01", "2018-02-28")
 builds = appveyor.builds
 puts "Number of builds: #{builds.length}"
 puts "First build:      #{builds.first['html_url']} (#{builds.first['started_at'].rfc3339})"

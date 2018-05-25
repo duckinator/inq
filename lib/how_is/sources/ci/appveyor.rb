@@ -10,14 +10,13 @@ module HowIs
     module CI
       # Fetches metadata about CI builds from appveyor.com.
       class Appveyor
-        # TODO: Use start/end date.
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
         def initialize(repository, start_date, end_date)
           @repository = repository
-          @start_date = start_date
-          @end_date = end_date
+          @start_date = DateTime.parse(start_date)
+          @end_date = DateTime.parse(end_date)
           @default_branch = Okay.default
         end
 
@@ -35,13 +34,21 @@ module HowIs
         #
         # @return [Hash] Builds for the default branch.
         def builds
-          @builds ||= fetch_builds["builds"].map(&method(:normalize_build))
+          @builds ||=
+            fetch_builds["builds"] \
+              .map(&method(:normalize_build)) \
+              .select(&method(:in_date_range?))
         rescue Net::HTTPServerException
           # It's not elegant, but it works™.
           []
         end
 
         private
+
+        def in_date_range?(build)
+          build["started_at"] >= @start_date &&
+            build["started_at"] <= @end_date
+        end
 
         def normalize_build(build)
           build["started_at"] = DateTime.parse(build["created"])
@@ -50,6 +57,7 @@ module HowIs
         end
 
         # Returns API result of /api/projects/:repository.
+        # FIXME: This doesn't limit results based on the date range.
         #
         # @return [Hash] API results.
         def fetch_builds
