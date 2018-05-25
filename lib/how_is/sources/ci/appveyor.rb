@@ -44,7 +44,7 @@ module HowIs
         private
 
         def add_build_urls(build)
-          require 'pp'; pp build
+          require "pp"; pp build
           #build["html_url"] = "https://ci.appveyor.com/#{build["repository"]}#{build["@href"]}"
           build
         end
