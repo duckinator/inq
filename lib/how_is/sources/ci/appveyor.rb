@@ -35,7 +35,7 @@ module HowIs
         #
         # @return [Hash] Builds for the default branch.
         def builds
-          @builds ||= fetch_builds["builds"].map(&method(:add_build_urls))
+          @builds ||= fetch_builds["builds"].map(&method(:normalize_build))
         rescue Net::HTTPServerException
           # It's not elegant, but it works™.
           []
@@ -43,7 +43,8 @@ module HowIs
 
         private
 
-        def add_build_urls(build)
+        def normalize_build(build)
+          build["started_at"] = DateTime.parse(build["created"])
           build["html_url"] = "https://ci.appveyor.com/project/#{@repository}/build/#{build['buildNumber']}"
           build
         end
