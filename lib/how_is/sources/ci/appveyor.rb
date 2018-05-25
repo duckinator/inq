@@ -35,7 +35,7 @@ module HowIs
         #
         # @return [Hash] Builds for the default branch.
         def builds
-          fetch_builds.map(&method(:add_build_urls))
+          @builds ||= fetch_builds["builds"].map(&method(:add_build_urls))
         rescue Net::HTTPServerException
           # It's not elegant, but it works™.
           []
@@ -44,8 +44,7 @@ module HowIs
         private
 
         def add_build_urls(build)
-          require "pp"; pp build
-          #build["html_url"] = "https://ci.appveyor.com/#{build["repository"]}#{build["@href"]}"
+          build["html_url"] = "https://ci.appveyor.com/project/#{@repository}/build/#{build['buildNumber']}"
           build
         end
 
@@ -54,7 +53,8 @@ module HowIs
         # @return [Hash] API results.
         def fetch_builds
           Okay::HTTP.get(
-            "https://ci.appveyor.com/api/projects/#{@repository}",
+            "https://ci.appveyor.com/api/projects/#{@repository}/history",
+            parameters: { "recordsNumber" => "100" },
             headers: {
               "Accept" => "application/json",
               "User-Agent" => HowIs::USER_AGENT,
