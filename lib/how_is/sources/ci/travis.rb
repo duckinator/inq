@@ -3,7 +3,7 @@
 require "date"
 require "okay/default"
 require "okay/http"
-require "how_is"
+require "how_is/constants"
 require "how_is/sources/github"
 
 module HowIs

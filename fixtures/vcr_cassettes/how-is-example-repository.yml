@@ -1364,4 +1364,49 @@ http_interactions:
       string: '{"message":"Project not found or access denied."}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: https://ci.appveyor.com/api/projects/how-is/example-repository/history?recordsNumber=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      Host:
+      - ci.appveyor.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Fri, 25 May 2018 15:54:59 GMT
+      Content-Length:
+      - '49'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Project not found or access denied."}'
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 recorded_with: VCR 4.0.0
