@@ -1135,4 +1135,278 @@ http_interactions:
         commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[]}]'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repo/how-is%2Fexample-repository/branches?sort_by=default_branch
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      Host:
+      - api.travis-ci.org
+      Travis-Api-Version:
+      - '3'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Fri, 30 Mar 2018 22:04:02 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::API::V3::Services::Branches::Find
+      X-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 508118b3-e746-442e-8e4f-381b7fc763ec
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "@type": "branches",
+          "@href": "/repo/how-is%2Fexample-repository/branches?sort_by=default_branch",
+          "@representation": "standard",
+          "@pagination": {
+            "limit": 25,
+            "offset": 0,
+            "count": 1,
+            "is_first": true,
+            "is_last": true,
+            "next": null,
+            "prev": null,
+            "first": {
+              "@href": "/repo/how-is%2Fexample-repository/branches?sort_by=default_branch",
+              "offset": 0,
+              "limit": 25
+            },
+            "last": {
+              "@href": "/repo/how-is%2Fexample-repository/branches?sort_by=default_branch",
+              "offset": 0,
+              "limit": 25
+            }
+          },
+          "branches": [
+            {
+              "@type": "branch",
+              "@href": "/repo/9682159/branch/master",
+              "@representation": "standard",
+              "name": "master",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/9682159",
+                "@representation": "minimal",
+                "id": 9682159,
+                "name": "example-repository",
+                "slug": "how-is/example-repository"
+              },
+              "default_branch": true,
+              "exists_on_github": true,
+              "last_build": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repo/how-is%2Fexample-repository/builds?branch.name=master&event_type=push
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      Host:
+      - api.travis-ci.org
+      Travis-Api-Version:
+      - '3'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Fri, 30 Mar 2018 22:04:02 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::API::V3::Services::Builds::Find
+      X-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 137b385a-8828-4b6b-9366-48720615036e
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "@type": "builds",
+          "@href": "/repo/how-is%2Fexample-repository/builds?event_type=push&branch.name=master",
+          "@representation": "standard",
+          "@pagination": {
+            "limit": 25,
+            "offset": 0,
+            "count": 0,
+            "is_first": true,
+            "is_last": true,
+            "next": null,
+            "prev": null,
+            "first": {
+              "@href": "/repo/how-is%2Fexample-repository/builds?event_type=push&branch.name=master",
+              "offset": 0,
+              "limit": 25
+            },
+            "last": {
+              "@href": "/repo/how-is%2Fexample-repository/builds?branch.name=master&event_type=push&limit=25&offset=-25",
+              "offset": -25,
+              "limit": 25
+            }
+          },
+          "builds": [
+
+          ]
+        }
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: https://ci.appveyor.com/api/projects/how-is/example-repository
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      Host:
+      - ci.appveyor.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Fri, 30 Mar 2018 22:04:02 GMT
+      Content-Length:
+      - '49'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Project not found or access denied."}'
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+- request:
+    method: get
+    uri: https://ci.appveyor.com/api/projects/how-is/example-repository/history?recordsNumber=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      Host:
+      - ci.appveyor.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Fri, 25 May 2018 15:54:59 GMT
+      Content-Length:
+      - '49'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Project not found or access denied."}'
+    http_version: 
+  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
+recorded_with: VCR 4.0.0

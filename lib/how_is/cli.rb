@@ -45,7 +45,7 @@ module HowIs::CLI
               format_regexp,
               "Output file for the report.",
               "Supported file types: #{HowIs.supported_formats.join(', ')}."
-             ) do |filename|
+             ) do |filename, _|
         options[:report] = filename
       end
 

@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "how_is/sources/github_helpers"
+require "json"
 
 describe HowIs::Sources::GithubHelpers do
   let(:issues) { JSON.parse(open(File.expand_path("../data/issues.json", __dir__)).read) }

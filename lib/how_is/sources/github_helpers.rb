@@ -12,14 +12,14 @@ module HowIs
 
       # Given an Array of issues or pulls, return a Hash specifying how many
       # issues or pulls use each label.
+      #
+      # Returned hash maps labels to frequency.
+      # E.g., given 10 issues/pulls with label "label1" and 5 with label "label2",
+      # {
+      #   "label1" => 10,
+      #   "label2" => 5
+      # }
       def num_with_label(issues_or_pulls)
-        # Returned hash maps labels to frequency.
-        # E.g., given 10 issues/pulls with label "label1" and 5 with label "label2",
-        # {
-        #   "label1" => 10,
-        #   "label2" => 5
-        # }
-
         hash = Hash.new(0)
         issues_or_pulls.each do |iop|
           next unless iop["labels"]
@@ -53,19 +53,12 @@ module HowIs
         ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["createdAt"]) }
         average_age_in_seconds = ages.reduce(:+) / ages.length
 
-        values = period_pairs_for(average_age_in_seconds).reject { |(v, _)| v.zero? }.map { |(v, k)|
-          k += "s" if v != 1
-          [v, k]
-        }
+        values =
+          period_pairs_for(average_age_in_seconds) \
+            .reject { |(v, _)| v.zero? } \
+            .map { |(v, k)| pluralize(k, v) }
 
-        most_significant = values[0, 2].map { |x| x.join(" ") }
-
-        value =
-          if most_significant.length < 2
-            most_significant.first
-          else
-            most_significant.join(" and ")
-          end
+        value = values[0, 2].join(" and ")
 
         "approximately #{value}"
       end
@@ -118,18 +111,6 @@ module HowIs
       # Returns how many seconds ago a date (as a String) was.
       def time_ago_in_seconds(x)
         DateTime.now.strftime("%s").to_i - DateTime.parse(x).strftime("%s").to_i
-      end
-
-      def issue_or_pull_to_hash(iop)
-        return nil if iop.nil?
-
-        ret = {}
-
-        ret["html_url"] = iop["html_url"]
-        ret["number"] = iop["number"]
-        ret["date"] = date_for(iop)
-
-        ret
       end
 
       SECONDS_IN_A_YEAR = 31_556_926

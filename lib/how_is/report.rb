@@ -4,7 +4,9 @@ require "how_is/frontmatter"
 require "how_is/sources/github/contributions"
 require "how_is/sources/github/issues"
 require "how_is/sources/github/pulls"
-require "how_is/sources/travis"
+require "how_is/sources/ci/travis"
+require "how_is/sources/ci/appveyor"
+require "json"
 
 module HowIs
   ##
@@ -39,7 +41,8 @@ module HowIs
       @gh_contributions = HowIs::Sources::Github::Contributions.new(repository, @start_date, @end_date)
       @gh_issues        = HowIs::Sources::Github::Issues.new(repository, @start_date, @end_date)
       @gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, @start_date, @end_date)
-      @travis           = HowIs::Sources::Travis.new(repository, @start_date, @end_date)
+      @travis           = HowIs::Sources::CI::Travis.new(repository, @start_date, @end_date)
+      @appveyor         = HowIs::Sources::CI::Appveyor.new(repository, @start_date, @end_date)
     end
 
     def to_h(frontmatter_data = nil)
@@ -70,7 +73,8 @@ module HowIs
         oldest_pull_link: @gh_pulls.oldest["url"],
         oldest_pull_date: @gh_pulls.oldest["createdAt"],
 
-        travis_builds: @travis.builds.to_h,
+        travis_builds: @travis.builds,
+        appveyor_builds: @appveyor.builds,
 
         date: @end_date,
       }

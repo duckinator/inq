@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 require "how_is/version"
+require "how_is/constants"
 require "how_is/report"
 
 ##
 # Top-level module for creating a report.
 module HowIs
-  DEFAULT_REPORT_FILE = "report.html"
-
   def self.new(repository, date)
     Report.new(repository, date)
   end
