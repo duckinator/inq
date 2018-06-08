@@ -162,6 +162,14 @@ Style/PreferredHashMethods:
 Style/MethodCalledOnDoEndBlock:
   Enabled: true
 
+# Indent method calls relative to the receiver, e.g.:
+#   foo \
+#     .bar \
+#     .baz \
+#     .asdf
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
 # Indenting the chained dots beneath each other is not supported by this cop,
 # see https://github.com/bbatsov/rubocop/issues/1633
 Layout/MultilineOperationIndentation:
