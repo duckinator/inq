@@ -50,7 +50,7 @@ module HowIs
         private
 
         def add_build_urls(build)
-          build["html_url"] = "https://travis-ci.org/#{build["repository"]}#{build["@href"]}"
+          build["html_url"] = "https://travis-ci.org/#{build['repository']}#{build['@href']}"
           build
         end
 
