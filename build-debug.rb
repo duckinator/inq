@@ -5,13 +5,13 @@ require "how_is/sources/ci/travis"
 require "how_is/sources/ci/appveyor"
 require "pp"
 
-travis = HowIs::Sources::CI::Travis.new("rubygems/rubygems", "2018-04-01", "2018-04-30")
+travis = HowIs::Sources::CI::Travis.new("rubygems/rubygems", "2018-04-01", "2018-06-01")
 builds = travis.builds
 puts "Number of builds: #{builds.length}"
 puts "First build:      #{builds.first['html_url']} (#{builds.first['started_at'].rfc3339})"
 puts "Last build:       #{builds.last['html_url']} (#{builds.last['started_at'].rfc3339})"
 
-appveyor = HowIs::Sources::CI::Appveyor.new("segiddins/rubygems", "2018-01-01", "2018-02-28")
+appveyor = HowIs::Sources::CI::Appveyor.new("rubygems/rubygems", "2018-04-01", "2018-06-01")
 builds = appveyor.builds
 puts "Number of builds: #{builds.length}"
 puts "First build:      #{builds.first['html_url']} (#{builds.first['started_at'].rfc3339})"
