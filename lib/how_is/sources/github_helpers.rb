@@ -53,9 +53,10 @@ module HowIs
         ages = issues_or_pulls.map { |iop| time_ago_in_seconds(iop["createdAt"]) }
         average_age_in_seconds = ages.reduce(:+) / ages.length
 
-        values = period_pairs_for(average_age_in_seconds) \
-                 .reject { |(v, _)| v.zero? } \
-                 .map { |(v, k)| pluralize(k, v) }
+        values =
+          period_pairs_for(average_age_in_seconds) \
+            .reject { |(v, _)| v.zero? } \
+            .map { |(v, k)| pluralize(k, v) }
 
         value = values[0, 2].join(" and ")
 
