@@ -63,7 +63,7 @@ module HowIs
         def fetch_builds
           Okay::HTTP.get(
             "https://ci.appveyor.com/api/projects/#{@repository}/history",
-            parameters: { "recordsNumber" => "100" },
+            parameters: {"recordsNumber" => "100"},
             headers: {
               "Accept" => "application/json",
               "User-Agent" => HowIs::USER_AGENT,
