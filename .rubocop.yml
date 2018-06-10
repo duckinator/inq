@@ -184,9 +184,17 @@ Layout/SpaceInsideHashLiteralBraces:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-# TODO: Maybe make it so you have to do [:foo, :bar] not %i[foo bar]?
+# Prefer [:foo, :bar] over %i[foo bar].
 Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+# Prefer ["foo", "bar"] over %w[foo bar].
+# TODO: Move away from %w[]/%W[] then re-enable this.
+Style/WordArray:
   Enabled: false
+#  Enabled: true
+#  EnforcedStyle: brackets
 
 # Require parentheses around complex ternary conditions.
 Style/TernaryParentheses:
