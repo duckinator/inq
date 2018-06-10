@@ -180,6 +180,10 @@ Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: no_space
 
+# I find "foo > 0" more readable than "foo.positive?" personally.
+Style/NumericPredicate:
+  Enabled: false
+
 # Use double quotes everywhere by default.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
