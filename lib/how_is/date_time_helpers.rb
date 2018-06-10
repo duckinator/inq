@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require "how_is/version"
-require "how_is/sources/github"
-require "how_is/sources/github_helpers"
 require "date"
 
 module HowIs
