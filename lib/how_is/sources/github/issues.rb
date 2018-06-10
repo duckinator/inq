@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "how_is/version"
+require "how_is/date_time_helpers"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
 require "date"
@@ -11,6 +12,7 @@ module HowIs
       ##
       # Fetches various information about GitHub Issues.
       class Issues
+        include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
         TERMINATE_GRAPHQL_LOOP = :terminate_graphql_loop
@@ -252,24 +254,6 @@ module HowIs
           end
 
           [current_last_cursor, data]
-        end
-
-        def date_le(left, right)
-          left  = str_to_dt(left)
-          right = str_to_dt(right)
-
-          left <= right
-        end
-
-        def date_ge(left, right)
-          left  = str_to_dt(left)
-          right = str_to_dt(right)
-
-          left >= right
-        end
-
-        def str_to_dt(str)
-          DateTime.parse(str)
         end
       end
     end
