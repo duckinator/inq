@@ -4,6 +4,8 @@ require "how_is/version"
 require "date"
 
 module HowIs
+  ##
+  # Various helper functions for working with DateTime objects.
   module DateTimeHelpers
     def date_le(left, right)
       left  = str_to_dt(left)
