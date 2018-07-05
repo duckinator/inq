@@ -13,8 +13,6 @@ module HowIs
   # Class for generating a HowIs report.
   class Report
     def initialize(repository, end_date)
-      @repository = repository
-
       # NOTE: Use DateTime because it defaults to UTC and that's less gross
       #       than trying to get Date to use UTC.
       #
@@ -25,14 +23,29 @@ module HowIs
       end_dt = DateTime.strptime(end_date, "%Y-%m-%d")
       start_dt = start_dt_from_end_dt(end_dt)
 
+      @repository = repository
       @end_date = end_dt.strftime("%Y-%m-%d")
       @start_date = start_dt.strftime("%Y-%m-%d")
+    end
 
-      @gh_contributions = HowIs::Sources::Github::Contributions.new(repository, @start_date, @end_date)
-      @gh_issues        = HowIs::Sources::Github::Issues.new(repository, @start_date, @end_date)
-      @gh_pulls         = HowIs::Sources::Github::Pulls.new(repository, @start_date, @end_date)
-      @travis           = HowIs::Sources::CI::Travis.new(repository, @start_date, @end_date)
-      @appveyor         = HowIs::Sources::CI::Appveyor.new(repository, @start_date, @end_date)
+    def contributions
+      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@repository, @start_date, @end_date)
+    end
+
+    def issues
+      @gh_issues ||= HowIs::Sources::Github::Issues.new(@repository, @start_date, @end_date)
+    end
+
+    def pulls
+      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@repository, @start_date, @end_date)
+    end
+
+    def travis
+      @travis ||= HowIs::Sources::CI::Travis.new(@repository, @start_date, @end_date)
+    end
+
+    def appveyor
+      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@repository, @start_date, @end_date)
     end
 
     def to_h(frontmatter_data = nil)
@@ -40,31 +53,31 @@ module HowIs
         title: "How is #{@repository}?",
         repository: @repository,
 
-        contributions_summary: @gh_contributions.to_html,
-        issues_summary: @gh_issues.to_html,
-        pulls_summary: @gh_pulls.to_html,
-        issues_per_label: @gh_issues.issues_per_label_html,
+        contributions_summary: contributions.to_html,
+        issues_summary: issues.to_html,
+        pulls_summary: pulls.to_html,
+        issues_per_label: issues.issues_per_label_html,
 
-        issues: @gh_issues.to_a,
-        pulls: @gh_issues.to_a,
+        issues: issues.to_a,
+        pulls: issues.to_a,
 
-        average_issue_age: @gh_issues.average_age,
-        average_pull_age:  @gh_pulls.average_age,
+        average_issue_age: issues.average_age,
+        average_pull_age:  pulls.average_age,
 
-        oldest_issue_link: @gh_issues.oldest["url"],
-        oldest_issue_date: @gh_issues.oldest["createdAt"],
+        oldest_issue_link: issues.oldest["url"],
+        oldest_issue_date: issues.oldest["createdAt"],
 
-        newest_issue_link: @gh_issues.newest["url"],
-        newest_issue_date: @gh_issues.newest["createdAt"],
+        newest_issue_link: issues.newest["url"],
+        newest_issue_date: issues.newest["createdAt"],
 
-        newest_pull_link: @gh_pulls.newest["url"],
-        newest_pull_date: @gh_pulls.newest["createdAt"],
+        newest_pull_link: pulls.newest["url"],
+        newest_pull_date: pulls.newest["createdAt"],
 
-        oldest_pull_link: @gh_pulls.oldest["url"],
-        oldest_pull_date: @gh_pulls.oldest["createdAt"],
+        oldest_pull_link: pulls.oldest["url"],
+        oldest_pull_date: pulls.oldest["createdAt"],
 
-        travis_builds: @travis.builds,
-        appveyor_builds: @appveyor.builds,
+        travis_builds: travis.builds,
+        appveyor_builds: appveyor.builds,
 
         date: @end_date,
       }
