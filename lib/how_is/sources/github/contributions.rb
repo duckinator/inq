@@ -134,17 +134,24 @@ module HowIs
             repo: @repo).default_branch
         end
 
+        # rubocop:disable Metrics/AbcSize
         def to_html(start_text: nil)
           start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
-          "#{start_text}, #{@user}/#{@repo} gained "\
-            "<a href=\"#{compare_url}\">#{pluralize('new commit', commits.length)}</a>, " \
-            "contributed by #{pluralize('author', contributors.length)}. There " \
-            "#{(additions_count == 1) ? 'was' : 'were'} " \
-            "#{pluralize('addition', additions_count)} and " \
-            "#{pluralize('deletion', deletions_count)} across " \
-            "#{pluralize('file', changed_files.length)}."
+          HowIs.apply_template("contributions_partial", {
+            start_text: start_text,
+            user: @user,
+            repo: @repo,
+            compare_url: compare_url,
+            additions_count_str: (additions_count == 1) ? "was" : "were",
+            authors: pluralize("author", contributors.length),
+            new_commits: pluralize("new commit", commits.length),
+            additions: pluralize("addition", additions_count),
+            deletions: pluralize("deletion", deletions_count),
+            changed_files: pluralize("file", changed_files.length),
+          }).strip
         end
+        # rubocop:enable Metrics/AbcSize
 
         private
 
