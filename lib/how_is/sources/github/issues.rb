@@ -230,7 +230,6 @@ module HowIs
         end
 
         def fetch_issues(after, data)
-          data ||= []
           after_str = ", after: #{after.inspect}" unless after.nil?
 
           query = build_query(@user, @repo, type, CHUNK_SIZE, after_str)
