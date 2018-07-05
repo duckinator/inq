@@ -152,16 +152,6 @@ module HowIs
           }).strip
         end
         # rubocop:enable Metrics/AbcSize
-
-        private
-
-        def date_to_dt(date)
-          DateTime.strptime(date.to_s, "%Y-%m-%d")
-        end
-
-        def timestamp_for(date)
-          date_to_dt(date).strftime("%s")
-        end
       end
     end
   end
