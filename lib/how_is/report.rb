@@ -23,17 +23,7 @@ module HowIs
       #
       #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
       end_dt = DateTime.strptime(end_date, "%Y-%m-%d")
-
-      d = end_dt.day
-      m = end_dt.month
-      y = end_dt.year
-      start_year = y
-      start_month = m - 1
-      if start_month <= 0
-        start_month = 12 - start_month
-        start_year -= 1
-      end
-      start_dt = DateTime.new(start_year, start_month, d)
+      start_dt = start_dt_from_end_dt(end_dt)
 
       @end_date = end_dt.strftime("%Y-%m-%d")
       @start_date = start_dt.strftime("%Y-%m-%d")
@@ -114,5 +104,19 @@ module HowIs
       send("to_#{format}")
     end
     private :to_format_for
+
+    def start_dt_from_end_dt(end_dt)
+      d = end_dt.day
+      m = end_dt.month
+      y = end_dt.year
+      start_year = y
+      start_month = m - 1
+      if start_month <= 0
+        start_month = 12 - start_month
+        start_year -= 1
+      end
+
+      DateTime.new(start_year, start_month, d)
+    end
   end
 end
