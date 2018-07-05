@@ -79,8 +79,7 @@ module HowIs
 
         def summary
           number_open = to_a.length
-          pretty_number =
-            pluralize(pretty_type, number_open, zero_is_no: true)
+          pretty_number = pluralize(pretty_type, number_open, zero_is_no: true)
 
           "<p>There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>.</p>"
         end
