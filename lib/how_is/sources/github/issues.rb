@@ -15,7 +15,7 @@ module HowIs
         include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
-        TERMINATE_GRAPHQL_LOOP = :terminate_graphql_loop
+        END_LOOP = :terminate_graphql_loop
 
         GRAPHQL_QUERY = <<~QUERY
           repository(owner: %{user}, name: %{repo}) {
@@ -186,7 +186,7 @@ module HowIs
 
           after = nil
           data = []
-          until after == TERMINATE_GRAPHQL_LOOP
+          until after == END_LOOP
             after, data = fetch_issues(after, data)
           end
 
@@ -244,25 +244,25 @@ module HowIs
 
           raw_data = graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
+          next_cursor = edges.last["cursor"]
 
-          current_last_cursor = edges.last["cursor"]
+          data += edge_nodes(edges)
 
-          unless edges.nil?
-            new_data = edges.map { |issue|
-              node = issue["node"]
-              node["labels"] = node["labels"]["nodes"]
+          next_cursor = END_LOOP if next_cursor == last_cursor
 
-              node
-            }
+          [next_cursor, data]
+        end
 
-            data += new_data
-          end
+        def edge_nodes(edges)
+          return [] if edges.nil?
+          new_data = edges.map { |issue|
+            node = issue["node"]
+            node["labels"] = node["labels"]["nodes"]
 
-          if current_last_cursor == last_cursor
-            current_last_cursor = TERMINATE_GRAPHQL_LOOP
-          end
+            node
+          }
 
-          [current_last_cursor, data]
+          new_data
         end
       end
     end
