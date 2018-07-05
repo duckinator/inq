@@ -232,14 +232,7 @@ module HowIs
           chunk_size = 100
           after_str = ", after: #{after.inspect}" unless after.nil?
 
-          query = format(GRAPHQL_QUERY, {
-            user: @user.inspect,
-            repo: @repo.inspect,
-            type: type,
-            chunk_size: chunk_size,
-            after_str: after_str,
-          })
-
+          query = build_query(@user, @repo, type, chunk_size, after_str)
           raw_data = graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
           next_cursor = edges.last["cursor"]
@@ -249,6 +242,16 @@ module HowIs
           next_cursor = END_LOOP if next_cursor == last_cursor
 
           [next_cursor, data]
+        end
+
+        def build_query(user, repo, type, chunk_size, after_str)
+          format(GRAPHQL_QUERY, {
+            user: user.inspect,
+            repo: repo.inspect,
+            type: type,
+            chunk_size: chunk_size,
+            after_str: after_str,
+          })
         end
 
         def edge_nodes(edges)
