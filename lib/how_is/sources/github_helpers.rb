@@ -5,6 +5,8 @@ require "date"
 
 module HowIs
   module Sources
+    ##
+    # Helper functions used by GitHub-related sources.
     module GithubHelpers
       def obj_to_array_of_hashes(object)
         object.to_a.map(&:to_h)

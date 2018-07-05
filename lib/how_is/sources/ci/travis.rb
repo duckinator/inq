@@ -55,16 +55,16 @@ module HowIs
         end
 
         def validate_response!(response)
-          unless hash_with_key?(response, "branches")
-            raise BadResponseError,
-              "expected `response' (#{response.class}) to be a Hash with key `\"branches\"'."
-          end
+          return true if hash_with_key?(response, "branches")
+
+          raise BadResponseError,
+            "expected `response' (#{response.class}) to be a Hash with key `\"branches\"'."
         end
 
         def validate_branches!(branches)
-          unless array_of_hashes?(branches)
-            raise BadResponseError, "expected `branches' to be Array of Hashes."
-          end
+          return true if array_of_hashes?(branches)
+
+          raise BadResponseError, "expected `branches' to be Array of Hashes."
         end
 
         def array_of_hashes?(ary)
