@@ -41,6 +41,8 @@ module HowIs
           }
         QUERY
 
+        CHUNK_SIZE = 100
+
         def initialize(repository, start_date, end_date)
           @repository = repository
           @user, @repo = repository.split("/", 2)
@@ -229,16 +231,15 @@ module HowIs
 
         def fetch_issues(after, data)
           data ||= []
-          chunk_size = 100
           after_str = ", after: #{after.inspect}" unless after.nil?
 
-          query = build_query(@user, @repo, type, chunk_size, after_str)
+          query = build_query(@user, @repo, type, CHUNK_SIZE, after_str)
           raw_data = graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
-          next_cursor = edges.last["cursor"]
 
           data += edge_nodes(edges)
 
+          next_cursor = edges.last["cursor"]
           next_cursor = END_LOOP if next_cursor == last_cursor
 
           [next_cursor, data]
