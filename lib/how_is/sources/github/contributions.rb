@@ -162,10 +162,6 @@ module HowIs
         def timestamp_for(date)
           date_to_dt(date).strftime("%s")
         end
-
-        def pretty_date(date)
-          date_to_dt(date).strftime("%b %d, %Y")
-        end
       end
     end
   end
