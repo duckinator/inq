@@ -22,19 +22,13 @@ module HowIs
     report = Report.new(config["repository"], date)
     report_data = prepare_report_metadata(config["repository"], date)
 
-    generated_reports =
-      config["reports"].map { |format, report_config|
-        # Sometimes report_data has unused keys, which generates a warning, but
-        # we're okay with it, so we wrap it with silence_warnings {}.
-        filename = silence_warnings { report_config["filename"] % report_data }
-        file = File.join(report_config["directory"], filename)
+    config["reports"].map { |format, report_config|
+      filename = expand_filename(report_config["filename"], report_data)
+      file = File.join(report_config["directory"], filename)
+      export = report_export(format, report_config["frontmatter"])
 
-        report_export = report.send("to_#{format}", report_config["frontmatter"])
-
-        [file, report_export]
-      }
-
-    generated_reports.to_h
+      [file, export]
+    }.to_h
   end
 
   ##
@@ -74,6 +68,20 @@ module HowIs
     $VERBOSE = old_verbose
   end
   private_class_method :with_warnings
+
+  def self.expand_filename(filename, report_data)
+    # Sometimes report_data has unused keys, which generates a warning, but
+    # we're okay with it, so we wrap it with silence_warnings {}.
+    silence_warnings { filename % report_data }
+  end
+  private_class_method :expand_filename
+
+  # Export +report+ to the specified +format+,
+  # with the specified +frontmatter+.
+  def self.report_export(report, format, frontmatter)
+    report.send("to_#{format}", frontmatter)
+  end
+  private_class_method :report_export
 
   def self.prepare_report_metadata(repository, date)
     end_date = DateTime.strptime(date, "%Y-%m-%d")
