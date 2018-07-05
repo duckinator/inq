@@ -55,6 +55,13 @@ module HowIs
     open(path).read
   end
 
+  def self.apply_template(template_name, data)
+    template_str = template(template_name + ".html_template")
+    silence_warnings {
+      Kernel.format(template_str, data)
+    }
+  end
+
   def self.silence_warnings(&block)
     with_warnings(nil, &block)
   end

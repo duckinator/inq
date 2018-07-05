@@ -82,16 +82,14 @@ module HowIs
           pretty_number =
             pluralize(pretty_type, number_open, zero_is_no: true)
 
-          "There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>."
+          "<p>There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>.</p>"
         end
 
         def to_html
-          summary_ = "<p>#{summary}</p>"
-
-          return summary_ if to_a.empty?
+          return summary if to_a.empty?
 
           template_data = {
-            summary: summary_,
+            summary: summary,
             average_age: average_age,
             type: type,
             pretty_type: pretty_type,
@@ -103,7 +101,7 @@ module HowIs
             newest_date: pretty_date(newest["createdAt"]),
           }
 
-          Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)
+          HowIs.apply_template("issues_or_pulls_partial", template_data)
         end
 
         # TODO: Clean up Issues Per Label stuff, or replace it with different functionality.
