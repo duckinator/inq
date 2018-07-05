@@ -25,7 +25,7 @@ module HowIs
     config["reports"].map { |format, report_config|
       filename = expand_filename(report_config["filename"], report_data)
       file = File.join(report_config["directory"], filename)
-      export = report_export(format, report_config["frontmatter"])
+      export = report_export(report, format, report_config["frontmatter"])
 
       [file, export]
     }.to_h
