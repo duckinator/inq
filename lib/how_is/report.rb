@@ -49,39 +49,7 @@ module HowIs
     end
 
     def to_h(frontmatter_data = nil)
-      @report_hash ||= {
-        title: "How is #{@repository}?",
-        repository: @repository,
-
-        contributions_summary: contributions.to_html,
-        issues_summary: issues.to_html,
-        pulls_summary: pulls.to_html,
-        issues_per_label: issues.issues_per_label_html,
-
-        issues: issues.to_a,
-        pulls: issues.to_a,
-
-        average_issue_age: issues.average_age,
-        average_pull_age:  pulls.average_age,
-
-        oldest_issue_link: issues.oldest["url"],
-        oldest_issue_date: issues.oldest["createdAt"],
-
-        newest_issue_link: issues.newest["url"],
-        newest_issue_date: issues.newest["createdAt"],
-
-        newest_pull_link: pulls.newest["url"],
-        newest_pull_date: pulls.newest["createdAt"],
-
-        oldest_pull_link: pulls.oldest["url"],
-        oldest_pull_date: pulls.oldest["createdAt"],
-
-        travis_builds: travis.builds,
-        appveyor_builds: appveyor.builds,
-
-        date: @end_date,
-      }
-
+      @report_hash ||= report_hash
       frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
 
       @report_hash.merge(frontmatter: frontmatter)
@@ -125,6 +93,41 @@ module HowIs
       end
 
       DateTime.new(start_year, start_month, d)
+    end
+
+    def report_hash
+      {
+        title: "How is #{@repository}?",
+        repository: @repository,
+
+        contributions_summary: contributions.to_html,
+        issues_summary: issues.to_html,
+        pulls_summary: pulls.to_html,
+        issues_per_label: issues.issues_per_label_html,
+
+        issues: issues.to_a,
+        pulls: issues.to_a,
+
+        average_issue_age: issues.average_age,
+        average_pull_age:  pulls.average_age,
+
+        oldest_issue_link: issues.oldest["url"],
+        oldest_issue_date: issues.oldest["createdAt"],
+
+        newest_issue_link: issues.newest["url"],
+        newest_issue_date: issues.newest["createdAt"],
+
+        newest_pull_link: pulls.newest["url"],
+        newest_pull_date: pulls.newest["createdAt"],
+
+        oldest_pull_link: pulls.oldest["url"],
+        oldest_pull_date: pulls.oldest["createdAt"],
+
+        travis_builds: travis.builds,
+        appveyor_builds: appveyor.builds,
+
+        date: @end_date,
+      }
     end
   end
 end
