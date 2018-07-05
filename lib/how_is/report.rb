@@ -69,12 +69,7 @@ module HowIs
         date: @end_date,
       }
 
-      frontmatter =
-        if frontmatter_data
-          HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
-        else
-          ""
-        end
+      frontmatter = HowIs::Frontmatter.generate(frontmatter_data, @report_hash)
 
       @report_hash.merge(frontmatter: frontmatter)
     end
