@@ -186,9 +186,7 @@ module HowIs
 
           after = nil
           data = []
-          until after == END_LOOP
-            after, data = fetch_issues(after, data)
-          end
+          after, data = fetch_issues(after, data) until after == END_LOOP
 
           @data = data.select(&method(:issue_is_relevant?))
         end
