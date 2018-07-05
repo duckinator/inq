@@ -232,7 +232,7 @@ module HowIs
         def fetch_issues(after, data)
           after_str = ", after: #{after.inspect}" unless after.nil?
 
-          query = build_query(@user, @repo, type, CHUNK_SIZE, after_str)
+          query = build_query(@user, @repo, type, after_str)
           raw_data = graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
 
@@ -244,12 +244,12 @@ module HowIs
           [next_cursor, data]
         end
 
-        def build_query(user, repo, type, chunk_size, after_str)
+        def build_query(user, repo, type, after_str)
           format(GRAPHQL_QUERY, {
             user: user.inspect,
             repo: repo.inspect,
             type: type,
-            chunk_size: chunk_size,
+            chunk_size: CHUNK_SIZE,
             after_str: after_str,
           })
         end
