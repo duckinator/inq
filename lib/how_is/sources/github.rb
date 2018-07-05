@@ -30,6 +30,12 @@ module HowIs
       # GitHub API.
       # https://developer.github.com/v4/guides/forming-calls/#communicating-with-graphql
       AUTHORIZATION_HEADER = "bearer " + ACCESS_TOKEN
+
+      def self.graphql(query_string)
+        query = Okay::GraphQL.query(query_string)
+        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
+        query.submit!(:github, headers).or_raise!.from_json
+      end
     end
   end
 end

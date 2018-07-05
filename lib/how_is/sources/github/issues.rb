@@ -198,16 +198,10 @@ module HowIs
           end
         end
 
-        def graphql(query_string)
-          query = Okay::GraphQL.query(query_string)
-          headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
-          query.submit!(:github, headers).or_raise!.from_json
-        end
-
         def last_cursor
           return @last_cursor if instance_variable_defined?(:@last_cursor)
 
-          raw_data = graphql <<~QUERY
+          raw_data = Github.graphql <<~QUERY
             repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
               #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
                 edges {
@@ -230,7 +224,7 @@ module HowIs
           after_str = ", after: #{after.inspect}" unless after.nil?
 
           query = build_query(@user, @repo, type, after_str)
-          raw_data = graphql(query)
+          raw_data = Github.graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
 
           data += edge_nodes(edges)
