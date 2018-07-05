@@ -83,32 +83,38 @@ module HowIs
           @commit[sha] ||= @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
         end
 
-        def changes
-          if @stats.nil? || @changed_files.nil?
-            @stats = {
-              "total" => 0,
-              "additions" => 0,
-              "deletions" => 0,
-            }
+        def stats
+          return @stats if @stats
 
-            @changed_files = []
+          stats = {
+            "total" => 0,
+            "additions" => 0,
+            "deletions" => 0,
+          }
 
-            commits.map do |commit|
-              @stats.keys.each do |key|
-                @stats[key] += commit.stats[key]
-              end
-
-              @changed_files += commit.files.map { |file| file["filename"] }
+          commits.map do |commit|
+            stats.keys.each do |key|
+              stats[key] += commit.stats[key]
             end
-
-            @changed_files = @changed_files.sort.uniq
           end
 
-          {"stats" => @stats, "files" => @changed_files}
+          @stats = stats
         end
 
         def changed_files
-          changes["files"]
+          return @changed_files if @changed_files
+
+          files = []
+
+          commits.map do |commit|
+            files += commit.files.map { |file| file["filename"] }
+          end
+
+          @changed_files = files.sort.uniq
+        end
+
+        def changes
+          {"stats" => stats, "files" => changed_files}
         end
 
         def additions_count
