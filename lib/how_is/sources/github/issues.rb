@@ -17,6 +17,30 @@ module HowIs
 
         TERMINATE_GRAPHQL_LOOP = :terminate_graphql_loop
 
+        GRAPHQL_QUERY = <<~QUERY
+          repository(owner: %{user}, name: %{repo}) {
+            %{type}(first: %{chunk_size}%{after_str}, orderBy:{field: CREATED_AT, direction: ASC}) {
+              edges {
+                cursor
+                node {
+                  number
+                  createdAt
+                  closedAt
+                  updatedAt
+                  state
+                  title
+                  url
+                  labels(first: 100) {
+                    nodes {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        QUERY
+
         def initialize(repository, start_date, end_date)
           @repository = repository
           @user, @repo = repository.split("/", 2)
@@ -210,30 +234,15 @@ module HowIs
           chunk_size = 100
           after_str = ", after: #{after.inspect}" unless after.nil?
 
-          raw_data = graphql <<~QUERY
-            repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
-              #{type}(first: #{chunk_size}#{after_str}, orderBy:{field: CREATED_AT, direction: ASC}) {
-                edges {
-                  cursor
-                  node {
-                    number
-                    createdAt
-                    closedAt
-                    updatedAt
-                    state
-                    title
-                    url
-                    labels(first: 100) {
-                      nodes {
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          QUERY
+          query = format(GRAPHQL_QUERY, {
+            user: @user.inspect,
+            repo: @repo.inspect,
+            type: type,
+            chunk_size: chunk_size,
+            after_str: after_str,
+          })
 
+          raw_data = graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
 
           current_last_cursor = edges.last["cursor"]
