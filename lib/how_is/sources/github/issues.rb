@@ -4,6 +4,7 @@ require "how_is/version"
 require "how_is/date_time_helpers"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
+require "how_is/sources/github/issue_fetcher"
 require "date"
 
 module HowIs
@@ -15,11 +16,8 @@ module HowIs
         include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
-        TERMINATE_GRAPHQL_LOOP = :terminate_graphql_loop
-
         def initialize(repository, start_date, end_date)
           @repository = repository
-          @user, @repo = repository.split("/", 2)
           @start_date = start_date
           @end_date = end_date
         end
@@ -44,40 +42,44 @@ module HowIs
         end
 
         def oldest
-          oldest_for(data) || {}
+          result = oldest_for(data)
+          return {} if result.nil?
+
+          result["date"] = pretty_date(result["createdAt"])
+
+          result
         end
 
         def newest
-          newest_for(data) || {}
+          result = newest_for(data)
+          return {} if result.nil?
+
+          result["date"] = pretty_date(result["createdAt"])
+
+          result
         end
 
         def summary
           number_open = to_a.length
-          pretty_number =
-            pluralize(pretty_type, number_open, zero_is_no: true)
+          pretty_number = pluralize(pretty_type, number_open, zero_is_no: true)
 
-          "There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>."
+          "<p>There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>.</p>"
         end
 
         def to_html
-          summary_ = "<p>#{summary}</p>"
+          return summary if to_a.empty?
 
-          return summary_ if to_a.empty?
-
-          template_data = {
-            summary: summary_,
+          HowIs.apply_template("issues_or_pulls_partial", {
+            summary: summary,
             average_age: average_age,
-            type: type,
             pretty_type: pretty_type,
 
             oldest_link: oldest["url"],
-            oldest_date: pretty_date(oldest["createdAt"]),
+            oldest_date: oldest["date"],
 
             newest_link: newest["url"],
-            newest_date: pretty_date(newest["createdAt"]),
-          }
-
-          Kernel.format(HowIs.template("issues_or_pulls_partial.html_template"), template_data)
+            newest_date: newest["date"],
+          })
         end
 
         # TODO: Clean up Issues Per Label stuff, or replace it with different functionality.
@@ -109,22 +111,12 @@ module HowIs
           return "<p>There are no open issues to graph.</p>" if ipl.empty?
 
           biggest = ipl.map { |_label, info| info["total"] }.max
-          get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
           longest_label_length = ipl.map(&:first).map(&:length).max
           label_width = "#{longest_label_length}ch"
 
           parts = ipl.map { |label, info|
-            label_url  = label_url_for(info["name"])
-            label_text = "<a href=\"#{label_url}\">#{label}</a>"
-
-            Kernel.format(HTML_GRAPH_ROW, {
-              label_width: label_width,
-              label_text: label_text,
-              label_link: info["url"],
-              percentage: get_percentage.call(info["total"]),
-              link_text: info["total"].to_s,
-            })
+            format_graph_row(label, info, label_width, biggest)
           }
 
           "<table class=\"horizontal-bar-graph\">\n" +
@@ -137,6 +129,23 @@ module HowIs
         end
 
         private
+
+        def format_graph_row(label, info, label_width, biggest)
+          label_url  = label_url_for(info["name"])
+          label_text = "<a href=\"#{label_url}\">#{label}</a>"
+
+          Kernel.format(HTML_GRAPH_ROW, {
+            label_width: label_width,
+            label_text: label_text,
+            label_link: info["url"],
+            percentage: width_percentage(info["total"], biggest),
+            link_text: info["total"].to_s,
+          })
+        end
+
+        def width_percentage(number_of_issues, biggest)
+          number_of_issues * 100 / biggest
+        end
 
         def url_suffix
           "issues"
@@ -157,103 +166,8 @@ module HowIs
         def data
           return @data if instance_variable_defined?(:@data)
 
-          @data = []
-          return @data if last_cursor.nil?
-
-          after = nil
-          data = []
-          until after == TERMINATE_GRAPHQL_LOOP
-            after, data = fetch_issues(after, data)
-          end
-
-          @data = data.select(&method(:issue_is_relevant?))
-        end
-
-        def issue_is_relevant?(issue)
-          if !issue["closedAt"].nil? && date_le(issue["closedAt"], @start_date)
-            false
-          else
-            date_ge(issue["createdAt"], @start_date) && date_le(issue["createdAt"], @end_date)
-          end
-        end
-
-        def graphql(query_string)
-          query = Okay::GraphQL.query(query_string)
-          headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
-          query.submit!(:github, headers).or_raise!.from_json
-        end
-
-        def last_cursor
-          return @last_cursor if instance_variable_defined?(:@last_cursor)
-
-          raw_data = graphql <<~QUERY
-            repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
-              #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
-                edges {
-                  cursor
-                }
-              }
-            }
-          QUERY
-
-          edges = raw_data.dig("data", "repository", type, "edges")
-          @last_cursor =
-            if edges.nil? || edges.empty?
-              nil
-            else
-              edges.last["cursor"]
-            end
-        end
-
-        def fetch_issues(after, data)
-          data ||= []
-          chunk_size = 100
-          after_str = ", after: #{after.inspect}" unless after.nil?
-
-          raw_data = graphql <<~QUERY
-            repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
-              #{type}(first: #{chunk_size}#{after_str}, orderBy:{field: CREATED_AT, direction: ASC}) {
-                edges {
-                  cursor
-                  node {
-                    number
-                    createdAt
-                    closedAt
-                    updatedAt
-                    state
-                    title
-                    url
-                    labels(first: 100) {
-                      nodes {
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          QUERY
-
-          edges = raw_data.dig("data", "repository", type, "edges")
-
-          current_last_cursor = edges.last["cursor"]
-
-          unless edges.nil?
-            new_data = edges.map { |issue|
-              node = issue["node"]
-              node["labels"] = node["labels"]["nodes"]
-
-              node
-            }
-
-            data += new_data
-          end
-
-          if current_last_cursor == last_cursor
-            current_last_cursor = TERMINATE_GRAPHQL_LOOP
-          end
-
-          [current_last_cursor, data]
+          fetcher = IssueFetcher.new(@repository, type, @start_date, @end_date)
+          @data = fetcher.data
         end
       end
     end

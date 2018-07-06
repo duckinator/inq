@@ -8,31 +8,34 @@ require "date"
 module HowIs
   module Sources
     class Github
-      # Fetch information about who has contributed to a repository during a given
-      # period.
+      # Fetch information about who has contributed to a repository during
+      # a given period.
       #
       # Usage:
       #
-      #     c = HowIs::Contributions.new(start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
+      #     c = HowIs::Contributions.new(start_date: '2017-07-01',
+      #                                  user: 'how-is',
+      #                                  repo: 'how_is')
       #     c.commits          #=> All commits during July 2017.
       #     c.contributors #=> All contributors during July 2017.
       #     c.new_contributors #=> New contributors during July 2017.
       class Contributions
         include HowIs::Sources::GithubHelpers
 
-        # Returns an object that fetches contributor information about a particular
-        # repository for a month-long period starting on +start_date+.
+        # Returns an object that fetches contributor information about a
+        # particular repository for a month-long period starting on
+        # +start_date+.
         #
-        # @param repository [String] GitHub repository in the form of "user/repo".
-        # @param start_date [String] Date in the format YYYY-MM-DD. The first date
-        #                            to include commits from.
-        # @param end_date [String] Date in the format YYYY-MM-DD. The last date
-        #                          to include commits from.
+        # @param repository [String] GitHub repo, formatted as "user/repo".
+        # @param start_date [String] Date in the format YYYY-MM-DD.
+        #                            The first date to include commits from.
+        # @param end_date [String] Date in the format YYYY-MM-DD.
+        #                          The last date to include commits from.
         def initialize(repository, start_date, end_date)
           @user, @repo = repository.split("/")
-          @github = ::Github.new(auto_pagination: true) do |config|
+          @github = ::Github.new(auto_pagination: true) { |config|
             config.basic_auth = HowIs::Sources::Github::BASIC_AUTH
-          end
+          }
 
           # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
           #               but internally we use "until_date" to match GitHub's API.
@@ -48,14 +51,17 @@ module HowIs
         #
         # @return [Hash{String => Hash}] Contributors keyed by email
         def new_contributors
-          # author: GitHub login, name or email by which to filter by commit author.
-          @new_contributors ||= contributors.select do |email, _committer|
-            # Returns true if +email+ never wrote a commit for +@repo+ before +@since_date+.
-            @github.repos.commits.list(user: @user,
-                                      repo: @repo,
-                                      until: @since_date,
-                                      author: email).count.zero?
-          end
+          @new_contributors ||= contributors.select { |email, _committer|
+            args = {
+              user: @user,
+              repo: @repo,
+              until: @since_date,
+              author: email,
+            }
+            # True if +email+ never wrote a commit for +@repo+ before
+            # +@since_date+, false otherwise.
+            @github.repos.commits.list(**args).count.zero?
+          }
         end
 
         # @return [Hash{String => Hash}] Author information keyed by author's email.
@@ -66,49 +72,61 @@ module HowIs
         end
 
         def commits
-          @commits ||= begin
-            @github.repos.commits.list(user: @user,
-                                      repo: @repo,
-                                      since: @since_date,
-                                      until: @until_date).map { |c|
-              # The commits list endpoint doesn't include all commit data, e.g. stats.
-              # So, we make N requests here, where N == number of commits returned,
-              # and then we die a bit inside.
-              commit(c.sha)
-            }
-          end
+          return @commits if instance_variable_defined?(:@commits)
+
+          args = {
+            user: @user,
+            repo: @repo,
+            since: @since_date,
+            until: @until_date,
+          }
+
+          # The commits list endpoint doesn't include all stats.
+          #
+          # So, to compensate, we make N requests here, where N is number
+          # of commits returned, and then we die a bit inside.
+          @commits = @github.repos.commits.list(**args).map { |c|
+            commit(c.sha)
+          }
         end
 
         def commit(sha)
-          @commit[sha] ||= @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
+          @commit[sha] ||=
+            @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
         end
 
-        def changes
-          if @stats.nil? || @changed_files.nil?
-            @stats = {
-              "total" => 0,
-              "additions" => 0,
-              "deletions" => 0,
-            }
+        def stats
+          return @stats if @stats
 
-            @changed_files = []
+          stats = {
+            "total" => 0,
+            "additions" => 0,
+            "deletions" => 0,
+          }
 
-            commits.map do |commit|
-              @stats.keys.each do |key|
-                @stats[key] += commit.stats[key]
-              end
-
-              @changed_files += commit.files.map { |file| file["filename"] }
+          commits.map do |commit|
+            stats.keys.each do |key|
+              stats[key] += commit.stats[key]
             end
-
-            @changed_files = @changed_files.sort.uniq
           end
 
-          {"stats" => @stats, "files" => @changed_files}
+          @stats = stats
         end
 
         def changed_files
-          changes["files"]
+          return @changed_files if @changed_files
+
+          files = []
+
+          commits.map do |commit|
+            files += commit.files.map { |file| file["filename"] }
+          end
+
+          @changed_files = files.sort.uniq
+        end
+
+        def changes
+          {"stats" => stats, "files" => changed_files}
         end
 
         def additions_count
@@ -124,35 +142,28 @@ module HowIs
         end
 
         def default_branch
-          @default_branch ||= @github.repos.get(user: @user,
-            repo: @repo).default_branch
+          @default_branch ||=
+            @github.repos.get(user: @user, repo: @repo).default_branch
         end
 
+        # rubocop:disable Metrics/AbcSize
         def to_html(start_text: nil)
           start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
-          "#{start_text}, #{@user}/#{@repo} gained "\
-            "<a href=\"#{compare_url}\">#{pluralize('new commit', commits.length)}</a>, " \
-            "contributed by #{pluralize('author', contributors.length)}. There " \
-            "#{(additions_count == 1) ? 'was' : 'were'} " \
-            "#{pluralize('addition', additions_count)} and " \
-            "#{pluralize('deletion', deletions_count)} across " \
-            "#{pluralize('file', changed_files.length)}."
+          HowIs.apply_template("contributions_partial", {
+            start_text: start_text,
+            user: @user,
+            repo: @repo,
+            compare_url: compare_url,
+            additions_count_str: (additions_count == 1) ? "was" : "were",
+            authors: pluralize("author", contributors.length),
+            new_commits: pluralize("new commit", commits.length),
+            additions: pluralize("addition", additions_count),
+            deletions: pluralize("deletion", deletions_count),
+            changed_files: pluralize("file", changed_files.length),
+          }).strip
         end
-
-        private
-
-        def date_to_dt(date)
-          DateTime.strptime(date.to_s, "%Y-%m-%d")
-        end
-
-        def timestamp_for(date)
-          date_to_dt(date).strftime("%s")
-        end
-
-        def pretty_date(date)
-          date_to_dt(date).strftime("%b %d, %Y")
-        end
+        # rubocop:enable Metrics/AbcSize
       end
     end
   end

@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
@@ -16,14 +14,18 @@ AllCops:
 Lint/InheritException:
   EnforcedStyle: standard_error
 
+Metrics/AbcSize:
+  Max: 16
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*_spec.rb'
 
 
-# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
-#Metrics/ClassLength:
-#  Max: 1500
+# Getting this back to the default of 100 would be nice,
+# but the few cases that exceed it don't seem overly concerning.
+Metrics/ClassLength:
+  Max: 120
 
 # Still try for 80, but we'll allow 110 because there's a not-insignificant
 # number of cases where we have long lines.
@@ -36,7 +38,7 @@ Metrics/LineLength:
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class
 Metrics/MethodLength:
-  Max: 20
+  Max: 23
 
 Style/Alias:
   EnforcedStyle: prefer_alias_method

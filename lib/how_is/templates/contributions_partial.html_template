@@ -1,0 +1,1 @@
+%{start_text}, %{user}/%{repo} gained <a href="%{compare_url}">%{new_commits}</a>, contributed by %{authors}. There %{additions_count_str} %{additions} and %{deletions} across %{changed_files}.
