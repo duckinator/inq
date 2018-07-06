@@ -30,9 +30,9 @@ module HowIs
         #                          to include commits from.
         def initialize(repository, start_date, end_date)
           @user, @repo = repository.split("/")
-          @github = ::Github.new(auto_pagination: true) do |config|
+          @github = ::Github.new(auto_pagination: true) { |config|
             config.basic_auth = HowIs::Sources::Github::BASIC_AUTH
-          end
+          }
 
           # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
           #               but internally we use "until_date" to match GitHub's API.
