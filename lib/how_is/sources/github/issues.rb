@@ -139,22 +139,12 @@ module HowIs
           return "<p>There are no open issues to graph.</p>" if ipl.empty?
 
           biggest = ipl.map { |_label, info| info["total"] }.max
-          get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
 
           longest_label_length = ipl.map(&:first).map(&:length).max
           label_width = "#{longest_label_length}ch"
 
           parts = ipl.map { |label, info|
-            label_url  = label_url_for(info["name"])
-            label_text = "<a href=\"#{label_url}\">#{label}</a>"
-
-            Kernel.format(HTML_GRAPH_ROW, {
-              label_width: label_width,
-              label_text: label_text,
-              label_link: info["url"],
-              percentage: get_percentage.call(info["total"]),
-              link_text: info["total"].to_s,
-            })
+            format_graph_row(label, info, label_width, biggest)
           }
 
           "<table class=\"horizontal-bar-graph\">\n" +
@@ -167,6 +157,21 @@ module HowIs
         end
 
         private
+
+        def format_graph_row(label, info, label_width, biggest)
+          get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
+
+          label_url  = label_url_for(info["name"])
+          label_text = "<a href=\"#{label_url}\">#{label}</a>"
+
+          Kernel.format(HTML_GRAPH_ROW, {
+            label_width: label_width,
+            label_text: label_text,
+            label_link: info["url"],
+            percentage: get_percentage.call(info["total"]),
+            link_text: info["total"].to_s,
+          })
+        end
 
         def url_suffix
           "issues"
