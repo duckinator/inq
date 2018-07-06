@@ -97,7 +97,7 @@ module HowIs
         def to_html
           return summary if to_a.empty?
 
-          template_data = {
+          HowIs.apply_template("issues_or_pulls_partial", {
             summary: summary,
             average_age: average_age,
             pretty_type: pretty_type,
@@ -107,9 +107,7 @@ module HowIs
 
             newest_link: newest["url"],
             newest_date: newest["date"],
-          }
-
-          HowIs.apply_template("issues_or_pulls_partial", template_data)
+          })
         end
 
         # TODO: Clean up Issues Per Label stuff, or replace it with different functionality.
