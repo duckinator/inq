@@ -48,16 +48,17 @@ module HowIs
         #
         # @return [Hash{String => Hash}] Contributors keyed by email
         def new_contributors
-          # author: GitHub login, name or email by which to filter by commit author.
-          @new_contributors ||= contributors.select do |email, _committer|
-            # Returns true if +email+ never wrote a commit for +@repo+ before +@since_date+.
-            @github.repos.commits.list(
+          @new_contributors ||= contributors.select { |email, _committer|
+            args = {
               user: @user,
               repo: @repo,
               until: @since_date,
-              author: email
-            ).count.zero?
-          end
+              author: email,
+            }
+            # True if +email+ never wrote a commit for +@repo+ before
+            # +@since_date+, false otherwise.
+            @github.repos.commits.list(**args).count.zero?
+          }
         end
 
         # @return [Hash{String => Hash}] Author information keyed by author's email.
