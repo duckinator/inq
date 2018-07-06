@@ -18,7 +18,8 @@
         {
           "name": "bug"
         }
-      ]
+      ],
+      "date": "Aug 07, 2016"
     },
     {
       "number": 2,
@@ -47,7 +48,8 @@
       "url": "https://github.com/how-is/example-repository/issues/3",
       "labels": [
 
-      ]
+      ],
+      "date": "Aug 07, 2016"
     }
   ],
   "pulls": [
@@ -63,7 +65,8 @@
         {
           "name": "bug"
         }
-      ]
+      ],
+      "date": "Aug 07, 2016"
     },
     {
       "number": 2,
@@ -92,7 +95,8 @@
       "url": "https://github.com/how-is/example-repository/issues/3",
       "labels": [
 
-      ]
+      ],
+      "date": "Aug 07, 2016"
     }
   ],
   "average_issue_age": "approximately 2 months and 3 weeks",

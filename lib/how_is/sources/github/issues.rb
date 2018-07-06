@@ -70,11 +70,21 @@ module HowIs
         end
 
         def oldest
-          oldest_for(data) || {}
+          result = oldest_for(data)
+          return {} if result.nil?
+
+          result["date"] = pretty_date(result["createdAt"])
+
+          result
         end
 
         def newest
-          newest_for(data) || {}
+          result = newest_for(data)
+          return {} if result.nil?
+
+          result["date"] = pretty_date(result["createdAt"])
+
+          result
         end
 
         def summary
@@ -94,10 +104,10 @@ module HowIs
             pretty_type: pretty_type,
 
             oldest_link: oldest["url"],
-            oldest_date: oldest_date,
+            oldest_date: oldest["date"],
 
             newest_link: newest["url"],
-            newest_date: newest_date,
+            newest_date: newest["date"],
           }
 
           HowIs.apply_template("issues_or_pulls_partial", template_data)
@@ -255,14 +265,6 @@ module HowIs
           }
 
           new_data
-        end
-
-        def oldest_date
-          pretty_date(oldest["createdAt"])
-        end
-
-        def newest_date
-          pretty_date(newest["createdAt"])
         end
       end
     end
