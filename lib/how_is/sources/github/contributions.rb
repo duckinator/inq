@@ -51,10 +51,12 @@ module HowIs
           # author: GitHub login, name or email by which to filter by commit author.
           @new_contributors ||= contributors.select do |email, _committer|
             # Returns true if +email+ never wrote a commit for +@repo+ before +@since_date+.
-            @github.repos.commits.list(user: @user,
-                                      repo: @repo,
-                                      until: @since_date,
-                                      author: email).count.zero?
+            @github.repos.commits.list(
+              user: @user,
+              repo: @repo,
+              until: @since_date,
+              author: email
+            ).count.zero?
           end
         end
 
@@ -66,21 +68,27 @@ module HowIs
         end
 
         def commits
-          @commits ||= begin
-            @github.repos.commits.list(user: @user,
-                                      repo: @repo,
-                                      since: @since_date,
-                                      until: @until_date).map { |c|
-              # The commits list endpoint doesn't include all commit data, e.g. stats.
-              # So, we make N requests here, where N == number of commits returned,
-              # and then we die a bit inside.
-              commit(c.sha)
-            }
-          end
+          return @commits if instance_variable_defined?(:@commits)
+
+          args = {
+            user: @user,
+            repo: @repo,
+            since: @since_date,
+            until: @until_date,
+          }
+
+          # The commits list endpoint doesn't include all stats.
+          #
+          # So, to compensate, we make N requests here, where N is number
+          # of commits returned, and then we die a bit inside.
+          @commits = @github.repos.commits.list(**args).map { |c|
+            commit(c.sha)
+          }
         end
 
         def commit(sha)
-          @commit[sha] ||= @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
+          @commit[sha] ||=
+            @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
         end
 
         def stats
@@ -130,8 +138,8 @@ module HowIs
         end
 
         def default_branch
-          @default_branch ||= @github.repos.get(user: @user,
-            repo: @repo).default_branch
+          @default_branch ||=
+            @github.repos.get(user: @user, repo: @repo).default_branch
         end
 
         # rubocop:disable Metrics/AbcSize
