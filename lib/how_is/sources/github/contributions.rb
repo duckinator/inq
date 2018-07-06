@@ -8,26 +8,29 @@ require "date"
 module HowIs
   module Sources
     class Github
-      # Fetch information about who has contributed to a repository during a given
-      # period.
+      # Fetch information about who has contributed to a repository during
+      # a given period.
       #
       # Usage:
       #
-      #     c = HowIs::Contributions.new(start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
+      #     c = HowIs::Contributions.new(start_date: '2017-07-01',
+      #                                  user: 'how-is',
+      #                                  repo: 'how_is')
       #     c.commits          #=> All commits during July 2017.
       #     c.contributors #=> All contributors during July 2017.
       #     c.new_contributors #=> New contributors during July 2017.
       class Contributions
         include HowIs::Sources::GithubHelpers
 
-        # Returns an object that fetches contributor information about a particular
-        # repository for a month-long period starting on +start_date+.
+        # Returns an object that fetches contributor information about a
+        # particular repository for a month-long period starting on
+        # +start_date+.
         #
-        # @param repository [String] GitHub repository in the form of "user/repo".
-        # @param start_date [String] Date in the format YYYY-MM-DD. The first date
-        #                            to include commits from.
-        # @param end_date [String] Date in the format YYYY-MM-DD. The last date
-        #                          to include commits from.
+        # @param repository [String] GitHub repo, formatted as "user/repo".
+        # @param start_date [String] Date in the format YYYY-MM-DD.
+        #                            The first date to include commits from.
+        # @param end_date [String] Date in the format YYYY-MM-DD.
+        #                          The last date to include commits from.
         def initialize(repository, start_date, end_date)
           @user, @repo = repository.split("/")
           @github = ::Github.new(auto_pagination: true) { |config|
