@@ -135,8 +135,7 @@ module HowIs
         end
 
         # rubocop:disable Metrics/AbcSize
-        # TODO: Determine if this can be done without making the AbcSize
-        #       metric upset.
+        # TODO: Avoid disabling the AbcSize metric.
         def to_html(start_text: nil)
           start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
