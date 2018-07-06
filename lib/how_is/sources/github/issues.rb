@@ -94,10 +94,10 @@ module HowIs
             pretty_type: pretty_type,
 
             oldest_link: oldest["url"],
-            oldest_date: pretty_date(oldest["createdAt"]),
+            oldest_date: oldest_date,
 
             newest_link: newest["url"],
-            newest_date: pretty_date(newest["createdAt"]),
+            newest_date: newest_date,
           }
 
           HowIs.apply_template("issues_or_pulls_partial", template_data)
@@ -255,6 +255,14 @@ module HowIs
           }
 
           new_data
+        end
+
+        def oldest_date
+          pretty_date(oldest["createdAt"])
+        end
+
+        def newest_date
+          pretty_date(newest["createdAt"])
         end
       end
     end
