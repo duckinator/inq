@@ -100,7 +100,6 @@ module HowIs
           template_data = {
             summary: summary,
             average_age: average_age,
-            type: type,
             pretty_type: pretty_type,
 
             oldest_link: oldest["url"],
