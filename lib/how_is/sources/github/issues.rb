@@ -131,8 +131,6 @@ module HowIs
         private
 
         def format_graph_row(label, info, label_width, biggest)
-          get_percentage = ->(number_of_issues) { number_of_issues * 100 / biggest }
-
           label_url  = label_url_for(info["name"])
           label_text = "<a href=\"#{label_url}\">#{label}</a>"
 
@@ -140,9 +138,13 @@ module HowIs
             label_width: label_width,
             label_text: label_text,
             label_link: info["url"],
-            percentage: get_percentage.call(info["total"]),
+            percentage: width_percentage(info["total"], biggest),
             link_text: info["total"].to_s,
           })
+        end
+
+        def width_percentage(number_of_issues, biggest)
+          number_of_issues * 100 / biggest
         end
 
         def url_suffix
