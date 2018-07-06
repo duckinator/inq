@@ -95,6 +95,7 @@ module HowIs
       DateTime.new(start_year, start_month, d)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def report_hash
       {
         title: "How is #{@repository}?",
@@ -129,5 +130,6 @@ module HowIs
         date: @end_date,
       }
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end
