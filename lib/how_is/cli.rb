@@ -4,9 +4,7 @@ require "how_is"
 require "optparse"
 
 module HowIs::CLI
-  # Parses +argv+ to generate an options Hash to control the behavior of
-  # the library.
-  def self.parse(argv)
+  def self.parse_main(argv)
     options = {
       report: HowIs::DEFAULT_REPORT_FILE,
     }
@@ -68,6 +66,14 @@ module HowIs::CLI
     # `.parse!` populates the `options` Hash that was created above, and
     # the return value is any non-flag arguments.
     opt_parser.parse!(argv)
+
+    [opts_, options]
+  end
+
+  # Parses +argv+ to generate an options Hash to control the behavior of
+  # the library.
+  def self.parse(argv)
+    opts_, options = self.parse_main(argv)
 
     # Options that are mutually-exclusive with everything else.
     options = {:help    => true} if options[:help]
