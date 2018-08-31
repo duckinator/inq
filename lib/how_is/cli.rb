@@ -3,104 +3,106 @@
 require "how_is"
 require "optparse"
 
-module HowIs::CLI
-  REPO_REGEXP = /.+\/.+/
-  DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
+module HowIs
+  module CLI
+    REPO_REGEXP = /.+\/.+/
+    DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
 
-  # Parses +argv+ to generate an options Hash to control the behavior of
-  # the library.
-  def self.parse(argv)
-    opts, options = parse_main(argv)
+    # Parses +argv+ to generate an options Hash to control the behavior of
+    # the library.
+    def self.parse(argv)
+      opts, options = parse_main(argv)
 
-    # Options that are mutually-exclusive with everything else.
-    options = {:help    => true} if options[:help]
-    options = {:version => true} if options[:version]
+      # Options that are mutually-exclusive with everything else.
+      options = {:help    => true} if options[:help]
+      options = {:version => true} if options[:version]
 
-    validate_options!(options)
+      validate_options!(options)
 
-    # Return an Array containing:
-    #   +opts+: the original OptionParser object.
-    #   +options+: the Hash of flags/values.
-    [opts, options]
-  end
+      # Return an Array containing:
+      #   +opts+: the original OptionParser object.
+      #   +options+: the Hash of flags/values.
+      [opts, options]
+    end
 
-  def self.parse_main(argv)
-    options = {
-      report: HowIs::DEFAULT_REPORT_FILE,
-    }
-    opts = nil
+    def self.parse_main(argv)
+      options = {
+        report: HowIs::DEFAULT_REPORT_FILE,
+      }
+      opts = nil
 
-    opt_parser = OptionParser.new do |opts_|
-      opts = opts_
-      # General usage information.
-      opts.banner = <<~EOF
-        Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
-               how_is --config CONFIG_FILE --date REPORT_DATE
-      EOF
+      opt_parser = OptionParser.new do |opts_|
+        opts = opts_
+        # General usage information.
+        opts.banner = <<~EOF
+          Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
+                 how_is --config CONFIG_FILE --date REPORT_DATE
+        EOF
 
-      opts.separator ""
-      opts.separator "Options:"
+        opts.separator ""
+        opts.separator "Options:"
 
-      opts.on("--config CONFIG_FILE",
-              "YAML config file for automating reports.") do |filename|
-        options[:config] = filename
+        opts.on("--config CONFIG_FILE",
+                "YAML config file for automating reports.") do |filename|
+          options[:config] = filename
+        end
+
+        opts.on("--repository USER/REPO", REPO_REGEXP,
+                "Repository to generate a report for.") do |repository|
+          options[:repository] = repository
+        end
+
+        opts.on("--date YYYY-MM-DD", DATE_REGEXP,
+                "Last date of the report.") do |date|
+          options[:date] = date
+        end
+
+        opts.on("--output REPORT_FILE", format_regexp,
+                "Output file for the report.",
+                "Supported file types: #{HowIs.supported_formats.join(', ')}."
+               ) do |filename, _|
+          options[:report] = filename
+        end
+
+        opts.on("--verbose", "Print debug information.") do
+          options[:verbose] = true
+        end
+
+        opts.on("-v", "--version", "Prints version information") do
+          options[:version] = true
+        end
+
+        opts.on("-h", "--help", "Print help text") do
+          options[:help] = true
+        end
       end
 
-      opts.on("--repository USER/REPO", REPO_REGEXP,
-              "Repository to generate a report for.") do |repository|
-        options[:repository] = repository
+      # `.parse!` populates the `options` Hash that was created above, and
+      # the return value is any non-flag arguments.
+      opt_parser.parse!(argv)
+
+      [opts, options]
+    end
+
+    def self.validate_options!(options)
+      if options[:date] && !options[:repository] && !options[:config]
+        missing_argument("expected wither --repository or --config.")
       end
 
-      opts.on("--date YYYY-MM-DD", DATE_REGEXP,
-              "Last date of the report.") do |date|
-        options[:date] = date
-      end
-
-      opts.on("--output REPORT_FILE", format_regexp,
-              "Output file for the report.",
-              "Supported file types: #{HowIs.supported_formats.join(', ')}."
-             ) do |filename, _|
-        options[:report] = filename
-      end
-
-      opts.on("--verbose", "Print debug information.") do
-        options[:verbose] = true
-      end
-
-      opts.on("-v", "--version", "Prints version information") do
-        options[:version] = true
-      end
-
-      opts.on("-h", "--help", "Print help text") do
-        options[:help] = true
+      if !options[:date] && !options[:help] && !options[:version]
+        missing_argument("--date")
       end
     end
 
-    # `.parse!` populates the `options` Hash that was created above, and
-    # the return value is any non-flag arguments.
-    opt_parser.parse!(argv)
+    def self.format_regexp
+      format_regexp_parts =
+        HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
-    [opts, options]
-  end
-
-  def self.validate_options!(options)
-    if options[:date] && !options[:repository] && !options[:config]
-      missing_argument("expected wither --repository or --config.")
+      /.+\.(#{format_regexp_parts.join("|")})/
     end
 
-    if !options[:date] && !options[:help] && !options[:version]
-      missing_argument("--date")
+    def self.missing_argument(argument)
+      raise OptionParser::MissingArgument, argument
     end
-  end
-
-  def self.format_regexp
-    format_regexp_parts =
-      HowIs.supported_formats.map { |x| Regexp.escape(x) }
-
-    /.+\.(#{format_regexp_parts.join("|")})/
-  end
-
-  def self.missing_argument(argument)
-    raise OptionParser::MissingArgument, argument
   end
 end
