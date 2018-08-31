@@ -4,6 +4,9 @@ require "how_is"
 require "optparse"
 
 module HowIs::CLI
+  REPO_REGEXP = /.+\/.+/
+  DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
+
   # Parses +argv+ to generate an options Hash to control the behavior of
   # the library.
   def self.parse(argv)
@@ -43,20 +46,17 @@ module HowIs::CLI
         options[:config] = filename
       end
 
-      repo_regexp = /.+\/.+/
-      opts.on("--repository USER/REPO", repo_regexp,
+      opts.on("--repository USER/REPO", REPO_REGEXP,
               "Repository to generate a report for.") do |repository|
         options[:repository] = repository
       end
 
-      date_regexp = /\d\d\d\d-\d\d-\d\d/
-      opts.on("--date YYYY-MM-DD", date_regexp,
+      opts.on("--date YYYY-MM-DD", DATE_REGEXP,
               "Last date of the report.") do |date|
         options[:date] = date
       end
 
-      opts.on("--output REPORT_FILE",
-              format_regexp,
+      opts.on("--output REPORT_FILE", format_regexp,
               "Output file for the report.",
               "Supported file types: #{HowIs.supported_formats.join(', ')}."
              ) do |filename, _|
