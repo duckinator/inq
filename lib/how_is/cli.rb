@@ -8,7 +8,12 @@ module HowIs::CLI
   # the library.
   def self.parse(argv)
     opts_, options = parse_main(argv)
-    options = normalize_options(options)
+
+    # Options that are mutually-exclusive with everything else.
+    options = {:help    => true} if options[:help]
+    options = {:version => true} if options[:version]
+
+    validate_options!(options)
 
     # Return an Array containing:
     #   +opts+: the original OptionParser object.
@@ -82,13 +87,9 @@ module HowIs::CLI
     [opts_, options]
   end
 
-  def self.normalize_options(options)
-    # Options that are mutually-exclusive with everything else.
-    options = {:help    => true} if options[:help]
-    options = {:version => true} if options[:version]
-
-    if !options[:help] && !options[:version]
-      return missing_argument("--date") unless options[:date]
+  def self.validate_options!(options)
+    if !options[:help] && !options[:version] && !options[:date]
+      missing_argument("--date")
     end
 
     if (options[:repository] || options[:config]) && !options[:date]
@@ -98,8 +99,6 @@ module HowIs::CLI
     if (!options[:repository] && !options[:config]) && options[:date]
       missing_argument("expected wither --repository or --config.")
     end
-
-    options
   end
 
   def self.format_regexp
