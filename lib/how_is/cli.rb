@@ -3,36 +3,39 @@
 require "how_is"
 require "optparse"
 
-module HowIs::CLI
-  REPO_REGEXP = /.+\/.+/
-  DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
+module HowIs
+  ##
+  # Class for handling the command-line interface for how_is.
+  module CLI
+    MissingArgument = Class.new(OptionParser::MissingArgument)
 
-  # Parses +argv+ to generate an options Hash to control the behavior of
-  # the library.
-  def self.parse(argv)
-    opts, options = parse_main(argv)
+    REPO_REGEXP = /.+\/.+/
+    DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
 
-    # Options that are mutually-exclusive with everything else.
-    options = {:help    => true} if options[:help]
-    options = {:version => true} if options[:version]
+    # Parses +argv+ to generate an options Hash to control the behavior of
+    # the library.
+    def self.parse(argv)
+      opts, options = parse_main(argv)
 
-    validate_options!(options)
+      # Options that are mutually-exclusive with everything else.
+      options = {:help    => true} if options[:help]
+      options = {:version => true} if options[:version]
 
-    # Return an Array containing:
-    #   +opts+: the original OptionParser object.
-    #   +options+: the Hash of flags/values.
-    [opts, options]
-  end
+      validate_options!(options)
 
-  def self.parse_main(argv)
-    options = {
-      report: HowIs::DEFAULT_REPORT_FILE,
-    }
-    opts = nil
+      # Return an Array containing:
+      #   +opts+: the original OptionParser object.
+      #   +options+: the Hash of flags/values.
+      [opts, options]
+    end
 
-    opt_parser = OptionParser.new do |opts_|
-      opts = opts_
-      # General usage information.
+    def self.parse_main(argv)
+      options = {
+        report: HowIs::DEFAULT_REPORT_FILE,
+      }
+
+      opts = OptionParser.new
+
       opts.banner = <<~EOF
         Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
                how_is --config CONFIG_FILE --date REPORT_DATE
@@ -58,8 +61,7 @@ module HowIs::CLI
 
       opts.on("--output REPORT_FILE", format_regexp,
               "Output file for the report.",
-              "Supported file types: #{HowIs.supported_formats.join(', ')}."
-             ) do |filename, _|
+              "Supported file formats: #{formats}.") do |filename, _|
         options[:report] = filename
       end
 
@@ -74,33 +76,40 @@ module HowIs::CLI
       opts.on("-h", "--help", "Print help text") do
         options[:help] = true
       end
+
+      # `.parse!` populates the `options` Hash that was created above, and
+      # the return value is any non-flag arguments.
+      opts.parse!(argv)
+
+      [opts, options]
     end
 
-    # `.parse!` populates the `options` Hash that was created above, and
-    # the return value is any non-flag arguments.
-    opt_parser.parse!(argv)
+    def self.validate_options!(options)
+      return if options[:help] || options[:version]
 
-    [opts, options]
-  end
-
-  def self.validate_options!(options)
-    if options[:date] && !options[:repository] && !options[:config]
-      missing_argument("expected wither --repository or --config.")
+      # Disable Style/GuardClause for this, because this is more readable
+      # than anything I could come up with using guard clauses.
+      #
+      # rubocop:disable Style/GuardClause
+      if options[:date]
+        if !options[:repository] && !options[:config]
+          raise MissingArgument, "--repository or --config."
+        end
+      else
+        raise MissingArgument, "--date"
+      end
+      # rubocop:enable Style/GuardClause
     end
 
-    if !options[:date] && !options[:help] && !options[:version]
-      missing_argument("--date")
+    def self.formats
+      HowIs.supported_formats.join(", ")
     end
-  end
 
-  def self.format_regexp
-    format_regexp_parts =
-      HowIs.supported_formats.map { |x| Regexp.escape(x) }
+    def self.format_regexp
+      format_regexp_parts =
+        HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
-    /.+\.(#{format_regexp_parts.join("|")})/
-  end
-
-  def self.missing_argument(argument)
-    raise OptionParser::MissingArgument, argument
+      /.+\.(#{format_regexp_parts.join("|")})/
+    end
   end
 end

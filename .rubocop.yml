@@ -7,7 +7,6 @@ AllCops:
     - 'bin/*'
     - '**/*~'
     - 'spec/capture_warnings.rb'
-    - 'lib/how_is/cli.rb' # FIXME: Make HowIs::CLI.parse not a disaster.
 
 # Exceptions should inherit from StandardError.
 # (RuboCop default is to inherit from RuntimeError.)
@@ -15,7 +14,7 @@ Lint/InheritException:
   EnforcedStyle: standard_error
 
 Metrics/AbcSize:
-  Max: 16
+  Max: 17
 
 Metrics/BlockLength:
   Exclude:
@@ -38,7 +37,7 @@ Metrics/LineLength:
 # Too short methods lead to extraction of single-use methods, which can make
 # the code easier to read (by naming things), but can also clutter the class
 Metrics/MethodLength:
-  Max: 23
+  Max: 25
 
 Style/Alias:
   EnforcedStyle: prefer_alias_method
@@ -184,6 +183,10 @@ Layout/SpaceInsideHashLiteralBraces:
 
 # I find "foo > 0" more readable than "foo.positive?" personally.
 Style/NumericPredicate:
+  Enabled: false
+
+# https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/RegexpLiteral
+Style/RegexpLiteral:
   Enabled: false
 
 # Use double quotes everywhere by default.
