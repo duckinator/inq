@@ -7,6 +7,8 @@ module HowIs
   ##
   # Class for handling the command-line interface for how_is.
   module CLI
+    MissingArgument = Class.new(OptionParser::MissingArgument)
+
     REPO_REGEXP = /.+\/.+/
     DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
 
@@ -87,11 +89,13 @@ module HowIs
     end
 
     def self.validate_options!(options)
+      return if options[:help] || options[:version]
+
       if options[:date] && !options[:repository] && !options[:config]
         missing_argument("expected wither --repository or --config.")
       end
 
-      if !options[:date] && !options[:help] && !options[:version]
+      if !options[:date]
         missing_argument("--date")
       end
     end
