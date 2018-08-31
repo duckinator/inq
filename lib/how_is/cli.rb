@@ -28,10 +28,10 @@ module HowIs::CLI
     options = {
       report: HowIs::DEFAULT_REPORT_FILE,
     }
-    opts_ = nil
+    opts = nil
 
-    opt_parser = OptionParser.new do |opts|
-      opts_ = opts
+    opt_parser = OptionParser.new do |opts_|
+      opts = opts_
       # General usage information.
       opts.banner = <<~EOF
         Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
@@ -80,7 +80,7 @@ module HowIs::CLI
     # the return value is any non-flag arguments.
     opt_parser.parse!(argv)
 
-    [opts_, options]
+    [opts, options]
   end
 
   def self.validate_options!(options)
