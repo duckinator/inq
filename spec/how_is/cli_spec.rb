@@ -10,7 +10,7 @@ describe HowIs::CLI do
 
   context "#parse" do
     it "converts flags to a Array" do
-      opts, options = subject.parse(%w[--version])
+      opts, options = subject.parse(["--version"])
 
       expect(opts).to_not be(nil)
       expect(options).to be_a(Hash)
@@ -19,19 +19,23 @@ describe HowIs::CLI do
 
     it "raises an OptionParser::MissingArgument if no date is specified" do
       expect {
-        subject.parse(%w[])
+        subject.parse([])
       }.to raise_error(OptionParser::MissingArgument, /--date/)
     end
 
     it "raises an OptionParser::MissingArgument if a repository is required but not specified" do
       expect {
-        subject.parse(%w[--date 2018-01-01])
+        subject.parse(["--date", "2018-01-01"])
       }.to raise_error(OptionParser::MissingArgument, /--repository/)
     end
 
     it "returns an error if you specify an invalid format" do
       expect {
-        subject.parse(%w[--output invalid.format --date 2018-01-01 --resitory how-is/example-repository])
+        subject.parse([
+          "--output", "invalid.format",
+          "--date", "2018-01-01",
+          "--repossitory", "how-is/example-repository"
+        ])
       }.to raise_error(OptionParser::InvalidArgument, /--output/)
     end
   end

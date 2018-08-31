@@ -198,11 +198,9 @@ Style/SymbolArray:
   EnforcedStyle: brackets
 
 # Prefer ["foo", "bar"] over %w[foo bar].
-# TODO: Move away from %w[]/%W[] then re-enable this.
 Style/WordArray:
-  Enabled: false
-#  Enabled: true
-#  EnforcedStyle: brackets
+  Enabled: true
+  EnforcedStyle: brackets
 
 # Require parentheses around complex ternary conditions.
 Style/TernaryParentheses:

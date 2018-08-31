@@ -59,9 +59,9 @@ end
 namespace :generate_reports do
   desc "Generate example HTML reports."
   task :html do
-    %w[
-      how-is/example-repository
-      how-is/example-empty-repository
+    [
+      "how-is/example-repository",
+      "how-is/example-empty-repository",
     ].each do |repo|
       HelperFunctions.generate_report(repo, "html")
     end
