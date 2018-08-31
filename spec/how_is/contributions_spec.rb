@@ -36,9 +36,9 @@ describe HowIs::Sources::Github::Contributions do
         commit_shas = contributions.commits.map(&:commit).map { |commit|
           commit["tree"]["sha"]
         }
-        expect(commit_shas).to eq(%w[
-          6911e0637822f44b83f04f47821adab56fdbc0b9
-          8286e548e330cfe01efcf7189f4df1fa53e777a7
+        expect(commit_shas).to eq([
+          "6911e0637822f44b83f04f47821adab56fdbc0b9",
+          "8286e548e330cfe01efcf7189f4df1fa53e777a7",
         ])
       end
     end

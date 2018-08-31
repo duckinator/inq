@@ -7,7 +7,7 @@ HOW_IS_EXE = File.expand_path("../../exe/how_is", __dir__)
 describe "Integration Tests" do
   context "--help and -h flags" do
     it "outputs usage information" do
-      %w[--help -h].each do |flag|
+      ["--help", "-h"].each do |flag|
         stub_const("ARGV", [flag])
 
         expect {
@@ -19,7 +19,7 @@ describe "Integration Tests" do
 
   context "--version and -v flags" do
     it "outputs the version number" do
-      %w[--version -v].each do |flag|
+      ["--version", "-v"].each do |flag|
         stub_const("ARGV", [flag])
 
         expect {
