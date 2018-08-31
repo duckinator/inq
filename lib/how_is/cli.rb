@@ -57,10 +57,10 @@ module HowIs
           options[:date] = date
         end
 
+        formats = HowIs.supported_formats.join(', ')
         opts.on("--output REPORT_FILE", format_regexp,
                 "Output file for the report.",
-                "Supported file types: #{HowIs.supported_formats.join(', ')}."
-               ) do |filename, _|
+                "Supported file formats: #{formats}.") do |filename, _|
           options[:report] = filename
         end
 
