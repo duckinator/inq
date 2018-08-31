@@ -4,6 +4,8 @@ require "how_is"
 require "optparse"
 
 module HowIs
+  ##
+  # Class for handling the command-line interface for how_is.
   module CLI
     REPO_REGEXP = /.+\/.+/
     DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
