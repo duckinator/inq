@@ -10,7 +10,7 @@ module HowIs::CLI
   # Parses +argv+ to generate an options Hash to control the behavior of
   # the library.
   def self.parse(argv)
-    opts_, options = parse_main(argv)
+    opts, options = parse_main(argv)
 
     # Options that are mutually-exclusive with everything else.
     options = {:help    => true} if options[:help]
@@ -21,7 +21,7 @@ module HowIs::CLI
     # Return an Array containing:
     #   +opts+: the original OptionParser object.
     #   +options+: the Hash of flags/values.
-    [opts_, options]
+    [opts, options]
   end
 
   def self.parse_main(argv)
