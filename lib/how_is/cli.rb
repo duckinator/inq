@@ -91,11 +91,11 @@ module HowIs
     def self.validate_options!(options)
       return if options[:help] || options[:version]
 
-      if options[:date] && !options[:repository] && !options[:config]
-        missing_argument("expected wither --repository or --config.")
-      end
-
-      if !options[:date]
+      if options[:date]
+        if !options[:repository] && !options[:config]
+          missing_argument("--repository or --config.")
+        end
+      else
         missing_argument("--date")
       end
     end
