@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# frozen_string_literal: true
+
 require "bundler/setup" # to avoid having to do `bundle exec ...`
 require "how_is/sources/ci/travis"
 require "how_is/sources/ci/appveyor"
