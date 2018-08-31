@@ -91,6 +91,10 @@ module HowIs
     def self.validate_options!(options)
       return if options[:help] || options[:version]
 
+      # Disable Style/GuardClause for this, because this is more readable
+      # than anything I could come up with using guard clauses.
+      #
+      # rubocop:disable Style/GuardClause
       if options[:date]
         if !options[:repository] && !options[:config]
           raise MissingArgument, "--repository or --config."
@@ -98,6 +102,7 @@ module HowIs
       else
         raise MissingArgument, "--date"
       end
+      # rubocop:enable Style/GuardClause
     end
 
     def self.format_regexp
