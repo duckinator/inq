@@ -14,7 +14,7 @@ Lint/InheritException:
   EnforcedStyle: standard_error
 
 Metrics/AbcSize:
-  Max: 16
+  Max: 17
 
 Metrics/BlockLength:
   Exclude:
