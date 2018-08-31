@@ -113,10 +113,9 @@ Style/FormatStringToken:
   EnforcedStyle: template
 
 # Freeze string literals to future-proof the code.
-# TODO: Enable this always. (Disabled due to not knowing what will happen.)
 Style/FrozenStringLiteralComment:
   Enabled: true
-  #EnforcedStyle: always
+  EnforcedStyle: always
 
 # Mixing hash styles just looks silly.
 # http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/HashSyntax
