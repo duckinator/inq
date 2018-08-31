@@ -30,11 +30,10 @@ module HowIs::CLI
     opt_parser = OptionParser.new do |opts|
       opts_ = opts
       # General usage information.
-      opts.banner =
-        <<~EOF
-          Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
-                 how_is --config CONFIG_FILE --date REPORT_DATE
-        EOF
+      opts.banner = <<~EOF
+        Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
+               how_is --config CONFIG_FILE --date REPORT_DATE
+      EOF
 
       opts.separator ""
       opts.separator "Options:"
@@ -44,14 +43,14 @@ module HowIs::CLI
         options[:config] = filename
       end
 
-      opts.on("--repository USER/REPO",
-              /.+\/.+/,
+      repo_regexp = /.+\/.+/
+      opts.on("--repository USER/REPO", repo_regexp,
               "Repository to generate a report for.") do |repository|
         options[:repository] = repository
       end
 
-      opts.on("--date YYYY-MM-DD",
-              /\d\d\d\d-\d\d-\d\d/,
+      date_regexp = /\d\d\d\d-\d\d-\d\d/
+      opts.on("--date YYYY-MM-DD", date_regexp,
               "Last date of the report.") do |date|
         options[:date] = date
       end
@@ -64,18 +63,15 @@ module HowIs::CLI
         options[:report] = filename
       end
 
-      opts.on("--verbose",
-              "Print debug information.") do
+      opts.on("--verbose", "Print debug information.") do
         options[:verbose] = true
       end
 
-      opts.on("-v", "--version",
-              "Prints version information") do
+      opts.on("-v", "--version", "Prints version information") do
         options[:version] = true
       end
 
-      opts.on("-h", "--help",
-              "Print help text") do
+      opts.on("-h", "--help", "Print help text") do
         options[:help] = true
       end
     end
