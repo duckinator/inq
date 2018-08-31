@@ -93,10 +93,10 @@ module HowIs
 
       if options[:date]
         if !options[:repository] && !options[:config]
-          missing_argument("--repository or --config.")
+          raise MissingArgument, "--repository or --config."
         end
       else
-        missing_argument("--date")
+        raise MissingArgument, "--date"
       end
     end
 
@@ -105,10 +105,6 @@ module HowIs
         HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
       /.+\.(#{format_regexp_parts.join("|")})/
-    end
-
-    def self.missing_argument(argument)
-      raise OptionParser::MissingArgument, argument
     end
   end
 end
