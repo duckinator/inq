@@ -33,57 +33,54 @@ module HowIs
       options = {
         report: HowIs::DEFAULT_REPORT_FILE,
       }
-      opts = nil
 
-      opt_parser = OptionParser.new do |opts_|
-        opts = opts_
-        # General usage information.
-        opts.banner = <<~EOF
-          Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
-                 how_is --config CONFIG_FILE --date REPORT_DATE
-        EOF
+      opts = OptionParser.new
 
-        opts.separator ""
-        opts.separator "Options:"
+      opts.banner = <<~EOF
+        Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
+               how_is --config CONFIG_FILE --date REPORT_DATE
+      EOF
 
-        opts.on("--config CONFIG_FILE",
-                "YAML config file for automating reports.") do |filename|
-          options[:config] = filename
-        end
+      opts.separator ""
+      opts.separator "Options:"
 
-        opts.on("--repository USER/REPO", REPO_REGEXP,
-                "Repository to generate a report for.") do |repository|
-          options[:repository] = repository
-        end
+      opts.on("--config CONFIG_FILE",
+              "YAML config file for automating reports.") do |filename|
+        options[:config] = filename
+      end
 
-        opts.on("--date YYYY-MM-DD", DATE_REGEXP,
-                "Last date of the report.") do |date|
-          options[:date] = date
-        end
+      opts.on("--repository USER/REPO", REPO_REGEXP,
+              "Repository to generate a report for.") do |repository|
+        options[:repository] = repository
+      end
 
-        formats = HowIs.supported_formats.join(", ")
-        opts.on("--output REPORT_FILE", format_regexp,
-                "Output file for the report.",
-                "Supported file formats: #{formats}.") do |filename, _|
-          options[:report] = filename
-        end
+      opts.on("--date YYYY-MM-DD", DATE_REGEXP,
+              "Last date of the report.") do |date|
+        options[:date] = date
+      end
 
-        opts.on("--verbose", "Print debug information.") do
-          options[:verbose] = true
-        end
+      formats = HowIs.supported_formats.join(", ")
+      opts.on("--output REPORT_FILE", format_regexp,
+              "Output file for the report.",
+              "Supported file formats: #{formats}.") do |filename, _|
+        options[:report] = filename
+      end
 
-        opts.on("-v", "--version", "Prints version information") do
-          options[:version] = true
-        end
+      opts.on("--verbose", "Print debug information.") do
+        options[:verbose] = true
+      end
 
-        opts.on("-h", "--help", "Print help text") do
-          options[:help] = true
-        end
+      opts.on("-v", "--version", "Prints version information") do
+        options[:version] = true
+      end
+
+      opts.on("-h", "--help", "Print help text") do
+        options[:help] = true
       end
 
       # `.parse!` populates the `options` Hash that was created above, and
       # the return value is any non-flag arguments.
-      opt_parser.parse!(argv)
+      opts.parse!(argv)
 
       [opts, options]
     end
