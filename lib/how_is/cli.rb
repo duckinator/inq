@@ -89,18 +89,14 @@ module HowIs::CLI
 
   def self.validate_options!(options)
     if options[:date]
-      if !options[:repository] && !options[:config]
-        missing_argument("expected wither --repository or --config.")
-      end
-    else
-      if !options[:help] && !options[:version]
-        missing_argument("--date")
-      end
+      return if options[:repository] || options[:config]
 
-      if options[:repository] || options[:config]
-        missing_argument("--date")
-      end
+      missing_argument("expected wither --repository or --config.")
     end
+
+    return if options[:help] || options[:version]
+
+    missing_argument("--date")
   end
 
   def self.format_regexp
