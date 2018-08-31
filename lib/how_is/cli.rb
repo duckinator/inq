@@ -7,7 +7,7 @@ module HowIs::CLI
   # Parses +argv+ to generate an options Hash to control the behavior of
   # the library.
   def self.parse(argv)
-    opts_, options = self.parse_main(argv)
+    opts_, options = parse_main(argv)
     options = normalize_options(options)
 
     # Return an Array containing:
