@@ -59,7 +59,6 @@ module HowIs
         options[:date] = date
       end
 
-      formats = HowIs.supported_formats.join(", ")
       opts.on("--output REPORT_FILE", format_regexp,
               "Output file for the report.",
               "Supported file formats: #{formats}.") do |filename, _|
@@ -100,6 +99,10 @@ module HowIs
         raise MissingArgument, "--date"
       end
       # rubocop:enable Style/GuardClause
+    end
+
+    def self.formats
+      HowIs.supported_formats.join(", ")
     end
 
     def self.format_regexp
