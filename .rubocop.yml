@@ -185,6 +185,10 @@ Layout/SpaceInsideHashLiteralBraces:
 Style/NumericPredicate:
   Enabled: false
 
+# https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/RegexpLiteral
+Style/RegexpLiteral:
+  Enabled: false
+
 # Use double quotes everywhere by default.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
