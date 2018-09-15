@@ -34,7 +34,7 @@ module HowIs
         def initialize(repository, start_date, end_date)
           @user, @repo = repository.split("/")
           @github = ::Github.new(auto_pagination: true) { |config|
-            config.basic_auth = HowIs::Sources::Github::BASIC_AUTH
+            config.basic_auth = HowIs::Sources::Github.basic_auth
           }
 
           # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
