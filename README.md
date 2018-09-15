@@ -2,7 +2,6 @@
 [![Travis](https://img.shields.io/travis/how-is/how_is.svg)](https://travis-ci.org/how-is/how_is)
 [![Code Climate](https://img.shields.io/codeclimate/github/how-is/how_is.svg)](https://codeclimate.com/github/how-is/how_is)
 [![Gem](https://img.shields.io/gem/v/how_is.svg)](https://rubygems.org/gems/how_is)
-[![Gemnasium](https://img.shields.io/gemnasium/how-is/how_is.svg)](https://gemnasium.com/github.com/how-is/how_is)
 
 # How is [your repo]?
 
