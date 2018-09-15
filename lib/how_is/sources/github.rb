@@ -19,21 +19,24 @@ module HowIs
       end
 
       # A GitHub Personal Access Token.
-      ACCESS_TOKEN = ENV["HOWIS_GITHUB_TOKEN"]
-      raise ConfigurationError, "HOWIS_GITHUB_TOKEN" if ACCESS_TOKEN.nil?
+      def self.access_token
+        token = ENV["HOWIS_GITHUB_TOKEN"]
+        raise ConfigurationError, "HOWIS_GITHUB_TOKEN" if token.nil?
+
+        token
+      end
 
       # "<github username>:<personal access token>"
-      BASIC_AUTH = ENV["HOWIS_BASIC_AUTH"]
-      raise ConfigurationError, "HOWIS_BASIC_AUTH" if BASIC_AUTH.nil?
+      def self.basic_auth
+        auth = ENV["HOWIS_BASIC_AUTH"]
+        raise ConfigurationError, "HOWIS_BASIC_AUTH" if auth.nil?
 
-      # Used for the the Authorization header when talking to the
-      # GitHub API.
-      # https://developer.github.com/v4/guides/forming-calls/#communicating-with-graphql
-      AUTHORIZATION_HEADER = "bearer " + ACCESS_TOKEN
+        auth
+      end
 
       def self.graphql(query_string)
         query = Okay::GraphQL.query(query_string)
-        headers = {bearer_token: HowIs::Sources::Github::ACCESS_TOKEN}
+        headers = {bearer_token: HowIs::Sources::Github.access_token}
         query.submit!(:github, headers).or_raise!.from_json
       end
     end
