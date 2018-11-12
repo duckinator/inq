@@ -41,7 +41,7 @@ variables.
 
 An example of how to do so for the Bash shell is provided below.
 
-Make sure to replaceall instances of `<TOKEN>` with the actual token,
+Make sure to replace all instances of `<TOKEN>` with the actual token,
 and `<USERNAME>` with your GitHub username.
 
 ```bash
