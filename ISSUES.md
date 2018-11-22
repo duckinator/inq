@@ -1,86 +1,62 @@
 # Issue Management
 
-The goal of issue management is to organize the work that needs to be
-done when working on a project, by allowing users to report bugs,
-request features or documentation, and start discussions.
+This document explains what labels on a given issue mean, or to help you
+choose labels for new/updated issues.
 
-To simplify that task, issues have _labels_. The purpose of labels is to
-group issues in ways developers find useful. The obvious examples being
-bug reports and feature requests.
-
-This document is intended as a guide to help you understand what labels
-on a given issue mean, or to help you choose labels for a new issue.
-
-Labels on this repository are grouped, using the section before the
-first colon in an issue name.
-
-Issue groups:
-
-* [(ungrouped)](#ungrouped)
-* [category](#categories)
-* [closed](#closed)
-* [size](#size)
-* [status](#status)
-* [type](#type)
+We use an issue tracker to organize and prioritize work by allowing users
+to report bugs, request features or documentation, and start discussions.
 
 ---
 
-## (ungrouped)
+## high priority
 
-### blocked
+An issue that should be resolved as soon as possible.
 
-An issue which can't be worked on until some other work is finished.
-If an issue has this label, it _should_ (but, unfortunately, may not)
-have an explanation of what other work needs to be done before it can be
-worked on.
-
-### duplicate
-
-A duplicate issue.
-
-### in progress
+## in progress
 
 An issue which is currently being worked on. This should be added when
 someone begins work on an issue.
 
-### ready
+## ready
 
 An issue which is ready to be worked on. This should be removed when
 someone begins work on an issue.
 
-## categories
-
-### category: export
-
-Issues relating to exporting reports.
-
-## size
-
-### size: small
-
-An issue which should, at least in theory, be relatively simple to
-resolve.
-
-### size: large
+## size: large
 
 An issue which is expected to take a large amount of effort to resolve.
 
-### size: here be dragons
+## size: small
 
-An issue which is extremely difficult, possibly impossible, to determine
-the actual difficulty of. It could be resolved quickly, or it could grow
-significantly.
+An issue which is expected to be relatively simple to resolve.
 
-## type
-
-### type: bug report
+## type: bug report
 
 A bug report.
 
-### type: feature request
+## type: documentation
+
+A request for additional or updated documentation.
+
+## type: feature request
 
 A request for a new feature to be added.
 
-### type: question
+## type: question/discussion
 
-An issue which is a question or discussion.
+A question or discussion. Issues with this label are likely to not have
+any immediately-actionable tasks.
+
+When any tasks do arise from an issue with this label, more specific
+issues will likely be opened to replace it.
+
+## type: refactoring
+
+A request for a particular section of code to be refactored.
+
+Including concrete suggestions for smaller areas will likely get these
+issues resolved more quickly.
+
+## type: tests
+
+A request for new or improved tests addressing specific situations.
