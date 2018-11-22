@@ -2,7 +2,7 @@
 
 require "how_is/sources/github/contributions"
 
-describe HowIs::Sources::Github::Contributions do
+describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
   let(:contributions) {
     described_class.new("how-is/example-repository", "2017-08-01", "2017-09-01")
   }

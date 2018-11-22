@@ -31,7 +31,7 @@ describe HowIs do
       YAML.load_file(HOW_IS_CONFIG_FILE)
     }
 
-    it "generates valid report files" do
+    it "generates valid report files", skip: env_vars_hidden? do
       Dir.mktmpdir { |dir|
         Dir.chdir(dir) {
           reports = nil
@@ -53,7 +53,7 @@ describe HowIs do
       }
     end
 
-    it "adds correct frontmatter" do
+    it "adds correct frontmatter", skip: env_vars_hidden? do
       reports = nil
 
       VCR.use_cassette("how-is-from-config-frontmatter") do
@@ -96,7 +96,7 @@ describe HowIs do
       Timecop.return
     end
 
-    it "generates a valid report" do
+    it "generates a valid report", skip: env_vars_hidden? do
       expected_html = File.open(HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
       expected_json = File.open(HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
       actual_report = nil
@@ -113,7 +113,7 @@ describe HowIs do
   end
 
   context "HTML report for repository with no PRs or issues" do
-    it "generates a valid report file" do
+    it "generates a valid report file", skip: env_vars_hidden? do
       expected = File.open(HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT).read.chomp
       actual = nil
 
