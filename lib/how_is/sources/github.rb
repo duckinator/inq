@@ -26,12 +26,18 @@ module HowIs
         token
       end
 
-      # "<github username>:<personal access token>"
-      def self.basic_auth
-        auth = ENV["HOWIS_BASIC_AUTH"]
-        raise ConfigurationError, "HOWIS_BASIC_AUTH" if auth.nil?
+      # The GitHub username to go with the Personal Access Token.
+      def self.username
+        username = ENV["HOWIS_GITHUB_USERNAME"]
+        raise ConfigurationError, "HOWIS_GITHUB_USERNAME" if username.nil?
 
-        auth
+        username
+      end
+
+      # A string containing both the GitHub username and access token,
+      # used in instances where we use Basic Auth.
+      def self.basic_auth
+        "#{username}:#{access_token}"
       end
 
       def self.graphql(query_string)
