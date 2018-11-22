@@ -1,29 +1,12 @@
 # Issue Management
 
-This document is intended as a guide to help you understand what labels
-on a given issue mean, or to help you choose labels for a new issue.
+This document explains what labels on a given issue mean, or to help you
+choose labels for new/updated issues.
 
-The goal of issue management is to organize the work that needs to be
-done when working on a project, by allowing users to report bugs,
-request features or documentation, and start discussions.
-
-To simplify that task, issues have _labels_, to group issues in ways
-that developers find useful.
+We use an issue tracker to organize and prioritize work by allowing users
+to report bugs, request features or documentation, and start discussions.
 
 ---
-
-## blocked
-
-An issue which can't be worked on until something else is finished.
-
-If an issue has this label, it _should_ have an explanation of what needs
-to be finished before it can be worked on.
-
-If it does not, feel free to leave a comment and ask for details.
-
-## help wanted
-
-An issue we'd like help with.
 
 ## high priority
 
@@ -45,17 +28,15 @@ An issue which is expected to take a large amount of effort to resolve.
 
 ## size: small
 
-An issue which should, in theory, be relatively simple to resolve.
-
-## size: here be dragons
-
-An issue which we can't easily determine the complexity of.
-
-It could be resolved quickly, or it could be impossible to do.
+An issue which is expected to be relatively simple to resolve.
 
 ## type: bug report
 
 A bug report.
+
+## type: documentation
+
+A request for additional or updated documentation.
 
 ## type: feature request
 
@@ -63,5 +44,19 @@ A request for a new feature to be added.
 
 ## type: question/discussion
 
-A question or discussion. Issues with this label may not have any
-development work related to them.
+A question or discussion. Issues with this label are likely to not have
+any immediately-actionable tasks.
+
+When any tasks do arise from an issue with this label, more specific
+issues will likely be opened to replace it.
+
+## type: refactoring
+
+A request for a particular section of code to be refactored.
+
+Including concrete suggestions for smaller areas will likely get these
+issues resolved more quickly.
+
+## type: tests
+
+A request for new or improved tests addressing specific situations.
