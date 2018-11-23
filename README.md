@@ -36,17 +36,17 @@ To acquire a personal access token:
 
 #### Using The Token
 
-You now need to define the `HOWIS_GITHUB_TOKEN` and `HOWIS_BASIC_AUTH`
+You now need to define the `HOWIS_GITHUB_TOKEN` and `HOWIS_GITHUB_USERNAME`
 variables.
 
 An example of how to do so for the Bash shell is provided below.
 
-Make sure to replace all instances of `<TOKEN>` with the actual token,
-and `<USERNAME>` with your GitHub username.
+Make sure to replace `<TOKEN>` with the actual token, and `<USERNAME>`
+with your GitHub username.
 
 ```bash
-export HOWIS_GITHUB_TOKEN=<TOKEN>
-export HOWIS_BASIC_AUTH="<USERNAME>:<TOKEN>"
+export HOWIS_GITHUB_TOKEN="<TOKEN>"
+export HOWIS_GITHUB_USERNAME="<USERNAME>"
 ```
 
 
