@@ -10,6 +10,9 @@ matrix:
     - rvm:
       - ruby-head
 
+before_install:
+  - gem install bundler
+
 # See https://bors.tech/documentation/getting-started/
 branches:
   only:
