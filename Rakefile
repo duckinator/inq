@@ -74,31 +74,3 @@ namespace :generate_reports do
 
   task :all => [:html, :json]
 end
-
-desc "List new contributors. Lists committers with no earlier commits then "\
-  "given start_date (as %Y-%m-%d). Defaults to first of current month."
-task :new_contributors, [:user, :repo, :start_date] => [] do |_t, args|
-  require "how_is/contributions"
-  user = args[:user] || "how-is"
-  repo = args[:repo] || "how_is"
-  start_date = args[:start_date] || Time.now.strftime("%Y-%m-01")
-
-  contributions = HowIs::Contributions.new(start_date: start_date,
-                                           user: user,
-                                           repo: repo)
-
-  puts "New committers:"
-  puts contributions.summary
-  puts contributions.new_contributors
-end
-
-desc "Display duration of latest CI build. CI builds supported include Travis."
-task :test_execution_time, [:user, :repo] => [] do |_t, args|
-  require "how_is/builds"
-  user = args[:user] || "how-is"
-  repo = args[:repo] || "how_is"
-  builds = HowIs::Builds.new(user: user, repo: repo)
-
-  puts "Test execution information:"
-  puts builds.summary
-end
