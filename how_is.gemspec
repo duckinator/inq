@@ -19,18 +19,26 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  # how_is only supports Ruby versions under "normal maintenance".
+  # This number should be updated when a Ruby version goes into security
+  # maintenance.
+  #
+  # Ruby maintenance info: https://www.ruby-lang.org/en/downloads/branches/
+  #
+  # NOTE: Update Gemfile when this is updated!
+  spec.required_ruby_version = "~> 2.4"
+
   spec.add_runtime_dependency "github_api", "~> 0.18.1"
-  spec.add_runtime_dependency "okay", "~> 8.0.0"
+  spec.add_runtime_dependency "okay", "~> 8.0"
 
   spec.add_runtime_dependency "json"
 
-  spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 12.3"
-  spec.add_development_dependency "rspec", "~> 3.7"
+  spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "timecop", "~> 0.9.1"
   spec.add_development_dependency "vcr", "~> 4.0"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "rubocop", "~> 0.49.1"
   spec.add_development_dependency "github_changelog_generator"
-  spec.add_development_dependency "pry"
 end
