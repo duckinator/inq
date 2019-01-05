@@ -9,9 +9,12 @@ class SimpleOpts < OptionParser
     @hi_options = defaults || {}
   end
 
-  # simple(..., :x)
+  # simple(..., :a)
+  # simple(..., :b)
   #   ==
-  # on(...) { <code to store the result> }
+  # options = {}
+  # on(...) { |val| options[:a] = val }
+  # on(...) { |val| options[:b] = val }
   def simple(*args)
     key = args.pop
     on(*args) { |*x| @hi_options[key] = x[0] }

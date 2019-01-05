@@ -9,7 +9,7 @@ describe HowIs::CLI do
   subject { HowIs::CLI }
 
   context "#parse" do
-    it "takes an Array of args and returns a Hash" do
+    it "takes an Array of args and returns a HowIs::CLI object" do
       cli = subject.parse(["--version"])
 
       expect(cli.help_text).to be_a(String)
