@@ -35,9 +35,6 @@ module HowIs
       @parser = opts
       @help_text = @parser.to_s
 
-      # Return an Array containing:
-      #   +opts+: the original OptionParser object.
-      #   +options+: the Hash of flags/values.
       self
     end
 
