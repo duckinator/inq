@@ -61,9 +61,9 @@ module HowIs
       opts.simple("--date YYYY-MM-DD", DATE_REGEXP, "Last date of the report.",
                   :date)
 
-      opts.simple("--output REPORT_FILE", HowIs::CLI.format_regexp,
+      opts.simple("--output REPORT_FILE", format_regexp,
                   "Output file for the report.",
-                  "Supported file formats: #{HowIs::CLI.formats}.",
+                  "Supported file formats: #{formats}.",
                   :report)
 
       opts.simple("--verbose", "Print debug information.", :verbose)
@@ -80,15 +80,14 @@ module HowIs
         options[:repository] || options[:config]
     end
 
-    def self.formats
+    def formats
       HowIs.supported_formats.join(", ")
     end
 
-    def self.format_regexp
-      format_regexp_parts =
-        HowIs.supported_formats.map { |x| Regexp.escape(x) }
+    def format_regexp
+      regexp_parts = HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
-      /.+\.(#{format_regexp_parts.join("|")})/
+      /.+\.(#{regexp_parts.join("|")})/
     end
 
     def self.parse(*args)
