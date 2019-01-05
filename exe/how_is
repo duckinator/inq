@@ -7,18 +7,15 @@ require "how_is/cli"
 require "date"
 
 begin
-  opts, options = HowIs::CLI.parse(ARGV)
+  cli = HowIs::CLI.parse(ARGV)
 rescue OptionParser::ParseError => e
   abort "how_is: error: #{e.message}"
 end
 
-if options[:help]
-  puts opts
-  exit
-elsif options[:version]
-  puts HowIs::VERSION
-  exit
-end
+options = cli.options
+
+abort cli.help_text         if options[:help]
+abort HowIs::VERSION_STRING if options[:version]
 
 date = options[:date]
 

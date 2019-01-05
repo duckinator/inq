@@ -9,12 +9,12 @@ describe HowIs::CLI do
   subject { HowIs::CLI }
 
   context "#parse" do
-    it "converts flags to a Array" do
-      opts, options = subject.parse(["--version"])
+    it "takes an Array of args and returns a Hash" do
+      cli = subject.parse(["--version"])
 
-      expect(opts).to_not be(nil)
-      expect(options).to be_a(Hash)
-      expect(options[:version]).to eq(true)
+      expect(cli.help_text).to be_a(String)
+      expect(cli.options).to be_a(Hash)
+      expect(cli.options[:version]).to eq(true)
     end
 
     it "raises an OptionParser::MissingArgument if no date is specified" do
