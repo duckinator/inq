@@ -12,10 +12,9 @@ module HowIs
     REPO_REGEXP = /.+\/.+/
     DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
 
-    attr_accessor :options, :help_text, :version_text
+    attr_accessor :options, :help_text
 
     def initialize
-      @parser = nil
       @options = nil
       @help_text = nil
     end
