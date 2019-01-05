@@ -1,21 +1,28 @@
 # frozen_string_literal: true
 
 require "how_is"
-require "optparse"
+require "how_is/simple_opts"
 
 module HowIs
   ##
   # Class for handling the command-line interface for how_is.
-  module CLI
+  class CLI
     MissingArgument = Class.new(OptionParser::MissingArgument)
 
     REPO_REGEXP = /.+\/.+/
     DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
 
+    attr_accessor :options, :help_text
+
+    def initialize
+      @options = nil
+      @help_text = nil
+    end
+
     # Parses +argv+ to generate an options Hash to control the behavior of
     # the library.
-    def self.parse(argv)
-      opts, options = parse_main(argv)
+    def parse(argv)
+      parser, options = parse_main(argv)
 
       # Options that are mutually-exclusive with everything else.
       options = {:help    => true} if options[:help]
@@ -23,93 +30,68 @@ module HowIs
 
       validate_options!(options)
 
-      # Return an Array containing:
-      #   +opts+: the original OptionParser object.
-      #   +options+: the Hash of flags/values.
-      [opts, options]
+      @options = options
+      @help_text = parser.to_s
+
+      self
     end
 
-    def self.parse_main(argv)
-      options = {
+    def parse_main(argv)
+      defaults = {
         report: HowIs::DEFAULT_REPORT_FILE,
       }
 
-      opts = OptionParser.new
+      opts = SimpleOpts.new(defaults: defaults)
 
       opts.banner = <<~EOF
         Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
                how_is --config CONFIG_FILE --date REPORT_DATE
       EOF
 
-      opts.separator ""
-      opts.separator "Options:"
+      opts.separator "\nOptions:"
 
-      opts.on("--config CONFIG_FILE",
-              "YAML config file for automating reports.") do |filename|
-        options[:config] = filename
-      end
+      opts.simple("--config CONFIG_FILE",
+                  "YAML config file for automated reports.",
+                  :config)
 
-      opts.on("--repository USER/REPO", REPO_REGEXP,
-              "Repository to generate a report for.") do |repository|
-        options[:repository] = repository
-      end
+      opts.simple("--repository USER/REPO", REPO_REGEXP,
+                  "Repository to generate a report for.",
+                  :repository)
 
-      opts.on("--date YYYY-MM-DD", DATE_REGEXP,
-              "Last date of the report.") do |date|
-        options[:date] = date
-      end
+      opts.simple("--date YYYY-MM-DD", DATE_REGEXP, "Last date of the report.",
+                  :date)
 
-      opts.on("--output REPORT_FILE", format_regexp,
-              "Output file for the report.",
-              "Supported file formats: #{formats}.") do |filename, _|
-        options[:report] = filename
-      end
+      opts.simple("--output REPORT_FILE", format_regexp,
+                  "Output file for the report.",
+                  "Supported file formats: #{formats}.",
+                  :report)
 
-      opts.on("--verbose", "Print debug information.") do
-        options[:verbose] = true
-      end
+      opts.simple("--verbose", "Print debug information.", :verbose)
+      opts.simple("-v", "--version", "Prints version information.", :version)
+      opts.simple("-h", "--help", "Print help text.", :help)
 
-      opts.on("-v", "--version", "Prints version information") do
-        options[:version] = true
-      end
-
-      opts.on("-h", "--help", "Print help text") do
-        options[:help] = true
-      end
-
-      # `.parse!` populates the `options` Hash that was created above, and
-      # the return value is any non-flag arguments.
-      opts.parse!(argv)
-
-      [opts, options]
+      [opts, opts.parse(argv)]
     end
 
-    def self.validate_options!(options)
+    def validate_options!(options)
       return if options[:help] || options[:version]
-
-      # Disable Style/GuardClause for this, because this is more readable
-      # than anything I could come up with using guard clauses.
-      #
-      # rubocop:disable Style/GuardClause
-      if options[:date]
-        if !options[:repository] && !options[:config]
-          raise MissingArgument, "--repository or --config."
-        end
-      else
-        raise MissingArgument, "--date"
-      end
-      # rubocop:enable Style/GuardClause
+      raise MissingArgument, "--date" unless options[:date]
+      raise MissingArgument, "--repository or --config" unless
+        options[:repository] || options[:config]
     end
 
-    def self.formats
+    def formats
       HowIs.supported_formats.join(", ")
     end
 
-    def self.format_regexp
-      format_regexp_parts =
-        HowIs.supported_formats.map { |x| Regexp.escape(x) }
+    def format_regexp
+      regexp_parts = HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
-      /.+\.(#{format_regexp_parts.join("|")})/
+      /.+\.(#{regexp_parts.join("|")})/
+    end
+
+    def self.parse(*args)
+      new.parse(*args)
     end
   end
 end
