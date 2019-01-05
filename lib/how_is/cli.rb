@@ -23,7 +23,7 @@ module HowIs
     # Parses +argv+ to generate an options Hash to control the behavior of
     # the library.
     def parse(argv)
-      opts, options = parse_main(argv)
+      parser, options = parse_main(argv)
 
       # Options that are mutually-exclusive with everything else.
       options = {:help    => true} if options[:help]
@@ -32,8 +32,7 @@ module HowIs
       validate_options!(options)
 
       @options = options
-      @parser = opts
-      @help_text = @parser.to_s
+      @help_text = parser.to_s
 
       self
     end
