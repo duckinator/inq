@@ -28,9 +28,7 @@ module HowIs
     end
 
     def with_site_configs(*files)
-      if files.length == 1 && files[0].is_a?(Array)
-        files = files[0]
-      end
+      files = files[0] if files.length == 1 && files[0].is_a?(Array)
 
       load_files(*files)
     end

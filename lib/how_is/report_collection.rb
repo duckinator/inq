@@ -4,6 +4,8 @@ require "how_is/report"
 require "how_is/warning_helpers"
 
 module HowIs
+  ##
+  # A class representing a collection of Reports.
   class ReportCollection
     include WarningHelpers
 
