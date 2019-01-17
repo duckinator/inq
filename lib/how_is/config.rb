@@ -38,7 +38,7 @@ module HowIs
     def load_files(*file_paths)
       files = (site_configs + file_paths).map { |f| Pathname.new(f) }
       # TODO: Validate config state in some way.
-      configs = files.map { |file| YAML.load(file.read) }
+      configs = files.map { |file| YAML.safe_load(file.read) }
 
       load(*configs)
     end
