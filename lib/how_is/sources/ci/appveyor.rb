@@ -2,6 +2,7 @@
 
 require "okay/default"
 require "okay/http"
+require "how_is/constants"
 require "how_is/sources"
 require "how_is/sources/github/contributions"
 

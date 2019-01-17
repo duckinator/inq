@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "how_is"
+require "how_is/constants"
 require "how_is/simple_opts"
 
 module HowIs

@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 require "how_is/version"
-require "how_is/constants"
 require "how_is/report"
 require "how_is/report_collection"
-require "how_is/warning_helpers"
 
 ##
 # Top-level module for creating a report.
 module HowIs
-  extend WarningHelpers
-
   def self.new(repository, date)
     # TODO: Define a proper default config?
     Report.new({
