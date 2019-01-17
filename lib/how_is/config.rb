@@ -3,14 +3,14 @@
 require "yaml"
 
 module HowIs
-  HOME_CONFIG = File.join(Dir.home, '.config', 'how_is', 'config.yml')
+  HOME_CONFIG = File.join(Dir.home, ".config", "how_is", "config.yml")
 
   # Usage:
   #     HowIs::Config
-  #       .with_site_configs('/path/to/config1.yml', '/path/to/config2.yml')
-  #       .load_file('./repo-config.yml')
+  #       .with_site_configs("/path/to/config1.yml", "/path/to/config2.yml")
+  #       .load_file("./repo-config.yml")
   # Or:
-  #     HowIs::Config.with_defaults.load_file('./repo-config.yml')
+  #     HowIs::Config.with_defaults.load_file("./repo-config.yml")
   # Or:
   #     HowIs::Config.with_defaults.load({
   #       "repository" => "how-is/example-repository",
