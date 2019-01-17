@@ -16,9 +16,9 @@ module HowIs
         "html" => {
           "directory" => ".",
           "frontmatter" => {},
-          "filename" => "report.html"
-        }
-      }
+          "filename" => "report.html",
+        },
+      },
     })
 
     Report.new(config, date)
