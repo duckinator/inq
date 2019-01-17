@@ -12,8 +12,17 @@ module HowIs
   extend WarningHelpers
 
   def self.new(repository, date)
-    # HACK: Provide a fake config hash during refactoring.
-    Report.new({"repository" => repository}, date)
+    # TODO: Define a proper default config?
+    Report.new({
+      "repository" => repository,
+      "reports" => {
+        "html" => {
+          "directory" => ".",
+          "frontmatter" => {},
+          "filename" => "report.html"
+        }
+      }
+    }, date)
   end
 
   ##
