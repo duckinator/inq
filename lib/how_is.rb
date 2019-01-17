@@ -3,10 +3,13 @@
 require "how_is/version"
 require "how_is/constants"
 require "how_is/report"
+require "how_is/warning_helpers"
 
 ##
 # Top-level module for creating a report.
 module HowIs
+  extend WarningHelpers
+
   def self.new(repository, date)
     Report.new(repository, date)
   end
@@ -61,20 +64,6 @@ module HowIs
       Kernel.format(template_str, data)
     }
   end
-
-  def self.silence_warnings(&block)
-    with_warnings(nil, &block)
-  end
-  private_class_method :silence_warnings
-
-  def self.with_warnings(flag, &_block)
-    old_verbose = $VERBOSE
-    $VERBOSE = flag
-    yield
-  ensure
-    $VERBOSE = old_verbose
-  end
-  private_class_method :with_warnings
 
   def self.expand_filename(filename, report_data)
     # Sometimes report_data has unused keys, which generates a warning, but
