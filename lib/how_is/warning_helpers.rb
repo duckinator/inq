@@ -1,4 +1,6 @@
 module HowIs
+  ##
+  # Helper functions for suppressing warnings when we know it's okay.
   module WarningHelpers
     def silence_warnings(&block)
       with_warnings(nil, &block)
