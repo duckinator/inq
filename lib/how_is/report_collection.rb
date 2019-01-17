@@ -1,3 +1,4 @@
+require "how_is/report"
 require "how_is/warning_helpers"
 
 module HowIs
