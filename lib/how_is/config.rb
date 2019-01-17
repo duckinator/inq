@@ -19,7 +19,7 @@ module HowIs
     attr_reader :site_configs
 
     def self.with_defaults
-      self.new.with_site_configs(HOME_CONFIG)
+      new.with_site_configs(HOME_CONFIG)
     end
 
     def initialize
