@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HowIs
   ##
   # Helper functions for suppressing warnings when we know it's okay.
