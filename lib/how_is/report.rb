@@ -12,7 +12,9 @@ module HowIs
   ##
   # Class for generating a HowIs report.
   class Report
-    def initialize(repository, end_date)
+    def initialize(config, end_date)
+      repository = config["repository"]
+
       # NOTE: Use DateTime because it defaults to UTC and that's less gross
       #       than trying to get Date to use UTC.
       #

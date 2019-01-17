@@ -11,7 +11,8 @@ module HowIs
   extend WarningHelpers
 
   def self.new(repository, date)
-    Report.new(repository, date)
+    # HACK: Provide a fake config hash during refactoring.
+    Report.new({"repository" => repository}, date)
   end
 
   ##
@@ -22,7 +23,7 @@ module HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
-    report = Report.new(config["repository"], date)
+    report = Report.new(config, date)
     report_data = prepare_report_metadata(config["repository"], date)
 
     config["reports"].map { |format, report_config|
