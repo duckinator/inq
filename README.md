@@ -17,10 +17,8 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
 ## Configuration
 
-HowIs can hit the default API limits for GitHub for even small reports.
-
 To avoid errors due to hitting rate limits, HowIs requires a Personal
-Access Token, which GitHub provides with higher rate limits.
+Access Token for GitHub.
 
 ### Acquiring A Personal Access Token
 
@@ -36,19 +34,16 @@ To acquire a personal access token:
 
 #### Using The Token
 
-You now need to define the `HOWIS_GITHUB_TOKEN` and `HOWIS_GITHUB_USERNAME`
-variables.
+Create a file in `~/.config/how_is/config.yml`:
 
-An example of how to do so for the Bash shell is provided below.
+```
+sources/github:
+  username: <USERNAME>
+  token:    <TOKEN>
+```
 
 Make sure to replace `<TOKEN>` with the actual token, and `<USERNAME>`
 with your GitHub username.
-
-```bash
-export HOWIS_GITHUB_TOKEN="<TOKEN>"
-export HOWIS_GITHUB_USERNAME="<USERNAME>"
-```
-
 
 ## Usage
 

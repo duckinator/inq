@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "how_is/version"
+require "how_is/config"
 require "how_is/report"
 require "how_is/report_collection"
 
@@ -9,7 +10,7 @@ require "how_is/report_collection"
 module HowIs
   def self.new(repository, date)
     # TODO: Define a proper default config?
-    Report.new({
+    config = Config.with_defaults.load({
       "repository" => repository,
       "reports" => {
         "html" => {
@@ -18,7 +19,9 @@ module HowIs
           "filename" => "report.html"
         }
       }
-    }, date)
+    })
+
+    Report.new(config, date)
   end
 
   ##
@@ -29,6 +32,9 @@ module HowIs
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
+    raise "Expected config to be Hash, got #{config.class}" unless \
+      config.is_a?(Hash)
+
     ReportCollection.new(config, date).to_h
   end
 

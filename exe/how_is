@@ -4,6 +4,7 @@
 
 require "how_is"
 require "how_is/cli"
+require "how_is/config"
 require "date"
 
 begin
@@ -21,7 +22,9 @@ date = options[:date]
 
 begin
   if options[:config]
-    reports = HowIs.from_config(YAML.load_file(options[:config]), date)
+    config = HowIs::Config.with_defaults.load_files(options[:config])
+
+    reports = HowIs.from_config(config, date)
 
     reports.each { |file, report| report.save_as(file) }
   else

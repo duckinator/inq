@@ -35,23 +35,23 @@ module HowIs
     end
 
     def contributions
-      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@repository, @start_date, @end_date)
+      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@config, @start_date, @end_date)
     end
 
     def issues
-      @gh_issues ||= HowIs::Sources::Github::Issues.new(@repository, @start_date, @end_date)
+      @gh_issues ||= HowIs::Sources::Github::Issues.new(@config, @start_date, @end_date)
     end
 
     def pulls
-      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@repository, @start_date, @end_date)
+      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@config, @start_date, @end_date)
     end
 
     def travis
-      @travis ||= HowIs::Sources::CI::Travis.new(@repository, @start_date, @end_date)
+      @travis ||= HowIs::Sources::CI::Travis.new(@config, @start_date, @end_date)
     end
 
     def appveyor
-      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@repository, @start_date, @end_date)
+      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@config, @start_date, @end_date)
     end
 
     def to_h(frontmatter_data = nil)

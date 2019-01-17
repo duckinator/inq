@@ -14,8 +14,9 @@ module HowIs
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
-        def initialize(repository, start_date, end_date)
-          @repository = repository
+        def initialize(config, start_date, end_date)
+          @config = config
+          @repository = config["repository"]
           @start_date = DateTime.parse(start_date)
           @end_date = DateTime.parse(end_date)
           @default_branch = Okay.default
@@ -26,7 +27,7 @@ module HowIs
           return @default_branch unless @default_branch.nil?
 
           contributions =
-            HowIs::Sources::GitHub::Contributions.new(repository, nil, nil)
+            HowIs::Sources::GitHub::Contributions.new(@config, nil, nil)
 
           @default_branch = contributions.default_branch
         end

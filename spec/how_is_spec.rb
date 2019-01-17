@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "how_is"
+require "how_is/config"
 require "how_is/frontmatter"
 require "json"
 require "open3"
@@ -28,7 +29,7 @@ JEKYLL_HEADER =
 describe HowIs do
   context "#from_config" do
     let(:config) {
-      YAML.load_file(HOW_IS_CONFIG_FILE)
+      HowIs::Config.with_defaults.load_files(HOW_IS_CONFIG_FILE)
     }
 
     it "generates valid report files", skip: env_vars_hidden? do

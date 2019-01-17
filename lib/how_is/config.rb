@@ -5,36 +5,43 @@ require "yaml"
 module HowIs
   HOME_CONFIG = File.join(Dir.home, '.config', 'how_is', 'config.yml')
 
-  class Config
+  class Config < Hash
     attr_reader :site_configs
 
+    def self.with_defaults
+      self.new.with_site_configs(HOME_CONFIG)
+    end
+
     def initialize
+      super()
       @site_configs = []
     end
 
-    def with_site_configs(*configs)
-      if configs.length == 1 && configs[0].is_a?(Array)
-        configs = configs[0]
+    def with_site_configs(*files)
+      if files.length == 1 && files[0].is_a?(Array)
+        files = files[0]
       end
 
-      @site_configs += configs
+      load_files(*files)
     end
 
-    def load(*file_paths)
-      files = (site_configs + file_paths).map(&Pathname)
+    def load_files(*file_paths)
+      files = (site_configs + file_paths).map { |f| Pathname.new(f) }
       # TODO: Validate config state in some way.
-      configs = files.map { |file| YAML.parse(file) }
-      final_config = {}
+      configs = files.map { |file| YAML.load(file.read) }
 
+      load(*configs)
+    end
+
+    def load(*configs)
       configs.each do |config|
         config.each do |k, v|
-          final_config[k] = v
+          self[k] = v
         end
       end
 
-      final_config
+      self
     end
-
   end
 
   class ConfigBuilder

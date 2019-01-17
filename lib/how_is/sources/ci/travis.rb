@@ -16,8 +16,10 @@ module HowIs
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
-        def initialize(repository, start_date, end_date)
-          @repository = repository
+        def initialize(config, start_date, end_date)
+          @config = config
+          @repository = config["repository"]
+          raise "Travis.new() got nil repository." if @repository.nil?
           @start_date = DateTime.parse(start_date)
           @end_date = DateTime.parse(end_date)
           @default_branch = Okay.default

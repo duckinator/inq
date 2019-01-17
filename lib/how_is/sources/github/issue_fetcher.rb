@@ -2,6 +2,7 @@
 
 require "how_is/version"
 require "how_is/date_time_helpers"
+require "how_is/sources/github"
 
 module HowIs
   module Sources
@@ -41,7 +42,10 @@ module HowIs
 
         attr_accessor :type
 
-        def initialize(repository, type, start_date, end_date)
+        def initialize(config, type, start_date, end_date)
+          @config = config
+          @github = HowIs::Sources::Github.new(config)
+          repository = config["repository"]
           @user, @repo = repository.split("/", 2)
           @start_date = start_date
           @end_date = end_date
@@ -72,7 +76,7 @@ module HowIs
         def last_cursor
           return @last_cursor if instance_variable_defined?(:@last_cursor)
 
-          raw_data = Github.graphql <<~QUERY
+          raw_data = @github.graphql <<~QUERY
             repository(owner: #{@user.inspect}, name: #{@repo.inspect}) {
               #{type}(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {
                 edges {
@@ -95,7 +99,7 @@ module HowIs
           after_str = ", after: #{after.inspect}" unless after.nil?
 
           query = build_query(@user, @repo, type, after_str)
-          raw_data = Github.graphql(query)
+          raw_data = @github.graphql(query)
           edges = raw_data.dig("data", "repository", type, "edges")
 
           data += edge_nodes(edges)

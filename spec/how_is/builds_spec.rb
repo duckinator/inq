@@ -5,7 +5,8 @@ require "how_is/sources/ci/appveyor"
 
 describe HowIs::Sources::CI::Travis do
   subject do
-    described_class.new("how-is/how_is", "2018-03-01", "2017-04-15")
+    config = HowIs::Config.with_defaults.load({"repository" => "how-is/how_is"})
+    described_class.new(config, "2018-03-01", "2017-04-15")
   end
 
   describe "#builds" do

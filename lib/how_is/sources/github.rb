@@ -8,41 +8,49 @@ module HowIs
   module Sources
     # Contains configuration information for GitHub-based sources.
     class Github
-      # An exception which is only raised if an environment variable
-      # is undefined.
-      class ConfigurationError < StandardError
-        def initialize(env_variable)
-          super("environment variable #{env_variable} not defined." \
-                  " See README.md for details.")
-        end
+      class ConfigError < StandardError
       end
 
-      # A GitHub Personal Access Token.
-      def self.access_token
-        token = ENV["HOWIS_GITHUB_TOKEN"]
-        raise ConfigurationError, "HOWIS_GITHUB_TOKEN" if token.nil?
+      def initialize(global_config)
+        raise ConfigError, "Expected Hash, got #{global_config.class}." unless \
+          global_config.is_a?(Hash)
 
-        token
+        raise ConfigError, "No config for sources/github." unless \
+          global_config.has_key?("sources/github")
+
+        config = global_config["sources/github"]
+
+        raise ConfigError, "No username provided for sources/github." unless \
+          config.has_key?("username") && config["username"]
+
+        raise ConfigError, "No token provided for sources/github." unless \
+          config.has_key?("token") && config["token"]
+
+        @global_config = global_config
+        @config = config
       end
 
-      # The GitHub username to go with the Personal Access Token.
-      def self.username
-        username = ENV["HOWIS_GITHUB_USERNAME"]
-        raise ConfigurationError, "HOWIS_GITHUB_USERNAME" if username.nil?
+      # The GitHub username used for authenticating with GitHub.
+      def username
+        @config["username"]
+      end
 
-        username
+      # A GitHub Personal Access Token which goes with +username+.
+      def access_token
+        @config["token"]
       end
 
       # A string containing both the GitHub username and access token,
       # used in instances where we use Basic Auth.
-      def self.basic_auth
+      def basic_auth
         "#{username}:#{access_token}"
       end
 
-      def self.graphql(query_string)
-        query = Okay::GraphQL.query(query_string)
-        headers = {bearer_token: HowIs::Sources::Github.access_token}
-        query.submit!(:github, headers).or_raise!.from_json
+      def graphql(query_string)
+        Okay::GraphQL.query(query_string)
+          .submit!(:github, {bearer_token: access_token})
+          .or_raise!
+          .from_json
       end
     end
   end
