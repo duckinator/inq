@@ -6,7 +6,7 @@ module HowIs
     include WarningHelpers
 
     def initialize(filename)
-      dir  = File.expand_path("./templates/", __dir__)
+      dir = File.expand_path("./templates/", __dir__)
       filename = "#{filename}.html_template"
       @file = Pathname(dir).join(filename)
     end
