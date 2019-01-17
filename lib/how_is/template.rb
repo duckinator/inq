@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "how_is/warning_helpers"
 require "pathname"
 
