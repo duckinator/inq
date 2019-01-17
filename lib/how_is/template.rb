@@ -4,6 +4,8 @@ require "how_is/warning_helpers"
 require "pathname"
 
 module HowIs
+  ##
+  # Handles various templating requirements for HowIs.
   class Template
     include WarningHelpers
 
