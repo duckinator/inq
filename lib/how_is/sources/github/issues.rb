@@ -5,6 +5,7 @@ require "how_is/date_time_helpers"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
 require "how_is/sources/github/issue_fetcher"
+require "how_is/template"
 require "date"
 
 module HowIs
@@ -69,7 +70,7 @@ module HowIs
         def to_html
           return summary if to_a.empty?
 
-          HowIs.apply_template("issues_or_pulls_partial", {
+          Template.new("issues_or_pulls_partial").apply({
             summary: summary,
             average_age: average_age,
             pretty_type: pretty_type,

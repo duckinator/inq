@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require "github_api"
 require "how_is/version"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
+require "how_is/template"
 require "date"
 
 module HowIs
@@ -150,7 +152,7 @@ module HowIs
         def to_html(start_text: nil)
           start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
-          HowIs.apply_template("contributions_partial", {
+          Template.new("contributions_partial").apply({
             start_text: start_text,
             user: @user,
             repo: @repo,
