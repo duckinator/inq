@@ -28,6 +28,11 @@ module HowIs
     end
 
     def with_site_configs(*files)
+      # Allows both:
+      #   with_site_configs('foo', 'bar')
+      #   with_site_configs(['foo', bar'])
+      # but not:
+      #   with_site_configs(['foo'], 'bar')
       files = files[0] if files.length == 1 && files[0].is_a?(Array)
 
       load_files(*files)
@@ -35,6 +40,10 @@ module HowIs
 
     def load_files(*file_paths)
       files = (site_configs + file_paths).map { |f| Pathname.new(f) }
+
+      # Ignore files that don't exist.
+      files.reject! { |f| !f.file? }
+
       # TODO: Validate config state in some way.
       configs = files.map { |file| YAML.safe_load(file.read) }
 
