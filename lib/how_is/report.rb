@@ -6,7 +6,6 @@ require "how_is/sources/github/issues"
 require "how_is/sources/github/pulls"
 require "how_is/sources/ci/travis"
 require "how_is/sources/ci/appveyor"
-require "how_is/warning_helpers"
 require "how_is/template"
 require "json"
 
@@ -14,8 +13,6 @@ module HowIs
   ##
   # Class for generating a HowIs report.
   class Report
-    include WarningHelpers
-
     def initialize(config, end_date)
       @config = config
       @repository = config["repository"]
@@ -62,12 +59,12 @@ module HowIs
     end
 
     def to_html_partial(frontmatter = nil)
-      Template.new("report_partial").apply(to_h(frontmatter))
+      HowIs::Template.apply("report_partial.html", to_h(frontmatter))
     end
 
     def to_html(frontmatter = nil)
       template_data = to_h(frontmatter).merge({report: to_html_partial})
-      Template.new("report").apply(template_data)
+      HowIs::Template.apply("report.html", template_data)
     end
 
     def to_json(frontmatter = nil)

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "how_is/version"
 require "how_is/date_time_helpers"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
@@ -72,7 +71,7 @@ module HowIs
         def to_html
           return summary if to_a.empty?
 
-          Template.new("issues_or_pulls_partial").apply({
+          HowIs::Template.apply("issues_or_pulls_partial.html", {
             summary: summary,
             average_age: average_age,
             pretty_type: pretty_type,
