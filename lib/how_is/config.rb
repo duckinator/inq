@@ -44,9 +44,10 @@ module HowIs
       # Ignore files that don't exist.
       files.reject! { |f| !f.file? }
 
-      # TODO: Validate config state in some way.
+      # Load the YAML files into Hashes.
       configs = files.map { |file| YAML.safe_load(file.read) }
 
+      # Apply configs.
       load(*configs)
     end
 
