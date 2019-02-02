@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = "~> 2.4"
 
   spec.add_runtime_dependency "github_api", "~> 0.18.1"
-  spec.add_runtime_dependency "okay", "~> 9.0"
+  spec.add_runtime_dependency "okay", "~> 11.0"
 
   spec.add_runtime_dependency "json"
 

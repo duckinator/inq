@@ -2,7 +2,7 @@
 
 require "how_is"
 require "how_is/constants"
-require "how_is/simple_opts"
+require "okay/simple_opts"
 
 module HowIs
   ##
@@ -42,7 +42,7 @@ module HowIs
         report: HowIs::DEFAULT_REPORT_FILE,
       }
 
-      opts = SimpleOpts.new(defaults: defaults)
+      opts = Okay::SimpleOpts.new(defaults: defaults)
 
       opts.banner = <<~EOF
         Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]

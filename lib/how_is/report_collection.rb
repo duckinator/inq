@@ -7,7 +7,7 @@ module HowIs
   ##
   # A class representing a collection of Reports.
   class ReportCollection
-    include WarningHelpers
+    include Okay::WarningHelpers
 
     def initialize(config, date)
       @report = Report.new(config, date)
