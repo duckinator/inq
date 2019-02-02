@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "how_is/report"
-require "how_is/warning_helpers"
+require "okay/warning_helpers"
 
 module HowIs
   ##
