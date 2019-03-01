@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "how_is/version"
 require "okay/template"
 
