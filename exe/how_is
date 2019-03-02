@@ -26,11 +26,16 @@ begin
 
     reports = HowIs.from_config(config, date)
 
-    reports.each { |file, report| report.save_as(file) }
+    puts "Saved reports to:"
+    reports.each do |file, report|
+      File.write(file, report)
+      puts "- #{file}"
+    end
   else
     report = HowIs.new(options[:repository], date)
 
     report.save_as(options[:report])
+    puts "Saved report to #{options[:report]}."
   end
 rescue => e
   raise if options[:verbose]
