@@ -60,5 +60,22 @@ module HowIs
 
       self
     end
+
+    def load_env()
+      gh_token = ENV["HOW_IS_GITHUB_TOKEN"]
+      gh_username = ENV["HOW_IS_GITHUB_USERNAME"]
+
+      raise "HOW_IS_GITHUB_TOKEN environment variable is not set" \
+        unless gh_token
+      raise "HOW_IS_GITHUB_USERNAME environment variable is not set" \
+        unless gh_username
+
+      load({
+        "sources/github" => {
+          "username" => github_username,
+          "token" => github_token,
+        }
+      })
+    end
   end
 end

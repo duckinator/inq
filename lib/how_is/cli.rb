@@ -55,6 +55,15 @@ module HowIs
                   "YAML config file for automated reports.",
                   :config)
 
+      opts.simple("--no-user-config",
+                  "Don't load user configuration file.",
+                  :no_user_config)
+
+      opts.simple("--env-config",
+                  "Use environment variables for configuration.",
+                  "Read first: https://how-is.github.io/config",
+                  :env_login)
+
       opts.simple("--repository USER/REPO", REPO_REGEXP,
                   "Repository to generate a report for.",
                   :repository)
