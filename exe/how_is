@@ -4,7 +4,8 @@
 
 require "how_is"
 require "how_is/cli"
-require "date"
+require "how_is/config"
+require "how_is/text"
 
 begin
   cli = HowIs::CLI.parse(ARGV)
@@ -20,15 +21,22 @@ abort HowIs::VERSION_STRING if options[:version]
 date = options[:date]
 
 begin
+  config = HowIs::Config.new
+
+  config.load_defaults unless options[:no_user_config]
+  config.load_env if options[:env_config]
+
   if options[:config]
-    reports = HowIs.from_config(YAML.load_file(options[:config]), date)
-
-    reports.each { |file, report| report.save_as(file) }
+    config.load_files(options[:config])
   else
-    report = HowIs.new(options[:repository], date)
-
-    report.save_as(options[:report])
+    config.load(HowIs.default_config(options[:repository]))
   end
+
+  reports = HowIs.from_config(config, date)
+
+  files = reports.save_all
+  HowIs::Text.puts "Saved reports to:"
+  files.each { |file| HowIs::Text.puts "- #{file}" }
 rescue => e
   raise if options[:verbose]
 

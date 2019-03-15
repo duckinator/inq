@@ -2,8 +2,9 @@
 [![Travis](https://img.shields.io/travis/how-is/how_is.svg)](https://travis-ci.org/how-is/how_is)
 [![Code Climate](https://img.shields.io/codeclimate/github/how-is/how_is.svg)](https://codeclimate.com/github/how-is/how_is)
 [![Gem](https://img.shields.io/gem/v/how_is.svg)](https://rubygems.org/gems/how_is)
+[Documentation](https://how-is.github.io)
 
-# How is [your repo]?
+# How is [your project]?
 
 `how_is` is tool for generating summaries of the health of a codebase hosted on GitHub. It uses information available from issues and pull requests to provide an overview of a repository and highlight problem areas of the codebase.
 
@@ -17,10 +18,8 @@ If you want to contribute or discuss how_is, you can [join Bundler's slack](http
 
 ## Configuration
 
-HowIs can hit the default API limits for GitHub for even small reports.
-
 To avoid errors due to hitting rate limits, HowIs requires a Personal
-Access Token, which GitHub provides with higher rate limits.
+Access Token for GitHub.
 
 ### Acquiring A Personal Access Token
 
@@ -36,30 +35,27 @@ To acquire a personal access token:
 
 #### Using The Token
 
-You now need to define the `HOWIS_GITHUB_TOKEN` and `HOWIS_GITHUB_USERNAME`
-variables.
+Create a file in `~/.config/how_is/config.yml`:
 
-An example of how to do so for the Bash shell is provided below.
+```
+sources/github:
+  username: <USERNAME>
+  token:    <TOKEN>
+```
 
 Make sure to replace `<TOKEN>` with the actual token, and `<USERNAME>`
 with your GitHub username.
-
-```bash
-export HOWIS_GITHUB_TOKEN="<TOKEN>"
-export HOWIS_GITHUB_USERNAME="<USERNAME>"
-```
-
 
 ## Usage
 
 ### Command Line
 
-    $ how_is REPOSITORY DATE [--output OUTPUT_FILENAME]
+    $ how_is --repository REPOSITORY --date DATE [--output OUTPUT_FILENAME]
     # OUTPUT_FILENAME defaults to ./report.html.
 
 or
 
-    $ how_is REPOSITORY --config CONFIG_FILENAME
+    $ how_is --date DATE --config CONFIG_FILENAME
 
 #### Example \#1
 
@@ -71,85 +67,11 @@ December 01 2016, and saves it as `./report-2016-12-01.html`.
 
 #### Example \#2
 
-    $ how_is 2016-12-01 --config some-config.yml
+    $ how_is --date 2016-12-01 --config some-config.yml
 
-Generates the report(s) specified in the config file, for the period
+This generates the report(s) specified in the config file, for the period
 from November 01 2016 to December 01 2016, and saves them in the
 locations specified in the config file.
-
-#### Generating reports from a config file
-
-You can also create a config file and run
-`how_is --config YAML_CONFIG_FILE_PATH`.
-
-E.g., if the config file is `how_is.yml`, you would run
-`how_is --config how_is.yml`.
-
-Below is an example config file, [from the how-is/manual-reports
-repository](https://raw.githubusercontent.com/how-is/manual-reports/gh-pages/how-is-configs/01-rubygems-rubygems.yml).
-
-```yaml
-repository: rubygems/rubygems
-reports:
-  html:
-    directory: rubygems/_posts
-    frontmatter:
-      title: "%{date} Report"
-      layout: default
-    filename: "%{date}-report.html"
-  json:
-    directory: json/rubygems
-    filename: "%{date}.json"
-```
-
-The config file is a YAML file. The two root keys are `repository`
-and `reports`.
-
-`reports` is a hash of key/value pairs, with the keys being the type of report
-("html" or "json") and the values being another hash.
-
-That hash can have the following keys: `directory` (the directory to place the
-report in), `filename` (the format string for filenames), and (optionally)
-`frontmatter`.
-
-`frontmatter` is a set of key/value pairs specifying frontmatter as used by
-various blog engines (e.g. Jekyll), so you can set the title, layout, etc of
-the page.
-
-Every value under `reports` is a format string, so you can do e.g.
-`filename: "%{date}-report.html"` or (under `frontmatter`)
-`title: "%{date} Report"`.
-
-### Ruby API
-
-```ruby
-# Generate an HTML report for rubygems/rubygems, for December 01
-# 2017, and save it to report.html:
-report = HowIs.new("rubygems/rubygems", "2017-12-01").to_html
-report.save_as("report.html")
-
-# Generate a report from a config Hash.
-reports = HowIs.from_config({
-  repository: 'rubygems/rubygems',
-  reports: {
-    html: {
-      directory: '_posts',
-      frontmatter: {
-        title: '%{date} Report',
-        layout: 'default'
-      },
-      filename: "%{date}-report.html"
-    },
-    json: {
-      directory: 'json',
-      filename: '%{date}.json'
-    }
-  }
-}, "2017-12-01")
-# Save all of the rports.
-# This assumes all of the directories the files go in already exist!
-reports.map {|file, report| File.write(file, report) }
-```
 
 ## Development
 

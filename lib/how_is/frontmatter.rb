@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 require "how_is/version"
+require "okay/warning_helpers"
 
 module HowIs
   ##
   # Module for generating YAML frontmatter, as used by Jekyll and other
   # blog engines.
   module Frontmatter
+    extend Okay::WarningHelpers
+
     # Generates YAML frontmatter, as is used in Jekyll and other blog engines.
     #
     # E.g.,
@@ -36,14 +39,5 @@ module HowIs
       data.map { |k, v| [k.send(method_name), v] }.to_h
     end
     private_class_method :convert_keys
-
-    def self.silence_warnings(&_block)
-      old_verbose = $VERBOSE
-      $VERBOSE = nil # Disable warnings entirely.
-      yield
-    ensure
-      $VERBOSE = old_verbose
-    end
-    private_class_method :silence_warnings
   end
 end

@@ -2,6 +2,7 @@
 
 require "spec_helper"
 require "how_is"
+require "how_is/config"
 require "how_is/frontmatter"
 require "json"
 require "open3"
@@ -28,7 +29,9 @@ JEKYLL_HEADER =
 describe HowIs do
   context "#from_config" do
     let(:config) {
-      YAML.load_file(HOW_IS_CONFIG_FILE)
+      HowIs::Config.new
+        .load_defaults
+        .load_files(HOW_IS_CONFIG_FILE)
     }
 
     it "generates valid report files", skip: env_vars_hidden? do
@@ -38,7 +41,7 @@ describe HowIs do
 
           VCR.use_cassette("how-is-with-config-file") do
             expect {
-              reports = HowIs.from_config(config, "2017-08-01")
+              reports = HowIs.from_config(config, "2017-08-01").to_h
             }.to_not output.to_stderr
           end
 
@@ -57,7 +60,7 @@ describe HowIs do
       reports = nil
 
       VCR.use_cassette("how-is-from-config-frontmatter") do
-        reports = HowIs.from_config(config, "2017-08-01")
+        reports = HowIs.from_config(config, "2017-08-01").to_h
       end
 
       actual_html = reports["output/report.html"]

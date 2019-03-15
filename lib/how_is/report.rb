@@ -6,13 +6,17 @@ require "how_is/sources/github/issues"
 require "how_is/sources/github/pulls"
 require "how_is/sources/ci/travis"
 require "how_is/sources/ci/appveyor"
+require "how_is/template"
 require "json"
 
 module HowIs
   ##
   # Class for generating a HowIs report.
   class Report
-    def initialize(repository, end_date)
+    def initialize(config, end_date)
+      @config = config
+      @repository = config["repository"]
+
       # NOTE: Use DateTime because it defaults to UTC and that's less gross
       #       than trying to get Date to use UTC.
       #
@@ -23,29 +27,28 @@ module HowIs
       end_dt = DateTime.strptime(end_date, "%Y-%m-%d")
       start_dt = start_dt_from_end_dt(end_dt)
 
-      @repository = repository
       @end_date = end_dt.strftime("%Y-%m-%d")
       @start_date = start_dt.strftime("%Y-%m-%d")
     end
 
     def contributions
-      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@repository, @start_date, @end_date)
+      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@config, @start_date, @end_date)
     end
 
     def issues
-      @gh_issues ||= HowIs::Sources::Github::Issues.new(@repository, @start_date, @end_date)
+      @gh_issues ||= HowIs::Sources::Github::Issues.new(@config, @start_date, @end_date)
     end
 
     def pulls
-      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@repository, @start_date, @end_date)
+      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@config, @start_date, @end_date)
     end
 
     def travis
-      @travis ||= HowIs::Sources::CI::Travis.new(@repository, @start_date, @end_date)
+      @travis ||= HowIs::Sources::CI::Travis.new(@config, @start_date, @end_date)
     end
 
     def appveyor
-      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@repository, @start_date, @end_date)
+      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@config, @start_date, @end_date)
     end
 
     def to_h(frontmatter_data = nil)
@@ -56,15 +59,12 @@ module HowIs
     end
 
     def to_html_partial(frontmatter = nil)
-      template_data = to_h(frontmatter)
-
-      Kernel.format(HowIs.template("report_partial.html_template"), template_data)
+      HowIs::Template.apply("report_partial.html", to_h(frontmatter))
     end
 
     def to_html(frontmatter = nil)
       template_data = to_h(frontmatter).merge({report: to_html_partial})
-
-      Kernel.format(HowIs.template("report.html_template"), template_data)
+      HowIs::Template.apply("report.html", template_data)
     end
 
     def to_json(frontmatter = nil)

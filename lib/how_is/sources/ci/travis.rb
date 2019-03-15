@@ -5,6 +5,7 @@ require "okay/default"
 require "okay/http"
 require "how_is/constants"
 require "how_is/sources/github"
+require "how_is/text"
 
 module HowIs
   module Sources
@@ -16,8 +17,10 @@ module HowIs
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
-        def initialize(repository, start_date, end_date)
-          @repository = repository
+        def initialize(config, start_date, end_date)
+          @config = config
+          @repository = config["repository"]
+          raise "Travis.new() got nil repository." if @repository.nil?
           @start_date = DateTime.parse(start_date)
           @end_date = DateTime.parse(end_date)
           @default_branch = Okay.default
@@ -124,10 +127,12 @@ module HowIs
         # @param parameters [Hash] Parameters.
         # @return [String] JSON result.
         def fetch(path, parameters = {})
+          HowIs::Text.print "Fetching Travis CI #{path.sub(/e?s$/, '')} data."
+
           # Apparently this is required for the Travis CI API to work.
           repo = @repository.sub("/", "%2F")
 
-          Okay::HTTP.get(
+          ret = Okay::HTTP.get(
             "https://api.travis-ci.org/repo/#{repo}/#{path}",
             parameters: parameters,
             headers: {
@@ -136,6 +141,10 @@ module HowIs
               "User-Agent" => HowIs::USER_AGENT,
             }
           ).or_raise!.from_json
+
+          HowIs::Text.puts
+
+          ret
         end
       end
     end

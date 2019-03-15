@@ -2,8 +2,10 @@
 
 require "okay/default"
 require "okay/http"
+require "how_is/constants"
 require "how_is/sources"
 require "how_is/sources/github/contributions"
+require "how_is/text"
 
 module HowIs
   module Sources
@@ -13,8 +15,9 @@ module HowIs
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
-        def initialize(repository, start_date, end_date)
-          @repository = repository
+        def initialize(config, start_date, end_date)
+          @config = config
+          @repository = config["repository"]
           @start_date = DateTime.parse(start_date)
           @end_date = DateTime.parse(end_date)
           @default_branch = Okay.default
@@ -25,7 +28,7 @@ module HowIs
           return @default_branch unless @default_branch.nil?
 
           contributions =
-            HowIs::Sources::GitHub::Contributions.new(repository, nil, nil)
+            HowIs::Sources::GitHub::Contributions.new(@config, nil, nil)
 
           @default_branch = contributions.default_branch
         end
@@ -61,7 +64,9 @@ module HowIs
         #
         # @return [Hash] API results.
         def fetch_builds
-          Okay::HTTP.get(
+          HowIs::Text.print "Fetching Appveyor build data."
+
+          ret = Okay::HTTP.get(
             "https://ci.appveyor.com/api/projects/#{@repository}/history",
             parameters: {"recordsNumber" => "100"},
             headers: {
@@ -69,6 +74,9 @@ module HowIs
               "User-Agent" => HowIs::USER_AGENT,
             }
           ).or_raise!.from_json
+
+          HowIs::Text.puts
+          ret
         end
       end
     end

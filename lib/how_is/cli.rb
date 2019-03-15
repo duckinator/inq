@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require "how_is"
-require "how_is/simple_opts"
+require "how_is/constants"
+require "okay/simple_opts"
 
 module HowIs
   ##
@@ -13,6 +14,10 @@ module HowIs
     DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
 
     attr_accessor :options, :help_text
+
+    def self.parse(*args)
+      new.parse(*args)
+    end
 
     def initialize
       @options = nil
@@ -36,12 +41,18 @@ module HowIs
       self
     end
 
+    private
+
+    # parse_main() is as short as can be managed. It's fine as-is.
+    # rubocop:disable Metrics/MethodLength
+
+    # Does a significant chunk of the work for parse().
     def parse_main(argv)
       defaults = {
         report: HowIs::DEFAULT_REPORT_FILE,
       }
 
-      opts = SimpleOpts.new(defaults: defaults)
+      opts = Okay::SimpleOpts.new(defaults: defaults)
 
       opts.banner = <<~EOF
         Usage: how_is --repository REPOSITORY --date REPORT_DATE [--output REPORT_FILE]
@@ -53,6 +64,15 @@ module HowIs
       opts.simple("--config CONFIG_FILE",
                   "YAML config file for automated reports.",
                   :config)
+
+      opts.simple("--no-user-config",
+                  "Don't load user configuration file.",
+                  :no_user_config)
+
+      opts.simple("--env-config",
+                  "Use environment variables for configuration.",
+                  "Read first: https://how-is.github.io/config",
+                  :env_login)
 
       opts.simple("--repository USER/REPO", REPO_REGEXP,
                   "Repository to generate a report for.",
@@ -73,6 +93,8 @@ module HowIs
       [opts, opts.parse(argv)]
     end
 
+    # rubocop:enable Metrics/MethodLength
+
     def validate_options!(options)
       return if options[:help] || options[:version]
       raise MissingArgument, "--date" unless options[:date]
@@ -88,10 +110,6 @@ module HowIs
       regexp_parts = HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
       /.+\.(#{regexp_parts.join("|")})/
-    end
-
-    def self.parse(*args)
-      new.parse(*args)
     end
   end
 end

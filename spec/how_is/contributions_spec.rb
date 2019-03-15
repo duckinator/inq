@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
+require "how_is/config"
 require "how_is/sources/github/contributions"
 
 describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
   let(:contributions) {
-    described_class.new("how-is/example-repository", "2017-08-01", "2017-09-01")
+    config =
+      HowIs::Config.new
+        .load_defaults
+        .load({"repository" => "how-is/example-repository"})
+    described_class.new(config, "2017-08-01", "2017-09-01")
   }
 
   context "#contributors" do

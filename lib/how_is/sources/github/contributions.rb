@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require "how_is/version"
+require "github_api"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
+require "how_is/template"
+require "how_is/text"
 require "date"
 
 module HowIs
@@ -26,15 +28,22 @@ module HowIs
         # particular repository for a month-long period starting on
         # +start_date+.
         #
-        # @param repository [String] GitHub repo, formatted as "user/repo".
+        # @param config     [Hash]   A config object.
         # @param start_date [String] Date in the format YYYY-MM-DD.
         #                            The first date to include commits from.
-        # @param end_date [String] Date in the format YYYY-MM-DD.
-        #                          The last date to include commits from.
-        def initialize(repository, start_date, end_date)
-          @user, @repo = repository.split("/")
-          @github = ::Github.new(auto_pagination: true) { |config|
-            config.basic_auth = HowIs::Sources::Github.basic_auth
+        # @param end_date   [String] Date in the format YYYY-MM-DD.
+        #                            The last date to include commits from.
+        def initialize(config, start_date, end_date)
+          raise "Got String, need Hash. The Github::Contributions API changed." if \
+            config.is_a?(String)
+
+          @config = config
+          @github = HowIs::Sources::Github.new(config)
+          @repository = config["repository"]
+
+          @user, @repo = @repository.split("/")
+          @github = ::Github.new(auto_pagination: true) { |conf|
+            conf.basic_auth = @github.basic_auth
           }
 
           # IMPL. DETAIL: The external API uses "end_date" so it's clearer,
@@ -81,13 +90,19 @@ module HowIs
             until: @until_date,
           }
 
+          HowIs::Text.print "Fetching #{@repository} commit data."
+
           # The commits list endpoint doesn't include all stats.
           #
           # So, to compensate, we make N requests here, where N is number
           # of commits returned, and then we die a bit inside.
           @commits = @github.repos.commits.list(**args).map { |c|
+            HowIs::Text.print "."
             commit(c.sha)
           }
+          HowIs::Text.puts
+
+          @commits
         end
 
         def commit(sha)
@@ -150,7 +165,7 @@ module HowIs
         def to_html(start_text: nil)
           start_text ||= "From #{pretty_date(@since_date)} through #{pretty_date(@until_date)}"
 
-          HowIs.apply_template("contributions_partial", {
+          HowIs::Template.apply("contributions_partial.html", {
             start_text: start_text,
             user: @user,
             repo: @repo,

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "how_is/version"
 require "how_is/date_time_helpers"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
 require "how_is/sources/github/issue_fetcher"
+require "how_is/template"
 require "date"
 
 module HowIs
@@ -16,8 +16,10 @@ module HowIs
         include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
-        def initialize(repository, start_date, end_date)
-          @repository = repository
+        def initialize(config, start_date, end_date)
+          @config = config
+          @repository = config["repository"]
+          raise "Travis.new() got nil repository." if @repository.nil?
           @start_date = start_date
           @end_date = end_date
         end
@@ -69,7 +71,7 @@ module HowIs
         def to_html
           return summary if to_a.empty?
 
-          HowIs.apply_template("issues_or_pulls_partial", {
+          HowIs::Template.apply("issues_or_pulls_partial.html", {
             summary: summary,
             average_age: average_age,
             pretty_type: pretty_type,
@@ -166,7 +168,7 @@ module HowIs
         def data
           return @data if instance_variable_defined?(:@data)
 
-          fetcher = IssueFetcher.new(@repository, type, @start_date, @end_date)
+          fetcher = IssueFetcher.new(@config, type, @start_date, @end_date)
           @data = fetcher.data
         end
       end
