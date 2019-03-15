@@ -5,9 +5,10 @@ require "how_is/sources/github/contributions"
 
 describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
   let(:contributions) {
-    config = HowIs::Config.with_defaults.load({
-      "repository" => "how-is/example-repository",
-    })
+    config =
+      HowIs::Config
+        .load_defaults
+        .load({"repository" => "how-is/example-repository"})
     described_class.new(config, "2017-08-01", "2017-09-01")
   }
 

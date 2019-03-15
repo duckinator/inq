@@ -29,7 +29,9 @@ JEKYLL_HEADER =
 describe HowIs do
   context "#from_config" do
     let(:config) {
-      HowIs::Config.with_defaults.load_files(HOW_IS_CONFIG_FILE)
+      HowIs::Config
+        .load_defaults
+        .load_files(HOW_IS_CONFIG_FILE)
     }
 
     it "generates valid report files", skip: env_vars_hidden? do

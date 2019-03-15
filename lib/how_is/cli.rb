@@ -46,7 +46,7 @@ module HowIs
     # parse_main() is as short as can be managed. It's fine as-is.
     # rubocop:disable Metrics/MethodLength
 
-    # Carries most of the weight for parse().
+    # Does a significant chunk of the work for parse().
     def parse_main(argv)
       defaults = {
         report: HowIs::DEFAULT_REPORT_FILE,

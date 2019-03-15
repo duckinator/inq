@@ -22,7 +22,10 @@ module HowIs
   end
 
   def self.new(repository, date)
-    config = Config.with_defaults.load(default_config(repository))
+    config =
+      Config
+        .load_defaults
+        .load(default_config(repository))
     Report.new(config, date)
   end
 

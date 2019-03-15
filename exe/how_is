@@ -20,7 +20,10 @@ abort HowIs::VERSION_STRING if options[:version]
 date = options[:date]
 
 begin
-  config = HowIs::Config.with_defaults
+  config = HowIs::Config
+
+  config.load_defaults unless options[:no_user_config]
+  config.load_env if options[:env_config]
 
   if options[:config]
     config.load_files(options[:config])

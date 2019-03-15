@@ -7,19 +7,21 @@ module HowIs
 
   # Usage:
   #     HowIs::Config
-  #       .with_site_configs("/path/to/config1.yml", "/path/to/config2.yml")
+  #       .load_site_configs("/path/to/config1.yml", "/path/to/config2.yml")
   #       .load_file("./repo-config.yml")
   # Or:
-  #     HowIs::Config.with_defaults.load_file("./repo-config.yml")
+  #     HowIs::Config
+  #       .load_defaults
+  #       .load_file("./repo-config.yml")
   # Or:
-  #     HowIs::Config.with_defaults.load({
-  #       "repository" => "how-is/example-repository",
-  #     })
+  #     HowIs::Config
+  #       .load_defaults
+  #       .load({"repository" => "how-is/example-repository"})
   class Config < Hash
     attr_reader :site_configs
 
-    def self.with_defaults
-      new.with_site_configs(HOME_CONFIG)
+    def self.load_defaults
+      new.load_site_configs(HOME_CONFIG)
     end
 
     def initialize
@@ -27,12 +29,12 @@ module HowIs
       @site_configs = []
     end
 
-    def with_site_configs(*files)
+    def load_site_configs(*files)
       # Allows both:
-      #   with_site_configs('foo', 'bar')
-      #   with_site_configs(['foo', bar'])
+      #   load_site_configs('foo', 'bar')
+      #   load_site_configs(['foo', bar'])
       # but not:
-      #   with_site_configs(['foo'], 'bar')
+      #   load_site_configs(['foo'], 'bar')
       files = files[0] if files.length == 1 && files[0].is_a?(Array)
 
       load_files(*files)
