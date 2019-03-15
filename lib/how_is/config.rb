@@ -68,6 +68,8 @@ module HowIs
     end
 
     def load_env
+      puts "Using configuration from environment variables."
+
       gh_token = ENV["HOWIS_GITHUB_TOKEN"]
       gh_username = ENV["HOWIS_GITHUB_USERNAME"]
 
