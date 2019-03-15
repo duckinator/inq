@@ -15,6 +15,10 @@ module HowIs
 
     attr_accessor :options, :help_text
 
+    def self.parse(*args)
+      new.parse(*args)
+    end
+
     def initialize
       @options = nil
       @help_text = nil
@@ -37,6 +41,12 @@ module HowIs
       self
     end
 
+    private
+
+    # parse_main() is as short as can be managed. It's fine as-is.
+    # rubocop:disable Metrics/MethodLength
+
+    # Carries most of the weight for parse().
     def parse_main(argv)
       defaults = {
         report: HowIs::DEFAULT_REPORT_FILE,
@@ -83,6 +93,8 @@ module HowIs
       [opts, opts.parse(argv)]
     end
 
+    # rubocop:enable Metrics/MethodLength
+
     def validate_options!(options)
       return if options[:help] || options[:version]
       raise MissingArgument, "--date" unless options[:date]
@@ -98,10 +110,6 @@ module HowIs
       regexp_parts = HowIs.supported_formats.map { |x| Regexp.escape(x) }
 
       /.+\.(#{regexp_parts.join("|")})/
-    end
-
-    def self.parse(*args)
-      new.parse(*args)
     end
   end
 end
