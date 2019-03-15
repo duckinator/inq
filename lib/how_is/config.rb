@@ -61,7 +61,7 @@ module HowIs
       self
     end
 
-    def load_env()
+    def load_env
       gh_token = ENV["HOW_IS_GITHUB_TOKEN"]
       gh_username = ENV["HOW_IS_GITHUB_USERNAME"]
 
@@ -74,7 +74,7 @@ module HowIs
         "sources/github" => {
           "username" => github_username,
           "token" => github_token,
-        }
+        },
       })
     end
   end

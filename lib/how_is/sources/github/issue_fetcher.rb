@@ -58,7 +58,7 @@ module HowIs
           @data = []
           return @data if last_cursor.nil?
 
-          print "Fetching #{@repository} #{type == 'issues' ? 'issue' : 'PR'} data."
+          print "Fetching #{@repository} #{(type == 'issues') ? 'issue' : 'PR'} data."
 
           after = nil
           data = []
