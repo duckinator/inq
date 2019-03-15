@@ -3,6 +3,7 @@
 require "how_is/version"
 require "how_is/date_time_helpers"
 require "how_is/sources/github"
+require "how_is/text"
 
 module HowIs
   module Sources
@@ -58,13 +59,13 @@ module HowIs
           @data = []
           return @data if last_cursor.nil?
 
-          print "Fetching #{@repository} #{(type == 'issues') ? 'issue' : 'PR'} data."
+          HowIs::Text.print "Fetching #{@repository} #{(type == 'issues') ? 'issue' : 'PR'} data."
 
           after = nil
           data = []
           after, data = fetch_issues(after, data) until after == END_LOOP
 
-          puts
+          HowIs::Text.puts
 
           @data = data.select(&method(:issue_is_relevant?))
         end
@@ -100,7 +101,7 @@ module HowIs
         end
 
         def fetch_issues(after, data)
-          print "."
+          HowIs::Text.print "."
 
           after_str = ", after: #{after.inspect}" unless after.nil?
 

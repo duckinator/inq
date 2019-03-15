@@ -5,6 +5,7 @@ require "okay/default"
 require "okay/http"
 require "how_is/constants"
 require "how_is/sources/github"
+require "how_is/text"
 
 module HowIs
   module Sources
@@ -126,7 +127,7 @@ module HowIs
         # @param parameters [Hash] Parameters.
         # @return [String] JSON result.
         def fetch(path, parameters = {})
-          print "Fetching Travis CI #{path.sub(/e?s$/, '')} data."
+          HowIs::Text.print "Fetching Travis CI #{path.sub(/e?s$/, '')} data."
 
           # Apparently this is required for the Travis CI API to work.
           repo = @repository.sub("/", "%2F")
@@ -141,7 +142,8 @@ module HowIs
             }
           ).or_raise!.from_json
 
-          puts
+          HowIs::Text.puts
+
           ret
         end
       end

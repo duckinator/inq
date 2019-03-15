@@ -29,7 +29,7 @@ JEKYLL_HEADER =
 describe HowIs do
   context "#from_config" do
     let(:config) {
-      HowIs::Config
+      HowIs::Config.new
         .load_defaults
         .load_files(HOW_IS_CONFIG_FILE)
     }

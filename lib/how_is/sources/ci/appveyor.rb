@@ -5,6 +5,7 @@ require "okay/http"
 require "how_is/constants"
 require "how_is/sources"
 require "how_is/sources/github/contributions"
+require "how_is/text"
 
 module HowIs
   module Sources
@@ -63,7 +64,7 @@ module HowIs
         #
         # @return [Hash] API results.
         def fetch_builds
-          print "Fetching Appveyor build data."
+          HowIs::Text.print "Fetching Appveyor build data."
 
           ret = Okay::HTTP.get(
             "https://ci.appveyor.com/api/projects/#{@repository}/history",
@@ -74,7 +75,7 @@ module HowIs
             }
           ).or_raise!.from_json
 
-          puts
+          HowIs::Text.puts
           ret
         end
       end

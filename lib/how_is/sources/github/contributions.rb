@@ -4,6 +4,7 @@ require "github_api"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
 require "how_is/template"
+require "how_is/text"
 require "date"
 
 module HowIs
@@ -89,17 +90,17 @@ module HowIs
             until: @until_date,
           }
 
-          print "Fetching #{@repository} commit data."
+          HowIs::Text.print "Fetching #{@repository} commit data."
 
           # The commits list endpoint doesn't include all stats.
           #
           # So, to compensate, we make N requests here, where N is number
           # of commits returned, and then we die a bit inside.
           @commits = @github.repos.commits.list(**args).map { |c|
-            print "."
+            HowIs::Text.print "."
             commit(c.sha)
           }
-          puts
+          HowIs::Text.puts
 
           @commits
         end

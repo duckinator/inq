@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "yaml"
+require "how_is/text"
 
 module HowIs
   HOME_CONFIG = File.join(Dir.home, ".config", "how_is", "config.yml")
@@ -20,11 +21,11 @@ module HowIs
   class Config < Hash
     attr_reader :site_configs
 
-    def self.load_defaults
+    def load_defaults
       if ENV["HOWIS_USE_ENV"] == "true"
-        new.load_env
+        load_env
       else
-        new.load_site_configs(HOME_CONFIG)
+        load_site_configs(HOME_CONFIG)
       end
     end
 
@@ -68,7 +69,7 @@ module HowIs
     end
 
     def load_env
-      puts "Using configuration from environment variables."
+      HowIs::Text.puts "Using configuration from environment variables."
 
       gh_token = ENV["HOWIS_GITHUB_TOKEN"]
       gh_username = ENV["HOWIS_GITHUB_USERNAME"]
@@ -80,8 +81,8 @@ module HowIs
 
       load({
         "sources/github" => {
-          "username" => github_username,
-          "token" => github_token,
+          "username" => gh_username,
+          "token" => gh_token,
         },
       })
     end

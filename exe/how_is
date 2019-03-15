@@ -5,6 +5,7 @@
 require "how_is"
 require "how_is/cli"
 require "how_is/config"
+require "how_is/text"
 
 begin
   cli = HowIs::CLI.parse(ARGV)
@@ -20,7 +21,7 @@ abort HowIs::VERSION_STRING if options[:version]
 date = options[:date]
 
 begin
-  config = HowIs::Config
+  config = HowIs::Config.new
 
   config.load_defaults unless options[:no_user_config]
   config.load_env if options[:env_config]
@@ -34,8 +35,8 @@ begin
   reports = HowIs.from_config(config, date)
 
   files = reports.save_all
-  puts "Saved reports to:"
-  files.each { |file| puts "- #{file}" }
+  HowIs::Text.puts "Saved reports to:"
+  files.each { |file| HowIs::Text.puts "- #{file}" }
 rescue => e
   raise if options[:verbose]
 
