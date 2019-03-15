@@ -19,7 +19,7 @@ module HowIs
         def initialize(config, start_date, end_date)
           @config = config
           @repository = config["repository"]
-          raise "Travis.new() got nil repository." if @repository.nil?
+          raise "#{self.class}.new() got nil repository." if @repository.nil?
           @start_date = start_date
           @end_date = end_date
         end
