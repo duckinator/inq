@@ -102,6 +102,7 @@ module HowIs
         repository: @repository,
 
         contributions_summary: contributions.to_html,
+        new_contributors: contributions.new_contributors_html,
         issues_summary: issues.to_html,
         pulls_summary: pulls.to_html,
 
