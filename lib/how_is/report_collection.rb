@@ -43,5 +43,14 @@ module HowIs
         [file, export]
       }.to_h
     end
+
+    def save_all
+      reports = to_h
+      reports.each do |file, report|
+        File.write(file, report)
+      end
+
+      reports.keys
+    end
   end
 end
