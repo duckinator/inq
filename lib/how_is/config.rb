@@ -41,8 +41,8 @@ module HowIs
     def load_files(*file_paths)
       files = (site_configs + file_paths).map { |f| Pathname.new(f) }
 
-      # Ignore files that don't exist.
-      files.reject! { |f| !f.file? }
+      # Keep only files that exist.
+      files.select!(&:file?)
 
       # Load the YAML files into Hashes.
       configs = files.map { |file| YAML.safe_load(file.read) }
