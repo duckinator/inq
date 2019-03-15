@@ -24,7 +24,7 @@ Metrics/BlockLength:
 # Getting this back to the default of 100 would be nice,
 # but the few cases that exceed it don't seem overly concerning.
 Metrics/ClassLength:
-  Max: 120
+  Max: 130
 
 # Still try for 80, but we'll allow 110 because there's a not-insignificant
 # number of cases where we have long lines.
@@ -76,6 +76,9 @@ Style/BlockDelimiters:
 
 # There's more nuance around this than RuboCop seems capable of.
 Style/BracesAroundHashParameters:
+  Enabled: false
+
+Style/ConditionalAssignment:
   Enabled: false
 
 # Don't force use of Time or Date; DateTime is okay.
