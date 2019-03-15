@@ -126,10 +126,12 @@ module HowIs
         # @param parameters [Hash] Parameters.
         # @return [String] JSON result.
         def fetch(path, parameters = {})
+          print "Fetching Travis CI #{path.sub(/e?s$/, '')} data."
+
           # Apparently this is required for the Travis CI API to work.
           repo = @repository.sub("/", "%2F")
 
-          Okay::HTTP.get(
+          ret = Okay::HTTP.get(
             "https://api.travis-ci.org/repo/#{repo}/#{path}",
             parameters: parameters,
             headers: {
@@ -138,6 +140,9 @@ module HowIs
               "User-Agent" => HowIs::USER_AGENT,
             }
           ).or_raise!.from_json
+
+          puts
+          ret
         end
       end
     end

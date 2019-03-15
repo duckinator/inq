@@ -45,8 +45,8 @@ module HowIs
         def initialize(config, type, start_date, end_date)
           @config = config
           @github = HowIs::Sources::Github.new(config)
-          repository = config["repository"]
-          @user, @repo = repository.split("/", 2)
+          @repository = config["repository"]
+          @user, @repo = @repository.split("/", 2)
           @start_date = start_date
           @end_date = end_date
           @type = type
@@ -58,9 +58,13 @@ module HowIs
           @data = []
           return @data if last_cursor.nil?
 
+          print "Fetching #{@repository} #{type == 'issues' ? 'issue' : 'PR'} data."
+
           after = nil
           data = []
           after, data = fetch_issues(after, data) until after == END_LOOP
+
+          puts
 
           @data = data.select(&method(:issue_is_relevant?))
         end
@@ -96,6 +100,8 @@ module HowIs
         end
 
         def fetch_issues(after, data)
+          print "."
+
           after_str = ", after: #{after.inspect}" unless after.nil?
 
           query = build_query(@user, @repo, type, after_str)

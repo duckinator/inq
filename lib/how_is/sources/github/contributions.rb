@@ -89,13 +89,19 @@ module HowIs
             until: @until_date,
           }
 
+          print "Fetching #{@repository} commit data."
+
           # The commits list endpoint doesn't include all stats.
           #
           # So, to compensate, we make N requests here, where N is number
           # of commits returned, and then we die a bit inside.
           @commits = @github.repos.commits.list(**args).map { |c|
+            print "."
             commit(c.sha)
           }
+          puts
+
+          @commits
         end
 
         def commit(sha)

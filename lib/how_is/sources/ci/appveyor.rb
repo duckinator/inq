@@ -63,7 +63,9 @@ module HowIs
         #
         # @return [Hash] API results.
         def fetch_builds
-          Okay::HTTP.get(
+          print "Fetching Appveyor build data."
+
+          ret = Okay::HTTP.get(
             "https://ci.appveyor.com/api/projects/#{@repository}/history",
             parameters: {"recordsNumber" => "100"},
             headers: {
@@ -71,6 +73,9 @@ module HowIs
               "User-Agent" => HowIs::USER_AGENT,
             }
           ).or_raise!.from_json
+
+          puts
+          ret
         end
       end
     end
