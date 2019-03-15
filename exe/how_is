@@ -28,7 +28,7 @@ begin
 
     files = reports.save_all
     puts "Saved reports to:"
-    files.each { |f| puts "- file" }
+    files.each { |file| puts "- #{file}" }
   else
     report = HowIs.new(options[:repository], date)
 
