@@ -8,9 +8,8 @@ require "how_is/report_collection"
 ##
 # Top-level module for creating a report.
 module HowIs
-  def self.new(repository, date)
-    # TODO: Define a proper default config?
-    config = Config.with_defaults.load({
+  def self.default_config(repository)
+    {
       "repository" => repository,
       "reports" => {
         "html" => {
@@ -19,23 +18,26 @@ module HowIs
           "filename" => "report.html",
         },
       },
-    })
+    }
+  end
 
+  def self.new(repository, date)
+    config = Config.with_defaults.load(self.default_config(repository))
     Report.new(config, date)
   end
 
   ##
   # Generates a series of report files based on a config Hash.
   #
-  # @param config [Hash] A Hash specifying the formats, locations, etc
-  #   of the reports to generate.
+  # @param config [ReportCollection] All the information needed to generate
+  #   the reports.
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
   def self.from_config(config, date)
     raise "Expected config to be Hash, got #{config.class}" unless \
       config.is_a?(Hash)
 
-    ReportCollection.new(config, date).to_h
+    ReportCollection.new(config, date)
   end
 
   ##

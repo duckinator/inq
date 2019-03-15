@@ -39,7 +39,7 @@ describe HowIs do
 
           VCR.use_cassette("how-is-with-config-file") do
             expect {
-              reports = HowIs.from_config(config, "2017-08-01")
+              reports = HowIs.from_config(config, "2017-08-01").to_h
             }.to_not output.to_stderr
           end
 
@@ -58,7 +58,7 @@ describe HowIs do
       reports = nil
 
       VCR.use_cassette("how-is-from-config-frontmatter") do
-        reports = HowIs.from_config(config, "2017-08-01")
+        reports = HowIs.from_config(config, "2017-08-01").to_h
       end
 
       actual_html = reports["output/report.html"]
