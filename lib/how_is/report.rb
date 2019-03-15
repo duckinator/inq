@@ -104,7 +104,6 @@ module HowIs
         contributions_summary: contributions.to_html,
         issues_summary: issues.to_html,
         pulls_summary: pulls.to_html,
-        issues_per_label: issues.issues_per_label_html,
 
         issues: issues.to_a,
         pulls: issues.to_a,
