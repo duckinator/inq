@@ -21,7 +21,11 @@ module HowIs
     attr_reader :site_configs
 
     def self.load_defaults
-      new.load_site_configs(HOME_CONFIG)
+      if ENV["HOWIS_USE_ENV"] == "true"
+        new.load_env
+      else
+        new.load_site_configs(HOME_CONFIG)
+      end
     end
 
     def initialize
@@ -64,12 +68,12 @@ module HowIs
     end
 
     def load_env
-      gh_token = ENV["HOW_IS_GITHUB_TOKEN"]
-      gh_username = ENV["HOW_IS_GITHUB_USERNAME"]
+      gh_token = ENV["HOWIS_GITHUB_TOKEN"]
+      gh_username = ENV["HOWIS_GITHUB_USERNAME"]
 
-      raise "HOW_IS_GITHUB_TOKEN environment variable is not set" \
+      raise "HOWIS_GITHUB_TOKEN environment variable is not set" \
         unless gh_token
-      raise "HOW_IS_GITHUB_USERNAME environment variable is not set" \
+      raise "HOWIS_GITHUB_USERNAME environment variable is not set" \
         unless gh_username
 
       load({
