@@ -63,7 +63,7 @@ module HowIs
 
         def summary
           number_open = to_a.length
-          pretty_number = pluralize(pretty_type, number_open, zero_is_no: true)
+          pretty_number = pluralize(pretty_type, number_open, zero_is_no: false)
           was_were = (number_open == 1) ? "was" : "were"
 
           "<p>A total of <a href=\"#{url}\">#{pretty_number}</a> #{was_were} opened during this period.</p>"
