@@ -73,6 +73,32 @@ module HowIs
           }
         end
 
+        def new_contributors_html
+          names = new_contributors.values.map { |c| c["name"] }
+          list_items = names.map { |n| "  <li>#{n}</li>" }.join("\n")
+
+          if names.length.zero?
+            num_new_contributors = "no"
+          else
+            num_new_contributors = names.length
+          end
+
+          if names.length == 1
+            was_were = "was"
+            contributor_s = ""
+          else
+            was_were = "were"
+            contributor_s = "s"
+          end
+
+          Template.apply("new_contributors_partial.html", {
+            was_were: was_were,
+            contributor_s: contributor_s,
+            number_of_new_contributors: num_new_contributors,
+            list_items: list_items,
+          }).strip
+        end
+
         # @return [Hash{String => Hash}] Author information keyed by author's email.
         def contributors
           commits.map { |api_response|

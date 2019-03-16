@@ -19,7 +19,7 @@ module HowIs
         def initialize(config, start_date, end_date)
           @config = config
           @repository = config["repository"]
-          raise "Travis.new() got nil repository." if @repository.nil?
+          raise "#{self.class}.new() got nil repository." if @repository.nil?
           @start_date = start_date
           @end_date = end_date
         end
@@ -63,9 +63,10 @@ module HowIs
 
         def summary
           number_open = to_a.length
-          pretty_number = pluralize(pretty_type, number_open, zero_is_no: true)
+          pretty_number = pluralize(pretty_type, number_open, zero_is_no: false)
+          was_were = (number_open == 1) ? "was" : "were"
 
-          "<p>There #{are_or_is(number_open)} <a href=\"#{url}\">#{pretty_number} open</a>.</p>"
+          "<p>A total of <a href=\"#{url}\">#{pretty_number}</a> #{was_were} opened during this period.</p>"
         end
 
         def to_html
@@ -84,70 +85,11 @@ module HowIs
           })
         end
 
-        # TODO: Clean up Issues Per Label stuff, or replace it with different functionality.
-
-        def issues_per_label
-          ipl = with_label_links(num_with_label(data), @repository)
-          number_with_no_label = num_with_no_label(data)
-
-          if number_with_no_label > 0
-            ipl["(No label)"] = {
-              "name" => "(No label)",
-              "total" => number_with_no_label,
-            }
-          end
-
-          ipl
-        end
-
-        HTML_GRAPH_ROW = <<-EOF
-  <tr>
-    <td style="width: %{label_width}">%{label_text}</td>
-    <td><span class="fill" style="width: %{percentage}%%">%{link_text}</span></td>
-  </tr>
-        EOF
-
-        def issues_per_label_html
-          ipl = issues_per_label
-
-          return "<p>There are no open issues to graph.</p>" if ipl.empty?
-
-          biggest = ipl.map { |_label, info| info["total"] }.max
-
-          longest_label_length = ipl.map(&:first).map(&:length).max
-          label_width = "#{longest_label_length}ch"
-
-          parts = ipl.map { |label, info|
-            format_graph_row(label, info, label_width, biggest)
-          }
-
-          "<table class=\"horizontal-bar-graph\">\n" +
-          parts.join("\n") +
-          "\n</table>"
-        end
-
         def to_a
           obj_to_array_of_hashes(data)
         end
 
         private
-
-        def format_graph_row(label, info, label_width, biggest)
-          label_url  = label_url_for(info["name"])
-          label_text = "<a href=\"#{label_url}\">#{label}</a>"
-
-          Kernel.format(HTML_GRAPH_ROW, {
-            label_width: label_width,
-            label_text: label_text,
-            label_link: info["url"],
-            percentage: width_percentage(info["total"], biggest),
-            link_text: info["total"].to_s,
-          })
-        end
-
-        def width_percentage(number_of_issues, biggest)
-          number_of_issues * 100 / biggest
-        end
 
         def url_suffix
           "issues"
