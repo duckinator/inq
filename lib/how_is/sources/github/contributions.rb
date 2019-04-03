@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "github_api"
+require "how_is/cacheable"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
 require "how_is/template"
@@ -33,11 +34,12 @@ module HowIs
         #                            The first date to include commits from.
         # @param end_date   [String] Date in the format YYYY-MM-DD.
         #                            The last date to include commits from.
-        def initialize(config, start_date, end_date)
+        def initialize(config, start_date, end_date, cache)
           raise "Got String, need Hash. The Github::Contributions API changed." if \
             config.is_a?(String)
 
           @config = config
+          @cache = cache
           @github = HowIs::Sources::Github.new(config)
           @repository = config["repository"]
 
@@ -69,7 +71,9 @@ module HowIs
             }
             # True if +email+ never wrote a commit for +@repo+ before
             # +@since_date+, false otherwise.
-            @github.repos.commits.list(**args).count.zero?
+            @cache.cached("repos_commits", args.to_json) do
+              @github.repos.commits.list(**args)
+            end.count.zero?
           }
         end
 
@@ -122,18 +126,21 @@ module HowIs
           #
           # So, to compensate, we make N requests here, where N is number
           # of commits returned, and then we die a bit inside.
-          @commits = @github.repos.commits.list(**args).map { |c|
-            HowIs::Text.print "."
-            commit(c.sha)
-          }
+          @commits = @cache.cached("repos_commits", args.to_json) do
+            @github.repos.commits.list(**args).map { |c|
+              HowIs::Text.print "."
+              commit(c.sha)
+            }
+          end
           HowIs::Text.puts
 
           @commits
         end
 
         def commit(sha)
-          @commit[sha] ||=
+          @commit[sha] ||= @cache.cached("repos_commit_#{sha}") do
             @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
+          end
         end
 
         def stats
@@ -183,8 +190,9 @@ module HowIs
         end
 
         def default_branch
-          @default_branch ||=
+          @default_branch ||= @cache.cached("repos_default_branch") do
             @github.repos.get(user: @user, repo: @repo).default_branch
+          end
         end
 
         # rubocop:disable Metrics/AbcSize

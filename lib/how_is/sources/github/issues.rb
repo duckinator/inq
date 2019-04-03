@@ -16,8 +16,9 @@ module HowIs
         include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
-        def initialize(config, start_date, end_date)
+        def initialize(config, start_date, end_date, cache)
           @config = config
+          @cache = cache
           @repository = config["repository"]
           raise "#{self.class}.new() got nil repository." if @repository.nil?
           @start_date = start_date
@@ -110,7 +111,7 @@ module HowIs
         def data
           return @data if instance_variable_defined?(:@data)
 
-          fetcher = IssueFetcher.new(@config, type, @start_date, @end_date)
+          fetcher = IssueFetcher.new(@config, type, @start_date, @end_date, @cache)
           @data = fetcher.data
         end
       end

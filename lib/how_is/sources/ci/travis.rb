@@ -17,8 +17,9 @@ module HowIs
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
-        def initialize(config, start_date, end_date)
+        def initialize(config, start_date, end_date, cache)
           @config = config
+          @cache = cache
           @repository = config["repository"]
           raise "Travis.new() got nil repository." if @repository.nil?
           @start_date = DateTime.parse(start_date)
@@ -44,10 +45,12 @@ module HowIs
         #
         # @return [Hash] Hash containing the builds for the default branch.
         def builds
-          raw_builds \
-            .map(&method(:normalize_build)) \
-            .select(&method(:in_date_range?)) \
-            .map(&method(:add_build_urls))
+          @cache.cached("travis_builds") do
+            raw_builds \
+              .map(&method(:normalize_build)) \
+              .select(&method(:in_date_range?)) \
+              .map(&method(:add_build_urls))
+          end
         end
 
         private
@@ -127,24 +130,26 @@ module HowIs
         # @param parameters [Hash] Parameters.
         # @return [String] JSON result.
         def fetch(path, parameters = {})
-          HowIs::Text.print "Fetching Travis CI #{path.sub(/e?s$/, '')} data."
+          @cache.cached("travis_path") do
+            HowIs::Text.print "Fetching Travis CI #{path.sub(/e?s$/, '')} data."
 
-          # Apparently this is required for the Travis CI API to work.
-          repo = @repository.sub("/", "%2F")
+            # Apparently this is required for the Travis CI API to work.
+            repo = @repository.sub("/", "%2F")
 
-          ret = Okay::HTTP.get(
-            "https://api.travis-ci.org/repo/#{repo}/#{path}",
-            parameters: parameters,
-            headers: {
-              "Travis-Api-Version" => "3",
-              "Accept" => "application/json",
-              "User-Agent" => HowIs::USER_AGENT,
-            }
-          ).or_raise!.from_json
+            ret = Okay::HTTP.get(
+              "https://api.travis-ci.org/repo/#{repo}/#{path}",
+              parameters: parameters,
+              headers: {
+                "Travis-Api-Version" => "3",
+                "Accept" => "application/json",
+                "User-Agent" => HowIs::USER_AGENT,
+              }
+            ).or_raise!.from_json
 
-          HowIs::Text.puts
+            HowIs::Text.puts
 
-          ret
+            ret
+          end
         end
       end
     end

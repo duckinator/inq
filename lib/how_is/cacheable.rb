@@ -20,10 +20,18 @@ module HowIs
       case cache['type']
       when 'marshal'
         MarshalCache.cached(cache_key, @config) { yield }
-      when 'redis'
-        RedisCache.cached(cache_key) { yield }
-      when 'memcache'
-        MemcachedCache.cached(cache_key) { yield }
+      when 'self'
+        # Can provide your own cache in HowIs.new
+        # e.g.
+        # cache_mechanism = ->(cache_key, config, block) do
+        #   if cached?
+        #     cached_value
+        #   else
+        #     block.call
+        #   end
+        # end
+        # HowIs.new('owner/repo', date, cache_mechanism)
+        cache['cache_mechanism'].call(cache_key, @config, ->() { yield })
       end
     end
 
@@ -55,40 +63,6 @@ module HowIs
 
         def base_cache_dir(config)
           File.join("/tmp/how_is", config['repository'])
-        end
-      end
-    end
-
-    module RedisCache
-      class << self
-        def cached(key, config)
-          require 'redis'
-          redis = Redis.new(cache['config'])
-
-          if o = redis.get(key)
-            Marshal.load(o)
-          else
-            ret = yield
-            redis.set(key, Marshal.dump(ret))
-            ret
-          end
-        end
-      end
-    end
-
-    module MemcacheCache
-      class << self
-        def cached(key, config)
-          require 'memcached'
-          memcache = Memcached.new(cache['config'])
-
-          if o = memcache.get(key)
-            Marshal.load(o)
-          else
-            ret = yield
-            memcache.set(key, Marshal.dump(ret))
-            ret
-          end
         end
       end
     end

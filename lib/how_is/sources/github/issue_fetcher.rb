@@ -43,8 +43,9 @@ module HowIs
 
         attr_accessor :type
 
-        def initialize(config, type, start_date, end_date)
+        def initialize(config, type, start_date, end_date, cache)
           @config = config
+          @cache = cache
           @github = HowIs::Sources::Github.new(config)
           @repository = config["repository"]
           @user, @repo = @repository.split("/", 2)
@@ -61,9 +62,12 @@ module HowIs
 
           HowIs::Text.print "Fetching #{@repository} #{(type == 'issues') ? 'issue' : 'PR'} data."
 
-          after = nil
-          data = []
-          after, data = fetch_issues(after, data) until after == END_LOOP
+          data = @cache.cached(type) do
+            data = []
+            after = nil
+            after, data = fetch_issues(after, data) until after == END_LOOP
+            data
+          end
 
           HowIs::Text.puts
 

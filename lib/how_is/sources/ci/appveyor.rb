@@ -15,8 +15,9 @@ module HowIs
         # @param repository [String] GitHub repository name, of the format user/repo.
         # @param start_date [String] Start date for the report being generated.
         # @param end_date [String] End date for the report being generated.
-        def initialize(config, start_date, end_date)
+        def initialize(config, start_date, end_date, cache)
           @config = config
+          @cache = cache
           @repository = config["repository"]
           @start_date = DateTime.parse(start_date)
           @end_date = DateTime.parse(end_date)
@@ -64,19 +65,21 @@ module HowIs
         #
         # @return [Hash] API results.
         def fetch_builds
-          HowIs::Text.print "Fetching Appveyor build data."
+          @cache.cached("appveyor_builds") do
+            HowIs::Text.print "Fetching Appveyor build data."
 
-          ret = Okay::HTTP.get(
-            "https://ci.appveyor.com/api/projects/#{@repository}/history",
-            parameters: {"recordsNumber" => "100"},
-            headers: {
-              "Accept" => "application/json",
-              "User-Agent" => HowIs::USER_AGENT,
-            }
-          ).or_raise!.from_json
+            ret = Okay::HTTP.get(
+              "https://ci.appveyor.com/api/projects/#{@repository}/history",
+              parameters: {"recordsNumber" => "100"},
+              headers: {
+                "Accept" => "application/json",
+                "User-Agent" => HowIs::USER_AGENT,
+              }
+            ).or_raise!.from_json
 
-          HowIs::Text.puts
-          ret
+            HowIs::Text.puts
+            ret
+          end
         end
       end
     end
