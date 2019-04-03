@@ -71,9 +71,10 @@ module HowIs
             }
             # True if +email+ never wrote a commit for +@repo+ before
             # +@since_date+, false otherwise.
-            @cache.cached("repos_commits", args.to_json) do
+            commits = @cache.cached("repos_commits", args.to_json) do
               @github.repos.commits.list(**args)
-            end.count.zero?
+            end
+            commits.count.zero?
           }
         end
 

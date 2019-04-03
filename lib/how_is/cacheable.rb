@@ -1,6 +1,7 @@
-require 'digest'
+require "digest"
 
 module HowIs
+  # Class for use in caching expensive operations
   class Cacheable
     def initialize(config, start_date, end_date)
       @config = config
@@ -9,7 +10,7 @@ module HowIs
     end
 
     def cached(key, extra_digest = nil)
-      cache = @config['cache']
+      cache = @config["cache"]
       return yield if cache.nil?
 
       hash_key = []
@@ -17,10 +18,10 @@ module HowIs
       hash_key << Digest::SHA1.hexdigest(@config.to_json)
       cache_key = File.join(@start_date, @end_date, key, hash_key.join('-'))
 
-      case cache['type']
-      when 'marshal'
+      case cache["type"]
+      when "marshal"
         MarshalCache.cached(cache_key, @config) { yield }
-      when 'self'
+      when "self"
         # Can provide your own cache in HowIs.new
         # e.g.
         # cache_mechanism = ->(cache_key, config, block) do
@@ -30,8 +31,8 @@ module HowIs
         #     block.call
         #   end
         # end
-        # HowIs.new('owner/repo', date, cache_mechanism)
-        cache['cache_mechanism'].call(cache_key, @config, ->() { yield })
+        # HowIs.new("owner/repo", date, cache_mechanism)
+        cache["cache_mechanism"].call(cache_key, @config, ->() { yield })
       end
     end
 
@@ -39,13 +40,13 @@ module HowIs
     module MarshalCache
       class << self
         def cached(key, config)
-          require 'fileutils'
+          require "fileutils"
 
           path = File.join(base_cache_dir(config), key)
           FileUtils.mkdir_p(File.dirname(path))
 
+          ret = nil
           if File.exist?(path)
-            ret = nil
             File.open(path,"rb") do |f|
               ret = Marshal.load(f)
             end
@@ -55,14 +56,14 @@ module HowIs
             File.open(path, "wb") do |file|
               Marshal.dump(ret, file)
             end
-            ret
           end
+          ret          
         end
 
         private
 
         def base_cache_dir(config)
-          File.join("/tmp/how_is", config['repository'])
+          File.join("/tmp/how_is", config["repository"])
         end
       end
     end
