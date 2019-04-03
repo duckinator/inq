@@ -13,10 +13,23 @@ describe HowIs::Sources::CI::Travis do
   end
 
   describe "#builds" do
-    it "returns an Array" do
-      VCR.use_cassette("how-is-how-is-travis-api-repos-builds") do
-        expect(subject.builds).to be_a(Array)
+    around(:example) do |example|
+      token = ENV["HOWIS_GITHUB_TOKEN"]
+      username = ENV["HOWIS_GITHUB_USERNAME"]
+      begin
+        ENV["HOWIS_GITHUB_TOKEN"] = "blah"
+        ENV["HOWIS_GITHUB_USERNAME"] = "who"
+        example.run
+      ensure
+        ENV["HOWIS_GITHUB_TOKEN"] = token
+        ENV["HOWIS_GITHUB_USERNAME"] = username
       end
+    end
+
+    it "returns an Array" do
+        VCR.use_cassette("how-is-how-is-travis-api-repos-builds") do
+          expect(subject.builds).to be_a(Array)
+        end
     end
   end
 end
