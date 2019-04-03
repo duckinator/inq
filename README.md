@@ -73,6 +73,10 @@ This generates the report(s) specified in the config file, for the period
 from November 01 2016 to December 01 2016, and saves them in the
 locations specified in the config file.
 
+#### Screenshot
+
+![image](https://user-images.githubusercontent.com/211/55504154-89284180-5650-11e9-9a13-e03e9b83c749.png)
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec how_is` to use the gem in this directory, ignoring other installed copies of this gem.
