@@ -12,3 +12,16 @@ def env_vars_hidden?
   travis_pr = ENV["TRAVIS_PULL_REQUEST"]
   !travis_pr.nil? && (travis_pr != "false")
 end
+
+def config(repo)
+  HowIs::Config.new
+    .load_defaults
+    .load({
+      "repository" => repo,
+      "cache" => { "type" => "marshal" }
+    })
+end
+
+def cache(start_date, end_date)
+  HowIs::Cacheable.new(config("how-is/how_is"), start_date, end_date)
+end

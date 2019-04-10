@@ -120,7 +120,6 @@ module HowIs
           HowIs::Text.print "Fetching #{@repository} commit data."
 
           # The commits list endpoint doesn't include all stats.
-          #
           # So, to compensate, we make N requests here, where N is number
           # of commits returned, and then we die a bit inside.
           @commits = @cache.cached("repos_commits", args.to_json) do
@@ -130,7 +129,6 @@ module HowIs
             }
           end
           HowIs::Text.puts
-
           @commits
         end
 
@@ -154,10 +152,8 @@ module HowIs
 
         def changed_files
           return @changed_files if @changed_files
-
-          files = []
-          commits.map do |commit|
-            files += commit.files.map { |file| file["filename"] }
+          files = commits.flat_map do |commit|
+            commit.files.map { |file| file["filename"] }
           end
           @changed_files = files.sort.uniq
         end

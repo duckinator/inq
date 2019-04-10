@@ -5,11 +5,8 @@ require "how_is/sources/ci/appveyor"
 
 describe HowIs::Sources::CI::Travis do
   subject do
-    config =
-      HowIs::Config.new
-        .load_defaults
-        .load({"repository" => "how-is/how_is"})
-    described_class.new(config, "2018-03-01", "2017-04-15")
+    cache = cache("2018-03-01", "2017-04-15")
+    described_class.new(config("how-is/how_is"), "2018-03-01", "2017-04-15", cache)
   end
 
   describe "#builds" do
@@ -24,6 +21,9 @@ describe HowIs::Sources::CI::Travis do
         ENV["HOWIS_GITHUB_TOKEN"] = token
         ENV["HOWIS_GITHUB_USERNAME"] = username
       end
+
+      # This will fail without VCR if the cache isn't working
+      expect(subject.builds).to be_a(Array)
     end
 
     it "returns an Array" do

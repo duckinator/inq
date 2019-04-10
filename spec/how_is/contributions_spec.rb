@@ -5,11 +5,8 @@ require "how_is/sources/github/contributions"
 
 describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
   let(:contributions) {
-    config =
-      HowIs::Config.new
-        .load_defaults
-        .load({"repository" => "how-is/example-repository"})
-    described_class.new(config, "2017-08-01", "2017-09-01")
+    cache = cache("2017-08-01", "2017-09-01")
+    described_class.new(config("how-is/example-repository"), "2017-08-01", "2017-09-01", cache)
   }
 
   context "#contributors" do
@@ -19,6 +16,11 @@ describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
           match_array(["me@duckie.co", "fake@duckinator.net"])
         )
       end
+
+      # This will fail without VCR if the cache isn't working
+      expect(contributions.contributors.keys).to(
+        match_array(["me@duckie.co", "fake@duckinator.net"])
+      )
     end
   end
 
@@ -31,6 +33,11 @@ describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
           match_array(["fake@duckinator.net"])
         )
       end
+
+      # This will fail without VCR if the cache isn't working
+      expect(contributions.new_contributors.keys).to(
+        match_array(["fake@duckinator.net"])
+      )
     end
   end
 
@@ -46,6 +53,9 @@ describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
           "8286e548e330cfe01efcf7189f4df1fa53e777a7",
         ])
       end
+
+      # This will fail without VCR if the cache isn't working
+      contributions.commits
     end
   end
 
@@ -63,6 +73,9 @@ describe HowIs::Sources::Github::Contributions, skip: env_vars_hidden? do
         })
         expect(files).to eq(["README.md"])
       end
+
+      # This will fail without VCR if the cache isn't working
+      contributions.changes
     end
   end
 

@@ -5,10 +5,11 @@ require "digest"
 module HowIs
   # Class for use in caching expensive operations
   class Cacheable
-    def initialize(config, start_date, end_date)
+    def initialize(config, start_date, end_date, tmpdir = Dir.mktmpdir)
       @config = config
       @start_date = start_date
       @end_date = end_date
+      @tmpdir = tmpdir
     end
 
     def cached(key, extra_digest = nil)
@@ -22,7 +23,7 @@ module HowIs
 
       case cache["type"]
       when "marshal"
-        MarshalCache.cached(cache_key, @config) { yield }
+        MarshalCache.cached(cache_key, @tmpdir) { yield }
       when "self"
         # Can provide your own cache in HowIs.new
         # e.g.
@@ -42,10 +43,10 @@ module HowIs
     module MarshalCache
       class << self
         # rubocop:disable Security/MarshalLoad
-        def cached(key, config)
+        def cached(key, tmpdir)
           require "fileutils"
 
-          path = File.join(base_cache_dir(config), key)
+          path = File.join(tmpdir, "how_is", key)
           FileUtils.mkdir_p(File.dirname(path))
 
           ret = nil
@@ -63,12 +64,6 @@ module HowIs
           ret
         end
         # rubocop:enable Security/MarshalLoad
-
-        private
-
-        def base_cache_dir(config)
-          File.join("/tmp/how_is", config["repository"])
-        end
       end
     end
   end
