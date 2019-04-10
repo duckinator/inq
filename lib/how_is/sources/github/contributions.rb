@@ -34,9 +34,9 @@ module HowIs
         #                            The first date to include commits from.
         # @param end_date   [String] Date in the format YYYY-MM-DD.
         #                            The last date to include commits from.
+        # @param cache      [Cacheable] Instance of HowIs::Cacheable to cache API calls
         def initialize(config, start_date, end_date, cache)
-          raise "Got String, need Hash. The Github::Contributions API changed." if \
-            config.is_a?(String)
+          raise "Got String, need Hash. The Github::Contributions API changed." if config.is_a?(String)
 
           @config = config
           @cache = cache
@@ -82,19 +82,9 @@ module HowIs
           names = new_contributors.values.map { |c| c["name"] }
           list_items = names.map { |n| "  <li>#{n}</li>" }.join("\n")
 
-          if names.length.zero?
-            num_new_contributors = "no"
-          else
-            num_new_contributors = names.length
-          end
-
-          if names.length == 1
-            was_were = "was"
-            contributor_s = ""
-          else
-            was_were = "were"
-            contributor_s = "s"
-          end
+          num_new_contributors = names.empty? ? "no" : names.length
+          was_were = (names.length == 1) ? "was" : "were"
+          contributor_s = (names.length == 1) ? "" : "s"
 
           Template.apply("new_contributors_partial.html", {
             was_were: was_were,
@@ -147,18 +137,12 @@ module HowIs
         def stats
           return @stats if @stats
 
-          stats = {
-            "total" => 0,
-            "additions" => 0,
-            "deletions" => 0,
-          }
-
+          stats = {"total" => 0, "additions" => 0, "deletions" => 0}
           commits.map do |commit|
             stats.keys.each do |key|
               stats[key] += commit.stats[key]
             end
           end
-
           @stats = stats
         end
 
@@ -166,11 +150,9 @@ module HowIs
           return @changed_files if @changed_files
 
           files = []
-
           commits.map do |commit|
             files += commit.files.map { |file| file["filename"] }
           end
-
           @changed_files = files.sort.uniq
         end
 

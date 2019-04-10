@@ -16,6 +16,8 @@ module HowIs
         include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
+        attr_reader :config, :start_date, :end_date, :cache
+
         def initialize(config, start_date, end_date, cache)
           @config = config
           @cache = cache
@@ -90,6 +92,14 @@ module HowIs
           obj_to_array_of_hashes(data)
         end
 
+        def type
+          singular_type + "s"
+        end
+
+        def pretty_type
+          "issue"
+        end
+
         private
 
         def url_suffix
@@ -100,18 +110,10 @@ module HowIs
           "issue"
         end
 
-        def type
-          singular_type + "s"
-        end
-
-        def pretty_type
-          "issue"
-        end
-
         def data
           return @data if instance_variable_defined?(:@data)
 
-          fetcher = IssueFetcher.new(@config, type, @start_date, @end_date, @cache)
+          fetcher = IssueFetcher.new(self)
           @data = fetcher.data
         end
       end

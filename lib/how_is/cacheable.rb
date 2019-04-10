@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "digest"
 
 module HowIs
@@ -16,7 +18,7 @@ module HowIs
       hash_key = []
       hash_key << Digest::SHA1.hexdigest(extra_digest) if extra_digest
       hash_key << Digest::SHA1.hexdigest(@config.to_json)
-      cache_key = File.join(@start_date, @end_date, key, hash_key.join('-'))
+      cache_key = File.join(@start_date, @end_date, key, hash_key.join("-"))
 
       case cache["type"]
       when "marshal"
@@ -39,6 +41,7 @@ module HowIs
     # This is only okay on a local system
     module MarshalCache
       class << self
+        # rubocop:disable Security/MarshalLoad
         def cached(key, config)
           require "fileutils"
 
@@ -47,7 +50,7 @@ module HowIs
 
           ret = nil
           if File.exist?(path)
-            File.open(path,"rb") do |f|
+            File.open(path, "rb") do |f|
               ret = Marshal.load(f)
             end
             ret
@@ -57,8 +60,9 @@ module HowIs
               Marshal.dump(ret, file)
             end
           end
-          ret          
+          ret
         end
+        # rubocop:enable Security/MarshalLoad
 
         private
 
