@@ -43,6 +43,7 @@ module HowIs
 
         attr_accessor :type
 
+        # @param issues_source [Issues] HowIs::Issues (or HowIs::Pulls) instance for which to fetch issues
         def initialize(issues_source)
           @issues_source = issues_source
           @cache = issues_source.cache
