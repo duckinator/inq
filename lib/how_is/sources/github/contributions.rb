@@ -16,9 +16,7 @@ module HowIs
       #
       # Usage:
       #
-      #     c = HowIs::Contributions.new(start_date: '2017-07-01',
-      #                                  user: 'how-is',
-      #                                  repo: 'how_is')
+      #     c = HowIs::Contributions.new(start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
       #     c.commits          #=> All commits during July 2017.
       #     c.contributors #=> All contributors during July 2017.
       #     c.new_contributors #=> New contributors during July 2017.
@@ -26,8 +24,7 @@ module HowIs
         include HowIs::Sources::GithubHelpers
 
         # Returns an object that fetches contributor information about a
-        # particular repository for a month-long period starting on
-        # +start_date+.
+        # particular repository for a month-long period starting on +start_date+.
         #
         # @param config     [Hash]   A config object.
         # @param start_date [String] Date in the format YYYY-MM-DD.
@@ -69,8 +66,7 @@ module HowIs
               until: @since_date,
               author: email,
             }
-            # True if +email+ never wrote a commit for +@repo+ before
-            # +@since_date+, false otherwise.
+            # True if +email+ never wrote a commit for +@repo+ before +@since_date+, false otherwise.
             commits = @cache.cached("repos_commits", args.to_json) do
               @github.repos.commits.list(**args)
             end
@@ -82,9 +78,19 @@ module HowIs
           names = new_contributors.values.map { |c| c["name"] }
           list_items = names.map { |n| "  <li>#{n}</li>" }.join("\n")
 
-          num_new_contributors = names.empty? ? "no" : names.length
-          was_were = (names.length == 1) ? "was" : "were"
-          contributor_s = (names.length == 1) ? "" : "s"
+          if names.length.zero?
+            num_new_contributors = "no"
+          else
+            num_new_contributors = names.length
+          end
+
+          if names.length == 1
+            was_were = "was"
+            contributor_s = ""
+          else
+            was_were = "were"
+            contributor_s = "s"
+          end
 
           Template.apply("new_contributors_partial.html", {
             was_were: was_were,
