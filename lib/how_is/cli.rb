@@ -6,7 +6,7 @@ require "okay/simple_opts"
 
 module HowIs
   ##
-  # Class for handling the command-line interface for how_is.
+  # Parses command-line arguments for how_is.
   class CLI
     MissingArgument = Class.new(OptionParser::MissingArgument)
 
@@ -24,8 +24,13 @@ module HowIs
       @help_text = nil
     end
 
-    # Parses +argv+ to generate an options Hash to control the behavior of
-    # the library.
+    # Parses an Array of command-line arguments into an equivalent Hash.
+    #
+    # The results of this can be used to control the behavior of the rest
+    # of the library.
+    #
+    # @params argv [Array] An array of command-line arguments, e.g. +ARGV+.
+    # @return [Hash] A Hash containing data used to control HowIs behavior.
     def parse(argv)
       parser, options = parse_main(argv)
 
@@ -46,7 +51,10 @@ module HowIs
     # parse_main() is as short as can be managed. It's fine as-is.
     # rubocop:disable Metrics/MethodLength
 
-    # Does a significant chunk of the work for parse().
+    # This does a significant chunk of the work for parse().
+    #
+    # @return [Array] An array containing the +OptionParser+ and the result
+    #   of running it.
     def parse_main(argv)
       defaults = {
         report: HowIs::DEFAULT_REPORT_FILE,
@@ -95,6 +103,15 @@ module HowIs
 
     # rubocop:enable Metrics/MethodLength
 
+    # Given an +options+ Hash, determine if we got a valid combination of
+    # options.
+    #
+    # 1. Anything with `--help` and `--version` is always valid.
+    # 2. Otherwise, `--repository` or `--config` is required.
+    # 3. If `--repository` or `--config` is required, so is `--date`.
+    #
+    # @param options [Hash] The result of CLI#parse().
+    # @raise [MissingArgument] if we did not get a valid options Hash.
     def validate_options!(options)
       return if options[:help] || options[:version]
       raise MissingArgument, "--date" unless options[:date]
@@ -102,10 +119,13 @@ module HowIs
         options[:repository] || options[:config]
     end
 
+    # @return [String] A comma-separated list of supported formats.
     def formats
       HowIs.supported_formats.join(", ")
     end
 
+    # @return [Regexp] a +Regexp+ object which matches any path ending
+    #   with an extension corresponding to a supported format.
     def format_regexp
       regexp_parts = HowIs.supported_formats.map { |x| Regexp.escape(x) }
 

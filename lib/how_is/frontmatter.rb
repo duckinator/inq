@@ -15,6 +15,10 @@ module HowIs
     # E.g.,
     #     generate_frontmatter({'foo' => "bar %{baz}"}, {'baz' => "asdf"})
     # =>  "---\nfoo: bar asdf\n"
+    #
+    # @param frontmatter [Hash] Frontmatter for the report.
+    # @param report_data [Hash] The report data itself.
+    # @return [String] A YAML dump of the generated frontmatter.
     def self.generate(frontmatter, report_data)
       return "" if frontmatter.nil?
 
@@ -35,6 +39,10 @@ module HowIs
     # @example
     #   convert_keys({'foo' => 'bar'}, :to_sym)
     #   # => {:foo => 'bar'}
+    # @param data [Hash] The input hash.
+    # @param method_name [Symbol] The method name used to convert keys.
+    #   (E.g. :to_s, :to_sym, etc.)
+    # @return [Hash] The converted result.
     def self.convert_keys(data, method_name)
       data.map { |k, v| [k.send(method_name), v] }.to_h
     end
