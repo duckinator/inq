@@ -52,6 +52,7 @@ module HowIs
           @user, @repo = @repository.split("/", 2)
           @start_date = issues_source.start_date
           @end_date = issues_source.end_date
+          @type = issues_source.type
         end
 
         def data
@@ -62,9 +63,8 @@ module HowIs
 
           HowIs::Text.print "Fetching #{@repository} #{@issues_source.pretty_type} data."
 
-          @data = @cache.cached(type) do
+          @data = @cache.cached("fetch-#{type}") do
             data = []
-            after = nil
             after, data = fetch_issues(after, data) until after == END_LOOP
             data.select(&method(:issue_is_relevant?))
           end
