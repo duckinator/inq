@@ -16,8 +16,15 @@ module HowIs
         include HowIs::DateTimeHelpers
         include HowIs::Sources::GithubHelpers
 
-        def initialize(config, start_date, end_date)
+        attr_reader :config, :start_date, :end_date, :cache
+
+        # @param repository [String] GitHub repository name, of the format user/repo.
+        # @param start_date [String] Start date for the report being generated.
+        # @param end_date   [String] End date for the report being generated.
+        # @param cache      [Cacheable] Instance of HowIs::Cacheable to cache API calls
+        def initialize(config, start_date, end_date, cache)
           @config = config
+          @cache = cache
           @repository = config["repository"]
           raise "#{self.class}.new() got nil repository." if @repository.nil?
           @start_date = start_date
@@ -89,6 +96,14 @@ module HowIs
           obj_to_array_of_hashes(data)
         end
 
+        def type
+          singular_type + "s"
+        end
+
+        def pretty_type
+          "issue"
+        end
+
         private
 
         def url_suffix
@@ -99,18 +114,10 @@ module HowIs
           "issue"
         end
 
-        def type
-          singular_type + "s"
-        end
-
-        def pretty_type
-          "issue"
-        end
-
         def data
           return @data if instance_variable_defined?(:@data)
 
-          fetcher = IssueFetcher.new(@config, type, @start_date, @end_date)
+          fetcher = IssueFetcher.new(self)
           @data = fetcher.data
         end
       end

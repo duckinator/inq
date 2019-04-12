@@ -43,14 +43,16 @@ module HowIs
 
         attr_accessor :type
 
-        def initialize(config, type, start_date, end_date)
-          @config = config
-          @github = HowIs::Sources::Github.new(config)
-          @repository = config["repository"]
+        # @param issues_source [Issues] HowIs::Issues (or HowIs::Pulls) instance for which to fetch issues
+        def initialize(issues_source)
+          @issues_source = issues_source
+          @cache = issues_source.cache
+          @github = HowIs::Sources::Github.new(issues_source.config)
+          @repository = issues_source.config["repository"]
           @user, @repo = @repository.split("/", 2)
-          @start_date = start_date
-          @end_date = end_date
-          @type = type
+          @start_date = issues_source.start_date
+          @end_date = issues_source.end_date
+          @type = issues_source.type
         end
 
         def data
@@ -59,15 +61,17 @@ module HowIs
           @data = []
           return @data if last_cursor.nil?
 
-          HowIs::Text.print "Fetching #{@repository} #{(type == 'issues') ? 'issue' : 'PR'} data."
+          HowIs::Text.print "Fetching #{@repository} #{@issues_source.pretty_type} data."
 
-          after = nil
-          data = []
-          after, data = fetch_issues(after, data) until after == END_LOOP
+          @data = @cache.cached("fetch-#{type}") do
+            data = []
+            after, data = fetch_issues(after, data) until after == END_LOOP
+            data.select(&method(:issue_is_relevant?))
+          end
 
           HowIs::Text.puts
 
-          @data = data.select(&method(:issue_is_relevant?))
+          @data
         end
 
         def issue_is_relevant?(issue)

@@ -21,11 +21,12 @@ module HowIs
     }
   end
 
-  def self.new(repository, date)
+  def self.new(repository, date, cache_mechanism = nil)
     config =
       Config.new
         .load_defaults
         .load(default_config(repository))
+    config["cache"] = {"type" => "self", "cache_mechanism" => cache_mechanism} if cache_mechanism
     Report.new(config, date)
   end
 

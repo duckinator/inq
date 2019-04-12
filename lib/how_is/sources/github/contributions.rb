@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "github_api"
+require "how_is/cacheable"
 require "how_is/sources/github"
 require "how_is/sources/github_helpers"
 require "how_is/template"
@@ -15,9 +16,7 @@ module HowIs
       #
       # Usage:
       #
-      #     c = HowIs::Contributions.new(start_date: '2017-07-01',
-      #                                  user: 'how-is',
-      #                                  repo: 'how_is')
+      #     c = HowIs::Contributions.new(start_date: '2017-07-01', user: 'how-is', repo: 'how_is')
       #     c.commits          #=> All commits during July 2017.
       #     c.contributors #=> All contributors during July 2017.
       #     c.new_contributors #=> New contributors during July 2017.
@@ -25,19 +24,19 @@ module HowIs
         include HowIs::Sources::GithubHelpers
 
         # Returns an object that fetches contributor information about a
-        # particular repository for a month-long period starting on
-        # +start_date+.
+        # particular repository for a month-long period starting on +start_date+.
         #
         # @param config     [Hash]   A config object.
         # @param start_date [String] Date in the format YYYY-MM-DD.
         #                            The first date to include commits from.
         # @param end_date   [String] Date in the format YYYY-MM-DD.
         #                            The last date to include commits from.
-        def initialize(config, start_date, end_date)
-          raise "Got String, need Hash. The Github::Contributions API changed." if \
-            config.is_a?(String)
+        # @param cache      [Cacheable] Instance of HowIs::Cacheable to cache API calls
+        def initialize(config, start_date, end_date, cache)
+          raise "Got String, need Hash. The Github::Contributions API changed." if config.is_a?(String)
 
           @config = config
+          @cache = cache
           @github = HowIs::Sources::Github.new(config)
           @repository = config["repository"]
 
@@ -67,9 +66,11 @@ module HowIs
               until: @since_date,
               author: email,
             }
-            # True if +email+ never wrote a commit for +@repo+ before
-            # +@since_date+, false otherwise.
-            @github.repos.commits.list(**args).count.zero?
+            # True if +email+ never wrote a commit for +@repo+ before +@since_date+, false otherwise.
+            commits = @cache.cached("repos_commits", args.to_json) do
+              @github.repos.commits.list(**args)
+            end
+            commits.count.zero?
           }
         end
 
@@ -119,50 +120,41 @@ module HowIs
           HowIs::Text.print "Fetching #{@repository} commit data."
 
           # The commits list endpoint doesn't include all stats.
-          #
           # So, to compensate, we make N requests here, where N is number
           # of commits returned, and then we die a bit inside.
-          @commits = @github.repos.commits.list(**args).map { |c|
-            HowIs::Text.print "."
-            commit(c.sha)
-          }
+          @commits = @cache.cached("repos_commits", args.to_json) do
+            @github.repos.commits.list(**args).map { |c|
+              HowIs::Text.print "."
+              commit(c.sha)
+            }
+          end
           HowIs::Text.puts
-
           @commits
         end
 
         def commit(sha)
-          @commit[sha] ||=
+          @commit[sha] ||= @cache.cached("repos_commit_#{sha}") do
             @github.repos.commits.get(user: @user, repo: @repo, sha: sha)
+          end
         end
 
         def stats
           return @stats if @stats
 
-          stats = {
-            "total" => 0,
-            "additions" => 0,
-            "deletions" => 0,
-          }
-
+          stats = {"total" => 0, "additions" => 0, "deletions" => 0}
           commits.map do |commit|
             stats.keys.each do |key|
               stats[key] += commit.stats[key]
             end
           end
-
           @stats = stats
         end
 
         def changed_files
           return @changed_files if @changed_files
-
-          files = []
-
-          commits.map do |commit|
-            files += commit.files.map { |file| file["filename"] }
+          files = commits.flat_map do |commit|
+            commit.files.map { |file| file["filename"] }
           end
-
           @changed_files = files.sort.uniq
         end
 
@@ -183,8 +175,9 @@ module HowIs
         end
 
         def default_branch
-          @default_branch ||=
+          @default_branch ||= @cache.cached("repos_default_branch") do
             @github.repos.get(user: @user, repo: @repo).default_branch
+          end
         end
 
         # rubocop:disable Metrics/AbcSize

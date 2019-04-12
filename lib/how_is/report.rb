@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "how_is/frontmatter"
+require "how_is/cacheable"
 require "how_is/sources/github/contributions"
 require "how_is/sources/github/issues"
 require "how_is/sources/github/pulls"
@@ -31,24 +32,28 @@ module HowIs
       @start_date = start_dt.strftime("%Y-%m-%d")
     end
 
+    def cache
+      @cache ||= Cacheable.new(@config, @start_date, @end_date)
+    end
+
     def contributions
-      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@config, @start_date, @end_date)
+      @gh_contributions ||= HowIs::Sources::Github::Contributions.new(@config, @start_date, @end_date, cache)
     end
 
     def issues
-      @gh_issues ||= HowIs::Sources::Github::Issues.new(@config, @start_date, @end_date)
+      @gh_issues ||= HowIs::Sources::Github::Issues.new(@config, @start_date, @end_date, cache)
     end
 
     def pulls
-      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@config, @start_date, @end_date)
+      @gh_pulls ||= HowIs::Sources::Github::Pulls.new(@config, @start_date, @end_date, cache)
     end
 
     def travis
-      @travis ||= HowIs::Sources::CI::Travis.new(@config, @start_date, @end_date)
+      @travis ||= HowIs::Sources::CI::Travis.new(@config, @start_date, @end_date, cache)
     end
 
     def appveyor
-      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@config, @start_date, @end_date)
+      @appveyor ||= HowIs::Sources::CI::Appveyor.new(@config, @start_date, @end_date, cache)
     end
 
     def to_h(frontmatter_data = nil)
