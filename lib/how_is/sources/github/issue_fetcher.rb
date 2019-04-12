@@ -41,7 +41,7 @@ module HowIs
 
         CHUNK_SIZE = 100
 
-        attr_accessor :type
+        attr_reader :type
 
         # @param issues_source [Issues] HowIs::Issues (or HowIs::Pulls) instance for which to fetch issues
         def initialize(issues_source)

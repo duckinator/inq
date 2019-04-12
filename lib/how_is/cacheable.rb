@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "digest"
+require "tmpdir"
 
 module HowIs
   # Class for use in caching expensive operations
