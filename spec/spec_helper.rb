@@ -25,3 +25,16 @@ end
 def cache(start_date, end_date)
   HowIs::Cacheable.new(config("how-is/how_is"), start_date, end_date)
 end
+
+def load_test_env
+  token = ENV["HOWIS_GITHUB_TOKEN"]
+  username = ENV["HOWIS_GITHUB_USERNAME"]
+  begin
+    ENV["HOWIS_GITHUB_TOKEN"] = "blah"
+    ENV["HOWIS_GITHUB_USERNAME"] = "who"
+    yield
+  ensure
+    ENV["HOWIS_GITHUB_TOKEN"] = token
+    ENV["HOWIS_GITHUB_USERNAME"] = username
+  end
+end

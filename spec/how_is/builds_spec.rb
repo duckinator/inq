@@ -11,16 +11,7 @@ describe HowIs::Sources::CI::Travis do
 
   describe "#builds" do
     around(:example) do |example|
-      token = ENV["HOWIS_GITHUB_TOKEN"]
-      username = ENV["HOWIS_GITHUB_USERNAME"]
-      begin
-        ENV["HOWIS_GITHUB_TOKEN"] = "blah"
-        ENV["HOWIS_GITHUB_USERNAME"] = "who"
-        example.run
-      ensure
-        ENV["HOWIS_GITHUB_TOKEN"] = token
-        ENV["HOWIS_GITHUB_USERNAME"] = username
-      end
+      load_test_env { example.run }
 
       # This will fail without VCR if the cache isn't working
       expect(subject.builds).to be_a(Array)

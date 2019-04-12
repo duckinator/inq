@@ -3,6 +3,12 @@
 require "how_is/cacheable"
 
 describe HowIs::Cacheable do
+  around(:example) do |example|
+    load_test_env do
+      example.run
+    end
+  end
+
   let(:marshal_cache_config) do
     config =
       HowIs::Config.new
