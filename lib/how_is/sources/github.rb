@@ -20,6 +20,9 @@ module HowIs
         must_have_key!(@config, "token")
       end
 
+      # Verify that +hash+ has a particular +key+.
+      #
+      # @raise [ConfigError] If +hash+ does not have the required +key+.
       def must_have_key!(hash, key)
         raise ConfigError, "Expected Hash, got #{hash.class}" unless hash.is_a?(Hash)
         raise ConfigError, "Expected key `#{key}'" unless hash.has_key?(key)
@@ -42,6 +45,7 @@ module HowIs
         "#{username}:#{access_token}"
       end
 
+      # Submit a GraphQL query, and convert it from JSON to a Ruby object.
       def graphql(query_string)
         Okay::GraphQL.query(query_string)
           .submit!(:github, {bearer_token: access_token})

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module HowIs
-  # Helper class for printing test, but hiding it when e.g. running in CI.
+  ##
+  # Helper class for printing text, but hiding it when e.g. running in CI.
   class Text
     def self.show_default_output
       @show_default_output = true unless

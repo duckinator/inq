@@ -21,6 +21,12 @@ module HowIs
   class Config < Hash
     attr_reader :site_configs
 
+    # If the +HOWIS_USE_ENV+ environment variable is set, load config from
+    # the environment.
+    #
+    # Otherwise, load the the default config file.
+    #
+    # @return [Hash] A Hash representation of the config.
     def load_defaults
       if ENV["HOWIS_USE_ENV"] == "true"
         load_env
@@ -34,6 +40,10 @@ module HowIs
       @site_configs = []
     end
 
+    # Load the config files as specified via +files+.
+    #
+    # @param files [Array<String>] The path(s) for config files.
+    # @return [Config] The config hash. (+self+)
     def load_site_configs(*files)
       # Allows both:
       #   load_site_configs('foo', 'bar')
@@ -45,6 +55,7 @@ module HowIs
       load_files(*files)
     end
 
+    # TODO: See if this can be consolidated with load_site_configs.
     def load_files(*file_paths)
       files = (site_configs + file_paths).map { |f| Pathname.new(f) }
 
@@ -58,6 +69,14 @@ module HowIs
       load(*configs)
     end
 
+    # Take a collection of config hashes and cascade them, meaning values
+    # in later ones override values in earlier ones.
+    #
+    # E.g., this results in +{'a'=>'x', 'c'=>'d'}+:
+    #     load({'a'=>'b'}, {'c'=>'d'}, {'a'=>'x'})
+    #
+    # @param [Array<Hash>] The configuration hashes.
+    # @return [Config] The final configuration value.
     def load(*configs)
       configs.each do |config|
         config.each do |k, v|
@@ -68,6 +87,13 @@ module HowIs
       self
     end
 
+    # Load config info from environment variables.
+    #
+    # Supported environment variables:
+    # - HOWIS_GITHUB_TOKEN: a GitHub authentication token.
+    # - HOWIS_GITHUB_USERNAME: the GitHub username corresponding to the token.
+    #
+    # @return [Config] The resulting configuration.
     def load_env
       HowIs::Text.puts "Using configuration from environment variables."
 

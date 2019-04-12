@@ -16,6 +16,7 @@ module HowIs
       @date = date
     end
 
+    # Generates the metadata for the collection of Reports.
     def metadata
       end_date = DateTime.strptime(@date, "%Y-%m-%d")
       friendly_end_date = end_date.strftime("%B %d, %y")
@@ -28,6 +29,9 @@ module HowIs
     end
     private :metadata
 
+    # Converts a ReportCollection to a Hash.
+    #
+    # Also good for giving programmers nightmares, I suspect.
     def to_h
       @config["reports"].map { |format, report_config|
         # Sometimes report_data has unused keys, which generates a warning, but
@@ -44,6 +48,9 @@ module HowIs
       }.to_h
     end
 
+    # Save all of the reports to the corresponding files.
+    #
+    # @return [Array<String>] An array of file paths.
     def save_all
       reports = to_h
       reports.each do |file, report|
