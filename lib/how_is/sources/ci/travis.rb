@@ -115,6 +115,7 @@ module HowIs
           result["repository"] = result["repository"]["slug"]
 
           ["started_at", "finished_at"].each do |k|
+            next if k.nil?
             result[k] = DateTime.parse(result[k])
           end
 

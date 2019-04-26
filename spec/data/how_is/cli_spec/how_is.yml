@@ -1,5 +1,4 @@
-repository: rubygems/rubygems
-reports:
+default_reports:
   html:
     directory: output
     frontmatter:
@@ -9,3 +8,14 @@ reports:
   json:
     directory: output
     filename: "report.json"
+
+repositories:
+  - repository: rubygems/rubygems
+  - repository: how-is/how_is
+    reports:
+      html:
+        filename: "%{sanitized_repository}-report.html"
+        frontmatter:
+          layout: alt_layout
+      json:
+        filename: "%{sanitized_repository}-report.json"

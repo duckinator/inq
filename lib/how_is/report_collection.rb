@@ -10,42 +10,94 @@ module HowIs
     include Okay::WarningHelpers
 
     def initialize(config, date)
-      @report = Report.new(config, date)
-      @repository = config["repository"]
       @config = config
+
+      # If the config is in the old format, convert it to the new one.
+      if !@config["repositories"]
+        @config["repositories"] = [
+          {
+            "repository" => @config.delete("repository"),
+            "reports" => @config.delete("reports"),
+          }
+        ]
+      end
+
       @date = date
+      @reports = config["repositories"].map(&method(:fetch_report)).to_h
     end
 
     # Generates the metadata for the collection of Reports.
-    def metadata
+    def metadata(repository)
       end_date = DateTime.strptime(@date, "%Y-%m-%d")
       friendly_end_date = end_date.strftime("%B %d, %y")
 
       {
-        repository: @repository,
+        sanitized_repository: repository.gsub('/', '-'),
+        repository: repository,
         date: end_date,
         friendly_date: friendly_end_date,
       }
     end
     private :metadata
 
+    def config_for(repo)
+      defaults = @config.fetch("default_reports", {})
+      config = @config.dup
+      repos = config.delete("repositories")
+
+      # Find the _last_ one that matches, to allow overriding.
+      repo_config = repos.reverse.find { |conf| conf["repository"] == repo }
+
+      # Use values from default_reports, unless overridden.
+      config["repository"] = repo
+      config["reports"] = defaults.merge(repo_config.fetch("reports", {}))
+      config
+    end
+    private :config_for
+
+    def fetch_report(repo_config)
+      repo = repo_config["repository"]
+      report = Report.new(config_for(repo), @date)
+      [repo, report]
+    end
+    private :fetch_report
+
     # Converts a ReportCollection to a Hash.
     #
     # Also good for giving programmers nightmares, I suspect.
     def to_h
-      @config["reports"].map { |format, report_config|
-        # Sometimes report_data has unused keys, which generates a warning, but
-        # we're okay with it, so we wrap it with silence_warnings {}.
-        filename = silence_warnings { report_config["filename"] % metadata }
+      results = {}
+      defaults = @config["default_reports"] || {}
 
-        file = File.join(report_config["directory"], filename)
+      @config["repositories"].map { |repo_config|
+        repo = repo_config["repository"]
+        config = config_for(repo)
 
-        # Export +report+ to the specified +format+ with the specified
-        # +frontmatter+.
-        export = @report.send("to_#{format}", report_config["frontmatter"])
+        config["reports"].map { |format, report_config|
+          # Sometimes report_data has unused keys, which generates a warning, but
+          # we're okay with it, so we wrap it with silence_warnings {}.
+          filename = silence_warnings {
+            tmp_filename = report_config["filename"] || defaults[format]["filename"]
+            tmp_filename % metadata(repo)
+          }
 
-        [file, export]
-      }.to_h
+          directory = report_config["directory"] || defaults[format]["directory"]
+          file = File.join(directory, filename)
+
+          # Export +report+ to the specified +format+ with the specified
+          # +frontmatter+.
+          frontmatter = report_config["frontmatter"] || {}
+          if defaults.has_key?(format) and defaults[format].has_key?("frontmatter")
+            frontmatter = defaults[format]["frontmatter"].merge(frontmatter)
+          end
+          frontmatter = nil if frontmatter == {}
+
+          export = @reports[repo].send("to_#{format}", frontmatter)
+
+          results[file] = export
+        }
+      }
+      results
     end
 
     # Save all of the reports to the corresponding files.
