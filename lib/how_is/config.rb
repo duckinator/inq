@@ -83,7 +83,7 @@ module HowIs
     def load(*configs)
       configs.each do |config|
         config.each do |k, v|
-          if self[k] and self[k].is_a?(Array)
+          if self[k] && self[k].is_a?(Array)
             self[k] += v
           else
             self[k] = v

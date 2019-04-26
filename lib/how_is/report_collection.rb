@@ -13,13 +13,11 @@ module HowIs
       @config = config
 
       # If the config is in the old format, convert it to the new one.
-      if !@config["repositories"]
-        @config["repositories"] = [
-          {
-            "repository" => @config.delete("repository"),
-            "reports" => @config.delete("reports"),
-          }
-        ]
+      unless @config["repositories"]
+        @config["repositories"] = [{
+          "repository" => @config.delete("repository"),
+          "reports" => @config.delete("reports"),
+        }]
       end
 
       @date = date
@@ -32,7 +30,7 @@ module HowIs
       friendly_end_date = end_date.strftime("%B %d, %y")
 
       {
-        sanitized_repository: repository.gsub('/', '-'),
+        sanitized_repository: repository.tr("/", "-"),
         repository: repository,
         date: end_date,
         friendly_date: friendly_end_date,
@@ -87,7 +85,7 @@ module HowIs
           # Export +report+ to the specified +format+ with the specified
           # +frontmatter+.
           frontmatter = report_config["frontmatter"] || {}
-          if defaults.has_key?(format) and defaults[format].has_key?("frontmatter")
+          if defaults.has_key?(format) && defaults[format].has_key?("frontmatter")
             frontmatter = defaults[format]["frontmatter"].merge(frontmatter)
           end
           frontmatter = nil if frontmatter == {}
