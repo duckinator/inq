@@ -1,10 +1,66 @@
 # Change Log
 
+## [v25.0.0](https://github.com/how-is/how_is/tree/v25.0.0) (2019-04-26)
+[Full Changelog](https://github.com/how-is/how_is/compare/v24.0.0...v25.0.0)
+
+**Closed issues:**
+
+- Image example of report.html [\#260](https://github.com/how-is/how_is/issues/260)
+- Add ReportCollection\#save\_all [\#257](https://github.com/how-is/how_is/issues/257)
+- Show progress while generating reports [\#255](https://github.com/how-is/how_is/issues/255)
+- Use config file instead of env vars [\#253](https://github.com/how-is/how_is/issues/253)
+- Include new contributors in reports [\#248](https://github.com/how-is/how_is/issues/248)
+- Alternative to "Issues Per Label" section [\#245](https://github.com/how-is/how_is/issues/245)
+- Remove "Issues per Label" section. [\#244](https://github.com/how-is/how_is/issues/244)
+- Refactor how\_is/cli.rb [\#243](https://github.com/how-is/how_is/issues/243)
+- Refactor Sources::Github.basic\_auth [\#241](https://github.com/how-is/how_is/issues/241)
+- Travis CI: Configure HOWIS\_BASIC\_AUTH et al [\#240](https://github.com/how-is/how_is/issues/240)
+- "Issues per label" missing issues. [\#230](https://github.com/how-is/how_is/issues/230)
+- resolve codeclimate issues [\#227](https://github.com/how-is/how_is/issues/227)
+-  no implicit conversion of nil into String \(TypeError\) [\#222](https://github.com/how-is/how_is/issues/222)
+- Document PR process [\#198](https://github.com/how-is/how_is/issues/198)
+- Better visualization of 'Issues Per Label' section [\#152](https://github.com/how-is/how_is/issues/152)
+- Exporting to HTML file returns HTML partial [\#151](https://github.com/how-is/how_is/issues/151)
+- Track data over time [\#111](https://github.com/how-is/how_is/issues/111)
+- group Issues Per Label by category type [\#71](https://github.com/how-is/how_is/issues/71)
+- Use authentication [\#6](https://github.com/how-is/how_is/issues/6)
+
+**Merged pull requests:**
+
+- Version bump to v25.0.0. [\#269](https://github.com/how-is/how_is/pull/269) ([duckinator](https://github.com/duckinator))
+- Multi repo configs [\#268](https://github.com/how-is/how_is/pull/268) ([duckinator](https://github.com/duckinator))
+- Remove dead code. [\#266](https://github.com/how-is/how_is/pull/266) ([duckinator](https://github.com/duckinator))
+- yay documentation! [\#265](https://github.com/how-is/how_is/pull/265) ([duckinator](https://github.com/duckinator))
+- Add caching mechanism to speed up duplicate runs [\#263](https://github.com/how-is/how_is/pull/263) ([jules2689](https://github.com/jules2689))
+- README: Add screenshot [\#261](https://github.com/how-is/how_is/pull/261) ([olleolleolle](https://github.com/olleolleolle))
+- Clean up reports [\#259](https://github.com/how-is/how_is/pull/259) ([duckinator](https://github.com/duckinator))
+- Refactor; support config files. [\#254](https://github.com/how-is/how_is/pull/254) ([duckinator](https://github.com/duckinator))
+- HowIs::CLI refactor [\#252](https://github.com/how-is/how_is/pull/252) ([duckinator](https://github.com/duckinator))
+- update build-debug.rb script [\#251](https://github.com/how-is/how_is/pull/251) ([duckinator](https://github.com/duckinator))
+- update supported Ruby versions [\#250](https://github.com/how-is/how_is/pull/250) ([duckinator](https://github.com/duckinator))
+- Misc cleanup [\#249](https://github.com/how-is/how_is/pull/249) ([duckinator](https://github.com/duckinator))
+- Refactor GitHub authentication [\#247](https://github.com/how-is/how_is/pull/247) ([duckinator](https://github.com/duckinator))
+- Document PR and issue management processes. [\#246](https://github.com/how-is/how_is/pull/246) ([duckinator](https://github.com/duckinator))
+- Skip tests that require an access token if running as a PR build. [\#242](https://github.com/how-is/how_is/pull/242) ([duckinator](https://github.com/duckinator))
+- README: fix typo [\#239](https://github.com/how-is/how_is/pull/239) ([olleolleolle](https://github.com/olleolleolle))
+- Enable the executable flag \(chmod +x\) for bin/setup [\#238](https://github.com/how-is/how_is/pull/238) ([olleolleolle](https://github.com/olleolleolle))
+- Only throw errors for undefined env vars if they're used. [\#237](https://github.com/how-is/how_is/pull/237) ([duckinator](https://github.com/duckinator))
+- README: Drop Gemnasium badge [\#236](https://github.com/how-is/how_is/pull/236) ([olleolleolle](https://github.com/olleolleolle))
+- Rubocop-related cleanup [\#235](https://github.com/how-is/how_is/pull/235) ([duckinator](https://github.com/duckinator))
+- Refactor cli [\#234](https://github.com/how-is/how_is/pull/234) ([duckinator](https://github.com/duckinator))
+- Refactor 2 [\#233](https://github.com/how-is/how_is/pull/233) ([duckinator](https://github.com/duckinator))
+- Fix Rubocop warnings. [\#232](https://github.com/how-is/how_is/pull/232) ([duckinator](https://github.com/duckinator))
+- Refactor [\#231](https://github.com/how-is/how_is/pull/231) ([duckinator](https://github.com/duckinator))
+- Miscellaneous cleanup. [\#229](https://github.com/how-is/how_is/pull/229) ([duckinator](https://github.com/duckinator))
+- CLI Refactor [\#228](https://github.com/how-is/how_is/pull/228) ([duckinator](https://github.com/duckinator))
+- \[WIP\] Collect CI information. [\#226](https://github.com/how-is/how_is/pull/226) ([duckinator](https://github.com/duckinator))
+
 ## [v24.0.0](https://github.com/how-is/how_is/tree/v24.0.0) (2018-03-17)
 [Full Changelog](https://github.com/how-is/how_is/compare/v23.0.0...v24.0.0)
 
 **Merged pull requests:**
 
+- bump version to v24.0.0; add json dependency; add future\_changelog Rake task [\#225](https://github.com/how-is/how_is/pull/225) ([duckinator](https://github.com/duckinator))
 - Improve error output; update README. [\#224](https://github.com/how-is/how_is/pull/224) ([duckinator](https://github.com/duckinator))
 - update .travis.yml. [\#223](https://github.com/how-is/how_is/pull/223) ([duckinator](https://github.com/duckinator))
 
