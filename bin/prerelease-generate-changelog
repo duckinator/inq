@@ -8,7 +8,7 @@ SCRIPT_DIR="$(dirname $(readlink -f $0))" # Directory this script is in.
 cd "$SCRIPT_DIR/.."
 
 LAST_RELEASE="$(git tag --list | cut -d 'v' -f 2 | sort -n | tail -n 1)"
-NEXT_RELEASE=$(cat lib/$PROJECT/version.rb | grep '^\s*VERSION\s*' | cut -d '"' -f 2)
+NEXT_RELEASE=$(cat lib/$PROJECT/version.rb | grep '^\s*VERSION\s*=\s*' | cut -d '"' -f 2)
 
 if [ -z "$LAST_RELEASE" ]; then
   echo "error: Could not find latest release using \`git tag --list\`"
