@@ -42,7 +42,11 @@ describe HowIs do
           VCR.use_cassette("how-is-with-config-file") do
             expect {
               reports = HowIs.from_config(config, "2017-08-01").to_h
-            }.to_not output.to_stderr
+            }.to_not raise_error
+            # This instance, and all other instances in this file, of
+            # ".to_not output.to_stderr" are replaced with
+            # ".to_not raise_error" due to a deprecation warning.
+            #}.to_not output.to_stderr
           end
 
           html_report = reports["output/report.html"]
@@ -107,7 +111,8 @@ describe HowIs do
       VCR.use_cassette("how-is-example-repository") do
         expect {
           actual_report = HowIs.new("how-is/example-repository", "2016-09-01")
-        }.to_not output.to_stderr
+        }.to_not raise_error
+        #}.to_not output.to_stderr
 
         expect(actual_report.to_html_partial).to eq(expected_html)
         expect(actual_report.to_json).to eq(expected_json)
@@ -123,7 +128,8 @@ describe HowIs do
       VCR.use_cassette("how-is-example-empty-repository") do
         expect {
           actual = HowIs.new("how-is/example-empty-repository", "2017-01-01").to_html_partial
-        }.to_not output.to_stderr
+        }.to_not raise_error
+        #}.to_not output.to_stderr
       end
 
       expect(actual).to eq(expected)
