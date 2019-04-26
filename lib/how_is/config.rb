@@ -75,12 +75,19 @@ module HowIs
     # E.g., this results in +{'a'=>'x', 'c'=>'d'}+:
     #     load({'a'=>'b'}, {'c'=>'d'}, {'a'=>'x'})
     #
+    # And this results in +{'a'=>['b', 'c']}+:
+    #     load({'a'=>['b']}, {'a'=>['c']})
+    #
     # @param [Array<Hash>] The configuration hashes.
     # @return [Config] The final configuration value.
     def load(*configs)
       configs.each do |config|
         config.each do |k, v|
-          self[k] = v
+          if self[k] and self[k].is_a?(Array)
+            self[k] += v
+          else
+            self[k] = v
+          end
         end
       end
 
