@@ -9,6 +9,7 @@
 /tmp/
 report.json
 report.html
+!lib/inq/templates/report.html
 *.dat
 *.png
 Thumbs.db
