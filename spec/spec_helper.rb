@@ -23,7 +23,7 @@ def config(repo)
 end
 
 def cache(start_date, end_date)
-  Inq::Cacheable.new(config("how-is/how_is"), start_date, end_date)
+  Inq::Cacheable.new(config("duckinator/inq"), start_date, end_date)
 end
 
 def load_test_env
