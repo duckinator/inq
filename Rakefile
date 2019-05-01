@@ -3,7 +3,7 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "timecop"
-require "how_is"
+require "inq"
 
 RSpec::Core::RakeTask.new(:spec) do |t|
   # Warning.warn() was added in Ruby 2.4.0, so don't use -w on older versions.
@@ -17,7 +17,7 @@ task :generate_changelog do
 end
 
 task :future_changelog do
-  sh "github_changelog_generator --future-release v#{HowIs::VERSION}"
+  sh "github_changelog_generator --future-release v#{Inq::VERSION}"
 end
 
 # Helper functions used later in the Rakefile.
@@ -42,7 +42,7 @@ class HelperFunctions
 
       cassette = repository.tr("/", "-")
       VCR.use_cassette(cassette) do
-        report = HowIs.generate_report(**options)
+        report = Inq.generate_report(**options)
       end
 
       filename = "#{cassette}-report.#{format}"

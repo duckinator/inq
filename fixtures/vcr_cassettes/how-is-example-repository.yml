@@ -25,7 +25,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:29 GMT
+      - Wed, 01 May 2019 13:52:47 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,15 +35,15 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4042'
+      - '4604'
       X-Ratelimit-Reset:
-      - '1515251555'
+      - '1556722011'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"02dd21f50224a2337aab5dbd59c947ca"
+      - W/"0e7a2b8cb1d4abfed8e64ef6d9b2871f"
       Last-Modified:
       - Sun, 07 Aug 2016 03:52:53 GMT
       X-Oauth-Scopes:
@@ -53,33 +53,34 @@ http_interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.043561'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - A644:4D96:973677:13A7C0C:5A50E505
+      - 2E4D:67F0:14F185:34F1A9:5CC9A4AF
     body:
       encoding: ASCII-8BIT
-      string: '{"id":65114449,"name":"example-repository","full_name":"how-is/example-repository","owner":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/how-is/example-repository","description":"Example
-        repository for testing how_is.","fork":false,"url":"https://api.github.com/repos/how-is/example-repository","forks_url":"https://api.github.com/repos/how-is/example-repository/forks","keys_url":"https://api.github.com/repos/how-is/example-repository/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/example-repository/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/example-repository/teams","hooks_url":"https://api.github.com/repos/how-is/example-repository/hooks","issue_events_url":"https://api.github.com/repos/how-is/example-repository/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/example-repository/events","assignees_url":"https://api.github.com/repos/how-is/example-repository/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/example-repository/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/example-repository/tags","blobs_url":"https://api.github.com/repos/how-is/example-repository/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/example-repository/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/example-repository/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/example-repository/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/example-repository/languages","stargazers_url":"https://api.github.com/repos/how-is/example-repository/stargazers","contributors_url":"https://api.github.com/repos/how-is/example-repository/contributors","subscribers_url":"https://api.github.com/repos/how-is/example-repository/subscribers","subscription_url":"https://api.github.com/repos/how-is/example-repository/subscription","commits_url":"https://api.github.com/repos/how-is/example-repository/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/example-repository/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/example-repository/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/example-repository/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/example-repository/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/example-repository/merges","archive_url":"https://api.github.com/repos/how-is/example-repository/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/example-repository/downloads","issues_url":"https://api.github.com/repos/how-is/example-repository/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/example-repository/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/example-repository/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/example-repository/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/example-repository/labels{/name}","releases_url":"https://api.github.com/repos/how-is/example-repository/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/example-repository/deployments","created_at":"2016-08-07T03:52:53Z","updated_at":"2016-08-07T03:52:53Z","pushed_at":"2017-08-05T20:39:30Z","git_url":"git://github.com/how-is/example-repository.git","ssh_url":"git@github.com:how-is/example-repository.git","clone_url":"https://github.com/how-is/example-repository.git","svn_url":"https://github.com/how-is/example-repository","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"open_issues_count":4,"license":null,"forks":0,"open_issues":4,"watchers":0,"default_branch":"master","permissions":{"admin":true,"push":true,"pull":true},"organization":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"network_count":0,"subscribers_count":1}'
+      string: '{"id":65114449,"node_id":"MDEwOlJlcG9zaXRvcnk2NTExNDQ0OQ==","name":"example-repository","full_name":"how-is/example-repository","private":false,"owner":{"login":"how-is","id":20577802,"node_id":"MDEyOk9yZ2FuaXphdGlvbjIwNTc3ODAy","avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"html_url":"https://github.com/how-is/example-repository","description":"Example
+        repository for testing how_is.","fork":false,"url":"https://api.github.com/repos/how-is/example-repository","forks_url":"https://api.github.com/repos/how-is/example-repository/forks","keys_url":"https://api.github.com/repos/how-is/example-repository/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/example-repository/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/example-repository/teams","hooks_url":"https://api.github.com/repos/how-is/example-repository/hooks","issue_events_url":"https://api.github.com/repos/how-is/example-repository/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/example-repository/events","assignees_url":"https://api.github.com/repos/how-is/example-repository/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/example-repository/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/example-repository/tags","blobs_url":"https://api.github.com/repos/how-is/example-repository/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/example-repository/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/example-repository/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/example-repository/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/example-repository/languages","stargazers_url":"https://api.github.com/repos/how-is/example-repository/stargazers","contributors_url":"https://api.github.com/repos/how-is/example-repository/contributors","subscribers_url":"https://api.github.com/repos/how-is/example-repository/subscribers","subscription_url":"https://api.github.com/repos/how-is/example-repository/subscription","commits_url":"https://api.github.com/repos/how-is/example-repository/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/example-repository/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/example-repository/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/example-repository/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/example-repository/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/example-repository/merges","archive_url":"https://api.github.com/repos/how-is/example-repository/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/example-repository/downloads","issues_url":"https://api.github.com/repos/how-is/example-repository/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/example-repository/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/example-repository/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/example-repository/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/example-repository/labels{/name}","releases_url":"https://api.github.com/repos/how-is/example-repository/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/example-repository/deployments","created_at":"2016-08-07T03:52:53Z","updated_at":"2016-08-07T03:52:53Z","pushed_at":"2017-08-05T20:39:30Z","git_url":"git://github.com/how-is/example-repository.git","ssh_url":"git@github.com:how-is/example-repository.git","clone_url":"https://github.com/how-is/example-repository.git","svn_url":"https://github.com/how-is/example-repository","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"disabled":false,"open_issues_count":4,"license":null,"forks":0,"open_issues":4,"watchers":0,"default_branch":"master","permissions":{"admin":true,"push":true,"pull":true},"organization":{"login":"how-is","id":20577802,"node_id":"MDEyOk9yZ2FuaXphdGlvbjIwNTc3ODAy","avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"network_count":0,"subscribers_count":1}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2016-11-01
+    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2016-08-01&until=2016-09-01
     body:
       encoding: US-ASCII
       string: ''
@@ -102,7 +103,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:29 GMT
+      - Wed, 01 May 2019 13:52:47 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -112,17 +113,17 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4041'
+      - '4603'
       X-Ratelimit-Reset:
-      - '1515251555'
+      - '1556722011'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"16344326ad40df166c215da19f534621"
+      - W/"923a0556422a04ad68ef70c98106927e"
       Last-Modified:
-      - Sat, 05 Aug 2017 20:39:01 GMT
+      - Sun, 07 Aug 2016 03:52:54 GMT
       X-Oauth-Scopes:
       - ''
       X-Accepted-Oauth-Scopes:
@@ -130,37 +131,36 @@ http_interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.054632'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - A646:4D97:904FEF:1C4D287:5A50E505
+      - 5622:0283:C0D91:20677E:5CC9A4AF
     body:
       encoding: ASCII-8BIT
-      string: '[{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"message":"meep","tree":{"sha":"6911e0637822f44b83f04f47821adab56fdbc0b9","url":"https://api.github.com/repos/how-is/example-repository/git/trees/6911e0637822f44b83f04f47821adab56fdbc0b9"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","html_url":"https://github.com/how-is/example-repository/commit/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[{"sha":"3794aa1c4b76623748faf280abe5760b76823162","url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162"}]},{"sha":"3794aa1c4b76623748faf280abe5760b76823162","commit":{"author":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"committer":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"message":"test
-        commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}]}]'
+      string: '[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","node_id":"MDY6Q29tbWl0NjUxMTQ0NDk6OWUyOTQwNWVmYTQzMzUyOWI4NjcyMjU0MmI4ZmI0YjM0ZGZkOWVkZA==","commit":{"author":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"committer":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"message":"Initial
+        commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"node_id":"MDQ6VXNlcjM5Njk4","avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"node_id":"MDQ6VXNlcjM5Njk4","avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[]}]'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557
+    uri: https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd
     body:
       encoding: US-ASCII
       string: ''
@@ -183,7 +183,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:29 GMT
+      - Wed, 01 May 2019 13:52:47 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -193,17 +193,17 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4040'
+      - '4602'
       X-Ratelimit-Reset:
-      - '1515251555'
+      - '1556722011'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"49360a2175bed19b1eccd1a520c91373"
+      - W/"1667953f17df25ca84eb7770aedeb8ac"
       Last-Modified:
-      - Sat, 05 Aug 2017 20:39:01 GMT
+      - Sun, 07 Aug 2016 03:52:54 GMT
       X-Oauth-Scopes:
       - ''
       X-Accepted-Oauth-Scopes:
@@ -211,36 +211,37 @@ http_interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.039378'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - A648:4D96:973682:13A7C23:5A50E505
+      - 1AF8:49D7:1706DB:398A36:5CC9A4AF
     body:
       encoding: ASCII-8BIT
-      string: '{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"message":"meep","tree":{"sha":"6911e0637822f44b83f04f47821adab56fdbc0b9","url":"https://api.github.com/repos/how-is/example-repository/git/trees/6911e0637822f44b83f04f47821adab56fdbc0b9"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","html_url":"https://github.com/how-is/example-repository/commit/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[{"sha":"3794aa1c4b76623748faf280abe5760b76823162","url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162"}],"stats":{"total":2,"additions":1,"deletions":1},"files":[{"sha":"1573b3cd673938ed5f9ee8c41952c77b456ffab9","filename":"README.md","status":"modified","additions":1,"deletions":1,"changes":2,"blob_url":"https://github.com/how-is/example-repository/blob/40c01ab6ebec6cbd8ad9e521a732f941c169e557/README.md","raw_url":"https://github.com/how-is/example-repository/raw/40c01ab6ebec6cbd8ad9e521a732f941c169e557/README.md","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/README.md?ref=40c01ab6ebec6cbd8ad9e521a732f941c169e557","patch":"@@
-        -1,3 +1,3 @@\n # example-repository\n \n-Example repository for testing how_is.\n+An
-        example repository for testing how_is."}]}'
+      string: '{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","node_id":"MDY6Q29tbWl0NjUxMTQ0NDk6OWUyOTQwNWVmYTQzMzUyOWI4NjcyMjU0MmI4ZmI0YjM0ZGZkOWVkZA==","commit":{"author":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"committer":{"name":"Ellen
+        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"message":"Initial
+        commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"node_id":"MDQ6VXNlcjM5Njk4","avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"node_id":"MDQ6VXNlcjM5Njk4","avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[],"stats":{"total":2,"additions":2,"deletions":0},"files":[{"sha":"e6fe1bae7e775ad465c33a764c2d45478ad31242","filename":"README.md","status":"added","additions":2,"deletions":0,"changes":2,"blob_url":"https://github.com/how-is/example-repository/blob/9e29405efa433529b86722542b8fb4b34dfd9edd/README.md","raw_url":"https://github.com/how-is/example-repository/raw/9e29405efa433529b86722542b8fb4b34dfd9edd/README.md","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/README.md?ref=9e29405efa433529b86722542b8fb4b34dfd9edd","patch":"@@
+        -0,0 +1,2 @@\n+# example-repository\n+Example repository for testing how_is."}]}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162
+    uri: https://api.github.com/repos/how-is/example-repository/commits?author=me@duckie.co&until=2016-08-01
     body:
       encoding: US-ASCII
       string: ''
@@ -263,27 +264,25 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:30 GMT
+      - Wed, 01 May 2019 13:52:47 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '2'
       Status:
       - 200 OK
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4039'
+      - '4601'
       X-Ratelimit-Reset:
-      - '1515251555'
+      - '1556722011'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
       - Accept, Authorization, Cookie, X-GitHub-OTP
       Etag:
-      - W/"e5cd87ba99eb952e4286cf96f8d837b9"
-      Last-Modified:
-      - Sat, 05 Aug 2017 20:23:10 GMT
+      - '"74b5718094ce8869d8149d99338cb4f8"'
       X-Oauth-Scopes:
       - ''
       X-Accepted-Oauth-Scopes:
@@ -291,31 +290,28 @@ http_interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.060155'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - A64A:4D96:973688:13A7C32:5A50E505
+      - 4D8F:5CEE:D3B9E:23B196:5CC9A4AF
     body:
-      encoding: ASCII-8BIT
-      string: '{"sha":"3794aa1c4b76623748faf280abe5760b76823162","commit":{"author":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"committer":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"message":"test
-        commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}],"stats":{"total":1,"additions":1,"deletions":0},"files":[{"sha":"a69ca6962d2a86d7c5a041338938e0b4fe6bf515","filename":"README.md","status":"modified","additions":1,"deletions":0,"changes":1,"blob_url":"https://github.com/how-is/example-repository/blob/3794aa1c4b76623748faf280abe5760b76823162/README.md","raw_url":"https://github.com/how-is/example-repository/raw/3794aa1c4b76623748faf280abe5760b76823162/README.md","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/README.md?ref=3794aa1c4b76623748faf280abe5760b76823162","patch":"@@
-        -1,2 +1,3 @@\n # example-repository\n+\n Example repository for testing how_is."}]}'
+      encoding: UTF-8
+      string: "[]"
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
@@ -347,19 +343,13 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:30 GMT
+      - Wed, 01 May 2019 13:52:47 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Status:
       - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4957'
-      X-Ratelimit-Reset:
-      - '1515254347'
       Cache-Control:
       - no-cache
       X-Oauth-Scopes:
@@ -368,25 +358,32 @@ http_interactions:
       - repo
       X-Github-Media-Type:
       - github.v4; param=idl
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4925'
+      X-Ratelimit-Reset:
+      - '1556722266'
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.058979'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - A64C:4D95:F4B61A:1C89CAB:5A50E506
+      - E94B:1AB9:155721:378F6D:5CC9A4AF
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"repository":{"issues":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wNlQyMzo1NDozMy0wNDowMM4KHp08"}]}}}}'
@@ -422,19 +419,13 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:30 GMT
+      - Wed, 01 May 2019 13:52:48 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Status:
       - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4956'
-      X-Ratelimit-Reset:
-      - '1515254347'
       Cache-Control:
       - no-cache
       X-Oauth-Scopes:
@@ -443,25 +434,32 @@ http_interactions:
       - repo
       X-Github-Media-Type:
       - github.v4; param=idl
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4924'
+      X-Ratelimit-Reset:
+      - '1556722266'
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.064458'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - C91E:4D95:F4B628:1C89CC0:5A50E506
+      - 64AA:576A:376B39:70C805:5CC9A4AF
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"repository":{"issues":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wNlQyMzo1MzoyNi0wNDowMM4KHp0f","node":{"number":1,"createdAt":"2016-08-07T03:53:26Z","closedAt":null,"updatedAt":"2016-08-07T03:53:49Z","state":"OPEN","title":"An
@@ -471,94 +469,13 @@ http_interactions:
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/issues
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 06 Jan 2018 15:02:30 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4038'
-      X-Ratelimit-Reset:
-      - '1515251555'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - W/"455106878a3e045a33ab3ed687ee8b0f"
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - repo
-      X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.079111'
-      X-Github-Request-Id:
-      - C920:4D95:F4B633:1C89CD8:5A50E506
-    body:
-      encoding: ASCII-8BIT
-      string: '[{"url":"https://api.github.com/repos/how-is/example-repository/issues/4","repository_url":"https://api.github.com/repos/how-is/example-repository","labels_url":"https://api.github.com/repos/how-is/example-repository/issues/4/labels{/name}","comments_url":"https://api.github.com/repos/how-is/example-repository/issues/4/comments","events_url":"https://api.github.com/repos/how-is/example-repository/issues/4/events","html_url":"https://github.com/how-is/example-repository/pull/4","id":169778701,"number":4,"title":"Example
-        Pull Request.","user":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"labels":[],"state":"open","locked":false,"assignee":null,"assignees":[],"milestone":null,"comments":0,"created_at":"2016-08-07T04:02:59Z","updated_at":"2017-08-05T20:23:15Z","closed_at":null,"author_association":"OWNER","pull_request":{"url":"https://api.github.com/repos/how-is/example-repository/pulls/4","html_url":"https://github.com/how-is/example-repository/pull/4","diff_url":"https://github.com/how-is/example-repository/pull/4.diff","patch_url":"https://github.com/how-is/example-repository/pull/4.patch"},"body":""},{"url":"https://api.github.com/repos/how-is/example-repository/issues/3","repository_url":"https://api.github.com/repos/how-is/example-repository","labels_url":"https://api.github.com/repos/how-is/example-repository/issues/3/labels{/name}","comments_url":"https://api.github.com/repos/how-is/example-repository/issues/3/comments","events_url":"https://api.github.com/repos/how-is/example-repository/issues/3/events","html_url":"https://github.com/how-is/example-repository/issues/3","id":169778492,"number":3,"title":"Yet
-        another issue!","user":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"labels":[],"state":"open","locked":false,"assignee":null,"assignees":[],"milestone":null,"comments":0,"created_at":"2016-08-07T03:54:33Z","updated_at":"2016-08-07T03:54:33Z","closed_at":null,"author_association":"OWNER","body":"An
-        issue with a description and no labels.\n"},{"url":"https://api.github.com/repos/how-is/example-repository/issues/2","repository_url":"https://api.github.com/repos/how-is/example-repository","labels_url":"https://api.github.com/repos/how-is/example-repository/issues/2/labels{/name}","comments_url":"https://api.github.com/repos/how-is/example-repository/issues/2/comments","events_url":"https://api.github.com/repos/how-is/example-repository/issues/2/events","html_url":"https://github.com/how-is/example-repository/issues/2","id":169778484,"number":2,"title":"Another
-        issue","user":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"labels":[{"id":420702040,"url":"https://api.github.com/repos/how-is/example-repository/labels/bug","name":"bug","color":"ee0701","default":true},{"id":420702046,"url":"https://api.github.com/repos/how-is/example-repository/labels/question","name":"question","color":"cc317c","default":true}],"state":"open","locked":false,"assignee":null,"assignees":[],"milestone":null,"comments":0,"created_at":"2016-08-07T03:54:13Z","updated_at":"2016-08-07T03:54:13Z","closed_at":null,"author_association":"OWNER","body":"With
-        a description and two labels!\n"},{"url":"https://api.github.com/repos/how-is/example-repository/issues/1","repository_url":"https://api.github.com/repos/how-is/example-repository","labels_url":"https://api.github.com/repos/how-is/example-repository/issues/1/labels{/name}","comments_url":"https://api.github.com/repos/how-is/example-repository/issues/1/comments","events_url":"https://api.github.com/repos/how-is/example-repository/issues/1/events","html_url":"https://github.com/how-is/example-repository/issues/1","id":169778463,"number":1,"title":"An
-        issue","user":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"labels":[{"id":420702040,"url":"https://api.github.com/repos/how-is/example-repository/labels/bug","name":"bug","color":"ee0701","default":true}],"state":"open","locked":false,"assignee":null,"assignees":[],"milestone":null,"comments":0,"created_at":"2016-08-07T03:53:26Z","updated_at":"2016-08-07T03:53:49Z","closed_at":null,"author_association":"OWNER","body":"With
-        a description and a label!\n"}]'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
     method: post
     uri: https://api.github.com/graphql
     body:
       encoding: UTF-8
       string: '{"query":"query {\n  repository(owner: \"how-is\", name: \"example-repository\")
-        {\n    pulls(last: 1, orderBy:{field: CREATED_AT, direction: ASC}) {\n      edges
-        {\n        cursor\n      }\n    }\n  }\n}"}'
+        {\n    pullRequests(last: 1, orderBy:{field: CREATED_AT, direction: ASC})
+        {\n      edges {\n        cursor\n      }\n    }\n  }\n}"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -580,19 +497,13 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:30 GMT
+      - Wed, 01 May 2019 13:52:48 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Status:
       - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4956'
-      X-Ratelimit-Reset:
-      - '1515254347'
       Cache-Control:
       - no-cache
       X-Oauth-Scopes:
@@ -601,538 +512,112 @@ http_interactions:
       - repo
       X-Github-Media-Type:
       - github.v4; param=idl
-      Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.033850'
-      X-Github-Request-Id:
-      - A652:4D95:F4B63E:1C89CEF:5A50E506
-    body:
-      encoding: ASCII-8BIT
-      string: '{"data":null,"errors":[{"message":"Field ''pulls'' doesn''t exist on
-        type ''Repository''","locations":[{"line":3,"column":5}]}]}'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/pulls
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 06 Jan 2018 15:02:30 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4037'
+      - '4923'
       X-Ratelimit-Reset:
-      - '1515251555'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - W/"11fce4bf2ba389dc8ff6dab35830cb88"
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
-      X-Github-Media-Type:
-      - github.v3; format=json
+      - '1556722266'
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.081314'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
       X-Github-Request-Id:
-      - C924:4D97:905019:1C4D311:5A50E506
+      - A15C:285E:D486D:2304B5:5CC9A4B0
     body:
       encoding: ASCII-8BIT
-      string: '[{"url":"https://api.github.com/repos/how-is/example-repository/pulls/4","id":80357659,"html_url":"https://github.com/how-is/example-repository/pull/4","diff_url":"https://github.com/how-is/example-repository/pull/4.diff","patch_url":"https://github.com/how-is/example-repository/pull/4.patch","issue_url":"https://api.github.com/repos/how-is/example-repository/issues/4","number":4,"state":"open","locked":false,"title":"Example
-        Pull Request.","user":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"body":"","created_at":"2016-08-07T04:02:59Z","updated_at":"2017-08-05T20:23:15Z","closed_at":null,"merged_at":null,"merge_commit_sha":"1713f338439097a5604751675168ae154d260831","assignee":null,"assignees":[],"requested_reviewers":[],"milestone":null,"commits_url":"https://api.github.com/repos/how-is/example-repository/pulls/4/commits","review_comments_url":"https://api.github.com/repos/how-is/example-repository/pulls/4/comments","review_comment_url":"https://api.github.com/repos/how-is/example-repository/pulls/comments{/number}","comments_url":"https://api.github.com/repos/how-is/example-repository/issues/4/comments","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/9eb3c2563f66404af63f676a248acafa16cae53a","head":{"label":"how-is:example-branch","ref":"example-branch","sha":"9eb3c2563f66404af63f676a248acafa16cae53a","user":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"repo":{"id":65114449,"name":"example-repository","full_name":"how-is/example-repository","owner":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/how-is/example-repository","description":"Example
-        repository for testing how_is.","fork":false,"url":"https://api.github.com/repos/how-is/example-repository","forks_url":"https://api.github.com/repos/how-is/example-repository/forks","keys_url":"https://api.github.com/repos/how-is/example-repository/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/example-repository/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/example-repository/teams","hooks_url":"https://api.github.com/repos/how-is/example-repository/hooks","issue_events_url":"https://api.github.com/repos/how-is/example-repository/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/example-repository/events","assignees_url":"https://api.github.com/repos/how-is/example-repository/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/example-repository/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/example-repository/tags","blobs_url":"https://api.github.com/repos/how-is/example-repository/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/example-repository/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/example-repository/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/example-repository/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/example-repository/languages","stargazers_url":"https://api.github.com/repos/how-is/example-repository/stargazers","contributors_url":"https://api.github.com/repos/how-is/example-repository/contributors","subscribers_url":"https://api.github.com/repos/how-is/example-repository/subscribers","subscription_url":"https://api.github.com/repos/how-is/example-repository/subscription","commits_url":"https://api.github.com/repos/how-is/example-repository/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/example-repository/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/example-repository/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/example-repository/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/example-repository/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/example-repository/merges","archive_url":"https://api.github.com/repos/how-is/example-repository/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/example-repository/downloads","issues_url":"https://api.github.com/repos/how-is/example-repository/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/example-repository/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/example-repository/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/example-repository/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/example-repository/labels{/name}","releases_url":"https://api.github.com/repos/how-is/example-repository/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/example-repository/deployments","created_at":"2016-08-07T03:52:53Z","updated_at":"2016-08-07T03:52:53Z","pushed_at":"2017-08-05T20:39:30Z","git_url":"git://github.com/how-is/example-repository.git","ssh_url":"git@github.com:how-is/example-repository.git","clone_url":"https://github.com/how-is/example-repository.git","svn_url":"https://github.com/how-is/example-repository","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"open_issues_count":4,"license":null,"forks":0,"open_issues":4,"watchers":0,"default_branch":"master"}},"base":{"label":"how-is:master","ref":"master","sha":"3794aa1c4b76623748faf280abe5760b76823162","user":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"repo":{"id":65114449,"name":"example-repository","full_name":"how-is/example-repository","owner":{"login":"how-is","id":20577802,"avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/how-is/example-repository","description":"Example
-        repository for testing how_is.","fork":false,"url":"https://api.github.com/repos/how-is/example-repository","forks_url":"https://api.github.com/repos/how-is/example-repository/forks","keys_url":"https://api.github.com/repos/how-is/example-repository/keys{/key_id}","collaborators_url":"https://api.github.com/repos/how-is/example-repository/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/how-is/example-repository/teams","hooks_url":"https://api.github.com/repos/how-is/example-repository/hooks","issue_events_url":"https://api.github.com/repos/how-is/example-repository/issues/events{/number}","events_url":"https://api.github.com/repos/how-is/example-repository/events","assignees_url":"https://api.github.com/repos/how-is/example-repository/assignees{/user}","branches_url":"https://api.github.com/repos/how-is/example-repository/branches{/branch}","tags_url":"https://api.github.com/repos/how-is/example-repository/tags","blobs_url":"https://api.github.com/repos/how-is/example-repository/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/how-is/example-repository/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/how-is/example-repository/git/refs{/sha}","trees_url":"https://api.github.com/repos/how-is/example-repository/git/trees{/sha}","statuses_url":"https://api.github.com/repos/how-is/example-repository/statuses/{sha}","languages_url":"https://api.github.com/repos/how-is/example-repository/languages","stargazers_url":"https://api.github.com/repos/how-is/example-repository/stargazers","contributors_url":"https://api.github.com/repos/how-is/example-repository/contributors","subscribers_url":"https://api.github.com/repos/how-is/example-repository/subscribers","subscription_url":"https://api.github.com/repos/how-is/example-repository/subscription","commits_url":"https://api.github.com/repos/how-is/example-repository/commits{/sha}","git_commits_url":"https://api.github.com/repos/how-is/example-repository/git/commits{/sha}","comments_url":"https://api.github.com/repos/how-is/example-repository/comments{/number}","issue_comment_url":"https://api.github.com/repos/how-is/example-repository/issues/comments{/number}","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/{+path}","compare_url":"https://api.github.com/repos/how-is/example-repository/compare/{base}...{head}","merges_url":"https://api.github.com/repos/how-is/example-repository/merges","archive_url":"https://api.github.com/repos/how-is/example-repository/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/how-is/example-repository/downloads","issues_url":"https://api.github.com/repos/how-is/example-repository/issues{/number}","pulls_url":"https://api.github.com/repos/how-is/example-repository/pulls{/number}","milestones_url":"https://api.github.com/repos/how-is/example-repository/milestones{/number}","notifications_url":"https://api.github.com/repos/how-is/example-repository/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/how-is/example-repository/labels{/name}","releases_url":"https://api.github.com/repos/how-is/example-repository/releases{/id}","deployments_url":"https://api.github.com/repos/how-is/example-repository/deployments","created_at":"2016-08-07T03:52:53Z","updated_at":"2016-08-07T03:52:53Z","pushed_at":"2017-08-05T20:39:30Z","git_url":"git://github.com/how-is/example-repository.git","ssh_url":"git@github.com:how-is/example-repository.git","clone_url":"https://github.com/how-is/example-repository.git","svn_url":"https://github.com/how-is/example-repository","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"open_issues_count":4,"license":null,"forks":0,"open_issues":4,"watchers":0,"default_branch":"master"}},"_links":{"self":{"href":"https://api.github.com/repos/how-is/example-repository/pulls/4"},"html":{"href":"https://github.com/how-is/example-repository/pull/4"},"issue":{"href":"https://api.github.com/repos/how-is/example-repository/issues/4"},"comments":{"href":"https://api.github.com/repos/how-is/example-repository/issues/4/comments"},"review_comments":{"href":"https://api.github.com/repos/how-is/example-repository/pulls/4/comments"},"review_comment":{"href":"https://api.github.com/repos/how-is/example-repository/pulls/comments{/number}"},"commits":{"href":"https://api.github.com/repos/how-is/example-repository/pulls/4/commits"},"statuses":{"href":"https://api.github.com/repos/how-is/example-repository/statuses/9eb3c2563f66404af63f676a248acafa16cae53a"}},"author_association":"OWNER"}]'
+      string: '{"data":{"repository":{"pullRequests":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wN1QwMDowMjo1OS0wNDowMM4Eyikb"}]}}}}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
-    method: get
-    uri: http://api.travis-ci.org/repos/how-is/example-repository/builds
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - application/vnd.travis-ci.2+json
-      User-Agent:
-      - Ruby
-      Host:
-      - api.travis-ci.org
-  response:
-    status:
-      code: 301
-      message: Moved Permanently
-    headers:
-      Connection:
-      - keep-alive
-      Server:
-      - nginx
-      Date:
-      - Sat, 06 Jan 2018 15:02:31 GMT
-      Content-Type:
-      - text/html
-      Content-Length:
-      - '0'
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Expose-Headers:
-      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
-      Location:
-      - https://api.travis-ci.org/repos/how-is/example-repository/builds
-      X-Request-Id:
-      - d3c022e9-51cf-4af0-b6bd-d01f33f9d166
-      Via:
-      - 1.1 vegur
+    method: post
+    uri: https://api.github.com/graphql
     body:
       encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.travis-ci.org/repos/how-is/example-repository/builds
-    body:
-      encoding: US-ASCII
-      string: ''
+      string: '{"query":"query {\n  repository(owner: \"how-is\", name: \"example-repository\")
+        {\n    pullRequests(first: 100, orderBy:{field: CREATED_AT, direction: ASC})
+        {\n      edges {\n        cursor\n        node {\n          number\n          createdAt\n          closedAt\n          updatedAt\n          state\n          title\n          url\n          labels(first:
+        100) {\n            nodes {\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n}"}'
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
-      - application/vnd.travis-ci.2+json
+      - application/vnd.github.v4.idl
       User-Agent:
       - Ruby
       Host:
-      - api.travis-ci.org
+      - api.github.com
+      Authorization:
+      - bearer 9182777ff3c006795193a570cdac326b64459dc9
+      Bearer-Token:
+      - 9182777ff3c006795193a570cdac326b64459dc9
   response:
     status:
       code: 200
       message: OK
     headers:
-      Connection:
-      - keep-alive
       Server:
-      - nginx
+      - GitHub.com
       Date:
-      - Sat, 06 Jan 2018 15:02:31 GMT
+      - Wed, 01 May 2019 13:52:48 GMT
       Content-Type:
-      - application/json;charset=utf-8
+      - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Expose-Headers:
-      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Endpoint:
-      - Travis::Api::App::Endpoint::Repos
-      X-Pattern:
-      - "/:owner_name/:name/builds"
-      X-Oauth-Scopes:
-      - public
-      X-Accepted-Oauth-Scopes:
-      - public
-      Vary:
-      - Accept,Accept-Encoding
+      Status:
+      - 200 OK
       Cache-Control:
       - no-cache
-      X-Rack-Cache:
-      - miss
-      X-Request-Id:
-      - fc35bafc-e325-4af9-8e47-bd24875051f1
-      Via:
-      - 1.1 vegur
-    body:
-      encoding: ASCII-8BIT
-      string: '{"builds":[],"commits":[]}'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2017-08-01
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 06 Jan 2018 15:09:47 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4029'
-      X-Ratelimit-Reset:
-      - '1515251555'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - W/"16344326ad40df166c215da19f534621"
-      Last-Modified:
-      - Sat, 05 Aug 2017 20:39:01 GMT
       X-Oauth-Scopes:
       - ''
       X-Accepted-Oauth-Scopes:
-      - ''
+      - repo
       X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.061100'
-      X-Github-Request-Id:
-      - C998:4D95:F53F59:1C99D54:5A50E6BB
-    body:
-      encoding: ASCII-8BIT
-      string: '[{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"message":"meep","tree":{"sha":"6911e0637822f44b83f04f47821adab56fdbc0b9","url":"https://api.github.com/repos/how-is/example-repository/git/trees/6911e0637822f44b83f04f47821adab56fdbc0b9"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","html_url":"https://github.com/how-is/example-repository/commit/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[{"sha":"3794aa1c4b76623748faf280abe5760b76823162","url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162"}]},{"sha":"3794aa1c4b76623748faf280abe5760b76823162","commit":{"author":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"committer":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"message":"test
-        commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}]}]'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2016-08-01
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 06 Jan 2018 15:10:25 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
+      - github.v4; param=idl
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4028'
+      - '4922'
       X-Ratelimit-Reset:
-      - '1515251555'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - W/"56130e70fd1370630507ea0a90e96c9b"
-      Last-Modified:
-      - Sat, 05 Aug 2017 20:39:01 GMT
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
-      X-Github-Media-Type:
-      - github.v3; format=json
+      - '1556722266'
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Access-Control-Allow-Origin:
       - "*"
-      Content-Security-Policy:
-      - default-src 'none'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
       X-Frame-Options:
       - deny
+      X-Content-Type-Options:
+      - nosniff
       X-Xss-Protection:
       - 1; mode=block
-      X-Runtime-Rack:
-      - '0.059660'
-      X-Github-Request-Id:
-      - C99A:4D96:979824:13B3FD3:5A50E6E1
-    body:
-      encoding: ASCII-8BIT
-      string: '[{"sha":"40c01ab6ebec6cbd8ad9e521a732f941c169e557","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2017-08-05T20:39:01Z"},"message":"meep","tree":{"sha":"6911e0637822f44b83f04f47821adab56fdbc0b9","url":"https://api.github.com/repos/how-is/example-repository/git/trees/6911e0637822f44b83f04f47821adab56fdbc0b9"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557","html_url":"https://github.com/how-is/example-repository/commit/40c01ab6ebec6cbd8ad9e521a732f941c169e557","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/40c01ab6ebec6cbd8ad9e521a732f941c169e557/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[{"sha":"3794aa1c4b76623748faf280abe5760b76823162","url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162"}]},{"sha":"3794aa1c4b76623748faf280abe5760b76823162","commit":{"author":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"committer":{"name":"fake
-        author","email":"fake@duckinator.net","date":"2017-08-05T20:23:10Z"},"message":"test
-        commit","tree":{"sha":"8286e548e330cfe01efcf7189f4df1fa53e777a7","url":"https://api.github.com/repos/how-is/example-repository/git/trees/8286e548e330cfe01efcf7189f4df1fa53e777a7"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/3794aa1c4b76623748faf280abe5760b76823162","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162","html_url":"https://github.com/how-is/example-repository/commit/3794aa1c4b76623748faf280abe5760b76823162","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/3794aa1c4b76623748faf280abe5760b76823162/comments","author":null,"committer":null,"parents":[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd"}]},{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"message":"Initial
-        commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[]}]'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 06 Jan 2018 15:10:26 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4027'
-      X-Ratelimit-Reset:
-      - '1515251555'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - W/"c7101dfcb22cdc6053bc804adbdfb947"
-      Last-Modified:
-      - Sun, 07 Aug 2016 03:52:54 GMT
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
-      X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.077075'
       X-Github-Request-Id:
-      - C99C:4D97:909DFF:1C5E4B3:5A50E6E2
+      - 0744:49D8:2AFC58:59B92E:5CC9A4B0
     body:
       encoding: ASCII-8BIT
-      string: '{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"message":"Initial
-        commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[],"stats":{"total":2,"additions":2,"deletions":0},"files":[{"sha":"e6fe1bae7e775ad465c33a764c2d45478ad31242","filename":"README.md","status":"added","additions":2,"deletions":0,"changes":2,"blob_url":"https://github.com/how-is/example-repository/blob/9e29405efa433529b86722542b8fb4b34dfd9edd/README.md","raw_url":"https://github.com/how-is/example-repository/raw/9e29405efa433529b86722542b8fb4b34dfd9edd/README.md","contents_url":"https://api.github.com/repos/how-is/example-repository/contents/README.md?ref=9e29405efa433529b86722542b8fb4b34dfd9edd","patch":"@@
-        -0,0 +1,2 @@\n+# example-repository\n+Example repository for testing how_is."}]}'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits?since=2016-08-01&until=2016-09-01
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sat, 06 Jan 2018 19:39:30 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4830'
-      X-Ratelimit-Reset:
-      - '1515270096'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - W/"849c4a32910ea52f608a02d0ae3309ed"
-      Last-Modified:
-      - Sun, 07 Aug 2016 03:52:54 GMT
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
-      X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - default-src 'none'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Runtime-Rack:
-      - '0.049821'
-      X-Github-Request-Id:
-      - ED46:4D95:1093D3D:1EEF866:5A5125F2
-    body:
-      encoding: ASCII-8BIT
-      string: '[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","commit":{"author":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"committer":{"name":"Ellen
-        Marie Dash","email":"me@duckie.co","date":"2016-08-07T03:52:54Z"},"message":"Initial
-        commit","tree":{"sha":"7bee2a10cc8c7c036d5006fa0aacadd869d09c4e","url":"https://api.github.com/repos/how-is/example-repository/git/trees/7bee2a10cc8c7c036d5006fa0aacadd869d09c4e"},"url":"https://api.github.com/repos/how-is/example-repository/git/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","comment_count":0,"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}},"url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd","html_url":"https://github.com/how-is/example-repository/commit/9e29405efa433529b86722542b8fb4b34dfd9edd","comments_url":"https://api.github.com/repos/how-is/example-repository/commits/9e29405efa433529b86722542b8fb4b34dfd9edd/comments","author":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"committer":{"login":"duckinator","id":39698,"avatar_url":"https://avatars3.githubusercontent.com/u/39698?v=4","gravatar_id":"","url":"https://api.github.com/users/duckinator","html_url":"https://github.com/duckinator","followers_url":"https://api.github.com/users/duckinator/followers","following_url":"https://api.github.com/users/duckinator/following{/other_user}","gists_url":"https://api.github.com/users/duckinator/gists{/gist_id}","starred_url":"https://api.github.com/users/duckinator/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/duckinator/subscriptions","organizations_url":"https://api.github.com/users/duckinator/orgs","repos_url":"https://api.github.com/users/duckinator/repos","events_url":"https://api.github.com/users/duckinator/events{/privacy}","received_events_url":"https://api.github.com/users/duckinator/received_events","type":"User","site_admin":false},"parents":[]}]'
+      string: '{"data":{"repository":{"pullRequests":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wN1QwMDowMjo1OS0wNDowMM4Eyikb","node":{"number":4,"createdAt":"2016-08-07T04:02:59Z","closedAt":null,"updatedAt":"2017-08-05T20:23:15Z","state":"OPEN","title":"Example
+        Pull Request.","url":"https://github.com/how-is/example-repository/pull/4","labels":{"nodes":[]}}}]}}}}'
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
@@ -1147,7 +632,7 @@ http_interactions:
       Accept:
       - application/json
       User-Agent:
-      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      - inq/25.0.0 (https://github.com/duckinator/inq)
       Host:
       - api.travis-ci.org
       Travis-Api-Version:
@@ -1162,17 +647,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 30 Mar 2018 22:04:02 GMT
+      - Wed, 01 May 2019 13:52:48 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Expose-Headers:
-      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
       Strict-Transport-Security:
       - max-age=31536000
       X-Endpoint:
@@ -1184,7 +663,13 @@ http_interactions:
       X-Rack-Cache:
       - miss
       X-Request-Id:
-      - 508118b3-e746-442e-8e4f-381b7fc763ec
+      - 84be5840-a2b3-464c-b456-7dcf417e1fba
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
       Via:
       - 1.1 vegur
     body:
@@ -1237,135 +722,6 @@ http_interactions:
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 - request:
     method: get
-    uri: https://api.travis-ci.org/repo/how-is%2Fexample-repository/builds?branch.name=master&event_type=push
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - application/json
-      User-Agent:
-      - how_is/24.0.0 (https://github.com/how-is/how_is/)
-      Host:
-      - api.travis-ci.org
-      Travis-Api-Version:
-      - '3'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Connection:
-      - keep-alive
-      Server:
-      - nginx
-      Date:
-      - Fri, 30 Mar 2018 22:04:02 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Expose-Headers:
-      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Endpoint:
-      - Travis::API::V3::Services::Builds::Find
-      X-Oauth-Scopes:
-      - ''
-      Vary:
-      - Accept-Encoding
-      X-Rack-Cache:
-      - miss
-      X-Request-Id:
-      - 137b385a-8828-4b6b-9366-48720615036e
-      Via:
-      - 1.1 vegur
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "@type": "builds",
-          "@href": "/repo/how-is%2Fexample-repository/builds?event_type=push&branch.name=master",
-          "@representation": "standard",
-          "@pagination": {
-            "limit": 25,
-            "offset": 0,
-            "count": 0,
-            "is_first": true,
-            "is_last": true,
-            "next": null,
-            "prev": null,
-            "first": {
-              "@href": "/repo/how-is%2Fexample-repository/builds?event_type=push&branch.name=master",
-              "offset": 0,
-              "limit": 25
-            },
-            "last": {
-              "@href": "/repo/how-is%2Fexample-repository/builds?branch.name=master&event_type=push&limit=25&offset=-25",
-              "offset": -25,
-              "limit": 25
-            }
-          },
-          "builds": [
-
-          ]
-        }
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://ci.appveyor.com/api/projects/how-is/example-repository
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - application/json
-      User-Agent:
-      - how_is/24.0.0 (https://github.com/how-is/how_is/)
-      Host:
-      - ci.appveyor.com
-  response:
-    status:
-      code: 404
-      message: Not Found
-    headers:
-      Cache-Control:
-      - no-cache
-      Pragma:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Expires:
-      - "-1"
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - SAMEORIGIN
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      Date:
-      - Fri, 30 Mar 2018 22:04:02 GMT
-      Content-Length:
-      - '49'
-    body:
-      encoding: UTF-8
-      string: '{"message":"Project not found or access denied."}'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
     uri: https://ci.appveyor.com/api/projects/how-is/example-repository/history?recordsNumber=100
     body:
       encoding: US-ASCII
@@ -1376,7 +732,7 @@ http_interactions:
       Accept:
       - application/json
       User-Agent:
-      - how_is/24.0.0 (https://github.com/how-is/how_is/)
+      - inq/25.0.0 (https://github.com/duckinator/inq)
       Host:
       - ci.appveyor.com
   response:
@@ -1388,6 +744,8 @@ http_interactions:
       - no-cache
       Pragma:
       - no-cache
+      Content-Length:
+      - '49'
       Content-Type:
       - application/json; charset=utf-8
       Expires:
@@ -1401,87 +759,10 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Date:
-      - Fri, 25 May 2018 15:54:59 GMT
-      Content-Length:
-      - '49'
+      - Wed, 01 May 2019 13:52:48 GMT
     body:
       encoding: UTF-8
       string: '{"message":"Project not found or access denied."}'
-    http_version: 
-  recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
-- request:
-    method: get
-    uri: https://api.github.com/repos/how-is/example-repository/commits?author=me@duckie.co&until=2016-08-01
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/vnd.github.v3+json,application/vnd.github.beta+json;q=0.5,application/json;q=0.1
-      Accept-Charset:
-      - utf-8
-      User-Agent:
-      - Github API Ruby Gem 0.18.2
-      Authorization:
-      - Basic ZHVja2luYXRvcjo5MTgyNzc3ZmYzYzAwNjc5NTE5M2E1NzBjZGFjMzI2YjY0NDU5ZGM5
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Fri, 15 Mar 2019 21:54:09 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '2'
-      Status:
-      - 200 OK
-      X-Ratelimit-Limit:
-      - '5000'
-      X-Ratelimit-Remaining:
-      - '4301'
-      X-Ratelimit-Reset:
-      - '1552689075'
-      Cache-Control:
-      - private, max-age=60, s-maxage=60
-      Vary:
-      - Accept, Authorization, Cookie, X-GitHub-OTP
-      Etag:
-      - '"74b5718094ce8869d8149d99338cb4f8"'
-      X-Oauth-Scopes:
-      - ''
-      X-Accepted-Oauth-Scopes:
-      - ''
-      X-Github-Media-Type:
-      - github.v3; format=json
-      Access-Control-Expose-Headers:
-      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
-        X-GitHub-Media-Type
-      Access-Control-Allow-Origin:
-      - "*"
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      X-Frame-Options:
-      - deny
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - 1; mode=block
-      Referrer-Policy:
-      - origin-when-cross-origin, strict-origin-when-cross-origin
-      Content-Security-Policy:
-      - default-src 'none'
-      X-Github-Request-Id:
-      - 87EF:64A4:11E9D23:22562CD:5C8C1F01
-    body:
-      encoding: UTF-8
-      string: "[]"
     http_version: 
   recorded_at: Tue, 01 Nov 2016 00:00:00 GMT
 recorded_with: VCR 4.0.0

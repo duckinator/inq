@@ -2,7 +2,7 @@
 
 # This script is a fucking tragedy.
 
-PROJECT="how_is"
+PROJECT="inq"
 
 SCRIPT_DIR="$(dirname $(readlink -f $0))" # Directory this script is in.
 cd "$SCRIPT_DIR/.."
