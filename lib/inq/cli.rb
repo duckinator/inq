@@ -79,7 +79,7 @@ module Inq
 
       opts.simple("--env-config",
                   "Use environment variables for configuration.",
-                  "Read first: https://how-is.github.io/config",
+                  "Read this first: https://inqrb.com/config",
                   :env_login)
 
       opts.simple("--repository USER/REPO", REPO_REGEXP,
