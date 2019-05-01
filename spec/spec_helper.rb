@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "how_is"
-require "how_is/text"
+require "inq"
+require "inq/text"
 require "timecop"
 require File.expand_path("./vcr_helper.rb", __dir__)
 
-HowIs::Text.show_default_output = false
+Inq::Text.show_default_output = false
 
 def env_vars_hidden?
   travis_pr = ENV["TRAVIS_PULL_REQUEST"]
@@ -14,7 +14,7 @@ def env_vars_hidden?
 end
 
 def config(repo)
-  HowIs::Config.new
+  Inq::Config.new
     .load_defaults
     .load({
       "repository" => repo,
@@ -23,7 +23,7 @@ def config(repo)
 end
 
 def cache(start_date, end_date)
-  HowIs::Cacheable.new(config("how-is/how_is"), start_date, end_date)
+  Inq::Cacheable.new(config("how-is/how_is"), start_date, end_date)
 end
 
 def load_test_env

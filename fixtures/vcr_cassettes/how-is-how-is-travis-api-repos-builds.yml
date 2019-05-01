@@ -2868,4 +2868,67 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 30 Mar 2018 22:03:31 GMT
+- request:
+    method: get
+    uri: https://api.travis-ci.org/repo/duckinator%2Finq/branches?sort_by=default_branch
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - application/json
+      User-Agent:
+      - inq/25.0.0 (https://github.com/duckinator/inq)
+      Host:
+      - api.travis-ci.org
+      Travis-Api-Version:
+      - '3'
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Connection:
+      - keep-alive
+      Server:
+      - nginx
+      Date:
+      - Wed, 01 May 2019 13:46:02 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Endpoint:
+      - Travis::API::V3::Services::Branches::Find
+      X-Oauth-Scopes:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Rack-Cache:
+      - miss
+      X-Request-Id:
+      - 17358f78-3334-48ce-b9b0-07b0d2884497
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "@type": "error",
+          "error_type": "not_found",
+          "error_message": "repository not found (or insufficient access)",
+          "resource_type": "repository"
+        }
+    http_version: 
+  recorded_at: Wed, 01 May 2019 13:46:02 GMT
 recorded_with: VCR 4.0.0

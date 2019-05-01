@@ -48,8 +48,8 @@ end
 at_exit {
   if Warning.has_warnings?
     puts "=== Warnings ==="
-    puts "#{Warning.codebase_warnings.length} warnings in how_is."
-    puts "#{Warning.dependency_warnings.length} warnings in how_is' dependencies."
+    puts "#{Warning.codebase_warnings.length} warnings in inq."
+    puts "#{Warning.dependency_warnings.length} warnings in inq's dependencies."
     puts "================"
   else
     puts "No warnings found in the codebase."
