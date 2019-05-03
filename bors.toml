@@ -1,5 +1,14 @@
 status = [
-  "continuous-integration/travis-ci/push",
+  "FreeBSD",
+  "Lint",
+  "Linux container:ruby:2.4-alpine",
+  "Linux container:ruby:2.5-alpine",
+  "Linux container:ruby:2.6-alpine",
+  "Windows RUBY_VERSION:2.5.3.101",
+  "Windows RUBY_VERSION:2.6.3.1",
+  "macOS RUBY_VERSION:2.5",
+  "macOS RUBY_VERSION:2.6",
+  #"continuous-integration/travis-ci/push",
   #"continuous-integration/appveyor/branch"
 ]
 
