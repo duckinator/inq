@@ -2,45 +2,6 @@
 
 # frozen_string_literal: true
 
-require "inq"
-require "inq/cli"
-require "inq/config"
-require "inq/text"
+require 'inq/exe'
 
-begin
-  cli = Inq::CLI.parse(ARGV)
-rescue OptionParser::ParseError => e
-  abort "inq: error: #{e.message}"
-end
-
-options = cli.options
-
-abort cli.help_text if options[:help]
-abort Inq::VERSION_STRING if options[:version]
-
-date = options[:date]
-
-begin
-  config = Inq::Config.new
-
-  config.load_defaults unless options[:no_user_config]
-  config.load_env if options[:env_config]
-
-  if options[:config]
-    config.load_files(options[:config])
-  else
-    config.load(Inq.default_config(options[:repository]))
-  end
-
-  reports = Inq.from_config(config, date)
-
-  files = reports.save_all
-  Inq::Text.puts "Saved reports to:"
-  files.each { |file| Inq::Text.puts "- #{file}" }
-rescue => e
-  raise if options[:verbose]
-
-  warn "inq: error: #{e.message} (Pass --verbose for more details.)"
-  warn "  at: #{e.backtrace_locations.first}"
-  exit 1
-end
+Inq::Exe.run(ARGV)
