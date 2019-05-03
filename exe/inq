@@ -2,6 +2,6 @@
 
 # frozen_string_literal: true
 
-require 'inq/exe'
+require "inq/exe"
 
 Inq::Exe.run(ARGV)
