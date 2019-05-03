@@ -1,0 +1,84 @@
+# Allow compute credits usage.
+use_compute_credits: $CIRRUS_USER_COLLABORATOR == 'true'
+
+# Use an expired token that was used when fixtures were generated.
+env:
+  INQ_GITHUB_USERNAME: "duckinator"
+  INQ_GITHUB_TOKEN: "9182777ff3c006795193a570cdac326b64459dc9"
+  INQ_USE_ENV: "true"
+
+Lint_task:
+  container:
+    image: ruby:2.6-alpine
+  install_script:
+    - apk add --no-cache git build-base
+    - gem install bundler
+    - bundle install
+  script:
+    - ruby --version
+    - bundle exec rubocop
+
+Linux_task:
+  container:
+    matrix:
+      - image: ruby:2.4-alpine
+      - image: ruby:2.5-alpine
+      - image: ruby:2.6-alpine
+  install_script:
+    - apk add --no-cache git build-base
+    - gem install bundler
+    - bundle install
+  script:
+    - ruby --version
+    - bundle exec rake spec
+
+macOS_task:
+  osx_instance:
+    image: mojave-base
+  env:
+    matrix:
+      - RUBY_VERSION: 2.5
+      - RUBY_VERSION: 2.6
+    PATH: "/usr/local/opt/ruby@${RUBY_VERSION}/bin:$HOME/.gem/ruby/${RUBY_VERSION}.0/bin:$PATH"
+  install_script:
+    # Based on pyenv homebrew recommendations.
+    # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+    - sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+    - "brew install ruby@${RUBY_VERSION}"
+    - gem install bundler --user-install
+    - bundle install
+  script:
+    - ruby --version
+    - bundle exec rake spec
+
+# NOTE: The `ruby` package on FreeBSD is currently Ruby 2.4.
+FreeBSD_task:
+  freebsd_instance:
+    image: freebsd-12-0-release-amd64
+  env:
+    RUBY_VERSION: 2.4
+  install_script:
+    - RB=`echo $RUBY_VERSION | tr -d '.'`
+    - pkg install -y ruby ruby${RB}-gems rubygem-rake git
+    - gem install bundler
+    - bundle install
+  script:
+    - ruby --version
+    - bundle exec rake spec
+
+Windows_task:
+  env:
+    matrix:
+      - RUBY_VERSION: 2.5.3.101
+      - RUBY_VERSION: 2.6.3.1
+  windows_container:
+    os_version: 2019
+    image: cirrusci/windowsservercore:2019
+  install_script:
+    - choco install -y ruby --version %RUBY_VERSION%
+    - refreshenv
+    - gem install bundler
+    - bundle install
+  script:
+    - refreshenv
+    - bundle exec rake spec
