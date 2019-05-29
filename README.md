@@ -9,7 +9,7 @@ Inq is tool for generating summaries of the health of a codebase hosted on GitHu
 
 Reports can be generated retroactively.
 
-If you want to contribute or discuss inq, you can [join Bundler's slack](http://slack.bundler.io/) and join the #how_is channel.
+If you want to contribute or discuss inq, you can [join Bundler's slack](http://slack.bundler.io/) and join the #inq channel.
 
 ## Installation
 
