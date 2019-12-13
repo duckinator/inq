@@ -1,5 +1,5 @@
-# Allow compute credits usage.
-use_compute_credits: $CIRRUS_USER_COLLABORATOR == 'true'
+# Allow compute credits usage by collaborators and bors.
+use_compute_credits: $CIRRUS_USER_COLLABORATOR == 'true' || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH == 'staging' || $CIRRUS_BRANCH == 'trying'
 
 # Use an expired token that was used when fixtures were generated.
 env:
