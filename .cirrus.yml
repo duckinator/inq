@@ -1,5 +1,5 @@
-# Allow compute credits usage.
-use_compute_credits: $CIRRUS_USER_COLLABORATOR == 'true'
+# Allow compute credits usage by collaborators and bors.
+use_compute_credits: $CIRRUS_USER_COLLABORATOR == 'true' || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH == 'staging' || $CIRRUS_BRANCH == 'trying'
 
 # Use an expired token that was used when fixtures were generated.
 env:
@@ -41,9 +41,6 @@ macOS_task:
       - RUBY_VERSION: 2.6
     PATH: "/usr/local/opt/ruby@${RUBY_VERSION}/bin:$HOME/.gem/ruby/${RUBY_VERSION}.0/bin:$PATH"
   install_script:
-    # Based on pyenv homebrew recommendations.
-    # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
-    - sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
     - "brew install ruby@${RUBY_VERSION}"
     - gem install bundler --user-install
     - bundle install
@@ -51,12 +48,12 @@ macOS_task:
     - ruby --version
     - bundle exec rake spec
 
-# NOTE: The `ruby` package on FreeBSD is currently Ruby 2.4.
+# NOTE: The `ruby` package on FreeBSD 12.1 is currently Ruby 2.6.
 FreeBSD_task:
   freebsd_instance:
-    image: freebsd-12-0-release-amd64
+    image_family: freebsd-12-1
   env:
-    RUBY_VERSION: 2.4
+    RUBY_VERSION: 2.6
   install_script:
     - RB=`echo $RUBY_VERSION | tr -d '.'`
     - pkg install -y ruby ruby${RB}-gems rubygem-rake git
