@@ -58,7 +58,7 @@ or
 
 #### Example \#1
 
-    $ inq rubygems/rubygems 2016-12-01 --output report-2016-12-01.html
+    $ inq --repository rubygems/rubygems --date 2016-12-01 --output report-2016-12-01.html
 
 The above command creates a HTML file containing the report for the state of
 the rubygems/rubygems repository, for November 01 2016 to
