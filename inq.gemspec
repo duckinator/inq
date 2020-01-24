@@ -26,14 +26,10 @@ Gem::Specification.new do |spec|
   # Ruby maintenance info: https://www.ruby-lang.org/en/downloads/branches/
   #
   # NOTE: Update Gemfile when this is updated!
-  spec.required_ruby_version = "~> 2.4"
+  spec.required_ruby_version = "~> 2.5"
 
   spec.add_runtime_dependency "github_api", "~> 0.18.1"
   spec.add_runtime_dependency "okay", "~> 11.0"
-
-  # github_api eventually pulls activesupport from somewhere.
-  # activesupport 6.x requires Ruby 2.5+, but 5.x only needs 2.2.2+.
-  spec.add_runtime_dependency "activesupport", "~> 5.0"
 
   spec.add_runtime_dependency "json_pure"
 
