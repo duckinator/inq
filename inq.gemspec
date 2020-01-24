@@ -31,6 +31,10 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "github_api", "~> 0.18.1"
   spec.add_runtime_dependency "okay", "~> 11.0"
 
+  # github_api eventually pulls activesupport from somewhere.
+  # activesupport 6.x requires Ruby 2.5+, but 5.x only needs 2.2.2+.
+  spec.add_runtime_dependency "activesupport", "~> 5.0"
+
   spec.add_runtime_dependency "json_pure"
 
   spec.add_development_dependency "bundler", "~> 2.0"
