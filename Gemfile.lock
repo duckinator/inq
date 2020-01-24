@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     inq (26.0.0)
-      activesupport (~> 5.0)
       github_api (~> 0.18.1)
       json_pure
       okay (~> 11.0)
