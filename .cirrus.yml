@@ -39,7 +39,8 @@ macOS_task:
     matrix:
       - RUBY_VERSION: 2.5
       - RUBY_VERSION: 2.6
-      - RUBY_VERSION: 2.7
+      # Un-comment the following line when 2.7 is available via Homebrew.
+      #- RUBY_VERSION: 2.7
     PATH: "/usr/local/opt/ruby@${RUBY_VERSION}/bin:$HOME/.gem/ruby/${RUBY_VERSION}.0/bin:$PATH"
   install_script:
     - "brew install ruby@${RUBY_VERSION}"
