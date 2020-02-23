@@ -28,18 +28,18 @@ Gem::Specification.new do |spec|
   # NOTE: Update Gemfile when this is updated!
   spec.required_ruby_version = "~> 2.5"
 
-  spec.add_runtime_dependency "github_api", "~> 0.18.1"
-  spec.add_runtime_dependency "okay", "~> 11.0"
+  spec.add_runtime_dependency "github_api", "= 0.18.2"
+  spec.add_runtime_dependency "okay", "= 11.0.0"
 
   spec.add_runtime_dependency "json_pure"
 
   spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "rake", "~> 12.3"
-  spec.add_development_dependency "rspec", "~> 3.8"
-  spec.add_development_dependency "timecop", "~> 0.9.1"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rspec", "~> 3.9"
+  spec.add_development_dependency "timecop", "= 0.9.1"
   spec.add_development_dependency "vcr", "~> 4.0"
   spec.add_development_dependency "webmock"
   # Rubocop pulls in C extensions, which we want to avoid in Windows CI.
-  spec.add_development_dependency "rubocop", "~> 0.68.1" unless Gem.win_platform? && ENV["CI"]
+  spec.add_development_dependency "rubocop", "= 0.68.1" unless Gem.win_platform? && ENV["CI"]
   spec.add_development_dependency "github_changelog_generator"
 end
