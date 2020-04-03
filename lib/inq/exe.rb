@@ -50,9 +50,11 @@ module Inq
     private_class_method :save_reports
 
     def self.execute(options)
-      date = options[:date]
+      start_date = options[:date] ? options[:date] : options[:start_date]
+      end_date = options[:end_date]
+
       config = load_config(options)
-      reports = Inq.from_config(config, date)
+      reports = Inq.from_config(config, start_date, end_date)
       save_reports(reports)
     rescue => e
       raise if options[:verbose]
@@ -62,5 +64,15 @@ module Inq
       exit 1
     end
     private_class_method :execute
+
+    def validate_date(options)
+      if options[:date] && (options[:start_date] || options[:end_date])
+        raise AmbiguousArgument, "--date, --start-date, --end-date"
+      end
+
+      if !options[:date] && (!options[:start_date] || !options[:end_date])
+        raise MissingArgument, "--date, --start-date, --end-date"
+      end
+    end
   end
 end
