@@ -9,7 +9,7 @@ module Inq
   class ReportCollection
     include Okay::WarningHelpers
 
-    def initialize(config, date)
+    def initialize(config, start_date, end_date=nil)
       @config = config
 
       # If the config is in the old format, convert it to the new one.
@@ -20,13 +20,14 @@ module Inq
         }]
       end
 
-      @date = date
+      @start_date = start_date
+      @end_date = end_date
       @reports = config["repositories"].map(&method(:fetch_report)).to_h
     end
 
     # Generates the metadata for the collection of Reports.
     def metadata(repository)
-      end_date = DateTime.strptime(@date, "%Y-%m-%d")
+      end_date = DateTime.strptime(@end_date || @start_date, "%Y-%m-%d")
       friendly_end_date = end_date.strftime("%B %d, %y")
 
       {
@@ -55,7 +56,7 @@ module Inq
 
     def fetch_report(repo_config)
       repo = repo_config["repository"]
-      report = Report.new(config_for(repo), @date)
+      report = Report.new(config_for(repo), @start_date, @end_date)
       [repo, report]
     end
     private :fetch_report
