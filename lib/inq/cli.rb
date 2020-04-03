@@ -89,6 +89,12 @@ module Inq
       opts.simple("--date YYYY-MM-DD", DATE_REGEXP, "Last date of the report.",
                   :date)
 
+      opts.simple("--start-date YYYY-MM-DD", DATE_REGEXP, "Start date of the report.",
+                  :date)
+
+      opts.simple("--end-date YYYY-MM-DD", DATE_REGEXP, "Last date of the report.",
+                  :date)
+
       opts.simple("--output REPORT_FILE", format_regexp,
                   "Output file for the report.",
                   "Supported file formats: #{formats}.",
