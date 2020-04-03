@@ -21,13 +21,13 @@ module Inq
     }
   end
 
-  def self.new(repository, date, cache_mechanism = nil)
+  def self.new(repository, start_date, end_date = nil, cache_mechanism = nil)
     config =
       Config.new
         .load_defaults
         .load(default_config(repository))
     config["cache"] = {"type" => "self", "cache_mechanism" => cache_mechanism} if cache_mechanism
-    Report.new(config, date)
+    Report.new(config, start_date, end_date)
   end
 
   ##

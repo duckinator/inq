@@ -14,7 +14,7 @@ module Inq
   ##
   # Class for generating a report.
   class Report
-    def initialize(config, end_date)
+    def initialize(config, start_date, end_date=nil)
       @config = config
       @repository = config["repository"]
 
@@ -25,8 +25,15 @@ module Inq
       #       results for different time zones, which makes it harder to test.
       #
       #       (I'm also guessing/hoping that GitHub's URLs use UTC.)
-      end_dt = DateTime.strptime(end_date, "%Y-%m-%d")
-      start_dt = start_dt_from_end_dt(end_dt)
+      end_dt = DateTime.strptime(end_date || start_date, "%Y-%m-%d")
+      start_dt =
+        if end_date
+          start_dt_from_end_dt(
+            DateTime.strptime(start_date, "%Y-%m-%d")
+          )
+        else
+          start_dt_from_end_dt(end_dt)
+        end
 
       @end_date = end_dt.strftime("%Y-%m-%d")
       @start_date = start_dt.strftime("%Y-%m-%d")
