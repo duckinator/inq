@@ -37,11 +37,11 @@ module Inq
   #   the reports.
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
-  def self.from_config(config, date)
+  def self.from_config(config, start_date, end_date = nil)
     raise "Expected config to be Hash, got #{config.class}" unless \
       config.is_a?(Hash)
 
-    ReportCollection.new(config, date)
+    ReportCollection.new(config, start_date, end_date)
   end
 
   ##
