@@ -28,9 +28,7 @@ module Inq
       end_dt = DateTime.strptime(end_date || start_date, "%Y-%m-%d")
       start_dt =
         if end_date
-          start_dt_from_end_dt(
-            DateTime.strptime(start_date, "%Y-%m-%d")
-          )
+          DateTime.strptime(start_date, "%Y-%m-%d")
         else
           start_dt_from_end_dt(end_dt)
         end

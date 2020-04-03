@@ -131,7 +131,7 @@ describe Inq do
 
         VCR.use_cassette("how-is-example-repository") do
           expect {
-            actual_report = Inq.new("how-is/example-repository", "2016-09-01", "2016-12-01")
+            actual_report = Inq.new("how-is/example-repository", "2016-08-01", "2016-12-01")
           }.to_not raise_error
 
           expect(actual_report.to_html_partial).to eq(expected_html)
