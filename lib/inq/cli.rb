@@ -9,6 +9,7 @@ module Inq
   # Parses command-line arguments for inq.
   class CLI
     MissingArgument = Class.new(OptionParser::MissingArgument)
+    AmbiguousArgument = Class.new(OptionParser::AmbiguousArgument)
 
     REPO_REGEXP = /.+\/.+/
     DATE_REGEXP = /\d\d\d\d-\d\d-\d\d/
@@ -90,10 +91,10 @@ module Inq
                   :date)
 
       opts.simple("--start-date YYYY-MM-DD", DATE_REGEXP, "Start date of the report.",
-                  :date)
+                  :start_date)
 
       opts.simple("--end-date YYYY-MM-DD", DATE_REGEXP, "Last date of the report.",
-                  :date)
+                  :end_date)
 
       opts.simple("--output REPORT_FILE", format_regexp,
                   "Output file for the report.",
@@ -118,9 +119,10 @@ module Inq
     #
     # @param options [Hash] The result of CLI#parse().
     # @raise [MissingArgument] if we did not get a valid options Hash.
+    # @raise [AmbiguousArgument] if we give an ambiguous options Hash.
     def validate_options!(options)
       return if options[:help] || options[:version]
-      raise MissingArgument, "--date" unless options[:date]
+      validate_date(options)
       raise MissingArgument, "--repository or --config" unless
         options[:repository] || options[:config]
     end
@@ -136,6 +138,18 @@ module Inq
       regexp_parts = Inq.supported_formats.map { |x| Regexp.escape(x) }
 
       /.+\.(#{regexp_parts.join("|")})/
+    end
+
+    # @param options [Hash] The result of CLI#parse().
+    # @raise [AmbiguousArgument] if we did not get a valid options Hash.
+    def validate_date(options)
+      if options[:date] && (options[:start_date] || options[:end_date])
+        raise AmbiguousArgument, "--date, --start-date, --end-date"
+      end
+
+      if !options[:date] && (!options[:start_date] || !options[:end_date])
+        raise MissingArgument, "--date, --start-date, --end-date"
+      end
     end
   end
 end
