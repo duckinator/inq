@@ -6,8 +6,7 @@ require "timecop"
 require "inq"
 
 RSpec::Core::RakeTask.new(:spec) do |t|
-  # Warning.warn() was added in Ruby 2.4.0, so don't use -w on older versions.
-  t.ruby_opts = "-w -r./spec/capture_warnings.rb" if RUBY_VERSION >= "2.4.0"
+  t.ruby_opts = "-w -r./spec/capture_warnings.rb"
 end
 
 task :default => :spec
