@@ -14,7 +14,7 @@ module Inq
   ##
   # Class for generating a report.
   class Report
-    def initialize(config, start_date, end_date=nil)
+    def initialize(config, start_date, end_date = nil)
       @config = config
       @repository = config["repository"]
 

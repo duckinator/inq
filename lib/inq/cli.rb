@@ -143,12 +143,10 @@ module Inq
     # @param options [Hash] The result of CLI#parse().
     # @raise [AmbiguousArgument] if we did not get a valid options Hash.
     def validate_date(options)
-      if options[:date] && (options[:start_date] || options[:end_date])
-        raise AmbiguousArgument, "--date, --start-date, --end-date"
-      end
-
-      if !options[:date] && (!options[:start_date] || !options[:end_date])
-        raise MissingArgument, "--date, --start-date, --end-date"
+      if options[:date]
+        raise AmbiguousArgument, "--date, --start-date, --end-date" if options[:start_date] || options[:end_date]
+      else
+        raise MissingArgument, "--date, --start-date, --end-date" unless options[:start_date] || options[:end_date]
       end
     end
   end
