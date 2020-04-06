@@ -12,28 +12,26 @@ http_interactions:
       Accept:
       - application/json
       User-Agent:
-      - inq/25.0.0 (https://github.com/duckinator/inq)
+      - inq/26.0.0 (https://github.com/duckinator/inq)
       Host:
       - api.travis-ci.org
       Travis-Api-Version:
       - '3'
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
     headers:
-      Connection:
-      - keep-alive
-      Server:
-      - nginx
       Date:
-      - Wed, 01 May 2019 13:50:54 GMT
+      - Sun, 05 Apr 2020 21:15:46 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
+      Connection:
+      - keep-alive
       Strict-Transport-Security:
-      - max-age=31536000
+      - max-age=15724800; includeSubDomains
       X-Endpoint:
       - Travis::API::V3::Services::Branches::Find
       X-Oauth-Scopes:
@@ -43,24 +41,846 @@ http_interactions:
       X-Rack-Cache:
       - miss
       X-Request-Id:
-      - c7993b22-1e0a-444c-acd6-39351c29370f
+      - a910be8ea52415cf1ae17572095e2f0f
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Credentials:
       - 'true'
       Access-Control-Expose-Headers:
       - Content-Type, Cache-Control, Expires, Etag, Last-Modified, X-Request-ID
-      Via:
-      - 1.1 vegur
     body:
       encoding: ASCII-8BIT
       string: |-
         {
-          "@type": "error",
-          "error_type": "not_found",
-          "error_message": "repository not found (or insufficient access)",
-          "resource_type": "repository"
+          "@type": "branches",
+          "@href": "/repo/duckinator%2Finq/branches?sort_by=default_branch",
+          "@representation": "standard",
+          "@pagination": {
+            "limit": 25,
+            "offset": 0,
+            "count": 161,
+            "is_first": true,
+            "is_last": false,
+            "next": {
+              "@href": "/repo/duckinator%2Finq/branches?limit=25&offset=25&sort_by=default_branch",
+              "offset": 25,
+              "limit": 25
+            },
+            "prev": null,
+            "first": {
+              "@href": "/repo/duckinator%2Finq/branches?sort_by=default_branch",
+              "offset": 0,
+              "limit": 25
+            },
+            "last": {
+              "@href": "/repo/duckinator%2Finq/branches?limit=25&offset=150&sort_by=default_branch",
+              "offset": 150,
+              "limit": 25
+            }
+          },
+          "branches": [
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/master",
+              "@representation": "standard",
+              "name": "master",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": true,
+              "exists_on_github": true,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/624851041",
+                "@representation": "minimal",
+                "id": 624851041,
+                "number": "1277",
+                "state": "passed",
+                "duration": 218,
+                "event_type": "push",
+                "previous_state": "passed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2019-12-13T23:45:22Z",
+                "finished_at": "2019-12-13T23:46:26Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v3.0.0",
+              "@representation": "standard",
+              "name": "v3.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/144437817",
+                "@representation": "minimal",
+                "id": 144437817,
+                "number": "42",
+                "state": "failed",
+                "duration": 42,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-13T12:08:18Z",
+                "finished_at": "2016-07-13T12:09:00Z",
+                "private": null
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/use-correct-config-file",
+              "@representation": "standard",
+              "name": "use-correct-config-file",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150365312",
+                "@representation": "minimal",
+                "id": 150365312,
+                "number": "76",
+                "state": "failed",
+                "duration": 88,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T03:41:26Z",
+                "finished_at": "2016-08-07T03:42:15Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v1.0.0",
+              "@representation": "standard",
+              "name": "v1.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/139595857",
+                "@representation": "minimal",
+                "id": 139595857,
+                "number": "6",
+                "state": "errored",
+                "duration": 237,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-06-22T20:48:15Z",
+                "finished_at": "2016-06-22T20:52:00Z",
+                "private": null
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/html-graphs",
+              "@representation": "standard",
+              "name": "html-graphs",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/140630031",
+                "@representation": "minimal",
+                "id": 140630031,
+                "number": "15",
+                "state": "errored",
+                "duration": 267,
+                "event_type": "push",
+                "previous_state": "errored",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-06-27T20:05:36Z",
+                "finished_at": "2016-06-27T20:08:11Z",
+                "private": null
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v2.0.0",
+              "@representation": "standard",
+              "name": "v2.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/140639076",
+                "@representation": "minimal",
+                "id": 140639076,
+                "number": "20",
+                "state": "errored",
+                "duration": 232,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-06-27T20:36:28Z",
+                "finished_at": "2016-06-27T20:40:26Z",
+                "private": null
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/html-links",
+              "@representation": "standard",
+              "name": "html-links",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/143662406",
+                "@representation": "minimal",
+                "id": 143662406,
+                "number": "36",
+                "state": "passed",
+                "duration": 30,
+                "event_type": "push",
+                "previous_state": "passed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-10T05:27:15Z",
+                "finished_at": "2016-07-10T05:27:45Z",
+                "private": null
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/cli-specs",
+              "@representation": "standard",
+              "name": "cli-specs",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/148142381",
+                "@representation": "minimal",
+                "id": 148142381,
+                "number": "54",
+                "state": "passed",
+                "duration": 41,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-28T20:29:19Z",
+                "finished_at": "2016-07-28T20:30:00Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v8.0.0",
+              "@representation": "standard",
+              "name": "v8.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/148151066",
+                "@representation": "minimal",
+                "id": 148151066,
+                "number": "60",
+                "state": "passed",
+                "duration": 124,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-28T21:03:03Z",
+                "finished_at": "2016-07-28T21:05:07Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v6.0.0",
+              "@representation": "standard",
+              "name": "v6.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/148146230",
+                "@representation": "minimal",
+                "id": 148146230,
+                "number": "57",
+                "state": "passed",
+                "duration": 42,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-28T20:45:22Z",
+                "finished_at": "2016-07-28T20:46:04Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v7.0.0",
+              "@representation": "standard",
+              "name": "v7.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/148147212",
+                "@representation": "minimal",
+                "id": 148147212,
+                "number": "58",
+                "state": "passed",
+                "duration": 91,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-28T20:48:30Z",
+                "finished_at": "2016-07-28T20:50:01Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/integration-tests",
+              "@representation": "standard",
+              "name": "integration-tests",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150363626",
+                "@representation": "minimal",
+                "id": 150363626,
+                "number": "67",
+                "state": "failed",
+                "duration": 87,
+                "event_type": "push",
+                "previous_state": "failed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T03:19:44Z",
+                "finished_at": "2016-08-07T03:20:31Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/fix-unit-test",
+              "@representation": "standard",
+              "name": "fix-unit-test",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150364147",
+                "@representation": "minimal",
+                "id": 150364147,
+                "number": "70",
+                "state": "failed",
+                "duration": 110,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T03:27:11Z",
+                "finished_at": "2016-08-07T03:28:10Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/remove-warnings",
+              "@representation": "standard",
+              "name": "remove-warnings",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150364685",
+                "@representation": "minimal",
+                "id": 150364685,
+                "number": "73",
+                "state": "failed",
+                "duration": 145,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T03:34:17Z",
+                "finished_at": "2016-08-07T03:36:10Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/v4.0.0",
+              "@representation": "standard",
+              "name": "v4.0.0",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/145750148",
+                "@representation": "minimal",
+                "id": 145750148,
+                "number": "53",
+                "state": "passed",
+                "duration": 42,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-19T07:27:03Z",
+                "finished_at": "2016-07-19T07:27:45Z",
+                "private": null
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/fix-contract-error",
+              "@representation": "standard",
+              "name": "fix-contract-error",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150367905",
+                "@representation": "minimal",
+                "id": 150367905,
+                "number": "79",
+                "state": "failed",
+                "duration": 82,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T04:15:53Z",
+                "finished_at": "2016-08-07T04:16:37Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/update-help-text",
+              "@representation": "standard",
+              "name": "update-help-text",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150386000",
+                "@representation": "minimal",
+                "id": 150386000,
+                "number": "85",
+                "state": "failed",
+                "duration": 99,
+                "event_type": "push",
+                "previous_state": "failed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T08:47:57Z",
+                "finished_at": "2016-08-07T08:48:50Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/fix-integration-tests",
+              "@representation": "standard",
+              "name": "fix-integration-tests",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/151716609",
+                "@representation": "minimal",
+                "id": 151716609,
+                "number": "91",
+                "state": "failed",
+                "duration": 95,
+                "event_type": "push",
+                "previous_state": "failed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-12T05:53:34Z",
+                "finished_at": "2016-08-12T05:54:29Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/option-parser-refactor",
+              "@representation": "standard",
+              "name": "option-parser-refactor",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/152006406",
+                "@representation": "minimal",
+                "id": 152006406,
+                "number": "94",
+                "state": "failed",
+                "duration": 92,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-13T06:57:19Z",
+                "finished_at": "2016-08-13T06:58:09Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/document-api",
+              "@representation": "standard",
+              "name": "document-api",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/163582524",
+                "@representation": "minimal",
+                "id": 163582524,
+                "number": "131",
+                "state": "failed",
+                "duration": 82,
+                "event_type": "push",
+                "previous_state": "failed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-09-29T00:46:15Z",
+                "finished_at": "2016-09-29T00:47:02Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/issue-48",
+              "@representation": "standard",
+              "name": "issue-48",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/165408567",
+                "@representation": "minimal",
+                "id": 165408567,
+                "number": "155",
+                "state": "failed",
+                "duration": 63,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-10-06T01:45:44Z",
+                "finished_at": "2016-10-06T01:46:17Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/issue-61",
+              "@representation": "standard",
+              "name": "issue-61",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/165412804",
+                "@representation": "minimal",
+                "id": 165412804,
+                "number": "158",
+                "state": "failed",
+                "duration": 64,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-10-06T02:25:45Z",
+                "finished_at": "2016-10-06T02:26:19Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/issue-61-typo-fix",
+              "@representation": "standard",
+              "name": "issue-61-typo-fix",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/165413345",
+                "@representation": "minimal",
+                "id": 165413345,
+                "number": "161",
+                "state": "failed",
+                "duration": 60,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-10-06T02:30:41Z",
+                "finished_at": "2016-10-06T02:31:12Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/parser-specs",
+              "@representation": "standard",
+              "name": "parser-specs",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/155460359",
+                "@representation": "minimal",
+                "id": 155460359,
+                "number": "109",
+                "state": "failed",
+                "duration": 81,
+                "event_type": "push",
+                "previous_state": "errored",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-26T20:46:40Z",
+                "finished_at": "2016-08-26T20:47:23Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/summary",
+              "@representation": "standard",
+              "name": "summary",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/145749054",
+                "@representation": "minimal",
+                "id": 145749054,
+                "number": "49",
+                "state": "passed",
+                "duration": 48,
+                "event_type": "push",
+                "previous_state": "failed",
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-07-19T07:21:41Z",
+                "finished_at": "2016-07-19T07:22:29Z",
+                "private": null
+              }
+            }
+          ]
         }
     http_version: 
-  recorded_at: Wed, 01 May 2019 13:50:54 GMT
+  recorded_at: Sun, 05 Apr 2020 21:15:46 GMT
 recorded_with: VCR 4.0.0
