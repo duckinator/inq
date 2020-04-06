@@ -83,6 +83,7 @@ module Inq
         end
 
         def in_date_range?(build, start_date = @start_date, end_date = @end_date)
+          return unless build["started_at"] && build["finished_at"]
           (build["started_at"] >= start_date) \
             && (build["finished_at"] <= end_date)
         end
@@ -115,7 +116,7 @@ module Inq
           result["repository"] = result["repository"]["slug"]
 
           ["started_at", "finished_at"].each do |k|
-            next if k.nil?
+            next if result[k].nil?
             result[k] = DateTime.parse(result[k])
           end
 
