@@ -23,6 +23,16 @@ VCR.configure do |config|
     end
   }
 
+  config.filter_sensitive_data("<BEARER TOKEN>") { |interaction|
+    auth_headers = interaction.request.headers["Bearer-Token"]
+    if auth_headers.is_a?(Array) && auth_headers.length > 0
+      auth_headers.first
+    else
+      "<BEARER TOKEN>" # idk if you can just return nil here without weirdness?
+    end
+  }
+
+
   config.allow_http_connections_when_no_cassette = false
   config.cassette_library_dir = "fixtures/vcr_cassettes"
   config.hook_into :webmock

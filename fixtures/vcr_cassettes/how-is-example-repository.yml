@@ -25,7 +25,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:41 GMT
+      - Mon, 06 Apr 2020 14:13:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -35,9 +35,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '3972'
+      - '4037'
       X-Ratelimit-Reset:
-      - '1586124150'
+      - '1586185735'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -72,7 +72,7 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - 4C1B:55F6:1096B85:1B6E3CF:5E8A4BA8
+      - 83B9:0B0A:1209:3BF5:5E8B3921
     body:
       encoding: ASCII-8BIT
       string: '{"id":65114449,"node_id":"MDEwOlJlcG9zaXRvcnk2NTExNDQ0OQ==","name":"example-repository","full_name":"how-is/example-repository","private":false,"owner":{"login":"how-is","id":20577802,"node_id":"MDEyOk9yZ2FuaXphdGlvbjIwNTc3ODAy","avatar_url":"https://avatars0.githubusercontent.com/u/20577802?v=4","gravatar_id":"","url":"https://api.github.com/users/how-is","html_url":"https://github.com/how-is","followers_url":"https://api.github.com/users/how-is/followers","following_url":"https://api.github.com/users/how-is/following{/other_user}","gists_url":"https://api.github.com/users/how-is/gists{/gist_id}","starred_url":"https://api.github.com/users/how-is/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/how-is/subscriptions","organizations_url":"https://api.github.com/users/how-is/orgs","repos_url":"https://api.github.com/users/how-is/repos","events_url":"https://api.github.com/users/how-is/events{/privacy}","received_events_url":"https://api.github.com/users/how-is/received_events","type":"Organization","site_admin":false},"html_url":"https://github.com/how-is/example-repository","description":"Example
@@ -104,7 +104,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:41 GMT
+      - Mon, 06 Apr 2020 14:13:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -114,9 +114,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '3971'
+      - '4036'
       X-Ratelimit-Reset:
-      - '1586124150'
+      - '1586185735'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -151,7 +151,7 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - 1F2C:56EB:118D0D5:1C92C08:5E8A4BA9
+      - A2C8:621E:87A2:F3F8:5E8B3921
     body:
       encoding: ASCII-8BIT
       string: '[{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","node_id":"MDY6Q29tbWl0NjUxMTQ0NDk6OWUyOTQwNWVmYTQzMzUyOWI4NjcyMjU0MmI4ZmI0YjM0ZGZkOWVkZA==","commit":{"author":{"name":"Ellen
@@ -185,7 +185,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:41 GMT
+      - Mon, 06 Apr 2020 14:13:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -195,9 +195,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '3970'
+      - '4035'
       X-Ratelimit-Reset:
-      - '1586124150'
+      - '1586185735'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -232,7 +232,7 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - 17B0:48ED:7B8C3E:1304AB5:5E8A4BA9
+      - 72F5:7407:56A2:C1BA:5E8B3921
     body:
       encoding: ASCII-8BIT
       string: '{"sha":"9e29405efa433529b86722542b8fb4b34dfd9edd","node_id":"MDY6Q29tbWl0NjUxMTQ0NDk6OWUyOTQwNWVmYTQzMzUyOWI4NjcyMjU0MmI4ZmI0YjM0ZGZkOWVkZA==","commit":{"author":{"name":"Ellen
@@ -267,7 +267,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:41 GMT
+      - Mon, 06 Apr 2020 14:13:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -277,9 +277,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '3969'
+      - '4034'
       X-Ratelimit-Reset:
-      - '1586124150'
+      - '1586185736'
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Vary:
@@ -312,7 +312,7 @@ http_interactions:
       Content-Security-Policy:
       - default-src 'none'
       X-Github-Request-Id:
-      - E84F:2E2C:F24328:19D3154:5E8A4BA9
+      - 90FC:5739:4968:ACF0:5E8B3921
     body:
       encoding: UTF-8
       string: "[]"
@@ -338,7 +338,7 @@ http_interactions:
       Authorization:
       - "<AUTHORIZATION TOKEN>"
       Bearer-Token:
-      - 7d8295bf78c385d1740d4fddba2bb0ad102736b1
+      - "<BEARER TOKEN>"
   response:
     status:
       code: 200
@@ -347,7 +347,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:42 GMT
+      - Mon, 06 Apr 2020 14:13:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -367,7 +367,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '4909'
       X-Ratelimit-Reset:
-      - '1586124952'
+      - '1586185736'
       Access-Control-Expose-Headers:
       - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
         X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
@@ -389,7 +389,7 @@ http_interactions:
       Vary:
       - Accept-Encoding, Accept, X-Requested-With
       X-Github-Request-Id:
-      - D8BF:2E2C:F24339:19D316D:5E8A4BA9
+      - 484D:4D5C:9DEC:118A2:5E8B3922
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"repository":{"issues":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wNlQyMzo1NDozMy0wNDowMM4KHp08"}]}}}}'
@@ -416,7 +416,7 @@ http_interactions:
       Authorization:
       - "<AUTHORIZATION TOKEN>"
       Bearer-Token:
-      - 7d8295bf78c385d1740d4fddba2bb0ad102736b1
+      - "<BEARER TOKEN>"
   response:
     status:
       code: 200
@@ -425,7 +425,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:42 GMT
+      - Mon, 06 Apr 2020 14:13:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -445,7 +445,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '4908'
       X-Ratelimit-Reset:
-      - '1586124953'
+      - '1586185736'
       Access-Control-Expose-Headers:
       - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
         X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
@@ -467,7 +467,7 @@ http_interactions:
       Vary:
       - Accept-Encoding, Accept, X-Requested-With
       X-Github-Request-Id:
-      - 0E48:787D:1034745:1B362AF:5E8A4BAA
+      - 81E0:1E38:8F21:10826:5E8B3922
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"repository":{"issues":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wNlQyMzo1MzoyNi0wNDowMM4KHp0f","node":{"number":1,"createdAt":"2016-08-07T03:53:26Z","closedAt":null,"updatedAt":"2016-08-07T03:53:49Z","state":"OPEN","title":"An
@@ -496,7 +496,7 @@ http_interactions:
       Authorization:
       - "<AUTHORIZATION TOKEN>"
       Bearer-Token:
-      - 7d8295bf78c385d1740d4fddba2bb0ad102736b1
+      - "<BEARER TOKEN>"
   response:
     status:
       code: 200
@@ -505,7 +505,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:42 GMT
+      - Mon, 06 Apr 2020 14:13:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -525,7 +525,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '4907'
       X-Ratelimit-Reset:
-      - '1586124953'
+      - '1586185736'
       Access-Control-Expose-Headers:
       - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
         X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
@@ -547,7 +547,7 @@ http_interactions:
       Vary:
       - Accept-Encoding, Accept, X-Requested-With
       X-Github-Request-Id:
-      - B9B7:2E2C:F24359:19D319D:5E8A4BAA
+      - DE86:31F4:1BFC:4B17:5E8B3922
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"repository":{"pullRequests":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wN1QwMDowMjo1OS0wNDowMM4Eyikb"}]}}}}'
@@ -574,7 +574,7 @@ http_interactions:
       Authorization:
       - "<AUTHORIZATION TOKEN>"
       Bearer-Token:
-      - 7d8295bf78c385d1740d4fddba2bb0ad102736b1
+      - "<BEARER TOKEN>"
   response:
     status:
       code: 200
@@ -583,7 +583,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 05 Apr 2020 21:20:42 GMT
+      - Mon, 06 Apr 2020 14:13:54 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -603,7 +603,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '4906'
       X-Ratelimit-Reset:
-      - '1586124952'
+      - '1586185736'
       Access-Control-Expose-Headers:
       - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
         X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
@@ -625,7 +625,7 @@ http_interactions:
       Vary:
       - Accept-Encoding, Accept, X-Requested-With
       X-Github-Request-Id:
-      - 9BD3:06ED:1F2AA8:5A6EA0:5E8A4BAA
+      - 7B75:535B:52C3:C782:5E8B3922
     body:
       encoding: ASCII-8BIT
       string: '{"data":{"repository":{"pullRequests":{"edges":[{"cursor":"Y3Vyc29yOnYyOpK5MjAxNi0wOC0wN1QwMDowMjo1OS0wNDowMM4Eyikb","node":{"number":4,"createdAt":"2016-08-07T04:02:59Z","closedAt":null,"updatedAt":"2017-08-05T20:23:15Z","state":"OPEN","title":"Example
@@ -655,7 +655,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 05 Apr 2020 21:20:42 GMT
+      - Mon, 06 Apr 2020 14:13:55 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -673,7 +673,7 @@ http_interactions:
       X-Rack-Cache:
       - miss
       X-Request-Id:
-      - 006a8d08b40fd183eae6f68c619a0679
+      - 6148ca2cd7cefdab9febdc4639d31bcb
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Credentials:
@@ -751,7 +751,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 05 Apr 2020 21:20:43 GMT
+      - Mon, 06 Apr 2020 14:13:56 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -769,7 +769,7 @@ http_interactions:
       X-Rack-Cache:
       - miss
       X-Request-Id:
-      - ad6e307e1ab80a099a800d1c37bfa146
+      - d2c9b97763c060513439f9a98daf5f9a
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Credentials:
@@ -847,7 +847,7 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Date:
-      - Sun, 05 Apr 2020 21:20:43 GMT
+      - Mon, 06 Apr 2020 14:13:56 GMT
     body:
       encoding: UTF-8
       string: '{"message":"Project not found or access denied."}'

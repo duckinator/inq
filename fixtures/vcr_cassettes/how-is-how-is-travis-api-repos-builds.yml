@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 05 Apr 2020 21:15:46 GMT
+      - Mon, 06 Apr 2020 14:08:55 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -41,7 +41,7 @@ http_interactions:
       X-Rack-Cache:
       - miss
       X-Request-Id:
-      - a910be8ea52415cf1ae17572095e2f0f
+      - c8b484420d5c92aec0d3c90610e084ef
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Credentials:
@@ -113,6 +113,55 @@ http_interactions:
             },
             {
               "@type": "branch",
+              "@href": "/repo/8014235/branch/fix-284",
+              "@representation": "standard",
+              "name": "fix-284",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": null
+            },
+            {
+              "@type": "branch",
+              "@href": "/repo/8014235/branch/fix-unit-test",
+              "@representation": "standard",
+              "name": "fix-unit-test",
+              "repository": {
+                "@type": "repository",
+                "@href": "/repo/8014235",
+                "@representation": "minimal",
+                "id": 8014235,
+                "name": "inq",
+                "slug": "duckinator/inq"
+              },
+              "default_branch": false,
+              "exists_on_github": false,
+              "last_build": {
+                "@type": "build",
+                "@href": "/build/150364147",
+                "@representation": "minimal",
+                "id": 150364147,
+                "number": "70",
+                "state": "failed",
+                "duration": 110,
+                "event_type": "push",
+                "previous_state": null,
+                "pull_request_title": null,
+                "pull_request_number": null,
+                "started_at": "2016-08-07T03:27:11Z",
+                "finished_at": "2016-08-07T03:28:10Z",
+                "private": false
+              }
+            },
+            {
+              "@type": "branch",
               "@href": "/repo/8014235/branch/v3.0.0",
               "@representation": "standard",
               "name": "v3.0.0",
@@ -145,9 +194,9 @@ http_interactions:
             },
             {
               "@type": "branch",
-              "@href": "/repo/8014235/branch/use-correct-config-file",
+              "@href": "/repo/8014235/branch/v4.0.0",
               "@representation": "standard",
-              "name": "use-correct-config-file",
+              "name": "v4.0.0",
               "repository": {
                 "@type": "repository",
                 "@href": "/repo/8014235",
@@ -160,19 +209,19 @@ http_interactions:
               "exists_on_github": false,
               "last_build": {
                 "@type": "build",
-                "@href": "/build/150365312",
+                "@href": "/build/145750148",
                 "@representation": "minimal",
-                "id": 150365312,
-                "number": "76",
-                "state": "failed",
-                "duration": 88,
+                "id": 145750148,
+                "number": "53",
+                "state": "passed",
+                "duration": 42,
                 "event_type": "push",
                 "previous_state": null,
                 "pull_request_title": null,
                 "pull_request_number": null,
-                "started_at": "2016-08-07T03:41:26Z",
-                "finished_at": "2016-08-07T03:42:15Z",
-                "private": false
+                "started_at": "2016-07-19T07:27:03Z",
+                "finished_at": "2016-07-19T07:27:45Z",
+                "private": null
               }
             },
             {
@@ -465,9 +514,9 @@ http_interactions:
             },
             {
               "@type": "branch",
-              "@href": "/repo/8014235/branch/fix-unit-test",
+              "@href": "/repo/8014235/branch/summary",
               "@representation": "standard",
-              "name": "fix-unit-test",
+              "name": "summary",
               "repository": {
                 "@type": "repository",
                 "@href": "/repo/8014235",
@@ -480,19 +529,19 @@ http_interactions:
               "exists_on_github": false,
               "last_build": {
                 "@type": "build",
-                "@href": "/build/150364147",
+                "@href": "/build/145749054",
                 "@representation": "minimal",
-                "id": 150364147,
-                "number": "70",
-                "state": "failed",
-                "duration": 110,
+                "id": 145749054,
+                "number": "49",
+                "state": "passed",
+                "duration": 48,
                 "event_type": "push",
-                "previous_state": null,
+                "previous_state": "failed",
                 "pull_request_title": null,
                 "pull_request_number": null,
-                "started_at": "2016-08-07T03:27:11Z",
-                "finished_at": "2016-08-07T03:28:10Z",
-                "private": false
+                "started_at": "2016-07-19T07:21:41Z",
+                "finished_at": "2016-07-19T07:22:29Z",
+                "private": null
               }
             },
             {
@@ -529,9 +578,9 @@ http_interactions:
             },
             {
               "@type": "branch",
-              "@href": "/repo/8014235/branch/v4.0.0",
+              "@href": "/repo/8014235/branch/use-correct-config-file",
               "@representation": "standard",
-              "name": "v4.0.0",
+              "name": "use-correct-config-file",
               "repository": {
                 "@type": "repository",
                 "@href": "/repo/8014235",
@@ -544,19 +593,19 @@ http_interactions:
               "exists_on_github": false,
               "last_build": {
                 "@type": "build",
-                "@href": "/build/145750148",
+                "@href": "/build/150365312",
                 "@representation": "minimal",
-                "id": 145750148,
-                "number": "53",
-                "state": "passed",
-                "duration": 42,
+                "id": 150365312,
+                "number": "76",
+                "state": "failed",
+                "duration": 88,
                 "event_type": "push",
                 "previous_state": null,
                 "pull_request_title": null,
                 "pull_request_number": null,
-                "started_at": "2016-07-19T07:27:03Z",
-                "finished_at": "2016-07-19T07:27:45Z",
-                "private": null
+                "started_at": "2016-08-07T03:41:26Z",
+                "finished_at": "2016-08-07T03:42:15Z",
+                "private": false
               }
             },
             {
@@ -785,9 +834,9 @@ http_interactions:
             },
             {
               "@type": "branch",
-              "@href": "/repo/8014235/branch/issue-61-typo-fix",
+              "@href": "/repo/8014235/branch/staging.tmp",
               "@representation": "standard",
-              "name": "issue-61-typo-fix",
+              "name": "staging.tmp",
               "repository": {
                 "@type": "repository",
                 "@href": "/repo/8014235",
@@ -800,87 +849,23 @@ http_interactions:
               "exists_on_github": false,
               "last_build": {
                 "@type": "build",
-                "@href": "/build/165413345",
+                "@href": "/build/354624357",
                 "@representation": "minimal",
-                "id": 165413345,
-                "number": "161",
+                "id": 354624357,
+                "number": "940",
                 "state": "failed",
-                "duration": 60,
-                "event_type": "push",
-                "previous_state": null,
-                "pull_request_title": null,
-                "pull_request_number": null,
-                "started_at": "2016-10-06T02:30:41Z",
-                "finished_at": "2016-10-06T02:31:12Z",
-                "private": false
-              }
-            },
-            {
-              "@type": "branch",
-              "@href": "/repo/8014235/branch/parser-specs",
-              "@representation": "standard",
-              "name": "parser-specs",
-              "repository": {
-                "@type": "repository",
-                "@href": "/repo/8014235",
-                "@representation": "minimal",
-                "id": 8014235,
-                "name": "inq",
-                "slug": "duckinator/inq"
-              },
-              "default_branch": false,
-              "exists_on_github": false,
-              "last_build": {
-                "@type": "build",
-                "@href": "/build/155460359",
-                "@representation": "minimal",
-                "id": 155460359,
-                "number": "109",
-                "state": "failed",
-                "duration": 81,
-                "event_type": "push",
-                "previous_state": "errored",
-                "pull_request_title": null,
-                "pull_request_number": null,
-                "started_at": "2016-08-26T20:46:40Z",
-                "finished_at": "2016-08-26T20:47:23Z",
-                "private": false
-              }
-            },
-            {
-              "@type": "branch",
-              "@href": "/repo/8014235/branch/summary",
-              "@representation": "standard",
-              "name": "summary",
-              "repository": {
-                "@type": "repository",
-                "@href": "/repo/8014235",
-                "@representation": "minimal",
-                "id": 8014235,
-                "name": "inq",
-                "slug": "duckinator/inq"
-              },
-              "default_branch": false,
-              "exists_on_github": false,
-              "last_build": {
-                "@type": "build",
-                "@href": "/build/145749054",
-                "@representation": "minimal",
-                "id": 145749054,
-                "number": "49",
-                "state": "passed",
-                "duration": 48,
+                "duration": 76,
                 "event_type": "push",
                 "previous_state": "failed",
                 "pull_request_title": null,
                 "pull_request_number": null,
-                "started_at": "2016-07-19T07:21:41Z",
-                "finished_at": "2016-07-19T07:22:29Z",
-                "private": null
+                "started_at": "2018-03-17T04:43:59Z",
+                "finished_at": "2018-03-17T04:44:21Z",
+                "private": false
               }
             }
           ]
         }
     http_version: 
-  recorded_at: Sun, 05 Apr 2020 21:15:46 GMT
+  recorded_at: Mon, 06 Apr 2020 14:08:55 GMT
 recorded_with: VCR 4.0.0
