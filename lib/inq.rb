@@ -21,13 +21,13 @@ module Inq
     }
   end
 
-  def self.new(repository, date, cache_mechanism = nil)
+  def self.new(repository, start_date, end_date = nil, cache_mechanism = nil)
     config =
       Config.new
         .load_defaults
         .load(default_config(repository))
     config["cache"] = {"type" => "self", "cache_mechanism" => cache_mechanism} if cache_mechanism
-    Report.new(config, date)
+    Report.new(config, start_date, end_date)
   end
 
   ##
@@ -37,11 +37,11 @@ module Inq
   #   the reports.
   # @param date [String] A string containing the date (YYYY-MM-DD) that the
   #   report ends on. E.g., for Jan 1-Feb 1 2017, you'd pass 2017-02-01.
-  def self.from_config(config, date)
+  def self.from_config(config, start_date, end_date = nil)
     raise "Expected config to be Hash, got #{config.class}" unless \
       config.is_a?(Hash)
 
-    ReportCollection.new(config, date)
+    ReportCollection.new(config, start_date, end_date)
   end
 
   ##

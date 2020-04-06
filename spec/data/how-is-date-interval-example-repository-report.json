@@ -1,0 +1,120 @@
+{
+  "title": "How is how-is/example-repository?",
+  "repository": "how-is/example-repository",
+  "contributions_summary": "From Aug 01, 2016 through Dec 01, 2016, how-is/example-repository gained <a href=\"https://github.com/how-is/example-repository/compare/master@%7B2016-08-01%7D...master@%7B2016-12-01%7D\">1 new commit</a>, contributed by 1 author. There were 2 additions and 0 deletions across 1 file.",
+  "new_contributors": "<p>There was 1 new contributor during this report period.</p>\n\n<ul>\n  <li>Ellen Marie Dash</li>\n</ul>",
+  "issues_summary": "<p>A total of <a href=\"https://github.com/how-is/example-repository/issues?q=is%3Aissue+created%3A2016-08-01..2016-12-01\">3 issues</a> were opened during this period.</p>\n\n<ul>\n  <li>Average age: approximately 2 months and 3 weeks.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/issues/1\">Oldest issue</a> was opened on Aug 07, 2016.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/issues/3\">Newest issue</a> was opened on Aug 07, 2016.</li>\n</ul>\n",
+  "pulls_summary": "<p>A total of <a href=\"https://github.com/how-is/example-repository/pulls?q=is%3Apull+created%3A2016-08-01..2016-12-01\">1 pull request</a> was opened during this period.</p>\n\n<ul>\n  <li>Average age: approximately 2 months and 3 weeks.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/pull/4\">Oldest pull request</a> was opened on Aug 07, 2016.</li>\n  <li><a href=\"https://github.com/how-is/example-repository/pull/4\">Newest pull request</a> was opened on Aug 07, 2016.</li>\n</ul>\n",
+  "issues": [
+    {
+      "number": 1,
+      "createdAt": "2016-08-07T03:53:26Z",
+      "closedAt": null,
+      "updatedAt": "2016-08-07T03:53:49Z",
+      "state": "OPEN",
+      "title": "An issue",
+      "url": "https://github.com/how-is/example-repository/issues/1",
+      "labels": [
+        {
+          "name": "bug"
+        }
+      ],
+      "date": "Aug 07, 2016"
+    },
+    {
+      "number": 2,
+      "createdAt": "2016-08-07T03:54:13Z",
+      "closedAt": null,
+      "updatedAt": "2016-08-07T03:54:13Z",
+      "state": "OPEN",
+      "title": "Another issue",
+      "url": "https://github.com/how-is/example-repository/issues/2",
+      "labels": [
+        {
+          "name": "bug"
+        },
+        {
+          "name": "question"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "createdAt": "2016-08-07T03:54:33Z",
+      "closedAt": null,
+      "updatedAt": "2016-08-07T03:54:33Z",
+      "state": "OPEN",
+      "title": "Yet another issue!",
+      "url": "https://github.com/how-is/example-repository/issues/3",
+      "labels": [
+
+      ],
+      "date": "Aug 07, 2016"
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "createdAt": "2016-08-07T03:53:26Z",
+      "closedAt": null,
+      "updatedAt": "2016-08-07T03:53:49Z",
+      "state": "OPEN",
+      "title": "An issue",
+      "url": "https://github.com/how-is/example-repository/issues/1",
+      "labels": [
+        {
+          "name": "bug"
+        }
+      ],
+      "date": "Aug 07, 2016"
+    },
+    {
+      "number": 2,
+      "createdAt": "2016-08-07T03:54:13Z",
+      "closedAt": null,
+      "updatedAt": "2016-08-07T03:54:13Z",
+      "state": "OPEN",
+      "title": "Another issue",
+      "url": "https://github.com/how-is/example-repository/issues/2",
+      "labels": [
+        {
+          "name": "bug"
+        },
+        {
+          "name": "question"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "createdAt": "2016-08-07T03:54:33Z",
+      "closedAt": null,
+      "updatedAt": "2016-08-07T03:54:33Z",
+      "state": "OPEN",
+      "title": "Yet another issue!",
+      "url": "https://github.com/how-is/example-repository/issues/3",
+      "labels": [
+
+      ],
+      "date": "Aug 07, 2016"
+    }
+  ],
+  "average_issue_age": "approximately 2 months and 3 weeks",
+  "average_pull_age": "approximately 2 months and 3 weeks",
+  "oldest_issue_link": "https://github.com/how-is/example-repository/issues/1",
+  "oldest_issue_date": "2016-08-07T03:53:26Z",
+  "newest_issue_link": "https://github.com/how-is/example-repository/issues/3",
+  "newest_issue_date": "2016-08-07T03:54:33Z",
+  "newest_pull_link": "https://github.com/how-is/example-repository/pull/4",
+  "newest_pull_date": "2016-08-07T04:02:59Z",
+  "oldest_pull_link": "https://github.com/how-is/example-repository/pull/4",
+  "oldest_pull_date": "2016-08-07T04:02:59Z",
+  "travis_builds": [
+
+  ],
+  "appveyor_builds": [
+
+  ],
+  "date": "2016-12-01",
+  "frontmatter": ""
+}

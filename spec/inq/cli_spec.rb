@@ -23,6 +23,19 @@ describe Inq::CLI do
       }.to raise_error(OptionParser::MissingArgument, /--date/)
     end
 
+
+    it "raises an OptionParser::MissingArgument if start date is required but not specified" do
+      expect {
+        subject.parse(["--start-date"])
+      }.to raise_error(OptionParser::MissingArgument, /--start-date/)
+    end
+
+    it "raises an OptionParser::MissingArgument if end date is required but not specified" do
+      expect {
+        subject.parse(["--end-date"])
+      }.to raise_error(OptionParser::MissingArgument, /--end-date/)
+    end
+
     it "raises an OptionParser::MissingArgument if a repository is required but not specified" do
       expect {
         subject.parse(["--date", "2018-01-01"])

@@ -15,6 +15,10 @@ HOW_IS_CONFIG_FILE = File.expand_path("./data/how_is/cli_spec/how_is.yml", __dir
 HOW_IS_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path("./data/how-is-example-repository-report.json", __dir__)
 HOW_IS_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path("./data/how-is-example-repository-report.html", __dir__)
 
+INQ_DATE_INTERVAL_EXAMPLE_REPOSITORY_HTML_REPORT = File.expand_path("./data/how-is-date-interval-example-repository-report.html", __dir__)
+INQ_DATE_INTERVAL_EXAMPLE_REPOSITORY_JSON_REPORT = File.expand_path("./data/how-is-date-interval-example-repository-report.json", __dir__)
+
+
 HOW_IS_EXAMPLE_EMPTY_REPOSITORY_HTML_REPORT =
   File.expand_path("./data/how-is-example-empty-repository-report.html", __dir__)
 
@@ -116,6 +120,23 @@ describe Inq do
 
         expect(actual_report.to_html_partial).to eq(expected_html)
         expect(actual_report.to_json).to eq(expected_json)
+      end
+    end
+
+    context "when a date interval is passed" do
+      it "generates a valid report", skip: env_vars_hidden? do
+        expected_html = File.open(INQ_DATE_INTERVAL_EXAMPLE_REPOSITORY_HTML_REPORT).read.chomp
+        expected_json = File.open(INQ_DATE_INTERVAL_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
+        actual_report = nil
+
+        VCR.use_cassette("how-is-example-repository-with-date-interval") do
+          expect {
+            actual_report = Inq.new("how-is/example-repository", "2016-08-01", "2016-12-01")
+          }.to_not raise_error
+
+          expect(actual_report.to_html_partial).to eq(expected_html)
+          expect(actual_report.to_json).to eq(expected_json)
+        end
       end
     end
   end
