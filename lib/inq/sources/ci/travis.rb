@@ -115,7 +115,7 @@ module Inq
           result["repository"] = result["repository"]["slug"]
 
           ["started_at", "finished_at"].each do |k|
-            next if k.nil?
+            next if result[k].nil?
             result[k] = DateTime.parse(result[k])
           end
 
