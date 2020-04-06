@@ -129,7 +129,7 @@ describe Inq do
         expected_json = File.open(INQ_DATE_INTERVAL_EXAMPLE_REPOSITORY_JSON_REPORT).read.chomp
         actual_report = nil
 
-        VCR.use_cassette("how-is-example-repository") do
+        VCR.use_cassette("how-is-example-repository-with-date-interval") do
           expect {
             actual_report = Inq.new("how-is/example-repository", "2016-08-01", "2016-12-01")
           }.to_not raise_error
