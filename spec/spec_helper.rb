@@ -5,6 +5,7 @@ require "inq"
 require "inq/text"
 require "timecop"
 require File.expand_path("./vcr_helper.rb", __dir__)
+require File.expand_path("./rspec_helper.rb", __dir__)
 
 Inq::Text.show_default_output = false
 
