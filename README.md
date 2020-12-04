@@ -1,3 +1,9 @@
+# Inq is on an indefinite development hiatus
+
+See [issue #292](https://github.com/duckinator/inq/issues/292) for details.
+
+---
+
 [![Travis](https://img.shields.io/travis/duckinator/inq.svg)](https://travis-ci.org/duckinator/inq)
 [![Code Climate](https://img.shields.io/codeclimate/github/duckinator/inq.svg)](https://codeclimate.com/github/duckinator/inq)
 [![Gem](https://img.shields.io/gem/v/inq.svg)](https://rubygems.org/gems/inq)
