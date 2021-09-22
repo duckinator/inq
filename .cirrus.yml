@@ -1,11 +1,18 @@
-# Allow compute credits usage by collaborators and bors.
-use_compute_credits: $CIRRUS_USER_COLLABORATOR == 'true' || $CIRRUS_BRANCH == 'master' || $CIRRUS_BRANCH == 'staging' || $CIRRUS_BRANCH == 'trying'
-
 # Use an expired token that was used when fixtures were generated.
 env:
   INQ_GITHUB_USERNAME: "duckinator"
   INQ_GITHUB_TOKEN: "9182777ff3c006795193a570cdac326b64459dc9"
   INQ_USE_ENV: "true"
+
+task:
+  name: "CI Success"
+  container: {image: "busybox"}
+  depends_on:
+    - Lint
+    - Linux
+    - macOS
+    - FreeBSD
+    #- Windows
 
 Lint_task:
   container:
