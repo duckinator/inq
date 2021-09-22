@@ -1,14 +1,3 @@
-status = [
-  "FreeBSD",
-  "Lint",
-  "Linux container:ruby:2.5-alpine",
-  "Linux container:ruby:2.6-alpine",
-  "Linux container:ruby:2.7-alpine",
-  "Windows RUBY_VERSION:2.5.3.101",
-  "Windows RUBY_VERSION:2.6.3.1",
-  "Windows RUBY_VERSION:2.7.0.1",
-  "macOS RUBY_VERSION:2.5",
-  "macOS RUBY_VERSION:2.6",
-]
+status = ["CI Success"]
 
 delete_merged_branches = true
