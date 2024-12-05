@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <title>How is</title>
+    <style>
+      body { font: sans-serif; }
+      main {
+        max-width: 800px;
+        margin: auto;
+        line-height: 1.25em;
+      }
+
+      table th, table td {
+        padding: 1em;
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+      }
+      table th:last-child, table td:last-child {
+        border-right: 0;
+      }
+      table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .arrow { font-size: 1.25em; }
+      .red.arrow { color: red; }
+      .green.arrow { color: green; }
+      .up.arrow:before {
+        display: inline-block;
+        content: '\02191';
+      }
+      .down.arrow:before {
+        display: inline-block;
+        content: '\02193'
+      }
+
+      #bundler, #rubygems {
+        display: none;
+      }
+      #bundler:target, #rubygems:target {
+        display: block;
+      }
+
+      :target ~ #overview { display: none; }
+    </style>
+  </head>
+  <body>
+  <main>
+    <section id="bundler">
+      <h1>How is <a href="https://github.com/bundler/bundler">bundler/bundler</a>?</h1>
+      <p><a href="#overview">&lt; Repository List</a></p>
+    </section>
+    <section id="rubygems">
+      <h1>How is <a href="https://github.com/rubygems/rubygems">rubygems/rubygems</a>?</h1>
+      <p><a href="#overview">&lt; Repository List</a></p>
+    </section>
+    <section id="overview">
+      <h1>How is</h1>
+      <table>
+        <tr>
+          <th>Repository</th>
+          <th>Total Issues</th>
+          <th>Total PRs</th>
+          <th>Average Issue Age</th>
+          <th>Average PR Age</th>
+          <th>Test Coverage</th>
+        </tr>
+        <tr>
+          <td><a href="#bundler">bundler/bundler</a></th>
+          <td><a href="https://github.com/bundler/bundler/issues">178</a> <span class="green down arrow"></span></td>
+          <td><a href="https://github.com/bundler/bundler/pulls">30</a> <span class="green down arrow"></span></td>
+          <td>4 months and 2 weeks</td>
+          <td>2 months and 2 weeks</td>
+          <td>75%</td>
+        </tr>
+        <tr>
+          <td><a href="#rubygems">rubygems/rubygems</a></td>
+          <td><a href="https://github.com/rubygems/rubygems/issues">132</a> <span class="red up arrow"></span></td>
+          <td><a href="https://github.com/rubygems/rubygems/pulls">36</a> <span class="red up arrow"></span></td>
+          <td>1 year and 4 months</td>
+          <td>11 months and 1 week</td>
+          <td>unknown</td>
+        </table>
+      </section>
+    </main>
+    </body>
+  </html>
