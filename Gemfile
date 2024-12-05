@@ -9,7 +9,7 @@ source "https://rubygems.org"
 # Ruby maintenance info: https://www.ruby-lang.org/en/downloads/branches/
 #
 # NOTE: Update inq.gemspec when this is updated!
-ruby "~> 2.5"
+ruby "~> 3.3"
 
 # Specify your gem's dependencies in inq.gemspec
 gemspec

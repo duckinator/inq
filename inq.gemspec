@@ -26,10 +26,10 @@ Gem::Specification.new do |spec|
   # Ruby maintenance info: https://www.ruby-lang.org/en/downloads/branches/
   #
   # NOTE: Update Gemfile when this is updated!
-  spec.required_ruby_version = "~> 2.5"
+  spec.required_ruby_version = "~> 3.3"
 
   spec.add_runtime_dependency "github_api", "= 0.18.2"
-  spec.add_runtime_dependency "okay", "= 11.0.0"
+  spec.add_runtime_dependency "okay", "~> 12.0"
 
   spec.add_runtime_dependency "json_pure"
 
